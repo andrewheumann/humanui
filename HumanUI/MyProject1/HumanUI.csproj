@@ -48,7 +48,7 @@
       <HintPath>..\packages\HelixToolkit.Wpf.2015.1.461\lib\net40\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="HumanUIBaseApp">
-      <HintPath>..\..\HumanUIBaseAppLib\HumanUIBaseApp\bin\Debug\HumanUIBaseApp.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2013\Projects\HumanUIBaseAppLib\HumanUIBaseApp\bin\Debug\HumanUIBaseApp.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -205,6 +205,9 @@
   <ItemGroup>
     <None Include="Resources\RestoreState.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetList.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -218,8 +221,8 @@
 Copy "$(TargetPath)" "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\$(ProjectName).gha"
 Erase "$(TargetPath)"
 Erase "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll"
-Copy "C:\Users\Andheum\Documents\Visual Studio 2013\Projects\HumanUI\MyProject1\bin\HumanUIBaseApp.dll" "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll"
-Erase "C:\Users\Andheum\Documents\Visual Studio 2013\Projects\HumanUI\MyProject1\bin\HumanUIBaseApp.dll"</PostBuildEvent>
+Copy "$(TargetDir)\HumanUIBaseApp.dll" "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll"
+Erase "$(TargetDir)\HumanUIBaseApp.dll"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
     <StartArguments>
