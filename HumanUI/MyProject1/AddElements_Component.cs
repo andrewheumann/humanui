@@ -61,7 +61,7 @@ namespace HumanUI
              
                 HUI_Util.removeParent(u.element);
                 mw.AddElement(u.element);
-                AddToDict(u, resultDict);
+                HUI_Util.AddToDict(u, resultDict);
             }
 
             DA.SetDataList("Added Elements", resultDict);
@@ -69,20 +69,7 @@ namespace HumanUI
         }
 
 
-        private void AddToDict(UIElement_Goo e, Dictionary<string, UIElement_Goo> resultDict)
-        {
-            int tryCount = 0;
-            string keyName = e.name;
-            while (resultDict.ContainsKey(keyName))
-            {
-                tryCount++;
-                keyName = String.Format("{0} {1:0}", e.name, tryCount);
-                
-            }
-            e.name = keyName;
-            resultDict.Add(keyName, e);
-
-        }
+        
 
 
         public override GH_Exposure Exposure

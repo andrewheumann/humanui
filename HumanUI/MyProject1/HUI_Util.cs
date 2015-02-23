@@ -47,6 +47,9 @@ namespace HumanUI
            return elem;
        }
 
+
+ 
+
        public static System.Windows.Media.Color ToMediaColor(System.Drawing.Color color)
        {
            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
@@ -107,6 +110,23 @@ namespace HumanUI
            }
            return null;
        }
+
+
+       static public void AddToDict(UIElement_Goo e, Dictionary<string, UIElement_Goo> resultDict)
+       {
+           int tryCount = 0;
+           string keyName = e.name;
+           while (resultDict.ContainsKey(keyName))
+           {
+               tryCount++;
+               keyName = String.Format("{0} {1:0}", e.name, tryCount);
+
+           }
+           e.name = keyName;
+           resultDict.Add(keyName, e);
+
+       }
+
 
        static public void TrySetElementValue(UIElement u, object o)
        {
@@ -188,6 +208,38 @@ namespace HumanUI
            }
        }
 
+       public static string elemType(UIElement elem)
+       {
+           if (elem is Panel)
+           {
+
+               Panel p = elem as Panel;
+               switch (p.Name)
+               {
+                   case "GH_Slider":
+                       foreach (UIElement u in p.Children)
+                       {
+                           if (u is Label)
+                           {
+                               Label name = u as Label;
+                               return "Slider " + name.Content.ToString();
+                           }
+                       }
+                       break;
+                   case "GH_TextBox":
+                   case "GH_TextBox_NoButton":
+                       return "Text Box";
+                   default:
+                      
+                       break;
+               }
+
+           }
+           string baseType = elem.GetType().ToString();
+           return baseType.Replace("System.Windows.Controls.", "");
+          
+       }
+
 
        public static void SetImageSource(string newImagePath, Image l)
        {
@@ -259,6 +311,14 @@ namespace HumanUI
                    Image img = u as Image;
 
                    return img.Source.ToString();
+               case "System.Windows.Controls.TabControl":
+                   TabControl tc = u as TabControl;
+                   TabItem ti = tc.SelectedItem as TabItem;
+                   if (ti == null)
+                   {
+                       ti = tc.Items[0] as TabItem;
+                   }
+                   return ti.Header.ToString();
                default:
                    return null;
            }

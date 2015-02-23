@@ -211,6 +211,11 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.Image":
                     return;
+                case "System.Windows.Controls.TabControl":
+                    TabControl tc = u as TabControl;
+                    tc.SelectionChanged -= ExpireThis;
+                    tc.SelectionChanged += ExpireThis;
+                    return;
                 default:
                     return;
             }
@@ -271,6 +276,10 @@ namespace HumanUI
                     rb.Unchecked -= ExpireThis;
                     return;
                 case "System.Windows.Controls.Image":
+                    return;
+                case "System.Windows.Controls.TabControl":
+                    TabControl tc = u as TabControl;
+                    tc.SelectionChanged -= ExpireThis;
                     return;
                 default:
                     return;

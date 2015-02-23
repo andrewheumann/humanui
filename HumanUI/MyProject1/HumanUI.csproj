@@ -91,6 +91,7 @@
     <Compile Include="3DViewModel.cs" />
     <Compile Include="AddElements_Component.cs" />
     <Compile Include="AdjustElementPositioning_Component.cs" />
+    <Compile Include="ContainerContents_Component.cs" />
     <Compile Include="Create3DView_Component.cs" />
     <Compile Include="CreateButton_Component.cs" />
     <Compile Include="CreateCheckBox_Component.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="SetImage_Component.cs" />
     <Compile Include="SetLabel_Component.cs" />
     <Compile Include="SetShape_Component.cs" />
+    <Compile Include="TabContainer_Component.cs" />
     <Compile Include="UIElement_Goo.cs" />
     <Compile Include="ValueListener.cs" />
   </ItemGroup>
@@ -137,34 +139,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CreateSlider.png" />
+    <None Include="Resources\ContainerContents.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CreateStack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CreateTextBox.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\FilterElements.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LaunchWindow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SetImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SetLabel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SetShape.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ValueListener.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AddElements.png" />
+    <None Include="Resources\Create3dView.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CreateButton.png" />
@@ -191,22 +169,52 @@
     <None Include="Resources\CreateShape.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Create3dView.png" />
+    <None Include="Resources\CreateSlider.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Set3dView.png" />
+    <None Include="Resources\CreateStack.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AdjustPositioning.png" />
+    <None Include="Resources\CreateTextBox.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SaveState.png" />
+    <None Include="Resources\FilterElements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LaunchWindow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RestoreState.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SaveState.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Set3dView.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetLabel.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\SetList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TabControl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValueListener.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddElements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AdjustPositioning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

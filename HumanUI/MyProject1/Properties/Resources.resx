@@ -124,6 +124,9 @@
   <data name="AdjustPositioning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AdjustPositioning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ContainerContents" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ContainerContents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Create3dView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Create3dView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -186,6 +189,9 @@
   </data>
   <data name="SetShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SetShape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TabControl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TabControl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ValueListener" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ValueListener.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -18,7 +18,7 @@ namespace HumanUI
         public CreateStack_Component()
             : base("Create Stack", "Stack",
                 "Creates a group of UI elements stacked vertically or horizontally.",
-                "Human", "UI Elements")
+                "Human", "UI Containers")
         {
         }
 
