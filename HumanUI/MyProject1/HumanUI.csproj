@@ -95,8 +95,8 @@
     <Compile Include="Create3DView_Component.cs" />
     <Compile Include="CreateButton_Component.cs" />
     <Compile Include="CreateCheckBox_Component.cs" />
+    <Compile Include="CreateCheckList_Component.cs" />
     <Compile Include="CreateLabel_Component.cs" />
-    <Compile Include="CreateCheckList_Component .cs" />
     <Compile Include="CreatePullDown_Component.cs" />
     <Compile Include="CreateListBox_Component.cs" />
     <Compile Include="CreateRadioButton_Component.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="CreateTextBox_Component.cs" />
     <Compile Include="LaunchWindow_Component.cs" />
     <Compile Include="RestoreElementState_Component.cs" />
+    <Compile Include="SetChecklist_Component.cs" />
     <Compile Include="SetList_Component.cs" />
     <Compile Include="StateSet_Goo.cs" />
     <Compile Include="FilterUIElements_Component.cs" />
@@ -215,6 +216,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AdjustPositioning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetCheckList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createChecklist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -123,6 +123,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap createChecklist {
+            get {
+                object obj = ResourceManager.GetObject("createChecklist", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateImage {
             get {
                 object obj = ResourceManager.GetObject("CreateImage", resourceCulture);
@@ -256,6 +266,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap Set3dView {
             get {
                 object obj = ResourceManager.GetObject("Set3dView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetCheckList {
+            get {
+                object obj = ResourceManager.GetObject("SetCheckList", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

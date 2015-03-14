@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
@@ -7,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using GH_IO.Serialization;
+using Grasshopper.Kernel.Types;
+using Grasshopper.Kernel.Data;
 
 namespace HumanUI
 {
@@ -42,7 +45,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Values", "V", "The values of the listened elements", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Values", "V", "The values of the listened elements", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -86,18 +89,30 @@ namespace HumanUI
             HUI_Util.extractBaseElements(filteredElements,elementsToListen);
 
             //retrieve element values
-            List<object> values = new List<object>();
+            GH_Structure<GH_ObjectWrapper> values = new GH_Structure<GH_ObjectWrapper>();
+            int i=0;
             foreach (UIElement u in elementsToListen)
             {
-                values.Add(HUI_Util.GetElementValue(u));
+                object value = HUI_Util.GetElementValue(u);
+                if(value is List<bool>){
+                    foreach (bool thing in (value as List<bool>))
+                    {
+                        values.Append(new GH_ObjectWrapper(thing),new GH_Path(i));
+                    }
+                }
+                else
+                {
+                    values.Append(new GH_ObjectWrapper(value), new GH_Path(i));
+                }
                 //add listener events to elements 
                if(AddEventsEnabled) AddEvents(u);
+                i++;
             }
 
-           
 
 
-            DA.SetDataList("Values", values);
+
+            DA.SetDataTree(0, values);
 
         }
 
@@ -161,6 +176,21 @@ namespace HumanUI
                     lb.SelectionChanged -= ExpireThis;
                     lb.SelectionChanged += ExpireThis;
                     return;
+                case "System.Windows.Controls.ScrollViewer":
+                    ScrollViewer sv = u as ScrollViewer;
+                    ItemsControl ic = sv.Content as ItemsControl;
+                    ((INotifyCollectionChanged)ic.Items).CollectionChanged -= ExpireThis;
+                    ((INotifyCollectionChanged)ic.Items).CollectionChanged += ExpireThis;
+                    List<bool> checkeds = new List<bool>();
+                    var cbs = from cbx in ic.Items.OfType<CheckBox>() select cbx;
+                    foreach (CheckBox chex in cbs)
+                    {
+                        chex.Checked -= ExpireThis;
+                        chex.Unchecked -= ExpireThis;
+                        chex.Checked += ExpireThis;
+                        chex.Unchecked += ExpireThis;
+                    }
+                    return;
                 case "System.Windows.Controls.ComboBox":
                     ComboBox cb = u as ComboBox;
                     cb.SelectionChanged -= ExpireThis;
@@ -186,8 +216,8 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.ListView":
                     ListView v = u as ListView;
-                     var cbs = from cbx in v.Items.OfType<CheckBox>() select cbx;
-                    foreach (CheckBox chex in cbs)
+                     var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
+                    foreach (CheckBox chex in cbxs)
                     {
                         chex.Checked -= ExpireThis;
                         chex.Unchecked -= ExpireThis;
@@ -241,6 +271,18 @@ namespace HumanUI
                     ListBox lb = u as ListBox;
                     lb.SelectionChanged -= ExpireThis;
                     return;
+                case "System.Windows.Controls.ScrollViewer":
+                    ScrollViewer sv = u as ScrollViewer;
+                    ItemsControl ic = sv.Content as ItemsControl;
+                    ((INotifyCollectionChanged)ic.Items).CollectionChanged -= ExpireThis;
+                    List<bool> checkeds = new List<bool>();
+                    var cbs = from cbx in ic.Items.OfType<CheckBox>() select cbx;
+                    foreach (CheckBox chex in cbs)
+                    {
+                        chex.Checked -= ExpireThis;
+                        chex.Unchecked -= ExpireThis;
+                    }
+                    return;
                 case "System.Windows.Controls.ComboBox":
                     ComboBox cb = u as ComboBox;
                     cb.SelectionChanged -= ExpireThis;
@@ -258,8 +300,8 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.ListView":
                     ListView v = u as ListView;
-                    var cbs = from cbx in v.Items.OfType<CheckBox>() select cbx;
-                    foreach (CheckBox chex in cbs)
+                    var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
+                    foreach (CheckBox chex in cbxs)
                     {
                         chex.Checked -= ExpireThis;
                         chex.Unchecked -= ExpireThis;

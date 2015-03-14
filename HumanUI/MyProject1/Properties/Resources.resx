@@ -136,6 +136,9 @@
   <data name="CreateCheckbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreateCheckbox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="createChecklist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\createChecklist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CreateImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreateImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -177,6 +180,9 @@
   </data>
   <data name="Set3dView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Set3dView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetCheckList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetCheckList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SetImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SetImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

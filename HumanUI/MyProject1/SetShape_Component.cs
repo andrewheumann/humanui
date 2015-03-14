@@ -82,7 +82,7 @@ namespace HumanUI
 
                     Path newPath = new Path();
                     DA.GetData<double>("Scale", ref scale);
-                    newPath.Data = CreateShape_Component.pathGeomFromCrvs(shapeCrvs, scale);
+                    newPath.Data = CreateShape_Component.pathGeomFromCrvs(shapeCrvs, scale,true);
                     G.Children.Remove(path);
                    
                     path = newPath;

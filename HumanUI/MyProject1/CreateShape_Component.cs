@@ -7,11 +7,14 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Drawing;
 using System.Windows.Shapes;
+using Grasshopper.Kernel.Types;
 
 namespace HumanUI
 {
     public class CreateShape_Component : GH_Component
     {
+      //  BoundingBox B = BoundingBox.Empty;
+       // Grid G = new Grid();
         /// <summary>
         /// Initializes a new instance of the CreateShape_Component class.
         /// </summary>
@@ -57,6 +60,20 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
+            //TODO - support multiple sets of objects in one shape??
+          /*  if (DA.Iteration == 0)
+            {
+                foreach (IGH_Goo goo in this.Params.Input[0].VolatileData.AllData(true))
+                {
+                    if (goo is IGH_GeometricGoo)
+                    {
+                        IGH_GeometricGoo geoGoo = goo as IGH_GeometricGoo;
+                        B.Union(geoGoo.GetBoundingBox(Rhino.Geometry.Transform.Identity));
+                    }
+                }
+                G = new Grid();
+            }*/
             List<Curve> shapeCrvs = new List<Curve>();
             System.Drawing.Color fillCol = System.Drawing.Color.Transparent;
             double strokeWeight = 0.0;
@@ -69,7 +86,7 @@ namespace HumanUI
 
             Path path = new Path();
             DA.GetData<double>("Scale", ref scale);
-            path.Data = pathGeomFromCrvs(shapeCrvs,scale);
+            path.Data = pathGeomFromCrvs(shapeCrvs,scale,false);
             if (DA.GetData<System.Drawing.Color>("Fill Color", ref fillCol))
             {
 
@@ -101,18 +118,18 @@ namespace HumanUI
             }
             G.Children.Add(path);
 
-
-            DA.SetData("Shape", new UIElement_Goo(G,"Shape"));
+           
+            DA.SetData("Shape", new UIElement_Goo(G, "Shape"));
             
         }
 
 
        
 
-        public static Geometry pathGeomFromCrvs(List<Curve> c, double scale)
+        public static Geometry pathGeomFromCrvs(List<Curve> c, double scale,bool rebox)
         {
             string crvString = "";
-            rebaseCrvs(c,scale);
+           rebaseCrvs(c,scale,rebox);
             foreach(Curve crv in c){
                 PolylineCurve p = new PolylineCurve();
                 Rhino.Geometry.Polyline pl = new Rhino.Geometry.Polyline();
@@ -132,25 +149,27 @@ namespace HumanUI
             return Geometry.Parse(crvString);
         }
 
-        static void rebaseCrvs(List<Curve> crvs,double scale)
+        static void rebaseCrvs(List<Curve> crvs,double scale,bool rebox)
         {
             foreach (Curve c in crvs)
             {
                 c.Transform(Rhino.Geometry.Transform.Mirror(Plane.WorldZX));
                 c.Transform(Rhino.Geometry.Transform.Scale(Point3d.Origin, scale));
             }
-
-            BoundingBox b = BoundingBox.Empty;
-            foreach (Curve c in crvs)
+            if (rebox)
             {
-                b.Union(c.GetBoundingBox(true));
-            }
+                BoundingBox b = BoundingBox.Empty;
+                foreach (Curve c in crvs)
+                {
+                    b.Union(c.GetBoundingBox(true));
+                }
 
-            Point3d boxBase = b.PointAt(0, 0, 0);
+                Point3d boxBase = b.PointAt(0, 0, 0);
 
-            foreach (Curve c in crvs)
-            {
-                c.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase))) ;
+                foreach (Curve c in crvs)
+                {
+                    c.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase)));
+                }
             }
 
 

@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Grasshopper.Kernel.Types;
+using Grasshopper.Kernel.Data;
 
 namespace HumanUI
 {
@@ -150,6 +151,7 @@ namespace HumanUI
                        lb.SelectedIndex = getSelectedItemIndex(lb,(string) o); 
 
                        return;
+
                    case "System.Windows.Controls.TextBox":
                        TextBox tb = u as TextBox;
                        tb.Text = (string)o;
@@ -281,6 +283,20 @@ namespace HumanUI
                    ListBox lb = u as ListBox;
                    Label lab = lb.SelectedItem as Label;
                    return lab.Content;
+               case "System.Windows.Controls.ScrollViewer":
+                   ScrollViewer sv = u as ScrollViewer;
+                   ItemsControl ic = sv.Content as ItemsControl;
+                   List<bool> checkeds = new List<bool>();
+                   var cbs = from cbx in ic.Items.OfType<CheckBox>() select cbx;
+                   foreach (CheckBox chex in cbs)
+                   {
+                    
+                           checkeds.Add(chex.IsChecked==true);
+                     
+                   }
+                  
+
+                   return checkeds;
                case "System.Windows.Controls.TextBox":
                    TextBox tb = u as TextBox;
                    return tb.Text;
@@ -290,9 +306,9 @@ namespace HumanUI
                    return cbi.Content;
                case "System.Windows.Controls.ListView":
                    ListView v = u as ListView;
-                   var cbs = from cbx in v.Items.OfType<CheckBox>() select cbx;
+                   var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
                    List<string> checkedVals = new List<string>();
-                   foreach (CheckBox chex in cbs)
+                   foreach (CheckBox chex in cbxs)
                    {
                        if (chex.IsChecked == true)
                        {
