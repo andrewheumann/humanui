@@ -12,14 +12,14 @@ using MahApps.Metro.Controls;
 
 namespace HumanUI
 {
-    public class TabContainer_Component : GH_Component, IGH_VariableParameterComponent
+    public class TabContainer_Component_DEPRECATED : GH_Component, IGH_VariableParameterComponent
     {
 
        
         /// <summary>
         /// Initializes a new instance of the TabContainer_Component class.
         /// </summary>
-        public TabContainer_Component()
+        public TabContainer_Component_DEPRECATED()
             : base("Tabbed View", "Tabs",
                 "Creates a series of tabbed views that can contain UI element layouts",
                 "Human", "UI Containers")
@@ -32,8 +32,6 @@ namespace HumanUI
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Tab Names", "N", "The labels for the tabs you're creating.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Tab Text Size", "S", "The font size for tab elements", GH_ParamAccess.item);
-            pManager[1].Optional = true;
             pManager.AddGenericParameter("Tab 0", "T0", "The contents of the first tab", GH_ParamAccess.list);
             VariableParameterMaintenance();
         }
@@ -60,12 +58,12 @@ namespace HumanUI
 
             List<List<UIElement_Goo>> tabList = new List<List<UIElement_Goo>>();
 
-            double fontSize = 26;
+
             List<string> tabNames = new List<string>();
             DA.GetDataList<string>("Tab Names", tabNames);
 
             //get the data from the variable input params
-            for (int i = 2; i < Params.Input.Count; i++)
+            for (int i = 1; i < Params.Input.Count; i++)
             {
                 List<UIElement_Goo> currentTab = new List<UIElement_Goo>();
                 DA.GetDataList<UIElement_Goo>(i, currentTab);
@@ -81,18 +79,12 @@ namespace HumanUI
             TabControl tabControl = new TabControl();
             //TabControlHelper.SetIsUnderlined(tabControl, true);
 
-            bool setSize = DA.GetData<double>("Tab Text Size", ref fontSize);
-     
-        
-
-
                 //for each tab,
             int tabIndex = 0;
             foreach (List<UIElement_Goo> oneTab in tabList)
             {
                 //create a tabItem
                 TabItem tabItem = new TabItem();
-                if (setSize) ControlsHelper.SetHeaderFontSize(tabItem, fontSize);
                 string tabName = "New Tab";
                 if (tabIndex < tabNames.Count) tabName = tabNames[tabIndex];
                 tabItem.Header = tabName;
@@ -138,7 +130,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{669ED7CD-5B59-4484-B179-4E8934AB39B3}"); }
+            get { return new Guid("{df93e843-3893-4ffc-b2e3-666190768b8e}"); }
         }
 
     
@@ -147,16 +139,14 @@ namespace HumanUI
         {
             if (side == GH_ParameterSide.Output) return false;
             if (index == 0) return false;
-            if (index == 1) return false;
             return true;
         }
 
         public bool CanRemoveParameter(GH_ParameterSide side, int index)
         {
            if (side == GH_ParameterSide.Output) return false;
-           if (Params.Input.Count <= 3) return false;
+           if (Params.Input.Count <= 2) return false;
             if (index == 0) return false;
-            if (index == 1) return false;
             return true;
         }
 
@@ -173,15 +163,23 @@ namespace HumanUI
             return true;
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
         public void VariableParameterMaintenance()
         {
-            for (int i = 2; i < Params.Input.Count;i++ )
+            for (int i = 1; i < Params.Input.Count;i++ )
             {
                 IGH_Param param = Params.Input[i];
 
-                param.NickName = String.Format("T{0}", i-2);
-                param.Name = String.Format("Tab {0}", i-2);
-                param.Description = String.Format("The ui elements to include in tab {0}", i - 2);
+                param.NickName = String.Format("T{0}", i-1);
+                param.Name = String.Format("Tab {0}", i-1);
+                param.Description = String.Format("The ui elements to include in tab {0}", i - 1);
                 param.Access = GH_ParamAccess.list;
                 param.Optional = true;
                 param.DataMapping = GH_DataMapping.Flatten;
