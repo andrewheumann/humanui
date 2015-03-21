@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GH_IO">
+      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+    </Reference>
     <Reference Include="HelixToolkit">
       <HintPath>..\packages\HelixToolkit.2015.1.461\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
     </Reference>
@@ -48,7 +54,8 @@
       <HintPath>..\packages\HelixToolkit.Wpf.2015.1.461\lib\net40\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="HumanUIBaseApp">
-      <HintPath>..\..\..\Visual Studio 2013\Projects\HumanUIBaseAppLib\HumanUIBaseApp\bin\Debug\HumanUIBaseApp.dll</HintPath>
+      <HintPath>..\..\..\..\AppData\Roaming\Grasshopper\Libraries\HumanUIBaseApp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,6 +64,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5.0 (64-bit)\System\RhinoCommon.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -64,21 +74,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="RhinoCommon">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Rhinoceros 5\System\rhinocommon.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Grasshopper">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Andheum\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.75.0\Grasshopper.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="GH_IO">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Andheum\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.75.0\GH_IO.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -100,6 +95,7 @@
     <Compile Include="CreatePullDown_Component.cs" />
     <Compile Include="CreateListBox_Component.cs" />
     <Compile Include="CreateRadioButton_Component.cs" />
+    <Compile Include="CreateRadioButton_Component_DEPRECATED.cs" />
     <Compile Include="CreateShape_Component.cs" />
     <Compile Include="CreateSlider_Component.cs" />
     <Compile Include="CreateStack_Component.cs" />
@@ -108,6 +104,7 @@
     <Compile Include="RestoreElementState_Component.cs" />
     <Compile Include="SetChecklist_Component.cs" />
     <Compile Include="SetList_Component.cs" />
+    <Compile Include="SetWindowProperties_Component.cs" />
     <Compile Include="StateSet_Goo.cs" />
     <Compile Include="FilterUIElements_Component.cs" />
     <Compile Include="HUI_Expirable.cs" />
@@ -126,6 +123,7 @@
     <Compile Include="SetLabel_Component.cs" />
     <Compile Include="SetShape_Component.cs" />
     <Compile Include="TabContainer_Component.cs" />
+    <Compile Include="TabContainer_Component_DEPRECATED.cs" />
     <Compile Include="UIElement_Goo.cs" />
     <Compile Include="ValueListener.cs" />
   </ItemGroup>
@@ -223,6 +221,9 @@
   <ItemGroup>
     <None Include="Resources\createChecklist.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetWindowProperties.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -232,11 +233,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Erase "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\$(ProjectName).gha"
-Copy "$(TargetPath)" "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\$(ProjectName).gha"
+    <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
 Erase "$(TargetPath)"
-Erase "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll"
-Copy "$(TargetDir)\HumanUIBaseApp.dll" "C:\Users\Andheum\AppData\Roaming\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll"
+Erase %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll
+Copy "$(TargetDir)\HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll
 Erase "$(TargetDir)\HumanUIBaseApp.dll"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">

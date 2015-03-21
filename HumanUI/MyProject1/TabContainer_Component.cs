@@ -163,6 +163,7 @@ namespace HumanUI
         public IGH_Param CreateParameter(GH_ParameterSide side, int index)  
         {
             Param_GenericObject input = new Param_GenericObject();
+            input.Optional = true;
             Params.RegisterInputParam(input, index);
             return input;
         }

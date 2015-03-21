@@ -7,8 +7,9 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid Name="AbsPosGrid">
-              <StackPanel Name="MasterStackPanel" Margin="10" >
-                
+              
+                <StackPanel Name="MasterStackPanel" Margin="10" >
+                   
                 </StackPanel>
 
             </Grid>

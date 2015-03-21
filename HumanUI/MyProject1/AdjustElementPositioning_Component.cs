@@ -28,7 +28,7 @@ namespace HumanUI
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Elements to adjust", "E", "The UIElement you want to reposition.", GH_ParamAccess.item);
-            pManager.AddTextParameter("Margin","M","The margin value. Input a single number to \naffect margins on all sides, or four values separated by commas\nto set Left, Right, Top, and Bottom individually.",GH_ParamAccess.item);
+            pManager.AddTextParameter("Margin","M","The margin value. Input a single number to \naffect margins on all sides, or four values separated by commas\nto set Left, Top, Right, and Bottom individually.",GH_ParamAccess.item);
             pManager.AddBooleanParameter("Absolute Positioning", "Abs", "Set to true to position relative to the upper left corner of the document", GH_ParamAccess.item,false);
             pManager.AddNumberParameter("Width", "W", "Override the element width", GH_ParamAccess.item);
             pManager.AddNumberParameter("Height", "H", "Override the element height", GH_ParamAccess.item);

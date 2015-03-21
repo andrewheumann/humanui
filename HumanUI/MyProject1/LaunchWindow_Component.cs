@@ -158,8 +158,9 @@ namespace HumanUI
                 }
                 else
                 {
-                    WindowInteropHelper helper = new WindowInteropHelper(mw);
-                    helper.Owner = Rhino.RhinoApp.MainWindowHandle();
+                    mw.Topmost = true;
+                 //   WindowInteropHelper helper = new WindowInteropHelper(mw);
+                   // helper.Owner = Rhino.RhinoApp.MainWindowHandle();
          
                 }
                 Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
