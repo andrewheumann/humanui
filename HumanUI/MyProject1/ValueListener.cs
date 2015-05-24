@@ -10,6 +10,9 @@ using System.Windows.Controls.Primitives;
 using GH_IO.Serialization;
 using Grasshopper.Kernel.Types;
 using Grasshopper.Kernel.Data;
+using Xceed.Wpf.Toolkit;
+
+using System.Collections;
 
 namespace HumanUI
 {
@@ -35,8 +38,9 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Elements", "E", "UI Elements to listen to.", GH_ParamAccess.list);
-            pManager.AddTextParameter("Name Filter(s)", "F", "The filter(s) for the elements you want to listen for.", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Elements", "E", "UI Element(s) to listen to. This can be retrieved either directly from the component \n that generated the element, or from the output of the \"Add Elements\" component.", GH_ParamAccess.list);
+            pManager.AddTextParameter("Name Filter(s)", "F", "The optional filter(s) for the elements you want to listen for.", GH_ParamAccess.list);
+            pManager[1].Optional = true;
             
         }
 
@@ -46,6 +50,7 @@ namespace HumanUI
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Values", "V", "The values of the listened elements", GH_ParamAccess.tree);
+            pManager.AddIntegerParameter("Indices", "I", "For list-based objects (checklist, pulldown menu, etc) returns the selected index - otherwise returns -1.", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -54,58 +59,125 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            List<object> elementObjects = new List<object>();
             List<KeyValuePair<string, UIElement_Goo>> allElements = new List<KeyValuePair<string, UIElement_Goo>>();
             List<string> elementFilters = new List<string>();
 
-            if (!DA.GetDataList<KeyValuePair<string, UIElement_Goo>>("Elements", allElements)) return;
-            if (!DA.GetDataList<string>("Name Filter(s)", elementFilters)) return;
+            
 
-            //create a dictionary
-            Dictionary<string, UIElement_Goo> elementDict = allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            if (!DA.GetDataList<object>("Elements", elementObjects)) return;
+            DA.GetDataList<string>("Name Filter(s)", elementFilters);
+
+
+
+            //the elements to listen to
             List<UIElement> filteredElements = new List<UIElement>();
-            //filter the dictionary
-            foreach (string fil in elementFilters)
+
+
+
+            //decide whether to populate the dictionary, or just populate filteredElements directly. 
+            foreach (object o in elementObjects)
             {
-                
-                filteredElements.Add(elementDict[fil].element);
-            }
-            //if there are no filters, include all values. 
-            if (elementFilters.Count == 0)
-            {
-                foreach(UIElement_Goo u in elementDict.Values){
-                    filteredElements.Add(u.element);
+                UIElement elem = null;
+                switch (o.GetType().ToString())
+                {
+                    case "HumanUI.UIElement_Goo":
+                        UIElement_Goo goo = o as UIElement_Goo;
+                        elem = goo.element as UIElement;
+                        filteredElements.Add(elem);
+                        break;
+                    case "Grasshopper.Kernel.Types.GH_ObjectWrapper":
+                        GH_ObjectWrapper wrapper = o as GH_ObjectWrapper;
+                        KeyValuePair<string, UIElement_Goo> kvp = (KeyValuePair<string, UIElement_Goo>)wrapper.Value;
+                        allElements.Add(kvp);
+                        break;
+                    default:
+                        break;
                 }
             }
 
-            //remove all events from previously "evented" elements
-            foreach (UIElement u in eventedElements)
+            if (allElements.Count > 0) //if we've been getting keyvaluepairs and need to filter
             {
-                RemoveEvents(u);
+
+                //create a dictionary for filtering
+                Dictionary<string, UIElement_Goo> elementDict = allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+
+
+                //filter the dictionary
+                foreach (string fil in elementFilters)
+                {
+
+                    filteredElements.Add(elementDict[fil].element);
+                }
+                //if there are no filters, include all values. 
+                if (elementFilters.Count == 0)
+                {
+                    foreach (UIElement_Goo u in elementDict.Values)
+                    {
+                        filteredElements.Add(u.element);
+                    }
+                }
             }
-            eventedElements.Clear();
+
+                //remove all events from previously "evented" elements
+                foreach (UIElement u in eventedElements)
+                {
+                    RemoveEvents(u);
+                }
+                eventedElements.Clear();
+            
 
             //extract base elements
             List<UIElement> elementsToListen = new List<UIElement>();
             HUI_Util.extractBaseElements(filteredElements,elementsToListen);
 
             //retrieve element values
-            GH_Structure<GH_ObjectWrapper> values = new GH_Structure<GH_ObjectWrapper>();
+            GH_Structure<IGH_Goo> values = new GH_Structure<IGH_Goo>();
+            GH_Structure<GH_Integer> indsOut = new GH_Structure<GH_Integer>();
             int i=0;
             foreach (UIElement u in elementsToListen)
             {
                 object value = HUI_Util.GetElementValue(u);
-                if(value is List<bool>){
-                    foreach (bool thing in (value as List<bool>))
+                object indices = HUI_Util.GetElementIndex(u);
+                IEnumerable list = value as IEnumerable;
+                IEnumerable indList = indices as IEnumerable;
+                if (list != null)
+                {
+                    foreach (object thing in list)
                     {
-                        values.Append(new GH_ObjectWrapper(thing),new GH_Path(i));
+                        values.Append(HUI_Util.GetRightType(thing),new GH_Path(i));
                     }
                 }
                 else
                 {
-                    values.Append(new GH_ObjectWrapper(value), new GH_Path(i));
+                    values.Append(HUI_Util.GetRightType(value), new GH_Path(i));
                 }
+
+                if (indList != null)
+                {
+                    foreach (int index in indList)
+                    {
+                        indsOut.Append(new GH_Integer(index), new GH_Path(i));
+                    }
+                }
+                else
+                {
+                    indsOut.Append(new GH_Integer((int)indices), new GH_Path(i));
+                }
+
+
+
+
+
+
                 //add listener events to elements 
-               if(AddEventsEnabled) AddEvents(u);
+                if (AddEventsEnabled)
+                {
+                    eventedElements.Add(u);
+                    AddEvents(u);
+                }
                 i++;
             }
 
@@ -113,6 +185,7 @@ namespace HumanUI
 
 
             DA.SetDataTree(0, values);
+            DA.SetDataTree(1, indsOut);
 
         }
 
@@ -120,34 +193,7 @@ namespace HumanUI
 
        
 
-        /*
-        void extractBaseElements(Dictionary<string, UIElement_Goo> elements, List<UIElement> extractedElements)
-        {
-             foreach (KeyValuePair<string, UIElement_Goo> element in elements)
-             {
-                 if (element.Value.element is Panel)
-                 {
-                     Panel p = element.Value.element as Panel;
-                     switch (p.Name)
-                     {
-                         case "GH Slider":
-                             extractedElements.Add(p.Children[1]);
-                             return;
-                         default:
-                             extractBaseElements(p.Children, extractedElements);
-                             return;
-                     }
-                 }
-                 else
-                 {
-                     extractedElements.Add(element.Value.element);
-                 }
-             }
-
-       
-       
-
-        } */
+   
 
 
         void AddEvents(UIElement u)
@@ -213,6 +259,11 @@ namespace HumanUI
                         tb.TextChanged -= ExpireThis;
                         tb.TextChanged += ExpireThis;
                     }
+                    return;
+                case "Xceed.Wpf.Toolkit.ColorPicker":
+                    ColorPicker cp = u as ColorPicker;
+                    cp.SelectedColorChanged -= ExpireThis;
+                    cp.SelectedColorChanged += ExpireThis;
                     return;
                 case "System.Windows.Controls.ListView":
                     ListView v = u as ListView;
@@ -297,6 +348,10 @@ namespace HumanUI
                             btn0.Click -= ExpireThis;
                         }
                         tb.TextChanged -= ExpireThis;
+                    return;
+                case "Xceed.Wpf.Toolkit.ColorPicker":
+                    ColorPicker cp = u as ColorPicker;
+                    cp.SelectedColorChanged -= ExpireThis;
                     return;
                 case "System.Windows.Controls.ListView":
                     ListView v = u as ListView;

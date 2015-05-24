@@ -81,14 +81,35 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="3DViewModel.cs" />
     <Compile Include="AddElements_Component.cs" />
     <Compile Include="AdjustElementPositioning_Component.cs" />
+    <Compile Include="CreateButton_Component.cs" />
+    <Compile Include="CreateColorPicker_Component.cs" />
+    <Compile Include="CreateSlider_Component.cs" />
     <Compile Include="ContainerContents_Component.cs" />
     <Compile Include="Create3DView_Component.cs" />
-    <Compile Include="CreateButton_Component.cs" />
+    <Compile Include="CreateButton_Component_DEPRECATED.cs" />
     <Compile Include="CreateCheckBox_Component.cs" />
     <Compile Include="CreateCheckList_Component.cs" />
     <Compile Include="CreateLabel_Component.cs" />
@@ -96,11 +117,14 @@
     <Compile Include="CreateListBox_Component.cs" />
     <Compile Include="CreateRadioButton_Component.cs" />
     <Compile Include="CreateRadioButton_Component_DEPRECATED.cs" />
+    <Compile Include="CreateMultiShape_Component.cs" />
     <Compile Include="CreateShape_Component.cs" />
-    <Compile Include="CreateSlider_Component.cs" />
+    <Compile Include="CreateSlider_Component_DEPRECATED.cs" />
     <Compile Include="CreateStack_Component.cs" />
     <Compile Include="CreateTextBox_Component.cs" />
+    <Compile Include="GetScreenDimensions.cs" />
     <Compile Include="LaunchWindow_Component.cs" />
+    <Compile Include="LaunchWindow_Component_DEPRECATED.cs" />
     <Compile Include="RestoreElementState_Component.cs" />
     <Compile Include="SetChecklist_Component.cs" />
     <Compile Include="SetList_Component.cs" />
@@ -122,12 +146,14 @@
     <Compile Include="SetImage_Component.cs" />
     <Compile Include="SetLabel_Component.cs" />
     <Compile Include="SetShape_Component.cs" />
+    <Compile Include="TabContainer_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="TabContainer_Component.cs" />
     <Compile Include="TabContainer_Component_DEPRECATED.cs" />
     <Compile Include="UIElement_Goo.cs" />
     <Compile Include="ValueListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SetWindowProperties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorPicker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screenDimensions.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

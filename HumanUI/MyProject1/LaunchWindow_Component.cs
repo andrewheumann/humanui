@@ -16,10 +16,13 @@ using GH_IO.Serialization;
 
 namespace HumanUI
 {
+     enum childStatus { ChildOfGH, ChildOfRhino, AlwaysOnTop};
+
+
     public class LaunchWindow_Component : GH_Component
     {
 
-        private bool makeChild = true;
+        private childStatus winChildStatus = childStatus.ChildOfGH;
 
         MainWindow mw;
 
@@ -33,7 +36,6 @@ namespace HumanUI
         /// </summary>
         public LaunchWindow_Component()
             : base("Launch Window", "LaunchWin", "This component launches a new blank control window.", "Human", "UI Main")
-     
         {
             UpdateMenu();
         }
@@ -45,11 +47,11 @@ namespace HumanUI
         {
             pManager.AddBooleanParameter("Show", "S", "Set this boolean to true to display the control window.", GH_ParamAccess.item);
             pManager.AddTextParameter("Name", "N", "The name of the window to display.", GH_ParamAccess.item, "Control Window");
-            pManager.AddIntegerParameter("Width", "W", "Starting Width of the window.", GH_ParamAccess.item,370);
-            pManager.AddIntegerParameter("Height", "H", "Starting Height of the window.", GH_ParamAccess.item,400);
+            pManager.AddIntegerParameter("Width", "W", "Starting Width of the window.", GH_ParamAccess.item, 370);
+            pManager.AddIntegerParameter("Height", "H", "Starting Height of the window.", GH_ParamAccess.item, 400);
             pManager.AddTextParameter("Font Family", "F", "Optional Font family for UI elements in this window.", GH_ParamAccess.item);
             pManager[4].Optional = true;
-      
+
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace HumanUI
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
             pManager.AddGenericParameter("Window Object", "W", "The window object. Other components can access this to add controls or gather data from the window.", GH_ParamAccess.item);
-    
+
         }
 
         /// <summary>
@@ -103,7 +105,7 @@ namespace HumanUI
 
             DA.SetData("Window Object", mw);
 
-            
+
         }
 
         /// <summary>
@@ -127,7 +129,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{f9d46462-5227-4c4e-9268-0b678960d7a9}"); }
+            get { return new Guid("{0A6B8A40-57A4-4D8D-9F09-F34869655D1E}"); }
         }
 
         protected override void BeforeSolveInstance()
@@ -142,30 +144,34 @@ namespace HumanUI
 
         private void SetupWin()
         {
-          //  WindowReset(EventArgs.Empty);
+            //  WindowReset(EventArgs.Empty);
             try
             {
                 mw.Close();
             }
             catch { }
-            ExpireInputs(null,EventArgs.Empty);
-                mw = new MainWindow();
-                mw.InitializeComponent();
-                mw.Closed += mw_Closed;
-                if (makeChild)
-                {
+            ExpireInputs(null, EventArgs.Empty);
+            mw = new MainWindow();
+            mw.InitializeComponent();
+            mw.Closed += mw_Closed;
+            switch (winChildStatus)
+            {
+                case childStatus.ChildOfGH:
                     setOwner(Grasshopper.Instances.DocumentEditor, mw);
-                }
-                else
-                {
+                    break;
+                case childStatus.AlwaysOnTop:
                     mw.Topmost = true;
-                 //   WindowInteropHelper helper = new WindowInteropHelper(mw);
-                   // helper.Owner = Rhino.RhinoApp.MainWindowHandle();
-         
-                }
-                Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
-                Grasshopper.Instances.ActiveCanvas.DocumentChanged += HideWindow;
-          
+                    break;
+                case childStatus.ChildOfRhino:
+                    setOwner(Rhino.RhinoApp.MainWindowHandle(), mw);
+                    break;
+                default:
+                    break;
+            }
+
+            Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
+            Grasshopper.Instances.ActiveCanvas.DocumentChanged += HideWindow;
+
         }
 
         static void setOwner(System.Windows.Forms.Form ownerForm, System.Windows.Window window)
@@ -174,7 +180,13 @@ namespace HumanUI
             helper.Owner = ownerForm.Handle;
         }
 
-        
+        static void setOwner(IntPtr ownerPtr, System.Windows.Window window)
+        {
+            WindowInteropHelper helper = new WindowInteropHelper(window);
+            helper.Owner = ownerPtr;
+        }
+
+
 
         void mw_Closed(object sender, EventArgs e)
         {
@@ -219,14 +231,36 @@ namespace HumanUI
 
         protected override void AppendAdditionalComponentMenuItems(ToolStripDropDown menu)
         {
-            ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Make Child Window", new System.EventHandler(this.menu_makeChild), true, this.makeChild);
-            toolStripMenuItem.ToolTipText = "When checked, the exploded geometry of the block is calculated. Disable this to speed up component functionality, to retrieve only the block name, attributes, and instance bounding box.";
+            ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Child of Grasshopper", new System.EventHandler(this.menu_makeChildofGH), true,winChildStatus==childStatus.ChildOfGH);
+            toolStripMenuItem.ToolTipText = "When selected, the window is made a child of the Grasshopper window - when the Grasshopper window is hidden or minimized, it will disappear.";
+            ToolStripMenuItem toolStripMenuItem1 = GH_DocumentObject.Menu_AppendItem(menu, "Child of Rhino", new System.EventHandler(this.menu_makeChildofRhino), true, winChildStatus == childStatus.ChildOfRhino);
+            toolStripMenuItem1.ToolTipText = "When selected, the window is made a child of the Rhino window - when the Rhino window is hidden or minimized, it will disappear.";
+            ToolStripMenuItem toolStripMenuItem2 = GH_DocumentObject.Menu_AppendItem(menu, "Always On Top", new System.EventHandler(this.menu_makeAlwaysOnTop), true, winChildStatus == childStatus.AlwaysOnTop);
+            toolStripMenuItem2.ToolTipText = "When selected, the window is always on top, floating above other apps.";
         }
 
-        private void menu_makeChild(object sender, System.EventArgs e)
+        private void menu_makeChildofGH(object sender, System.EventArgs e)
         {
-            base.RecordUndoEvent("Child Window Toggle");
-            this.makeChild = !this.makeChild;
+            base.RecordUndoEvent("Child Window Status Change");
+            this.winChildStatus = childStatus.ChildOfGH;
+            this.UpdateMenu();
+            this.SetupWin();
+            this.ExpireSolution(true);
+        }
+
+        private void menu_makeChildofRhino(object sender, System.EventArgs e)
+        {
+            base.RecordUndoEvent("Child Window Status Change");
+            this.winChildStatus = childStatus.ChildOfRhino;
+            this.UpdateMenu();
+            this.SetupWin();
+            this.ExpireSolution(true);
+        }
+
+        private void menu_makeAlwaysOnTop(object sender, System.EventArgs e)
+        {
+            base.RecordUndoEvent("Child Window Status Change");
+            this.winChildStatus = childStatus.AlwaysOnTop;
             this.UpdateMenu();
             this.SetupWin();
             this.ExpireSolution(true);
@@ -235,24 +269,45 @@ namespace HumanUI
 
         private void UpdateMenu()
         {
-            if (this.makeChild)
+            switch (winChildStatus)
             {
-                base.Message = "Child Window";
+                case childStatus.ChildOfGH:
+                    Message = "Child of GH";
+                    break;
+                case childStatus.AlwaysOnTop:
+                    Message = "Always On Top";
+                    break;
+                case childStatus.ChildOfRhino:
+                    Message = "Child of Rhino";
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                base.Message = "Independent Window";
-            }
+           
         }
+
+        public override void RemovedFromDocument(GH_Document document)
+        {
+            try
+            {
+                mw.Close();
+            }
+            catch { }
+            base.RemovedFromDocument(document);
+        }
+
+        
 
         public override bool Write(GH_IWriter writer)
         {
-            writer.SetBoolean("makeChild", this.makeChild);
-            return base.Write(writer);
+            writer.SetInt32("ChildStatus", (int)winChildStatus);
+                 return base.Write(writer);
         }
         public override bool Read(GH_IReader reader)
         {
-            reader.TryGetBoolean("makeChild", ref this.makeChild);
+            int readVal = -1;
+            reader.TryGetInt32("ChildStatus", ref readVal);
+            winChildStatus = (childStatus)readVal;
             this.UpdateMenu();
             return base.Read(reader);
         }

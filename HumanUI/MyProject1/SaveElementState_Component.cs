@@ -5,6 +5,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows;
 using System.Linq;
+using GH_IO.Serialization;
 
 namespace HumanUI
 {
@@ -19,6 +20,8 @@ namespace HumanUI
                 "Human", "UI Main")
         {
             savedStates = new StateSet_Goo();
+            serializedStates = new Dictionary<string, Dictionary<int, object>>();
+        //    baseElems = new List<UIElement>();
         }
 
         /// <summary>
@@ -44,6 +47,8 @@ namespace HumanUI
         }
 
         private static StateSet_Goo savedStates;
+        private static Dictionary<string, Dictionary<int, object>> serializedStates;
+        private List<UIElement> baseElems;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -77,11 +82,16 @@ namespace HumanUI
             {
                 savedStates.Clear();
             }
+           
+
+            //restore from serializedStates
+
             if (saveState)
             {
-
-                List<UIElement> baseElems = new List<UIElement>();
+              //  baseElems.Clear();
+                baseElems = new List<UIElement>();
                 HUI_Util.extractBaseElements(elems, baseElems);
+              
                 State namedState = new State();
                 //for each element
                 foreach (UIElement u in baseElems)
@@ -128,5 +138,95 @@ namespace HumanUI
         {
             get { return new Guid("{8b6f72d3-6eff-4d25-8faa-62065ab7663e}"); }
         }
+        /*
+        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
+        {
+            Dictionary<string, State> states = savedStates.states;
+            writer.SetInt32("StateCount", states.Count);
+            int i = 0;
+            report("StateCount="+states.Count.ToString());
+            AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, states.Count.ToString());
+            foreach(KeyValuePair<string,State> state in states){
+                 GH_IWriter chunk = writer.CreateChunk("State", i);
+                 chunk.SetString("StateName", state.Key);
+                 State theState = state.Value;
+                 int j = 0;
+                 chunk.SetInt32("elementCount", theState.Count);
+                 foreach (KeyValuePair<UIElement, object> elementState in theState)
+                 {
+                     GH_IWriter elementChunk = chunk.CreateChunk("ElementState", j);
+                   //find index of uiElement
+                     int index = baseElems.FindIndex(u => u == elementState.Key);
+                     elementChunk.SetInt32("elementIndex", index);
+                     elementChunk.SetString("elementType", elementState.Value.GetType().ToString());
+                     elementChunk.SetString("elementValue", elementState.Value.ToString());
+
+                     j++;
+                 }
+                 //chunk.
+
+                 i++;
+             }
+            return base.Write(writer);
+        }
+
+        private void report(string str)
+        {
+            List<string> lines = new List<string>();
+            lines.Add(str);
+            System.IO.File.AppendAllLines(@"C:\users\aheumann\desktop\errorReadout.txt", lines);
+        }
+
+        public override bool Read(GH_IO.Serialization.GH_IReader reader)
+        {
+            Dictionary<string, Dictionary<int, object>> stateSetDict = new Dictionary<string, Dictionary<int, object>>();
+            int stateCount = 0;
+            reader.TryGetInt32("StateCount", ref stateCount);
+           
+      
+            for (int i = 0; i < stateCount; i++)
+            {
+                Dictionary<int, object> stateDict = new Dictionary<int, object>();
+                GH_IReader chunk = reader.FindChunk("State",i);
+                string stateName = chunk.GetString("StateName");
+                int elementCount = chunk.GetInt32("elementCount");
+                report(elementCount.ToString());
+                for (int j = 0; j < elementCount; j++)
+                {
+                    GH_IReader elementChunk = chunk.FindChunk("ElementState",j);
+                    int index = elementChunk.GetInt32("elementIndex");
+                    string elementType = elementChunk.GetString("elementType");
+                    string elementValueRaw = elementChunk.GetString("elementValue");
+                    object actualValue;
+                    report(elementType);
+                    switch (elementType)
+                    {
+                        case "string":
+                            actualValue = elementValueRaw;
+                            break;
+                        case "bool":
+                            bool boolVal = false;
+                            Boolean.TryParse(elementValueRaw,out boolVal);
+                            actualValue = boolVal;
+                            break;
+                        case "int":
+                            int intVal = -1;
+                            Int32.TryParse(elementValueRaw, out intVal);
+                            actualValue = intVal;
+                            break;
+                        default:
+                            actualValue = null;
+                            break;
+                    }
+                    stateDict.Add(index, actualValue);
+
+                }
+
+                stateSetDict.Add(stateName, stateDict);
+            }
+
+                return base.Read(reader);
+        }
+        */
     }
 }

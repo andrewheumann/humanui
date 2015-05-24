@@ -28,7 +28,7 @@ namespace HumanUI
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddNumberParameter("Slider", "S", "The slider(s) to add to the window.", GH_ParamAccess.tree);
-            
+
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace HumanUI
             {
                 if (DependsOn(ao) && ao is GH_NumberSlider)
                 {
-                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider),(ao as GH_NumberSlider).ImpliedNickName));
+                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider), (ao as GH_NumberSlider).ImpliedNickName));
                 }
             }
 
@@ -72,25 +72,25 @@ namespace HumanUI
             }
         }
 
-        private StackPanel MakeSlider(GH_NumberSlider slider)
+        private DockPanel MakeSlider(GH_NumberSlider slider)
         {
+            int decimalPlaces = slider.Slider.DecimalPlaces;
             string name = slider.ImpliedNickName;
-            if (String.IsNullOrWhiteSpace(name)||name.Length==0) name = "Slider";
-            return createNewSliderWithLabels(slider.Slider.Minimum, slider.Slider.Maximum, slider.Slider.Value, name,slider.Slider.Type== Grasshopper.GUI.Base.GH_SliderAccuracy.Integer);
+            if (String.IsNullOrWhiteSpace(name) || name.Length == 0) name = "Slider";
+            return createNewSliderWithLabels(slider.Slider.Minimum, slider.Slider.Maximum, slider.Slider.Value, name, slider.Slider.Type == Grasshopper.GUI.Base.GH_SliderAccuracy.Integer,decimalPlaces);
         }
 
-        public StackPanel createNewSliderWithLabels(Decimal min, Decimal max, Decimal startVal, string name, bool integerSlider)
+        public DockPanel createNewSliderWithLabels(Decimal min, Decimal max, Decimal startVal, string name, bool integerSlider, int decPlaces)
         {
-           return createNewSliderWithLabels((double)min,(double)max,(double)startVal,name,integerSlider);
+            return createNewSliderWithLabels((double)min, (double)max, (double)startVal, name, integerSlider, decPlaces);
         }
 
-        public StackPanel createNewSliderWithLabels(double min, double max, double startVal, string name,bool integerSlider)
+        public DockPanel createNewSliderWithLabels(double min, double max, double startVal, string name, bool integerSlider, int decPlaces)
         {
             Slider slider = new Slider();
             slider.Minimum = min;
             slider.Value = startVal;
             slider.Maximum = max;
-            slider.Width = 200;
             if (integerSlider)
             {
                 slider.TickFrequency = 1.0;
@@ -98,7 +98,7 @@ namespace HumanUI
 
             }
             Label label = new Label();
-            label.Width = 100;
+            label.MinWidth = 100;
             label.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Right;
             label.Content = name;
             Label readout = new Label();
@@ -106,15 +106,19 @@ namespace HumanUI
             Binding myBinding = new Binding("Value");
             myBinding.Source = slider;
             readout.SetBinding(Label.ContentProperty, myBinding);
-            readout.ContentStringFormat = integerSlider ? "{0:0}" :"{0:0.0}";
-            StackPanel internalPanel = new StackPanel();
+
+            readout.ContentStringFormat = integerSlider ? "{0:0}" : String.Concat("{0:F", decPlaces, "}");
+            DockPanel internalPanel = new DockPanel();
+            internalPanel.MinWidth = 200;
             internalPanel.Height = 32;
             internalPanel.Margin = new Thickness(4);
-          //  internalPanel.Width = MasterStackPanel.Width;
-            internalPanel.Orientation = Orientation.Horizontal;
+            internalPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             internalPanel.Children.Add(label);
-            internalPanel.Children.Add(slider);
+            DockPanel.SetDock(label, Dock.Left);
+            DockPanel.SetDock(readout, Dock.Right);
             internalPanel.Children.Add(readout);
+            
+            internalPanel.Children.Add(slider);
             internalPanel.Name = "GH_Slider";
             return internalPanel;
         }
@@ -125,7 +129,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{16231ddc-6473-42d4-b81f-e0c5e90e8fbd}"); }
+            get { return new Guid("{E4F276AF-46FB-478E-B10A-B95E7B04DFF0}"); }
         }
     }
 }

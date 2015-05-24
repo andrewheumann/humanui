@@ -84,7 +84,6 @@ namespace HumanUI
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.ToString());
             }
             DA.SetData("Image", new UIElement_Goo(img,name));
-           
         }
 
         /// <summary>

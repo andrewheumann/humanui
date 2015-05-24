@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Grasshopper.Kernel.Types;
 using Grasshopper.Kernel.Data;
+using Xceed.Wpf.Toolkit;
+using Grasshopper.Kernel;
 
 namespace HumanUI
 {
@@ -56,6 +58,11 @@ namespace HumanUI
            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
        }
 
+
+       public static System.Drawing.Color ToSysColor(System.Windows.Media.Color color)
+       {
+           return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+       }
 
        public static void extractBaseElements(IEnumerable<UIElement> elements, List<UIElement> extractedElements)
        {
@@ -162,6 +169,14 @@ namespace HumanUI
                       
                        //return cbi.Content;
                        return;
+
+                   case "Xceed.Wpf.Toolkit.ColorPicker":
+                       ColorPicker colP = u as ColorPicker;
+                       System.Drawing.Color sysCol = (System.Drawing.Color)o;
+                       colP.SelectedColor = HUI_Util.ToMediaColor(sysCol);
+
+                       //return cbi.Content;
+                       return;
                    case "System.Windows.Controls.ListView":
                        ListView v = u as ListView;
                        var cbs = from cbx in v.Items.OfType<CheckBox>() select cbx;
@@ -209,6 +224,29 @@ namespace HumanUI
               
            }
        }
+
+       public static IGH_Goo GetRightType(object o)
+       {
+          
+           switch (o.GetType().ToString())
+           {
+               case "System.Boolean": 
+                   return new GH_Boolean((bool)o);
+               case "System.Int32": 
+               case "System.Double":
+               case "System.Single":
+                   return new GH_Number((double)o);
+               case "System.String":
+                   return new GH_String((string)o);
+               case "System.Drawing.Color":
+                   return new GH_Colour((System.Drawing.Color)o);
+               default:
+                   return new GH_ObjectWrapper(o);
+
+
+           }
+       }
+
 
        public static string elemType(UIElement elem)
        {
@@ -304,6 +342,11 @@ namespace HumanUI
                    ComboBox cb = u as ComboBox;
                    Label cbi = cb.SelectedItem as Label;
                    return cbi.Content;
+               case "Xceed.Wpf.Toolkit.ColorPicker":
+                   ColorPicker colP = u as ColorPicker;
+
+                   //return cbi.Content;
+                   return HUI_Util.ToSysColor(colP.SelectedColor);
                case "System.Windows.Controls.ListView":
                    ListView v = u as ListView;
                    var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
@@ -340,6 +383,42 @@ namespace HumanUI
            }
        }
 
+
+       static public object GetElementIndex(UIElement u)
+       {
+           switch (u.GetType().ToString())
+           {
+               
+              case "System.Windows.Controls.ListBox":
+                   ListBox lb = u as ListBox;
+                   return lb.SelectedIndex;
+               case "System.Windows.Controls.ScrollViewer":
+                   ScrollViewer sv = u as ScrollViewer;
+                   ItemsControl ic = sv.Content as ItemsControl;
+                   List<int> checkeds = new List<int>();
+                   var cbs = from cbx in ic.Items.OfType<CheckBox>() select cbx;
+                   int i = 0;
+                   foreach (CheckBox chex in cbs)
+                   {
+
+                       if (chex.IsChecked == true)
+                       {
+                           checkeds.Add(i);
+                       }
+                       i++;
+                   }
+
+                   return checkeds;
+               case "System.Windows.Controls.ComboBox":
+                   ComboBox cb = u as ComboBox;
+                   return cb.SelectedIndex;
+               case "System.Windows.Controls.TabControl":
+                   TabControl tc = u as TabControl;
+                   return tc.SelectedIndex;
+               default:
+                   return -1;
+           }
+       }
 
     }
 }

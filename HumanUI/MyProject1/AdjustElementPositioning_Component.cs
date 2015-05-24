@@ -17,7 +17,7 @@ namespace HumanUI
         /// </summary>
         public AdjustElementPositioning_Component()
             : base("Adjust Element Positioning", "AdjustPos",
-                "Adjust the margins and other positioning information of an element. \nAbsolute positioning can get a little wonky, use at your own risk.",
+                "Adjust the margins, sizing, and other positioning information of an element. \nAbsolute positioning can get a little wonky, use at your own risk.",
                 "Human", "UI Main")
         {
         }
@@ -42,7 +42,7 @@ namespace HumanUI
             horizAlign.AddNamedValue("Left", 0);
             horizAlign.AddNamedValue("Center", 1);
             horizAlign.AddNamedValue("Right", 2);
-            pManager.AddIntegerParameter("Vertical Alignment", "VA", "Horizontal alignment", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Vertical Alignment", "VA", "Vertical alignment", GH_ParamAccess.item);
             pManager[6].Optional = true;
             Param_Integer vertAlign = (Param_Integer)pManager[6];
             vertAlign.AddNamedValue("Bottom", 0);

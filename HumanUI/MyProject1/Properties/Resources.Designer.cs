@@ -83,6 +83,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ColorPicker {
+            get {
+                object obj = ResourceManager.GetObject("ColorPicker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ContainerContents {
             get {
                 object obj = ResourceManager.GetObject("ContainerContents", resourceCulture);
@@ -256,6 +266,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SaveState {
             get {
                 object obj = ResourceManager.GetObject("SaveState", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap screenDimensions {
+            get {
+                object obj = ResourceManager.GetObject("screenDimensions", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
