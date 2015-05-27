@@ -45,6 +45,7 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            List<Label> sliderLabels = new List<Label>();
             List<UIElement_Goo> sliderPanels = new List<UIElement_Goo>();
             GH_Document doc = OnPingDocument();
             if (doc == null) return;
@@ -52,8 +53,24 @@ namespace HumanUI
             {
                 if (DependsOn(ao) && ao is GH_NumberSlider)
                 {
-                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider), (ao as GH_NumberSlider).ImpliedNickName));
+                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider, ref sliderLabels), (ao as GH_NumberSlider).ImpliedNickName));
                 }
+            }
+
+
+            double width = 0;
+            foreach (Label l in sliderLabels)
+            {
+                
+                l.Measure(new Size(double.PositiveInfinity,double.PositiveInfinity));
+                if (width < l.DesiredSize.Width)
+                {
+                    width = l.DesiredSize.Width;
+                }
+            }
+            foreach (Label l in sliderLabels)
+            {
+                l.Width = width;
             }
 
             DA.SetDataList("Sliders", sliderPanels);
@@ -72,20 +89,20 @@ namespace HumanUI
             }
         }
 
-        private DockPanel MakeSlider(GH_NumberSlider slider)
+        private DockPanel MakeSlider(GH_NumberSlider slider, ref List<Label> labelList)
         {
             int decimalPlaces = slider.Slider.DecimalPlaces;
             string name = slider.ImpliedNickName;
             if (String.IsNullOrWhiteSpace(name) || name.Length == 0) name = "Slider";
-            return createNewSliderWithLabels(slider.Slider.Minimum, slider.Slider.Maximum, slider.Slider.Value, name, slider.Slider.Type == Grasshopper.GUI.Base.GH_SliderAccuracy.Integer,decimalPlaces);
+            return createNewSliderWithLabels(slider.Slider.Minimum, slider.Slider.Maximum, slider.Slider.Value, name, slider.Slider.Type == Grasshopper.GUI.Base.GH_SliderAccuracy.Integer,decimalPlaces, ref labelList);
         }
 
-        public DockPanel createNewSliderWithLabels(Decimal min, Decimal max, Decimal startVal, string name, bool integerSlider, int decPlaces)
+        public DockPanel createNewSliderWithLabels(Decimal min, Decimal max, Decimal startVal, string name, bool integerSlider, int decPlaces, ref List<Label> sliderLabels)
         {
-            return createNewSliderWithLabels((double)min, (double)max, (double)startVal, name, integerSlider, decPlaces);
+            return createNewSliderWithLabels((double)min, (double)max, (double)startVal, name, integerSlider, decPlaces, ref sliderLabels);
         }
 
-        public DockPanel createNewSliderWithLabels(double min, double max, double startVal, string name, bool integerSlider, int decPlaces)
+        public DockPanel createNewSliderWithLabels(double min, double max, double startVal, string name, bool integerSlider, int decPlaces, ref List<Label> sliderLabels)
         {
             Slider slider = new Slider();
             slider.Minimum = min;
@@ -98,9 +115,12 @@ namespace HumanUI
 
             }
             Label label = new Label();
-            label.MinWidth = 100;
+        //    label.MinWidth = 100;
             label.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Right;
             label.Content = name;
+
+            sliderLabels.Add(label);
+
             Label readout = new Label();
             readout.Content = "";
             Binding myBinding = new Binding("Value");

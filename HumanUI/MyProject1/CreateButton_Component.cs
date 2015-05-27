@@ -181,14 +181,13 @@ namespace HumanUI
 
              }
 
-             
 
-            //btn.Style = MainWindow.getStyleByName("SquareButtonStyle");
-
-            //TODO: figure out how to calculate the width of content and assign it as the button width.
-          //   btn.MaxWidth = sp.ExtentWidth;
-            btn.Margin = new Thickness(4);
-
+             Size size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+             sp.Measure(size);
+             sp.Margin = new Thickness(2);
+             btn.Width = sp.DesiredSize.Width+20;
+             btn.Margin = new Thickness(4);
+                
             DA.SetData("Button", new UIElement_Goo(btn, name));
 
         }

@@ -141,7 +141,8 @@ namespace HumanUI
             {
                 object value = HUI_Util.GetElementValue(u);
                 object indices = HUI_Util.GetElementIndex(u);
-                IEnumerable list = value as IEnumerable;
+                IEnumerable list = null;
+                if ((value as string) == null) list = value as IEnumerable;
                 IEnumerable indList = indices as IEnumerable;
                 if (list != null)
                 {
