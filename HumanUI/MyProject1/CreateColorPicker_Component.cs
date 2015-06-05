@@ -74,7 +74,7 @@ namespace HumanUI
             }
 
 
-            DA.SetData("Color Picker", new UIElement_Goo(picker,"Color Picker"));
+            DA.SetData("Color Picker", new UIElement_Goo(picker, "Color Picker", InstanceGuid, DA.Iteration));
 
         }
 

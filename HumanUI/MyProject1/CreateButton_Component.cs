@@ -188,7 +188,7 @@ namespace HumanUI
              btn.Width = sp.DesiredSize.Width+20;
              btn.Margin = new Thickness(4);
                 
-            DA.SetData("Button", new UIElement_Goo(btn, name));
+            DA.SetData("Button", new UIElement_Goo(btn, name,InstanceGuid,DA.Iteration));
 
         }
 

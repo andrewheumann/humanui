@@ -12,19 +12,25 @@ namespace HumanUI
 {
     public class UIElement_Goo : GH_Goo<UIElement>
     {
+      
         public UIElement element { get; set; }
+
         public string name { get; set; }
-        public UIElement_Goo(UIElement _element, string _name)
+        public int index { get; set; }
+        public Guid instanceGuid { get; set; }
+        public UIElement_Goo(UIElement _element, string _name, Guid _id, int _index)
         {
             element = _element;
             name = _name;
-
+            instanceGuid = _id;
+            index = _index;
         }
         public override IGH_Goo Duplicate()
         {
-            return new UIElement_Goo(element,name);
+            return new UIElement_Goo(element,name,instanceGuid,index);
         }
 
+     
         public override bool IsValid
         {
             get { return (element != null); }

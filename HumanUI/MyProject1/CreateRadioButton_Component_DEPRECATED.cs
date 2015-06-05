@@ -52,7 +52,7 @@ namespace HumanUI
             rb.Content = btnName;
             rb.GroupName = groupName;
 
-            DA.SetData("Radio Button", new UIElement_Goo(rb,String.Format("Radio Button: {0}",btnName)));
+            DA.SetData("Radio Button", new UIElement_Goo(rb, String.Format("Radio Button: {0}", btnName), InstanceGuid, DA.Iteration));
             
         }
 

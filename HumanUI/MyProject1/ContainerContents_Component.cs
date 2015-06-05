@@ -78,7 +78,7 @@ namespace HumanUI
                     foreach (UIElement elem in sp.Children)
                     {
 
-                        childElements.Add(new UIElement_Goo(elem, String.Format("StackPanel {0}/{2} {1}", i, j, HUI_Util.elemType(elem))));
+                        childElements.Add(new UIElement_Goo(elem, String.Format("StackPanel {0}/{2} {1}", i, j, HUI_Util.elemType(elem)), InstanceGuid, DA.Iteration));
                         j++;
                     }
                     break;
@@ -95,7 +95,7 @@ namespace HumanUI
                             foreach (UIElement elem in spInside.Children)
                             {
 
-                                childElements.Add(new UIElement_Goo(elem, String.Format("Tab Control {0}/{1}/{2} {3}", i, ti.Header.ToString(), HUI_Util.elemType(elem), k)));
+                                childElements.Add(new UIElement_Goo(elem, String.Format("Tab Control {0}/{1}/{2} {3}", i, ti.Header.ToString(), HUI_Util.elemType(elem), k), InstanceGuid, DA.Iteration));
                                 k++;
                             }
 
@@ -104,7 +104,7 @@ namespace HumanUI
                         else if(o is UIElement)
                         {
                             UIElement elem = o as UIElement;
-                            childElements.Add(new UIElement_Goo(elem, String.Format("Tab Control {0}/{1}", i, HUI_Util.elemType(elem))));
+                            childElements.Add(new UIElement_Goo(elem, String.Format("Tab Control {0}/{1}", i, HUI_Util.elemType(elem)), InstanceGuid, DA.Iteration));
                         }
                     }
                     

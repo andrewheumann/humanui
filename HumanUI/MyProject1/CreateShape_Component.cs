@@ -118,8 +118,8 @@ namespace HumanUI
             }
             G.Children.Add(path);
 
-           
-            DA.SetData("Shape", new UIElement_Goo(G, "Shape"));
+
+            DA.SetData("Shape", new UIElement_Goo(G, "Shape", InstanceGuid, DA.Iteration));
             
         }
 

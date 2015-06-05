@@ -133,6 +133,9 @@ namespace HumanUI
             List<UIElement> elementsToListen = new List<UIElement>();
             HUI_Util.extractBaseElements(filteredElements,elementsToListen);
 
+           
+
+
             //retrieve element values
             GH_Structure<IGH_Goo> values = new GH_Structure<IGH_Goo>();
             GH_Structure<GH_Integer> indsOut = new GH_Structure<GH_Integer>();
@@ -266,17 +269,6 @@ namespace HumanUI
                     cp.SelectedColorChanged -= ExpireThis;
                     cp.SelectedColorChanged += ExpireThis;
                     return;
-                case "System.Windows.Controls.ListView":
-                    ListView v = u as ListView;
-                     var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
-                    foreach (CheckBox chex in cbxs)
-                    {
-                        chex.Checked -= ExpireThis;
-                        chex.Unchecked -= ExpireThis;
-                        chex.Checked += ExpireThis;
-                        chex.Unchecked += ExpireThis;
-                    }
-                    return;
                 case "System.Windows.Controls.CheckBox":
                     CheckBox chb = u as CheckBox;
                     chb.Checked -= ExpireThis;
@@ -353,15 +345,6 @@ namespace HumanUI
                 case "Xceed.Wpf.Toolkit.ColorPicker":
                     ColorPicker cp = u as ColorPicker;
                     cp.SelectedColorChanged -= ExpireThis;
-                    return;
-                case "System.Windows.Controls.ListView":
-                    ListView v = u as ListView;
-                    var cbxs = from cbx in v.Items.OfType<CheckBox>() select cbx;
-                    foreach (CheckBox chex in cbxs)
-                    {
-                        chex.Checked -= ExpireThis;
-                        chex.Unchecked -= ExpireThis;
-                    }
                     return;
                 case "System.Windows.Controls.CheckBox":
                     CheckBox chb = u as CheckBox;

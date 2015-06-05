@@ -3,19 +3,18 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using System.Windows.Controls;
 
 namespace HumanUI
 {
-    public class CreateCheckBox_Component : GH_Component
+    public class ElemFromGuid : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the CreateCheckBox_Component class.
+        /// Initializes a new instance of the ElemFromGuid class.
         /// </summary>
-        public CreateCheckBox_Component()
-            : base("Create Checkbox", "Checkbox",
-                "Creates a single checkbox",
-                "Human", "UI Elements")
+        public ElemFromGuid()
+            : base("ElemFromGuid", "Nickname",
+                "Description",
+                "Human", "UI Testing")
         {
         }
 
@@ -24,8 +23,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Label", "L", "The label for the checkbox.", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Starting Value", "V", "The starting value (checked/unchecked) for the box.", GH_ParamAccess.item, false);
+            pManager.AddGenericParameter("Element", "E", "", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -33,7 +31,8 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Checkbox", "CB", "The created checkbox.", GH_ParamAccess.item);
+            pManager.AddTextParameter("GUID", "G", "", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Index", "i", "", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,17 +41,10 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool isSelected = false;
-            string label = "";
-            if (!DA.GetData<string>("Label", ref label)) return;
-            DA.GetData<bool>("Starting Value", ref isSelected);
-
-            CheckBox cb = new CheckBox();
-            cb.Margin = new System.Windows.Thickness(2);
-            cb.Content = label;
-            cb.IsChecked = isSelected;
-            DA.SetData("Checkbox", new UIElement_Goo(cb, String.Format("Checkbox: {0}", label), InstanceGuid, DA.Iteration));
-
+            UIElement_Goo gooTest = null;
+            DA.GetData<UIElement_Goo>(0, ref gooTest);
+            DA.SetData(0, gooTest.instanceGuid);
+            DA.SetData(1, gooTest.index);
         }
 
         /// <summary>
@@ -64,7 +56,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateCheckbox;
+                return null;
             }
         }
 
@@ -73,7 +65,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{c2c5cc88-9812-4769-b482-bd6f32697836}"); }
+            get { return new Guid("{d6b1d3c9-f9a9-4523-8ecd-1def6fdc753f}"); }
         }
     }
 }

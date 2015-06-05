@@ -61,7 +61,7 @@ namespace HumanUI
                 lb.Items.Add(label);
             }
             lb.SelectedIndex = selectedIndex;
-            DA.SetData("List Box", new UIElement_Goo(lb,"List Box"));
+            DA.SetData("List Box", new UIElement_Goo(lb, "List Box", InstanceGuid, DA.Iteration));
         }
 
         /// <summary>

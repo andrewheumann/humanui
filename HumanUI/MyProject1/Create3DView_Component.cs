@@ -75,7 +75,7 @@ namespace HumanUI
             vp3.Children.Add(mv3);
         //    vp3.Children.Add(grid);
 
-            DA.SetData("3DView", new UIElement_Goo(vp3,"3D View"));
+            DA.SetData("3DView", new UIElement_Goo(vp3,"3D View", InstanceGuid, DA.Iteration));
         }
 
         /// <summary>

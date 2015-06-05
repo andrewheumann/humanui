@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
+using Grasshopper.Kernel.Types;
+using Grasshopper.Kernel.Special;
 using Rhino.Geometry;
+using Grasshopper.Kernel.Parameters;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace HumanUI
 {
-    public class CreateLabel_Component : GH_Component
+    public class CreateTextBlock_Component : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the CreateLabel_Component class.
+        /// Initializes a new instance of the CreateTextBlock_Component class.
         /// </summary>
-        public CreateLabel_Component()
-            : base("Create Label", "Label",
-                "Creates a label in the window.",
+        public CreateTextBlock_Component()
+            : base("Create Text Block", "TB",
+                "Creates a multi-line text block",
                 "Human", "UI Elements")
         {
         }
@@ -26,19 +28,19 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Label Text", "T", "The text to display in the label", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Label Size", "S", "The size of the label to display", GH_ParamAccess.item,12);
+            pManager.AddTextParameter("Text", "T", "The text to display in the text block", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Text Size", "S", "The size of the label to display", GH_ParamAccess.item, 12);
             Param_Integer labelSize = (Param_Integer)pManager[1];
             labelSize.AddNamedValue("Micro", 8);
             labelSize.AddNamedValue("Normal", 12);
-            labelSize.AddNamedValue("Heading", 18);
-            labelSize.AddNamedValue("Major Heading", 24);
+            labelSize.AddNamedValue("Medium", 16);
+            labelSize.AddNamedValue("Large", 18);
             pManager.AddIntegerParameter("Justification", "J", "Text justification", GH_ParamAccess.item, 0);
             Param_Integer justification = (Param_Integer)pManager[2];
             justification.AddNamedValue("Left", 0);
             justification.AddNamedValue("Center", 1);
             justification.AddNamedValue("Right", 2);
-           
+            justification.AddNamedValue("Justify", 3);
         }
 
         /// <summary>
@@ -46,7 +48,8 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Label", "L", "The created labels.", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Text Block", "TB", "The created text block.", GH_ParamAccess.item);
+       
         }
 
         /// <summary>
@@ -58,15 +61,35 @@ namespace HumanUI
             string labelContent = "";
             int labelSize = 12;
             int justification = 0;
-            if (!DA.GetData<string>("Label Text", ref labelContent)) return;
-            DA.GetData<int>("Label Size", ref labelSize);
+            if (!DA.GetData<string>("Text", ref labelContent)) return;
+            DA.GetData<int>("Text Size", ref labelSize);
             DA.GetData<int>("Justification", ref justification);
-            Label l = new Label();
-            l.Content = labelContent;
+            TextBlock l = new TextBlock();
+            l.Text = labelContent;
             l.FontSize = labelSize;
-            l.HorizontalContentAlignment = (HorizontalAlignment)justification;
-            DA.SetData("Label", new UIElement_Goo(l, String.Format("Label: {0}", labelContent), InstanceGuid, DA.Iteration));
+            l.TextWrapping = TextWrapping.Wrap;
+            switch (justification)
+            {
+                case 0:
+                    l.TextAlignment = TextAlignment.Left;
+                    break;
+                case 1:
+                    l.TextAlignment = TextAlignment.Center;
+                    break;
+                case 2:
+                    l.TextAlignment = TextAlignment.Right;
+                    break;
+                case 3:
+                    l.TextAlignment = TextAlignment.Justify;
+                    break;
+                default:
+                    l.TextAlignment = TextAlignment.Left;
+                    break;
+
+            }
+            DA.SetData("Text Block", new UIElement_Goo(l, String.Format("Text Block: {0}", labelContent), InstanceGuid, DA.Iteration));
            
+     
         }
 
         /// <summary>
@@ -78,7 +101,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateLabel;
+                return null;
             }
         }
 
@@ -87,7 +110,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{b844ab20-b7ae-4a21-99d5-83c5666a7432}"); }
+            get { return new Guid("{088f694c-6b70-4baf-afe4-5bfd46526d6f}"); }
         }
     }
 }

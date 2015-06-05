@@ -19,7 +19,7 @@ namespace HumanUI
         /// Initializes a new instance of the CreateMultiShape_Component class.
         /// </summary>
         public CreateMultiShape_Component()
-            : base("Create Shape", "Shape",
+            : base("Create Shapes", "Shapes",
                 "Creates shapes from a polylines",
                 "Human", "UI Elements")
         {
@@ -86,7 +86,21 @@ namespace HumanUI
             bool hasWeight = DA.GetDataList<double>("Stroke Weight", strokeWeights);
             bool hasStrokeCol = DA.GetDataList<System.Drawing.Color>("Stroke Color",  strokeCol);
               DA.GetData<double>("Scale", ref scale);
-            if (!DA.GetDataList<Curve>("Shape", shapeCrvs)) return;
+            if (!DA.GetDataList<Curve>("Shapes", shapeCrvs)) return;
+
+            Grid G = new Grid();
+            if (DA.GetData<int>("Width", ref width))
+            {
+
+                G.Width = width;
+            }
+            if (DA.GetData<int>("Height", ref height))
+            {
+
+                G.Height = height;
+            }
+
+
             int i =0;
             foreach (Curve c in shapeCrvs)
             {
@@ -115,6 +129,7 @@ namespace HumanUI
                 }
                 
                 i++;
+                G.Children.Add(path);
             }
         
           
@@ -125,21 +140,11 @@ namespace HumanUI
 
            
 
-            Grid G = new Grid();
-            if (DA.GetData<int>("Width", ref width))
-            {
+          
+     
 
-                G.Width = width;
-            }
-            if (DA.GetData<int>("Height", ref height))
-            {
 
-                G.Height = height;
-            }
-         //   G.Children.Add(path);
-
-           
-            DA.SetData("Shape", new UIElement_Goo(G, "Shape"));
+            DA.SetData("Shape", new UIElement_Goo(G, "Shape", InstanceGuid, DA.Iteration));
             
         }
 

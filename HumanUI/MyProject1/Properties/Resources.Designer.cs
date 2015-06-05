@@ -231,6 +231,15 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 0.5.1.2.
+        /// </summary>
+        internal static string CURRENT_VERSION {
+            get {
+                return ResourceManager.GetString("CURRENT_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap FilterElements {

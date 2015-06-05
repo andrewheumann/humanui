@@ -58,7 +58,7 @@ namespace HumanUI
                 sp.Children.Add(u.element);
             }
 
-            DA.SetData("Stack", new UIElement_Goo(sp,"Stack"));
+            DA.SetData("Stack", new UIElement_Goo(sp, "Stack", InstanceGuid, DA.Iteration));
         }
 
         

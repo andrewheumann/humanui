@@ -73,7 +73,7 @@ namespace HumanUI
                 sp.Name = "GH_TextBox_NoButton";
             }
             
-            DA.SetData("Text Box", new UIElement_Goo(sp,String.Format("TextBox: {0}",label)));
+            DA.SetData("Text Box", new UIElement_Goo(sp,String.Format("TextBox: {0}",label), InstanceGuid, DA.Iteration));
         }
 
         /// <summary>

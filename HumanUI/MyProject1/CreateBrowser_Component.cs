@@ -1,44 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Windows.Controls;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using HumanUIBaseApp;
-
 namespace HumanUI
 {
-    public class CreateButton_Component_DEPRECATED : GH_Component,HUI_Expirable
+    public class CreateBrowser_Component : GH_Component
     {
-
-       
         /// <summary>
-        /// Initializes a new instance of the CreateButton_Component class.
+        /// Initializes a new instance of the CreateBrowser_Component class.
         /// </summary>
-        public CreateButton_Component_DEPRECATED()
-            : base("Create Button", "Button",
-                "Create a Button object.",
+        public CreateBrowser_Component()
+            : base("Create Browser", "Browser",
+                "Creates a web browser window.",
                 "Human", "UI Elements")
         {
-        }
-
-
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden ;
-            }
         }
 
         /// <summary>
@@ -46,7 +23,12 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Button Name", "N", "The text to display on the button", GH_ParamAccess.item);
+            pManager.AddTextParameter("URL", "U", "The URI/URL of the page to display", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Width", "W", "Width of the window", GH_ParamAccess.item);
+            pManager[1].Optional = true;
+            pManager.AddIntegerParameter("Height", "H", "Height of the window", GH_ParamAccess.item);
+            pManager[2].Optional = true;
+
         }
 
         /// <summary>
@@ -54,7 +36,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Button", "B", "The created Button", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Browser", "WB", "The created Web Browser", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -63,17 +45,21 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            string name = "Button";
+            string url = "";
+            int width = -1;
+            int height = -1;
+            if (!DA.GetData<string>("URL", ref url)) return;
+            WebBrowser wb = new WebBrowser();
+            wb.Source = new Uri(url);
 
-            if (!DA.GetData<string>("Button Name", ref name)) return;
-            Button btn = new Button();
-            btn.Content = name;
-            //btn.Style = MainWindow.getStyleByName("SquareButtonStyle");
-            btn.MaxWidth = 150;
-            btn.Margin = new Thickness(4);
-
-            DA.SetData("Button", new UIElement_Goo(btn,name, InstanceGuid, DA.Iteration));
-
+            if(DA.GetData<int>("Width",ref width)){
+                wb.Width = width;   
+            }
+            if (DA.GetData<int>("Height", ref height))
+            {
+                wb.Height = height;
+            }
+            DA.SetData("Browser", new UIElement_Goo(wb, String.Format("Browser: {0}", url), InstanceGuid, DA.Iteration));
         }
 
         /// <summary>
@@ -85,7 +71,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateButton;
+                return null;
             }
         }
 
@@ -94,7 +80,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{b29e7c03-27ee-446c-894c-476261a807d1}"); }
+            get { return new Guid("{cf49dbbd-93b5-4f9f-81ea-f585f20a5843}"); }
         }
     }
 }

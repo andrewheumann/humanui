@@ -53,7 +53,7 @@ namespace HumanUI
             {
                 if (DependsOn(ao) && ao is GH_NumberSlider)
                 {
-                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider, ref sliderLabels), (ao as GH_NumberSlider).ImpliedNickName));
+                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider, ref sliderLabels), (ao as GH_NumberSlider).ImpliedNickName, InstanceGuid, DA.Iteration));
                 }
             }
 

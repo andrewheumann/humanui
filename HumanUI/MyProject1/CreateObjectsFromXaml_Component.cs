@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Windows.Markup;
+using System.Xaml;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace HumanUI
 {
-    public class CreatePullDown_Component : GH_Component
+    public class CreateObjectsFromXaml_Component : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the CreateListBox_Component class.
+        /// Initializes a new instance of the CreateObjectsFromXaml_Component class.
         /// </summary>
-        public CreatePullDown_Component()
-            : base("Create Pulldown Menu", "Pulldown",
-                "Creates a pulldown menu from which items can be selected.",
+        public CreateObjectsFromXaml_Component()
+            : base("Create Objects from XAML", "XAML",
+                "Creates UI elements from typed XAML syntax",
                 "Human", "UI Elements")
         {
         }
@@ -26,16 +26,15 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("List Items", "L", "The initial list of options to display in the list.", GH_ParamAccess.list);
-            pManager.AddIntegerParameter("Selected Index", "I", "The initially selected index. Defaults to the first item.", GH_ParamAccess.item, 0);
-            }
+            pManager.AddTextParameter("XAML", "X", "The XAML text", GH_ParamAccess.item);
+        }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Pulldown", "PD", "The pulldown object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Object", "O", "The XAML object tree", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -44,23 +43,21 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-           
-            List<string> listItems = new List<string>();
-            int selectedIndex = 0;
+            string xaml= "";
+            if (!DA.GetData<string>("XAML", ref xaml)) return;
 
-            if (!DA.GetDataList<string>("List Items", listItems)) return;
-            DA.GetData<int>("Selected Index",ref selectedIndex);
-            ComboBox pd = new ComboBox();
-          
-            foreach (string item in listItems)
+            ParserContext parserContext = new ParserContext();
+            parserContext.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            parserContext.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
+
+            object xamlObj = System.Windows.Markup.XamlReader.Parse(xaml,parserContext); //XamlServices.Parse(xaml);
+            UIElement uie = xamlObj as UIElement;
+            if (uie == null)
             {
-                Label label = new Label();
-                label.Content = item;
-                pd.Items.Add(label);
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "unable to convert xaml into a UI element");
             }
-            pd.Margin = new Thickness(4);
-            pd.SelectedIndex = selectedIndex;
-            DA.SetData("Pulldown", new UIElement_Goo(pd, "Pulldown", InstanceGuid, DA.Iteration));
+            DA.SetData("Object", new UIElement_Goo(uie, "Generic XAML", InstanceGuid, DA.Iteration));
+      
         }
 
         /// <summary>
@@ -72,7 +69,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreatePullDown;
+                return null;
             }
         }
 
@@ -81,7 +78,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{1CA8D537-EF52-487C-828D-034B1BCA7361}"); }
+            get { return new Guid("{fd2eb7a5-9db0-4688-ad19-3736eb4fb182}"); }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace HumanUI
             rb.GroupName = groupName;
             rb.IsChecked = isSelected;
 
-            DA.SetData("Radio Button", new UIElement_Goo(rb,String.Format("Radio Button: {0}",btnName)));
+            DA.SetData("Radio Button", new UIElement_Goo(rb, String.Format("Radio Button: {0}", btnName), InstanceGuid, DA.Iteration));
             
         }
 

@@ -104,8 +104,10 @@
     <Compile Include="3DViewModel.cs" />
     <Compile Include="AddElements_Component.cs" />
     <Compile Include="AdjustElementPositioning_Component.cs" />
+    <Compile Include="CreateBrowser_Component.cs" />
     <Compile Include="CreateButton_Component.cs" />
     <Compile Include="CreateColorPicker_Component.cs" />
+    <Compile Include="CreateObjectsFromXaml_Component.cs" />
     <Compile Include="CreateSlider_Component.cs" />
     <Compile Include="ContainerContents_Component.cs" />
     <Compile Include="Create3DView_Component.cs" />
@@ -121,7 +123,9 @@
     <Compile Include="CreateShape_Component.cs" />
     <Compile Include="CreateSlider_Component_DEPRECATED.cs" />
     <Compile Include="CreateStack_Component.cs" />
+    <Compile Include="CreateTextBlock_Component.cs" />
     <Compile Include="CreateTextBox_Component.cs" />
+    <Compile Include="ElemFromGuid.cs" />
     <Compile Include="GetScreenDimensions.cs" />
     <Compile Include="LaunchWindow_Component.cs" />
     <Compile Include="LaunchWindow_Component_DEPRECATED.cs" />

@@ -72,7 +72,7 @@ namespace HumanUI
                 ic.Items.Add(cb);
             }
             sv.Content = ic;
-            DA.SetData("Checklist", new UIElement_Goo(sv, "Checklist"));
+            DA.SetData("Checklist", new UIElement_Goo(sv, "Checklist", InstanceGuid, DA.Iteration));
       
         }
 

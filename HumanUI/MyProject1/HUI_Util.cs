@@ -64,6 +64,33 @@ namespace HumanUI
            return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
        }
 
+
+
+       public static UIElement extractBaseElement(UIElement element)
+       {
+           if (element is Panel)
+           {
+
+               Panel p = element as Panel;
+               switch (p.Name)
+               {
+                   case "GH_Slider":
+                       return findSlider(p);
+                   case "GH_TextBox":
+                   case "GH_TextBox_NoButton":
+                       return findTextBox(p);
+                   default:
+                       return null;
+               }
+
+           }
+           else
+           {
+                return element;
+           }
+       }
+
+
        public static void extractBaseElements(IEnumerable<UIElement> elements, List<UIElement> extractedElements)
        {
            foreach (UIElement elem in elements)
@@ -81,7 +108,7 @@ namespace HumanUI
                        case "GH_TextBox_NoButton":
                            extractedElements.Add(findTextBox(p));
                            break;
-                       default:
+                       default: // WE MAY HAVE TO FORGET ABOUT GETTING STUFF OUT OF CONTAINERS (TABS ETC)
                            extractBaseElements(p.Children.Cast<UIElement>(), extractedElements);
                            break;
                    }
@@ -146,19 +173,10 @@ namespace HumanUI
                        Slider s = u as Slider;
                        s.Value = (double)o;
                        return;
-                   case "System.Windows.Controls.Button":
-                       Button b = u as Button;
-                       return;
-                   case "System.Windows.Controls.Label":
-                       Label l = u as Label;
-                       l.Content = (string)o;
-                       return;
                    case "System.Windows.Controls.ListBox":
                        ListBox lb = u as ListBox;
                        lb.SelectedIndex = getSelectedItemIndex(lb,(string) o); 
-
                        return;
-
                    case "System.Windows.Controls.TextBox":
                        TextBox tb = u as TextBox;
                        tb.Text = (string)o;
@@ -166,41 +184,27 @@ namespace HumanUI
                    case "System.Windows.Controls.ComboBox":
                        ComboBox cb = u as ComboBox;
                        cb.SelectedIndex = getSelectedItemIndex(cb, (string)o);
-                      
-                       //return cbi.Content;
                        return;
 
                    case "Xceed.Wpf.Toolkit.ColorPicker":
                        ColorPicker colP = u as ColorPicker;
                        System.Drawing.Color sysCol = (System.Drawing.Color)o;
                        colP.SelectedColor = HUI_Util.ToMediaColor(sysCol);
-
-                       //return cbi.Content;
                        return;
-                   case "System.Windows.Controls.ListView":
-                       ListView v = u as ListView;
-                       var cbs = from cbx in v.Items.OfType<CheckBox>() select cbx;
+                   case "System.Windows.Controls.ScrollViewer":
+                       //it's a checklist
+                       ScrollViewer sv = u as ScrollViewer;
+                       List<bool> valueList = (List<bool>)o;
+                       ItemsControl ic = sv.Content as ItemsControl;
+                        var cbs = from cbx in ic.Items.OfType<CheckBox>() select cbx;
+                        int i = 0;
+                        foreach (CheckBox chex in cbs)
+                        {
 
-                       string namesJoined = (string) o;
-                       string[] checkBoxNames = namesJoined.Split(',');
+                            chex.IsChecked = valueList[i];
+                                i++;
+                        }
 
-                       
-                       foreach (CheckBox chex in cbs)
-                       {
-                           bool isItChecked = false;
-                           foreach (string cbn in checkBoxNames)
-                           {
-                              
-                               if (chex.Content.ToString() == cbn)
-                               {
-                                   isItChecked = true;
-                                   break;
-                               }
-                           }
-                           chex.IsChecked = isItChecked;
-                       }
-
-                      // return String.Join(",", checkedVals);
                        return;
                    case "System.Windows.Controls.CheckBox":
                        CheckBox chb = u as CheckBox;
@@ -209,11 +213,6 @@ namespace HumanUI
                    case "System.Windows.Controls.RadioButton":
                        RadioButton rb = u as RadioButton;
                        rb.IsChecked = (bool)o;
-                       return;
-                   case "System.Windows.Controls.Image":
-                       Image I = u as Image;
-                       //set image source;
-                       SetImageSource((string)o, I);
                        return;
                    default:
                        return;
@@ -247,6 +246,30 @@ namespace HumanUI
            }
        }
 
+
+       public static List<bool> boolsFromString(string str)
+       {
+           List<bool> bools = new List<bool>();
+
+           string[] strs = str.Split(',');
+           foreach (string s in strs)
+           {
+               bool bl;
+               Boolean.TryParse(s, out bl);
+               bools.Add(bl);
+           }
+           return bools;
+       }
+
+       public static string stringFromBools(List<bool> bs)
+       {
+           string str = "";
+           foreach (bool b in bs)
+           {
+               str += b.ToString()+",";
+           }
+           return str;
+       }
 
        public static string elemType(UIElement elem)
        {

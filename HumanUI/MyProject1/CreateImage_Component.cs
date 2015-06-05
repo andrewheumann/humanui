@@ -83,7 +83,7 @@ namespace HumanUI
             catch (Exception e) {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.ToString());
             }
-            DA.SetData("Image", new UIElement_Goo(img,name));
+            DA.SetData("Image", new UIElement_Goo(img, name, InstanceGuid, DA.Iteration));
         }
 
         /// <summary>

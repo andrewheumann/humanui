@@ -108,7 +108,7 @@ namespace HumanUI
 
 
 
-                DA.SetData("Tabs", new UIElement_Goo(tabControl,String.Format("Tab Control with {0} tabs",tabList.Count)));
+                DA.SetData("Tabs", new UIElement_Goo(tabControl,String.Format("Tab Control with {0} tabs",tabList.Count),InstanceGuid,DA.Iteration));
             
         }
 
