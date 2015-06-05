@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows;
+using Grasshopper.Kernel.Types;
 using System.Linq;
 using GH_IO.Serialization;
 
@@ -19,9 +20,9 @@ namespace HumanUI
                 "This component lets you save the states of seleted elements for later retrieval",
                 "Human", "UI Main")
         {
+
             savedStates = new StateSet_Goo();
-            serializedStates = new Dictionary<string, Dictionary<int, object>>();
-        //    baseElems = new List<UIElement>();
+              //    baseElems = new List<UIElement>();
         }
 
         /// <summary>
@@ -30,7 +31,8 @@ namespace HumanUI
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Elements", "E", "All Controls and other elements belonging to the window", GH_ParamAccess.list);
-            pManager.AddTextParameter("Name Filter(s)", "F", "The filter(s) for the elements you want to save.", GH_ParamAccess.list);
+            pManager.AddTextParameter("Name Filter(s)", "F", "The optional filter(s) for the elements you want to save.", GH_ParamAccess.list);
+            pManager[1].Optional = true;
             pManager.AddBooleanParameter("Save State", "S", "Set to true to save the current state of all selected elements", GH_ParamAccess.item, false);
             pManager.AddTextParameter("State Name", "N", "The name under which to save the state. If the name already exists, saved state will be overwritten", GH_ParamAccess.item);
             pManager.AddBooleanParameter("Clear Saved States", "C", "Set to true to clear all saved states.", GH_ParamAccess.item, false);
@@ -46,8 +48,8 @@ namespace HumanUI
             pManager.AddTextParameter("Saved State Names", "N", "The names of all currently saved states", GH_ParamAccess.list);
         }
 
+        private static Dictionary<string, Dictionary<Tuple<Guid, int>, object>> savedShadowStates = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
         private static StateSet_Goo savedStates;
-        private static Dictionary<string, Dictionary<int, object>> serializedStates;
         private List<UIElement> baseElems;
 
         /// <summary>
@@ -56,57 +58,134 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            try
+            {
+                if (savedShadowStates.Count > 0)
+                {
+                    shadowToState();
+                }
+            }
+            catch
+            {
+               // AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "It threw an error when trying to restore shadow states");
+            }
+
             bool saveState = false;
             bool clearState = false;
             string stateName = "Unnamed State";
-            List<KeyValuePair<string, UIElement_Goo>> allElements = new List<KeyValuePair<string, UIElement_Goo>>();
-            List<string> filters = new List<string>();
 
-            if (!DA.GetDataList<KeyValuePair<string, UIElement_Goo>>("Elements", allElements)) return;
-            DA.GetDataList<string>("Name Filter(s)", filters);
+            List<object> elementObjects = new List<object>();
+            List<KeyValuePair<string, UIElement_Goo>> allElements = new List<KeyValuePair<string, UIElement_Goo>>();
+            List<string> elementFilters = new List<string>();
+
+            if (!DA.GetDataList<object>("Elements", elementObjects)) return;
+            bool hasFilters = DA.GetDataList<string>("Name Filter(s)", elementFilters);
+
+
+
             if (!DA.GetData<string>("State Name", ref stateName)) return;
             DA.GetData<bool>("Save State", ref saveState);
             DA.GetData<bool>("Clear Saved States", ref clearState);
 
-            List<UIElement> elems = new List<UIElement>();
+            List<UIElement_Goo> filteredElements = new List<UIElement_Goo>();
 
             //populate elems based on filtering
-            Dictionary<string, UIElement_Goo> elementDict = allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
-            
-            foreach (string fil in filters)
+        //    Dictionary<string, UIElement_Goo> elementDict = new Dictionary<string, UIElement_Goo>();//allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+
+
+            foreach (object o in elementObjects)
             {
-                elems.Add(elementDict[fil].element);
+                
+                switch (o.GetType().ToString())
+                {
+                    case "HumanUI.UIElement_Goo":
+                        UIElement_Goo goo = o as UIElement_Goo;
+                        filteredElements.Add(goo);
+                        break;
+                    case "Grasshopper.Kernel.Types.GH_ObjectWrapper":
+                        GH_ObjectWrapper wrapper = o as GH_ObjectWrapper;
+                        KeyValuePair<string, UIElement_Goo> kvp = (KeyValuePair<string, UIElement_Goo>)wrapper.Value;
+                        allElements.Add(kvp);
+                        break;
+                    default:
+                        break;
+                }
             }
+
+            if (allElements.Count > 0) //if we've been getting keyvaluepairs and need to filter
+            {
+
+                //create a dictionary for filtering
+                Dictionary<string, UIElement_Goo> elementDict = allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+
+
+                //filter the dictionary
+                foreach (string fil in elementFilters)
+                {
+
+                    filteredElements.Add(elementDict[fil]);
+                }
+                //if there are no filters, include all values. 
+                if (elementFilters.Count == 0)
+                {
+                    foreach (UIElement_Goo u in elementDict.Values)
+                    {
+                        filteredElements.Add(u);
+                    }
+                }
+            }
+
+
+
+
+
 
             if (clearState)
             {
                 savedStates.Clear();
+                savedShadowStates.Clear();
             }
            
 
-            //restore from serializedStates
+        
 
             if (saveState)
             {
               //  baseElems.Clear();
                 baseElems = new List<UIElement>();
-                HUI_Util.extractBaseElements(elems, baseElems);
+              //  HUI_Util.extractBaseElements(elems, baseElems);
+
+                //setting up a 1:1 correspondence between base elements and parent elements.
+                foreach (UIElement_Goo u in filteredElements)
+                {
+                    baseElems.Add(HUI_Util.extractBaseElement(u.element));
+                }
+
               
                 State namedState = new State();
                 //for each element
-                foreach (UIElement u in baseElems)
+                for (int i = 0; i < baseElems.Count;i++ )
                 {
-
+                    UIElement u = baseElems[i];
+                    UIElement_Goo parent = filteredElements[i];
                     //get its state 
                     object state = HUI_Util.GetElementValue(u);
                     //add the element and its state to an element state dictionary
-                    namedState.AddMember(u, state);
+
+                    
+                    namedState.AddMember(parent, state);
                 }
                 savedStates.Add(stateName, namedState);
 
             }
             DA.SetData("Saved States", savedStates);
             DA.SetDataList("Saved State Names", savedStates.Names);
+ 
+ 
+ 
+
         }
 
 
@@ -131,6 +210,153 @@ namespace HumanUI
             }
         }
 
+
+        public override bool Write(GH_IWriter writer)
+        {
+            //serialize the states
+            
+            GH_IWriter stateSetChunk = writer.CreateChunk("stateSetChunk");
+            stateSetChunk.SetInt32("StateCount", savedStates.states.Count);
+            int i = 0; //the state
+            foreach (KeyValuePair<string,State> statePair in savedStates.states)
+            {
+                string stateName = statePair.Key;
+                GH_IWriter StateChunk = stateSetChunk.CreateChunk("State", i);
+                StateChunk.SetString("stateName", stateName);
+               
+                State state = statePair.Value;
+                StateChunk.SetInt32("itemCount", state.stateDict.Count);
+                int j=0;
+                foreach (KeyValuePair<UIElement_Goo, object> stateItem in state.stateDict)
+                {
+                    UIElement_Goo element = stateItem.Key;
+                    object value = stateItem.Value;
+                   
+                    GH_IWriter stateItemChunk = StateChunk.CreateChunk("stateItem",j);
+                    stateItemChunk.SetString("ElementID", element.instanceGuid.ToString());
+                    stateItemChunk.SetInt32("ElementIndex", element.index);
+
+                    string stringValue = value.ToString();
+                    string typeString = value.GetType().ToString();
+                    if (value is List<bool>)
+                    {
+
+                        typeString = "LIST OF BOOL";
+                        stringValue = HUI_Util.stringFromBools((List<bool>)value);
+                    }
+                    
+                    stateItemChunk.SetString("ElementValue", stringValue);
+
+
+
+                    stateItemChunk.SetString("ElementValueType", typeString);
+                 
+                        j++;
+                }
+               
+
+                i++;
+            }
+            return base.Write(writer);
+        }
+
+
+
+        public override bool Read(GH_IReader reader)
+        {
+            Dictionary<string, Dictionary<Tuple<Guid, int>, object>> stateSet = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
+            GH_IReader stateSetChunk = reader.FindChunk("stateSetChunk");
+            int stateCount = stateSetChunk.GetInt32("StateCount");
+            for (int i = 0; i < stateCount; i++)
+            {
+                Dictionary<Tuple<Guid, int>, object> state = new Dictionary<Tuple<Guid, int>, object>();
+                GH_IReader stateChunk = stateSetChunk.FindChunk("State", i);
+                string stateName = stateChunk.GetString("stateName");
+                int itemCount = stateChunk.GetInt32("itemCount");
+
+                for (int j = 0; j < itemCount; j++)
+                {
+                    
+                        GH_IReader stateItemChunk = stateChunk.FindChunk("stateItem", j);
+                        Guid elementID = new Guid(stateItemChunk.GetString("ElementID"));
+                        int index = stateItemChunk.GetInt32("ElementIndex");
+                        string elementValue = stateItemChunk.GetString("ElementValue");
+                        string elementValueType = stateItemChunk.GetString("ElementValueType");
+                        
+                            Tuple<Guid, int> goo = new Tuple<Guid, int>(elementID, index);
+                        object value = getValue(elementValue, elementValueType);
+                        state.Add(goo, value);
+                    
+                }
+
+                stateSet.Add(stateName, state);
+            }
+            savedShadowStates = stateSet;
+
+
+
+                return base.Read(reader);
+        }
+
+
+        void shadowToState()
+        {
+            foreach (KeyValuePair<string, Dictionary<Tuple<Guid, int>, object>> ShadowState in savedShadowStates)
+            {
+                string stateName = ShadowState.Key;
+                Dictionary<Tuple<Guid, int>, object> stateItem = ShadowState.Value;
+
+                State state = new State();
+
+                foreach (Tuple<Guid, int> uiElemProxy in stateItem.Keys)
+                {
+                    object valueSet = stateItem[uiElemProxy];
+                    UIElement_Goo goo = getElementGoo(uiElemProxy.Item1, uiElemProxy.Item2);
+                    state.stateDict.Add(goo, valueSet);
+                }
+
+                savedStates.Add(stateName, state);
+
+            }
+        }
+
+        object getValue(string value, string valueType)
+        {
+            switch (valueType)
+            {
+                  
+                case "System.Double":
+                    double dbl;
+                    Double.TryParse(value,out dbl);
+                    return dbl;
+                case "System.Boolean":
+                    bool bl;
+                    Boolean.TryParse(value, out bl);
+                    return bl;
+                case "LIST OF BOOL":
+                    return HUI_Util.boolsFromString(value);
+                case "System.Drawing.Color":
+                    string[] res = value.Split("=,]".ToCharArray());
+                    int A, R, G, B;
+                    Int32.TryParse(res[1],out A);
+                    Int32.TryParse(res[3], out R);
+                    Int32.TryParse(res[5], out G);
+                    Int32.TryParse(res[7], out B);
+                    return System.Drawing.Color.FromArgb(A, R, G, B);
+                default:
+                    return value;
+            }
+        }
+
+        UIElement_Goo getElementGoo(Guid id, int index)
+        {
+            GH_Document doc = this.OnPingDocument();
+            IGH_Component comp = doc.FindComponent(id);
+            return comp.Params.Output[0].VolatileData.AllData(true).ToArray()[index] as UIElement_Goo;
+
+        }
+
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
@@ -138,95 +364,6 @@ namespace HumanUI
         {
             get { return new Guid("{8b6f72d3-6eff-4d25-8faa-62065ab7663e}"); }
         }
-        /*
-        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
-        {
-            Dictionary<string, State> states = savedStates.states;
-            writer.SetInt32("StateCount", states.Count);
-            int i = 0;
-            report("StateCount="+states.Count.ToString());
-            AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, states.Count.ToString());
-            foreach(KeyValuePair<string,State> state in states){
-                 GH_IWriter chunk = writer.CreateChunk("State", i);
-                 chunk.SetString("StateName", state.Key);
-                 State theState = state.Value;
-                 int j = 0;
-                 chunk.SetInt32("elementCount", theState.Count);
-                 foreach (KeyValuePair<UIElement, object> elementState in theState)
-                 {
-                     GH_IWriter elementChunk = chunk.CreateChunk("ElementState", j);
-                   //find index of uiElement
-                     int index = baseElems.FindIndex(u => u == elementState.Key);
-                     elementChunk.SetInt32("elementIndex", index);
-                     elementChunk.SetString("elementType", elementState.Value.GetType().ToString());
-                     elementChunk.SetString("elementValue", elementState.Value.ToString());
-
-                     j++;
-                 }
-                 //chunk.
-
-                 i++;
-             }
-            return base.Write(writer);
-        }
-
-        private void report(string str)
-        {
-            List<string> lines = new List<string>();
-            lines.Add(str);
-            System.IO.File.AppendAllLines(@"C:\users\aheumann\desktop\errorReadout.txt", lines);
-        }
-
-        public override bool Read(GH_IO.Serialization.GH_IReader reader)
-        {
-            Dictionary<string, Dictionary<int, object>> stateSetDict = new Dictionary<string, Dictionary<int, object>>();
-            int stateCount = 0;
-            reader.TryGetInt32("StateCount", ref stateCount);
-           
-      
-            for (int i = 0; i < stateCount; i++)
-            {
-                Dictionary<int, object> stateDict = new Dictionary<int, object>();
-                GH_IReader chunk = reader.FindChunk("State",i);
-                string stateName = chunk.GetString("StateName");
-                int elementCount = chunk.GetInt32("elementCount");
-                report(elementCount.ToString());
-                for (int j = 0; j < elementCount; j++)
-                {
-                    GH_IReader elementChunk = chunk.FindChunk("ElementState",j);
-                    int index = elementChunk.GetInt32("elementIndex");
-                    string elementType = elementChunk.GetString("elementType");
-                    string elementValueRaw = elementChunk.GetString("elementValue");
-                    object actualValue;
-                    report(elementType);
-                    switch (elementType)
-                    {
-                        case "string":
-                            actualValue = elementValueRaw;
-                            break;
-                        case "bool":
-                            bool boolVal = false;
-                            Boolean.TryParse(elementValueRaw,out boolVal);
-                            actualValue = boolVal;
-                            break;
-                        case "int":
-                            int intVal = -1;
-                            Int32.TryParse(elementValueRaw, out intVal);
-                            actualValue = intVal;
-                            break;
-                        default:
-                            actualValue = null;
-                            break;
-                    }
-                    stateDict.Add(index, actualValue);
-
-                }
-
-                stateSetDict.Add(stateName, stateDict);
-            }
-
-                return base.Read(reader);
-        }
-        */
+       
     }
 }

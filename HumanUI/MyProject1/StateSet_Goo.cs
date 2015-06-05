@@ -74,15 +74,15 @@ namespace HumanUI
     }
 
     //represents a collection of elements and their state objects (number for slider, text for label, etc.)
-    public class State : Dictionary<UIElement, object>
+    public class State : Dictionary<UIElement_Goo, object>
     {
-        public  Dictionary<UIElement, object> stateDict {get; set;}
+        public  Dictionary<UIElement_Goo, object> stateDict {get; set;}
         public State()
         {
-            stateDict = new Dictionary<UIElement, object>();
+            stateDict = new Dictionary<UIElement_Goo, object>();
         }
 
-        public void AddMember(UIElement u,object o)
+        public void AddMember(UIElement_Goo u,object o)
         {
             if (stateDict.ContainsKey(u))
             {
@@ -90,7 +90,11 @@ namespace HumanUI
             }
             stateDict.Add(u, o);
         }
-       
+
+        public override string ToString()
+        {
+            return base.ToString()+stateDict.Count.ToString();
+        }
 
 
     }

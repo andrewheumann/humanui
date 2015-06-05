@@ -51,9 +51,9 @@ namespace HumanUI
             if (!restore) return;
             State stateToRestore = states.states[setName];
             //restore state
-            foreach (KeyValuePair<UIElement, object> elementState in stateToRestore.stateDict)
+            foreach (KeyValuePair<UIElement_Goo, object> elementState in stateToRestore.stateDict)
             {
-                HUI_Util.TrySetElementValue(elementState.Key, elementState.Value);
+                HUI_Util.TrySetElementValue(HUI_Util.extractBaseElement(elementState.Key.element), elementState.Value);
             }
 
 
