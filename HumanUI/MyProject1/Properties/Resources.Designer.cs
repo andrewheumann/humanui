@@ -113,6 +113,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap createBrowser {
+            get {
+                object obj = ResourceManager.GetObject("createBrowser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateButton {
             get {
                 object obj = ResourceManager.GetObject("CreateButton", resourceCulture);
@@ -173,6 +183,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateObjectsFromXaml {
+            get {
+                object obj = ResourceManager.GetObject("CreateObjectsFromXaml", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreatePullDown {
             get {
                 object obj = ResourceManager.GetObject("CreatePullDown", resourceCulture);
@@ -203,6 +223,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateShapes {
+            get {
+                object obj = ResourceManager.GetObject("CreateShapes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateSlider {
             get {
                 object obj = ResourceManager.GetObject("CreateSlider", resourceCulture);
@@ -223,6 +253,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateTextBlock {
+            get {
+                object obj = ResourceManager.GetObject("CreateTextBlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateTextBox {
             get {
                 object obj = ResourceManager.GetObject("CreateTextBox", resourceCulture);
@@ -231,7 +271,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.5.1.2.
+        ///   Looks up a localized string similar to 0.5.1.5.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -345,6 +385,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetShape {
             get {
                 object obj = ResourceManager.GetObject("SetShape", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetShapes {
+            get {
+                object obj = ResourceManager.GetObject("SetShapes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

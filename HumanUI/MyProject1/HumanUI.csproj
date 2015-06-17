@@ -54,8 +54,7 @@
       <HintPath>..\packages\HelixToolkit.Wpf.2015.1.461\lib\net40\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="HumanUIBaseApp">
-      <HintPath>..\..\..\..\AppData\Roaming\Grasshopper\Libraries\HumanUIBaseApp.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\HumanUIBaseApp.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -195,9 +194,6 @@
     <None Include="Resources\CreateRadioButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CreateShape.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CreateSlider.png" />
   </ItemGroup>
   <ItemGroup>
@@ -231,9 +227,6 @@
     <None Include="Resources\SetList.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SetShape.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\TabControl.png" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +252,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\screenDimensions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateShapes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetShapes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateObjectsFromXaml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateTextBlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createBrowser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
