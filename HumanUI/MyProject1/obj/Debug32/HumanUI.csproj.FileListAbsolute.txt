@@ -47,7 +47,6 @@ C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\GH_IO.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\Grasshopper.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\HelixToolkit.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\HelixToolkit.Wpf.dll
-C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\HumanUIBaseApp.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\MahApps.Metro.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\RhinoCommon.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\System.Windows.Interactivity.dll
@@ -88,3 +87,4 @@ C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\ru\Xceed.Wpf.AvalonDo
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\obj\Debug32\HumanUI.csprojResolveAssemblyReference.cache
+C:\Users\aheumann\Documents\humanui\HumanUI\MyProject1\bin\HumanUIBaseApp.dll

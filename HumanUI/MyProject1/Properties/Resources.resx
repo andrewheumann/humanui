@@ -212,6 +212,21 @@
     <value>..\Resources\screenDimensions.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CURRENT_VERSION" xml:space="preserve">
-    <value>0.5.1.2</value>
+    <value>0.5.1.5</value>
+  </data>
+  <data name="createBrowser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\createBrowser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateObjectsFromXaml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateObjectsFromXaml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateShapes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateShapes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateTextBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateTextBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetShapes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetShapes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

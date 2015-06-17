@@ -35,6 +35,14 @@ namespace HumanUI
             pManager.AddIntegerParameter("Index", "i", "", GH_ParamAccess.item);
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
