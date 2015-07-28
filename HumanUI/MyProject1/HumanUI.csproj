@@ -131,6 +131,8 @@
     <Compile Include="RestoreElementState_Component.cs" />
     <Compile Include="SetChecklist_Component.cs" />
     <Compile Include="SetList_Component.cs" />
+    <Compile Include="SetTextBlock_Component.cs" />
+    <Compile Include="SetTextBox_Component.cs" />
     <Compile Include="SetWindowProperties_Component.cs" />
     <Compile Include="StateSet_Goo.cs" />
     <Compile Include="FilterUIElements_Component.cs" />
