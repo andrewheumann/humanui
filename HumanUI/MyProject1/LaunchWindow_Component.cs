@@ -25,6 +25,7 @@ namespace HumanUI
         private childStatus winChildStatus = childStatus.ChildOfGH;
 
         MainWindow mw;
+        
 
 
         /// <summary>

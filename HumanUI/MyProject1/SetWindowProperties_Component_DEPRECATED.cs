@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Windows.Media;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Special;
@@ -12,7 +11,7 @@ using HumanUIBaseApp;
 
 namespace HumanUI
 {
-    public class SetWindowProperties_Component : GH_Component
+    public class SetWindowProperties_Component_DEPRECATED : GH_Component
     {
         private string[] ACCENT_COLORS = new string[] { "Amber", "Blue", "Brown", "Cobalt", "Crimson", "Cyan", "Emerald", "Green", "Indigo", "Lime", "Magenta", "Mauve", "Olive", "Orange", "Pink", "Purple", "Red", "Sienna", "Steel", "Taupe", "Teal", "Violet", "Yellow" };
 
@@ -20,7 +19,7 @@ namespace HumanUI
         /// <summary>
         /// Initializes a new instance of the SetWindowProperties_Component class.
         /// </summary>
-        public SetWindowProperties_Component()
+        public SetWindowProperties_Component_DEPRECATED()
             : base("Set Window Properties", "WinProps",
                 "Modify various properties of a Window.",
                 "Human", "UI Main")
@@ -42,8 +41,6 @@ namespace HumanUI
             themeParam.AddNamedValue("Dark", 1);
             pManager.AddTextParameter("Accent Color", "A", "The color accent for the window.  Use the component \nmenu item \"Create Accent List\" so you don't have to guess", GH_ParamAccess.item);
             pManager[3].Optional = true;
-            pManager.AddBooleanParameter("Show Title Bar", "TB", "Set to false to hide the window's title bar.", GH_ParamAccess.item, true);
-            pManager.AddColourParameter("Background Color", "BG", "Set the background color of the window.", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -88,19 +85,6 @@ namespace HumanUI
                         AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "That's not a valid theme - only 0 or 1 (light or dark) can be used.");
                         break;
                 }
-            }
-
-            bool showTitleBar = true;
-            DA.GetData<bool>("Show Title Bar", ref showTitleBar);
-            mw.ShowMaxRestoreButton = showTitleBar;
-            mw.ShowMinButton = showTitleBar;
-            mw.ShowTitleBar = showTitleBar;
-            mw.ShowCloseButton = showTitleBar;
-
-            System.Drawing.Color backgroundColor = System.Drawing.Color.Transparent;
-            if (DA.GetData<System.Drawing.Color>("Background Color", ref backgroundColor))
-            {
-                mw.Background = new SolidColorBrush(HUI_Util.ToMediaColor(backgroundColor));
             }
 
             if (DA.GetData<string>("Accent Color", ref colorName))
@@ -149,12 +133,22 @@ namespace HumanUI
             vl.Attributes.Pivot = new PointF(currPivot.X - 120, currPivot.Y - 11);
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// 
+
         public override Guid ComponentGuid
         {
-            get { return new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}"); }
+            get { return new Guid("{aa3816cc-918e-4383-9125-8f00922f154a}"); }
         }
     }
 }

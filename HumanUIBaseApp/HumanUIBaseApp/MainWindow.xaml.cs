@@ -25,6 +25,7 @@ namespace HumanUIBaseApp
         public MainWindow()
         {
             InitializeComponent();
+            AllowsTransparency = true;
             clearElements();
         }
 

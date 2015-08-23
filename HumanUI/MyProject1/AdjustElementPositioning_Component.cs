@@ -166,7 +166,43 @@ namespace HumanUI
 
         Thickness thicknessFromString(string margin)
         {
-            if (margin.Contains(","))
+            if(margin.Contains("{")) {
+                string[] vals = margin.Split(",{}".ToCharArray());
+                if (vals.Length == 3)
+                {
+                    List<double> margins = new List<double>();
+                    foreach (string v in vals)
+                    {
+                        double tempV;
+                        Double.TryParse(v, out tempV);
+                        margins.Add(tempV);
+                    }
+                    try
+                    {
+                        return new Thickness(margins[0], margins[1], 0, 0);
+                    }
+                    catch { }
+                }
+                else if (vals.Length == 5)
+                {
+                    List<double> margins = new List<double>();
+                    foreach (string v in vals)
+                    {
+                        double tempV = 0;
+                        Double.TryParse(v, out tempV);
+                        margins.Add(tempV);
+                    }
+                    try
+                    {
+                        return new Thickness(margins[1], margins[2], 0, 0);
+                    }
+                    catch { }
+                } else
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, String.Format("Trying to parse a point, but got {0} items",vals.Length));
+                }
+            }
+            else if (margin.Contains(","))
             {
                 string[] vals = margin.Split(',');
                 if (vals.Length == 4)
@@ -195,7 +231,7 @@ namespace HumanUI
                 }
                
             }
-             AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Trouble parsing the margin input. Try a single value or A,B,C,D format.");
+             AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Trouble parsing the margin input. Try a single value, a Point, or A,B,C,D format.");
                     return new Thickness(0);
             
         }

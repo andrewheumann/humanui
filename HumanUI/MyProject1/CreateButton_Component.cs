@@ -19,7 +19,7 @@ using HumanUIBaseApp;
 namespace HumanUI
 {
 
-    enum buttonStyle { Default, Square, Circle };
+    enum buttonStyle { Default, Square, Circle, Borderless};
 
 
     public class CreateButton_Component : GH_Component, HUI_Expirable
@@ -52,6 +52,9 @@ namespace HumanUI
                 case buttonStyle.Circle:
                     Message = "Circle Style";
                     break;
+                case buttonStyle.Borderless:
+                    Message = "Borderless";
+                    break;
                 default:
                     break;
             }
@@ -62,11 +65,14 @@ namespace HumanUI
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
             System.Windows.Forms.ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Default Style", new System.EventHandler(this.menu_makeDefaultStyle), true, bs == buttonStyle.Default);
-            toolStripMenuItem.ToolTipText = "When selected, the window is made a child of the Grasshopper window - when the Grasshopper window is hidden or minimized, it will disappear.";
+            toolStripMenuItem.ToolTipText = "Use the default button style.";
             System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1 = GH_DocumentObject.Menu_AppendItem(menu, "Square Style", new System.EventHandler(this.menu_makeSquareStyle), true, bs == buttonStyle.Square);
-            toolStripMenuItem1.ToolTipText = "When selected, the window is made a child of the Rhino window - when the Rhino window is hidden or minimized, it will disappear.";
+            toolStripMenuItem1.ToolTipText = "Use a flat, square button style.";
             System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2 = GH_DocumentObject.Menu_AppendItem(menu, "Circle Style", new System.EventHandler(this.menu_makeCircleStyle), true, bs == buttonStyle.Circle);
-            toolStripMenuItem2.ToolTipText = "When selected, the window is always on top, floating above other apps.";
+            toolStripMenuItem2.ToolTipText = "Use a circle (or ellipse) button style.";
+            System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3 = GH_DocumentObject.Menu_AppendItem(menu, "Borderless Style", new System.EventHandler(this.menu_makeBorderless), true, bs == buttonStyle.Borderless);
+            toolStripMenuItem3.ToolTipText = "Use a borderless button style.";
+            
         }
 
 
@@ -94,6 +100,15 @@ namespace HumanUI
             this.UpdateMenu();
             this.ExpireSolution(true);
         }
+
+        private void menu_makeBorderless(object sender, System.EventArgs e)
+        {
+            base.RecordUndoEvent("Button Style Change");
+            this.bs = buttonStyle.Borderless;
+            this.UpdateMenu();
+            this.ExpireSolution(true);
+        }
+
 
 
         public override bool Write(GH_IWriter writer)
@@ -177,6 +192,18 @@ namespace HumanUI
                      break;
                  case buttonStyle.Circle:
                      btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroCircleButtonStyle"]);
+                     break;
+                 case buttonStyle.Borderless:
+                    // Style btnStyle = (Style)Application.Current.FindResource(ToolBar.ButtonStyleKey);
+                   //  style.BasedOn = (Style)FindResource(ToolBar.ButtonStyleKey);
+                   //  btn.Style = new Style(typeof(Button), btnStyle);
+                    // btn.Padding = new Thickness(-5);
+                     btn.Margin = new Thickness(0);
+                     btn.Padding = new Thickness(-2);
+                        btn.BorderThickness = new Thickness(0);
+            btn.BorderBrush = Brushes.Transparent;
+          
+                     
                      break;
 
              }

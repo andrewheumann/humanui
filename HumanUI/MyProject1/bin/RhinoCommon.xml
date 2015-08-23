@@ -7653,6 +7653,12 @@
             Gets or sets the location (position) of this point.
             </summary>
         </member>
+        <member name="M:Rhino.Geometry.BrepVertex.EdgeIndices">
+            <summary>
+            Gets the indices of all edges associated with this vertex.
+            </summary>
+            <returns>Empty array on failure.</returns>
+        </member>
         <member name="P:Rhino.Geometry.BrepVertex.Brep">
             <summary>
             Gets the Brep that owns this vertex.
@@ -7700,6 +7706,21 @@
             <summary>
             Gets the indices of all the BrepFaces that use this edge.
             </summary>
+        </member>
+        <member name="M:Rhino.Geometry.BrepEdge.TrimIndices">
+            <summary>
+            Gets the indices of all trims associated with this edge.
+            </summary>
+            <returns>Empty array on failure.</returns>
+        </member>
+        <member name="M:Rhino.Geometry.BrepEdge.GetEdgeParameter(System.Int32,System.Double,System.Double@)">
+            <summary>
+            Get corresponding edge parameter for given trim at given trim parameter.
+            </summary>
+            <param name="trimIndex"></param>
+            <param name="trimParameter"></param>
+            <param name="edgeParameter"></param>
+            <returns>true on success</returns>
         </member>
         <member name="M:Rhino.Geometry.BrepEdge.SetEdgeCurve(System.Int32)">
             <summary>
@@ -7818,6 +7839,20 @@
             Note well that the domains and orientations of the curve m_C2[trim.m_c2i]
             and the trim as a curve may not agree.
             </summary>
+        </member>
+        <member name="M:Rhino.Geometry.BrepTrim.IsReversed">
+            <summary>
+            Get orientation of trim with respect to it's corresponding edge.
+            </summary>
+            <returns>true if the 2d trim and 3d edge have opposite orientations</returns>
+        </member>
+        <member name="M:Rhino.Geometry.BrepTrim.GetTrimParameter(System.Double,System.Double@)">
+            <summary>
+            Get corresponding trim parameter at given edge parameter.
+            </summary>
+            <param name="edgeParameter"></param>
+            <param name="trimParameter"></param>
+            <returns>true on success</returns>
         </member>
         <member name="M:Rhino.Geometry.BrepTrim.GetTolerances(System.Double@,System.Double@)">
              <summary>
@@ -20279,6 +20314,29 @@
             Get the document this content belongs to or null if the content has not
             yet been added to a document.  This will be null when content is
             generated for browsers or preview generation.
+            </summary>
+        </member>
+        <member name="P:Rhino.Render.RenderContent.IsLocked">
+            <summary>
+            Set this property to true prior to adding content to the document to
+            lock the content browser editing UI methods.  Setting this to true will
+            keep the browser from allowing things like deleting, renaming or
+            changing content.  This is useful for custom child content that you
+            want to be editable but persistent.  Setting this after adding content
+            to the document will cause an exception to be thrown.
+            </summary>
+            <exception cref="T:System.Exception">
+            IsLocked must be called prior to adding content to the document
+            </exception>
+        </member>
+        <member name="P:Rhino.Render.RenderContent.FilesToEmbed">
+            <summary>
+            A string array of full paths to files used by the content that may be
+            embedded in .3dm files and library files (.rmtl, .renv, .rtex). The
+            default implementation returns an empty string list. Override this to
+            return the file name or file names used by your content. This is
+            typically used by textures that reference files containing the texture
+            imagery. 
             </summary>
         </member>
         <member name="E:Rhino.Render.RenderContent.ContentAdded">
@@ -38646,6 +38704,17 @@
             </param>
             <returns><see cref="F:Rhino.Input.GetResult.Point"/> if the user chose a point; other enumeration value otherwise.</returns>
         </member>
+        <member name="M:Rhino.Input.Custom.GetPoint.Get(System.Boolean,System.Boolean)">
+            <summary>
+            After setting up options and so on, call this method to get a 2d or 3d point.
+            </summary>
+            <param name="onMouseUp">
+            If false, the point is returned when the left mouse button goes down.
+            If true, the point is returned when the left mouse button goes up.
+            </param>
+            <param name="get2DPoint">If true then get a 2d point otherwise get a 2d point</param>
+            <returns><see cref="F:Rhino.Input.GetResult.Point"/> if the user chose a 3d point; <see cref="F:Rhino.Input.GetResult.Point2d"/> if the user chose a 2d point; other enumeration value otherwise.</returns>
+        </member>
         <member name="M:Rhino.Input.Custom.GetPoint.Get">
             <summary>
             After setting up options and so on, call GetPoint::Get to get a 3d point. The
@@ -42469,6 +42538,76 @@
             If true then this plug-in is now the current render plug-in otherwise
             it is no longer the current render plug-in.
             </param>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.OnAssignMaterial(System.IntPtr,Rhino.RhinoDoc,Rhino.DocObjects.Material@)">
+            <summary>
+            This function is called by the Object Properties and Layer Control
+            dialogs when the "Material" button is pressed in the "Render" tab.
+            This is only called if EnableAssignMaterialButton returns true.
+            </summary>
+            <param name="parent"></param>
+            <param name="doc"></param>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.EnableAssignMaterialButton">
+            <summary>
+            Called to enable/disable the "Material" button located on the
+            "Material" tab in the Properties and Layer dialog boxes.  The default
+            return value is false which will disable the button.  If the button is
+            disabled then the OnAssignMaterial function is never called.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.OnEditMaterial(System.IntPtr,Rhino.RhinoDoc,Rhino.DocObjects.Material@)">
+            <summary>
+            This function is called by the Object Properties and Layer Control
+            dialogs when the "Edit" button is pressed in the "Material" tab.  This
+            is only called if EnableEditMaterialButton returns true. A return value
+            of true means the material has been updated.
+            </summary>
+            <param name="parent"></param>
+            <param name="doc"></param>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.EnableEditMaterialButton(Rhino.RhinoDoc,Rhino.DocObjects.Material)">
+            <summary>
+            Called to enable/disable the "Edit" button located on the "Material" in
+            the Properties and Layer dialog boxes.  The default return value is
+            false  which will disable the button.  If the button is disabled then
+            the OnEditMaterial function is never called.
+            </summary>
+            <param name="doc"></param>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.OnCreateMaterial(System.IntPtr,Rhino.RhinoDoc,Rhino.DocObjects.Material@)">
+            <summary>
+            This function is called by the Object Properties and Layer Control
+            dialogs when the "New" button is pressed in the "Material" tab.  This
+            is only called if EnableCreateMaterialButton returns true.
+            </summary>
+            <param name="parent"></param>
+            <param name="doc"></param>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhino.PlugIns.RenderPlugIn.EnableCreateMaterialButton">
+            <summary>
+            Called to enable/disable the "New" button located on the "Material" in
+            the  Properties and Layer dialog boxes.  The default return value is
+            false which will disable the button.  If the button is disabled then
+            the OnEditMaterial function is never called.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Rhino.PlugIns.RenderPlugIn.PerferBasicContent">
+            <summary>
+            Set to true if you would like Rhino to quickly create a basic render
+            content in response to 'Create New' commands. Set to false if you would
+            prefer Rhino to display the render content chooser dialog.
+            </summary>
         </member>
         <member name="M:Rhino.PlugIns.CustomRenderSaveFileTypes.#ctor">
             <summary>

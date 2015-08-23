@@ -122,7 +122,7 @@ namespace HumanUI
        }
 
 
-       static TextBox findTextBox(Panel p)
+       public static TextBox findTextBox(Panel p)
        {
            foreach (UIElement u in p.Children)
            {
