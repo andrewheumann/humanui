@@ -62,7 +62,7 @@ namespace HumanUI
                 HUI_Util.removeParent(u.element);
                 mw.AddElement(u.element);
                 //Fix because webbrowser doesn't play nice w/ transparent window
-                if (u.element is WebBrowser) mw.AllowsTransparency = false;
+              //  if (u.element is WebBrowser) mw.AllowsTransparency = false;
                 HUI_Util.AddToDict(u, resultDict);
             }
 
