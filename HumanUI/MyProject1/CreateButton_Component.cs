@@ -22,7 +22,7 @@ namespace HumanUI
     enum buttonStyle { Default, Square, Circle, Borderless};
 
 
-    public class CreateButton_Component : GH_Component, HUI_Expirable
+    public class CreateButton_Component : GH_Component
     {
 
         private buttonStyle bs = buttonStyle.Default;

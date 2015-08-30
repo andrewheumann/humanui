@@ -73,6 +73,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AdjustElementAppearance {
+            get {
+                object obj = ResourceManager.GetObject("AdjustElementAppearance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AdjustPositioning {
             get {
                 object obj = ResourceManager.GetObject("AdjustPositioning", resourceCulture);
@@ -146,6 +156,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap createChecklist {
             get {
                 object obj = ResourceManager.GetObject("createChecklist", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap createGrid {
+            get {
+                object obj = ResourceManager.GetObject("createGrid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -271,6 +291,16 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CreateViewBox {
+            get {
+                object obj = ResourceManager.GetObject("CreateViewBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 0.5.1.5.
         /// </summary>
         internal static string CURRENT_VERSION {
@@ -342,6 +372,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap setBrowser {
+            get {
+                object obj = ResourceManager.GetObject("setBrowser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SetCheckList {
             get {
                 object obj = ResourceManager.GetObject("SetCheckList", resourceCulture);
@@ -395,6 +435,26 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetShapes {
             get {
                 object obj = ResourceManager.GetObject("SetShapes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetTextBlock {
+            get {
+                object obj = ResourceManager.GetObject("SetTextBlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetTextBox {
+            get {
+                object obj = ResourceManager.GetObject("SetTextBox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

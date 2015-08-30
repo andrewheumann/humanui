@@ -48,9 +48,10 @@ namespace HumanUI
             pManager.AddTextParameter("Saved State Names", "N", "The names of all currently saved states", GH_ParamAccess.list);
         }
 
-        private static Dictionary<string, Dictionary<Tuple<Guid, int>, object>> savedShadowStates = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
-        private static StateSet_Goo savedStates;
+        private Dictionary<string, Dictionary<Tuple<Guid, int>, object>> savedShadowStates = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
+        private StateSet_Goo savedStates;
         private List<UIElement> baseElems;
+        private bool hasProperlyGrabbedShadowElements = false;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -60,14 +61,35 @@ namespace HumanUI
         {
             try
             {
-                if (savedShadowStates.Count > 0)
+                if (!hasProperlyGrabbedShadowElements)
                 {
-                    shadowToState();
+               //     System.Windows.Forms.MessageBox.Show("Getting States from Shadows");
+                    hasProperlyGrabbedShadowElements = shadowToState();
                 }
             }
-            catch
+            catch (Exception e)
             {
-               // AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "It threw an error when trying to restore shadow states");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, String.Format("It threw an {0} error when trying to restore shadow states",e.ToString()));
+            }
+
+            bool allElementsHaveParents = true;
+            //hacky hack fix for weird deserialization problem
+            if (savedStates != null)
+            {
+                foreach (State state in savedStates.states.Values)
+                {
+                    foreach (UIElement_Goo goo in state.stateDict.Keys)
+                    {
+                        if(System.Windows.Media.VisualTreeHelper.GetParent(goo.element) == null) allElementsHaveParents = false;
+                       
+                    }
+                }
+            }
+
+            if (!allElementsHaveParents)
+            {
+            //    System.Windows.Forms.MessageBox.Show("Getting States from Shadows, Again");
+                shadowToState();
             }
 
             bool saveState = false;
@@ -86,7 +108,7 @@ namespace HumanUI
             if (!DA.GetData<string>("State Name", ref stateName)) return;
             DA.GetData<bool>("Save State", ref saveState);
             DA.GetData<bool>("Clear Saved States", ref clearState);
-
+            
             List<UIElement_Goo> filteredElements = new List<UIElement_Goo>();
 
             //populate elems based on filtering
@@ -182,7 +204,7 @@ namespace HumanUI
             }
             DA.SetData("Saved States", savedStates);
             DA.SetDataList("Saved State Names", savedStates.Names);
- 
+         //   stateToShadow();
  
  
 
@@ -213,11 +235,14 @@ namespace HumanUI
 
         public override bool Write(GH_IWriter writer)
         {
+           
             //serialize the states
             
             GH_IWriter stateSetChunk = writer.CreateChunk("stateSetChunk");
             stateSetChunk.SetInt32("StateCount", savedStates.states.Count);
             int i = 0; //the state
+
+            //for each state in saved states
             foreach (KeyValuePair<string,State> statePair in savedStates.states)
             {
                 string stateName = statePair.Key;
@@ -264,6 +289,7 @@ namespace HumanUI
 
         public override bool Read(GH_IReader reader)
         {
+            //System.Windows.Forms.MessageBox.Show("Calling Read!");
             Dictionary<string, Dictionary<Tuple<Guid, int>, object>> stateSet = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
             GH_IReader stateSetChunk = reader.FindChunk("stateSetChunk");
             int stateCount = stateSetChunk.GetInt32("StateCount");
@@ -288,8 +314,14 @@ namespace HumanUI
                         state.Add(goo, value);
                     
                 }
-
-                stateSet.Add(stateName, state);
+                if (stateSet.ContainsKey(stateName))
+                {
+                    stateSet[stateName] = state;
+                }
+                else
+                {
+                    stateSet.Add(stateName, state);
+                }
             }
             savedShadowStates = stateSet;
 
@@ -298,26 +330,73 @@ namespace HumanUI
                 return base.Read(reader);
         }
 
+        void stateToShadow(){
+            Dictionary<string, Dictionary<Tuple<Guid, int>, object>> stateSet = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
 
-        void shadowToState()
+            //foreach state in savedStates
+            foreach(KeyValuePair<string,State> s in savedStates.states)
+            {
+                Dictionary<Tuple<Guid, int>, object> shadowState = new Dictionary<Tuple<Guid, int>, object>();
+
+                string stateName = s.Key;
+                State state = s.Value;
+                //foreach stateitem in s
+                foreach(KeyValuePair<UIElement_Goo,object> stateItem in state.stateDict)
+                {
+
+
+                    Guid elementID = stateItem.Key.instanceGuid;
+                    int index = stateItem.Key.index;
+                    string elementValue = stateItem.Value.ToString();
+                    string elementValueType = stateItem.Value.GetType().ToString();
+
+                    Tuple<Guid, int> goo = new Tuple<Guid, int>(elementID, index);
+                    object value = getValue(elementValue, elementValueType);
+                    shadowState.Add(goo, value);
+
+                }
+                if (stateSet.ContainsKey(stateName))
+                {
+                    stateSet[stateName] = shadowState;
+                }
+                else
+                {
+                    stateSet.Add(stateName, shadowState);
+                }
+            }
+            savedShadowStates = stateSet;
+        }
+
+
+        bool shadowToState()
         {
+            bool allElementsHaveParents = true;
+            //for each saved shadow state
             foreach (KeyValuePair<string, Dictionary<Tuple<Guid, int>, object>> ShadowState in savedShadowStates)
             {
+                //get the name and the shadow state item
                 string stateName = ShadowState.Key;
                 Dictionary<Tuple<Guid, int>, object> stateItem = ShadowState.Value;
 
+                //create a new real state
                 State state = new State();
 
+                //for each shadow state uielement proxy
                 foreach (Tuple<Guid, int> uiElemProxy in stateItem.Keys)
                 {
+                    //get the value and a reference to the object
                     object valueSet = stateItem[uiElemProxy];
-                    UIElement_Goo goo = getElementGoo(uiElemProxy.Item1, uiElemProxy.Item2);
+                    UIElement_Goo goo = getElementGoo(this.OnPingDocument(),uiElemProxy.Item1, uiElemProxy.Item2);
+                    //add the value and the elementGoo into the new real state
                     state.stateDict.Add(goo, valueSet);
+                    //assumes that all elements, if properly deserialized and referenced back to the doc, have a parent element.
+                    if (System.Windows.Media.VisualTreeHelper.GetParent(goo.element) == null) allElementsHaveParents = false;
                 }
-
+                //add the re-constituted state into the global state dictionary
                 savedStates.Add(stateName, state);
 
             }
+            return allElementsHaveParents;
         }
 
         object getValue(string value, string valueType)
@@ -348,9 +427,10 @@ namespace HumanUI
             }
         }
 
-        UIElement_Goo getElementGoo(Guid id, int index)
+        //Grab the elementgoo based on its guid and index
+        public static UIElement_Goo getElementGoo(GH_Document doc, Guid id, int index)
         {
-            GH_Document doc = this.OnPingDocument();
+           
             IGH_Component comp = doc.FindComponent(id);
             return comp.Params.Output[0].VolatileData.AllData(true).ToArray()[index] as UIElement_Goo;
 

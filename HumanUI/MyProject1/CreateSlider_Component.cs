@@ -39,6 +39,8 @@ namespace HumanUI
             pManager.AddGenericParameter("Sliders", "S", @"The Slider UI elements. Use in conjunction with an ""Add Elements"" component.", GH_ParamAccess.list);
         }
 
+        int sliderIndex = 0;
+
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -49,11 +51,13 @@ namespace HumanUI
             List<UIElement_Goo> sliderPanels = new List<UIElement_Goo>();
             GH_Document doc = OnPingDocument();
             if (doc == null) return;
+
             foreach (IGH_ActiveObject ao in doc.ActiveObjects())
             {
                 if (DependsOn(ao) && ao is GH_NumberSlider)
                 {
-                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider, ref sliderLabels), (ao as GH_NumberSlider).ImpliedNickName, InstanceGuid, DA.Iteration));
+                    sliderPanels.Add(new UIElement_Goo(MakeSlider(ao as GH_NumberSlider, ref sliderLabels), (ao as GH_NumberSlider).ImpliedNickName, InstanceGuid, sliderIndex));
+                    sliderIndex++;
                 }
             }
 

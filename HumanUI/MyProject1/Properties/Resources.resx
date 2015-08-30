@@ -229,4 +229,22 @@
   <data name="SetShapes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SetShapes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AdjustElementAppearance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdjustElementAppearance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="createGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\createGrid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateViewBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateViewBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setBrowser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setBrowser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetTextBlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetTextBlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetTextBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetTextBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

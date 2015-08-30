@@ -12,6 +12,13 @@ namespace HumanUI
     public class StateSet_Goo : GH_Goo<Dictionary<string, State>>
     {
         public Dictionary<string, State> states { get; set; }
+        public int Count
+        {
+            get
+            {
+                return states.Count;
+            }
+        }
         public StateSet_Goo()
         {
              states = new Dictionary<string, State>(); 

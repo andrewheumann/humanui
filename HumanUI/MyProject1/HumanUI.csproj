@@ -281,6 +281,24 @@
   <ItemGroup>
     <None Include="Resources\createBrowser.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetTextBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetTextBlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateViewBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createGrid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AdjustElementAppearance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setBrowser.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

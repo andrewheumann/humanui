@@ -25,7 +25,7 @@ namespace HumanUI
         private childStatus winChildStatus = childStatus.ChildOfGH;
 
         MainWindow mw;
-        
+        bool shouldBeVisible = true;
 
 
         /// <summary>
@@ -86,10 +86,12 @@ namespace HumanUI
             mw.Width = width;
             if (show)
             {
+                shouldBeVisible = true;
                 mw.Show();
             }
             else
             {
+                shouldBeVisible = false;
                 mw.Hide();
             }
             if (DA.GetData<string>("Font Family", ref font))
@@ -151,7 +153,7 @@ namespace HumanUI
                 mw.Close();
             }
             catch { }
-            ExpireInputs(null, EventArgs.Empty);
+         //   ExpireInputs(null, EventArgs.Empty);
             mw = new MainWindow();
             mw.InitializeComponent();
             mw.Closed += mw_Closed;
@@ -199,11 +201,24 @@ namespace HumanUI
         {
             if (mw != null)
             {
-                if (e.NewDocument == this.OnPingDocument())
+                if (e.NewDocument == this.OnPingDocument() && e.OldDocument != null) // switching from other document
                 {
                     try
                     {
-                        mw.Show();
+                       
+                     if(shouldBeVisible)   mw.Show();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else if (e.NewDocument == this.OnPingDocument() && e.OldDocument == null) // fresh window
+                {
+                    try
+                    {
+                       
+                        if (shouldBeVisible) mw.Show();
                     }
                     catch
                     {

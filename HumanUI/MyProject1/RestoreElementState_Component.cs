@@ -14,7 +14,7 @@ namespace HumanUI
         /// </summary>
         public RestoreElementState_Component()
             : base("Restore Element States", "Restore",
-                "",
+                "Restore the saved states of UI elements",
                 "Human", "UI Main")
         {
         }
@@ -53,7 +53,22 @@ namespace HumanUI
             //restore state
             foreach (KeyValuePair<UIElement_Goo, object> elementState in stateToRestore.stateDict)
             {
-                HUI_Util.TrySetElementValue(HUI_Util.extractBaseElement(elementState.Key.element), elementState.Value);
+            //    AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, string.Format("Setting element {0} to {1}", HUI_Util.extractBaseElement(elementState.Key.element).ToString(), elementState.Value));
+                UIElement element = elementState.Key.element;
+                
+                var parent = System.Windows.Media.VisualTreeHelper.GetParent(element);
+         //    AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Parent is: "+parent.ToString());
+                
+             if (parent == null)
+             {
+                 Guid id = elementState.Key.instanceGuid;
+                 int index = elementState.Key.index;
+
+                 UIElement_Goo newGoo = SaveElementState_Component.getElementGoo(this.OnPingDocument(),id,index);
+                 element = newGoo.element;
+             }
+
+                HUI_Util.TrySetElementValue(HUI_Util.extractBaseElement(element), elementState.Value);
             }
 
 

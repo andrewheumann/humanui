@@ -171,6 +171,8 @@ namespace HumanUI
                {
                    case "System.Windows.Controls.Slider":
                        Slider s = u as Slider;
+                       //System.Windows.Forms.MessageBox.Show(o.GetType().ToString());
+                       
                        s.Value = (double)o;
                        return;
                    case "System.Windows.Controls.ListBox":
@@ -218,9 +220,9 @@ namespace HumanUI
                        return;
                }
            }
-           catch
+           catch (Exception e)
            {
-              
+               System.Windows.Forms.MessageBox.Show(e.ToString());
            }
        }
 
