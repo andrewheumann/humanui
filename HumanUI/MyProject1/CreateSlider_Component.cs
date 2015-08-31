@@ -47,6 +47,10 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            if (DA.Iteration == 0)
+            {
+                sliderIndex = 0;
+            }
             List<Label> sliderLabels = new List<Label>();
             List<UIElement_Goo> sliderPanels = new List<UIElement_Goo>();
             GH_Document doc = OnPingDocument();

@@ -228,7 +228,7 @@ namespace HumanUI
 
        public static IGH_Goo GetRightType(object o)
        {
-          
+           if (o == null) return new GH_ObjectWrapper(null);
            switch (o.GetType().ToString())
            {
                case "System.Boolean": 
@@ -345,7 +345,13 @@ namespace HumanUI
                case "System.Windows.Controls.ListBox":
                    ListBox lb = u as ListBox;
                    Label lab = lb.SelectedItem as Label;
+                   if (lab != null) { 
                    return lab.Content;
+                   }
+                   else
+                   {
+                       return null;
+                   }
                case "System.Windows.Controls.ScrollViewer":
                    ScrollViewer sv = u as ScrollViewer;
                    ItemsControl ic = sv.Content as ItemsControl;
@@ -366,7 +372,14 @@ namespace HumanUI
                case "System.Windows.Controls.ComboBox":
                    ComboBox cb = u as ComboBox;
                    Label cbi = cb.SelectedItem as Label;
-                   return cbi.Content;
+                   if (cbi != null)
+                   {
+                       return cbi.Content;
+                   }
+                   else
+                   {
+                       return null;
+                   }
                case "Xceed.Wpf.Toolkit.ColorPicker":
                    ColorPicker colP = u as ColorPicker;
 
@@ -416,7 +429,13 @@ namespace HumanUI
                
               case "System.Windows.Controls.ListBox":
                    ListBox lb = u as ListBox;
-                   return lb.SelectedIndex;
+                   if(lb != null) {
+                       return lb.SelectedIndex;
+                   }
+                   else
+                   {
+                       return -1;
+                   }
                case "System.Windows.Controls.ScrollViewer":
                    ScrollViewer sv = u as ScrollViewer;
                    ItemsControl ic = sv.Content as ItemsControl;
@@ -436,7 +455,15 @@ namespace HumanUI
                    return checkeds;
                case "System.Windows.Controls.ComboBox":
                    ComboBox cb = u as ComboBox;
-                   return cb.SelectedIndex;
+                   if (cb != null)
+                   {
+                       return cb.SelectedIndex;
+                   }
+                   else
+                   {
+                       return -1;
+                   }
+                  
                case "System.Windows.Controls.TabControl":
                    TabControl tc = u as TabControl;
                    return tc.SelectedIndex;

@@ -204,7 +204,7 @@ namespace HumanUI
             }
             DA.SetData("Saved States", savedStates);
             DA.SetDataList("Saved State Names", savedStates.Names);
-         //   stateToShadow();
+          // stateToShadow();
  
  
 
@@ -432,9 +432,16 @@ namespace HumanUI
         {
            
             IGH_Component comp = doc.FindComponent(id);
-            return comp.Params.Output[0].VolatileData.AllData(true).ToArray()[index] as UIElement_Goo;
-
+          
+                return comp.Params.Output[0].VolatileData.AllData(true).ToArray()[index] as UIElement_Goo;
+         
         }
+
+
+
+
+
+
 
 
         /// <summary>
