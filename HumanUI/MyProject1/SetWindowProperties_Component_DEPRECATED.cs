@@ -110,6 +110,15 @@ namespace HumanUI
                 return Properties.Resources.SetWindowProperties;
             }
         }
+
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public override void AppendAdditionalMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
             ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Create Accent List", createAccentList);

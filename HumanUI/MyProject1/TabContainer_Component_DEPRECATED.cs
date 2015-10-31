@@ -44,6 +44,14 @@ namespace HumanUI
             pManager.AddGenericParameter("Tabs", "T", "The Tab control", GH_ParamAccess.item);
         }
 
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>

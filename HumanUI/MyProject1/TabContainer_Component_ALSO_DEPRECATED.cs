@@ -38,6 +38,14 @@ namespace HumanUI
             VariableParameterMaintenance();
         }
 
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>

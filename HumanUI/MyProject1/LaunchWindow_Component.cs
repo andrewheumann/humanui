@@ -71,7 +71,10 @@ namespace HumanUI
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-          
+#if LIMITEDRELEASE
+            if (HasExpired()) return; 
+#endif
+
             bool show = false;
             int width = 370;
             int height = 400;
@@ -109,6 +112,13 @@ namespace HumanUI
             DA.SetData("Window Object", mw);
 
 
+        }
+
+        private static bool HasExpired()
+        {
+            bool hasExpired = DateTime.Now > new DateTime(2015,12,31);
+            if(hasExpired) MessageBox.Show("Human UI beta has expired. Please contact Andrew Heumann (aheumann@nbbj.com) for information about an updated version");
+            return hasExpired;
         }
 
         /// <summary>

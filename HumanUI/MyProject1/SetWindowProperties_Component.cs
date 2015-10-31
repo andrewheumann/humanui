@@ -44,6 +44,7 @@ namespace HumanUI
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Show Title Bar", "TB", "Set to false to hide the window's title bar.", GH_ParamAccess.item, true);
             pManager.AddColourParameter("Background Color", "BG", "Set the background color of the window.", GH_ParamAccess.item);
+            pManager[4].Optional = true;
         }
 
         /// <summary>

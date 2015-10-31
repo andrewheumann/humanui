@@ -61,19 +61,7 @@ namespace HumanUI
         protected override void SolveInstance(IGH_DataAccess DA)
         {
 
-            //TODO - support multiple sets of objects in one shape??
-          /*  if (DA.Iteration == 0)
-            {
-                foreach (IGH_Goo goo in this.Params.Input[0].VolatileData.AllData(true))
-                {
-                    if (goo is IGH_GeometricGoo)
-                    {
-                        IGH_GeometricGoo geoGoo = goo as IGH_GeometricGoo;
-                        B.Union(geoGoo.GetBoundingBox(Rhino.Geometry.Transform.Identity));
-                    }
-                }
-                G = new Grid();
-            }*/
+         
             List<Curve> shapeCrvs = new List<Curve>();
             List<System.Drawing.Color> fillCol = new List<System.Drawing.Color>();
             List<double> strokeWeights = new List<double>();

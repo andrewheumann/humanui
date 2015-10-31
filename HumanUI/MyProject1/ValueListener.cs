@@ -218,6 +218,12 @@ namespace HumanUI
                     b.PreviewMouseUp -= ExpireThis;
                     b.PreviewMouseUp += ExpireThis;
                     return;
+                case "HumanUI.TrueOnlyButton":
+                    TrueOnlyButton tob = u as TrueOnlyButton;
+                    tob.PreviewMouseDown -= ExpireThis;
+                    tob.PreviewMouseDown += ExpireThis;
+                   
+                    return;
                 case "System.Windows.Controls.Label":
                     Label l = u as Label;
                     return;
@@ -308,6 +314,10 @@ namespace HumanUI
                     b.PreviewMouseDown -= ExpireThis;
                     b.PreviewMouseUp -= ExpireThis;
                     return;
+                case "HumanUI.TrueOnlyButton":
+                    TrueOnlyButton tob = u as TrueOnlyButton;
+                    tob.PreviewMouseDown -= ExpireThis;
+                    return;
                 case "System.Windows.Controls.Label":
                     Label l = u as Label;
                     return;
@@ -371,11 +381,12 @@ namespace HumanUI
 
         void ExpireThis(object sender, EventArgs e)
         {
-           // System.Windows.Forms.MessageBox.Show("Event Trigger");
-            ExpireSolution(true);
+          
+                // System.Windows.Forms.MessageBox.Show("Event Trigger");
+                ExpireSolution(true);
+         
         }
 
-       
 
         /// <summary>
         /// Provides an Icon for the component.

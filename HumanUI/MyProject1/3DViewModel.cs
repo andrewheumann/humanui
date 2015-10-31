@@ -18,7 +18,7 @@ namespace HumanUI
 
          public _3DViewModel(List<Mesh> meshes, List<Material> mats)
          {
-             setupModel(meshes, mats);
+             setupModel(meshes, mats,false);
          }
 
         public _3DViewModel(List<Mesh> meshes, List<System.Drawing.Color> colors)
@@ -28,11 +28,21 @@ namespace HumanUI
             {
                 mats.Add(MaterialHelper.CreateMaterial(HUI_Util.ToMediaColor(colors[i % colors.Count])));
             }
-             setupModel(meshes, mats);
+             setupModel(meshes, mats,false);
         }
 
+        public _3DViewModel(List<Mesh> meshes, List<string> bitmaps)
+        {
+            List<Material> mats = new List<Material>();
+            for (int i = 0; i < meshes.Count; i++)
+            {
+           
+                mats.Add(MaterialHelper.CreateImageMaterial(bitmaps[i % bitmaps.Count],1,UriKind.Absolute,false));
+            }
+            setupModel(meshes, mats,true);
+        }
 
-        void setupModel(List<Mesh> meshes, List<Material> mats)
+        void setupModel(List<Mesh> meshes, List<Material> mats,bool useTextures)
         {
 
             var modelGroup = new Model3DGroup();
@@ -40,7 +50,7 @@ namespace HumanUI
             int i = 0;
             foreach (Mesh m in meshes)
             {
-                var meshBuilder = new MeshBuilder(false, false);
+                var meshBuilder = new MeshBuilder(false, useTextures);
                 m.Faces.ConvertQuadsToTriangles();
                 List<Point3D> ptsToAppend = new List<Point3D>();
                 List<int> indicesToAppend = new List<int>();
@@ -50,7 +60,14 @@ namespace HumanUI
                 {
                     ptsToAppend.Add(new Point3D(p.X, p.Y, p.Z));
                 }
-
+                if (useTextures)
+                {
+                    //special coordinates to keep from autonormalizing texcoords
+                    for (int j = 0; j < 4; j++)
+                    {
+                        ptsToAppend.Add(new Point3D(0, 0, 0));
+                    }
+                }
                 foreach (MeshFace mf in m.Faces)
                 {
 
@@ -60,7 +77,37 @@ namespace HumanUI
 
                 }
 
-                meshBuilder.Append(ptsToAppend, indicesToAppend);
+              //  m.TextureCoordinates.NormalizeTextureCoordinates();
+                double minX = double.MaxValue;
+                double minY = double.MaxValue;
+                double maxX = double.MinValue;
+                double maxY = double.MinValue;
+                List<System.Windows.Point> texCoords = new List<System.Windows.Point>();
+               foreach(Point2f texPt in m.TextureCoordinates.ToList()){
+                   if (texPt.X > maxX) maxX = texPt.X;
+                   if (texPt.X < minX) minX = texPt.X;
+                   if (texPt.Y > maxY) maxY = texPt.Y;
+                   if (texPt.Y < minY) minY = texPt.Y;
+                   texCoords.Add(new System.Windows.Point(texPt.X, 1.0-texPt.Y));
+               }
+               if (useTextures)
+               {
+                   texCoords.Add(new System.Windows.Point(0, 0));
+                   texCoords.Add(new System.Windows.Point(0, 1));
+                   texCoords.Add(new System.Windows.Point(1, 0));
+                   texCoords.Add(new System.Windows.Point(1, 1));
+               }
+            //   System.Windows.Forms.MessageBox.Show(minX.ToString() + ", " + maxX.ToString() + ", " + minY.ToString() + ", " + maxY.ToString());
+               if (texCoords.Count == ptsToAppend.Count)
+               {
+                   meshBuilder.Append(ptsToAppend, indicesToAppend, textureCoordinatesToAppend: texCoords);
+               }
+               else
+               {
+                   meshBuilder.Append(ptsToAppend, indicesToAppend);
+               }
+                
+              
 
                 var mesh = meshBuilder.ToMesh(true);
                 if (mats.Count > 0)
@@ -87,5 +134,7 @@ namespace HumanUI
 
         }
 
+
+      
     }
 }

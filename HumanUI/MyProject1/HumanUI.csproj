@@ -40,6 +40,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LimitedRelease|AnyCPU'">
+    <OutputPath>bin\LimitedRelease\</OutputPath>
+    <DefineConstants>TRACE;LIMITEDRELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
@@ -109,6 +118,9 @@
     <Compile Include="CreateColorPicker_Component.cs" />
     <Compile Include="CreateGrid_Component.cs" />
     <Compile Include="CreateObjectsFromXaml_Component.cs" />
+    <Compile Include="CreateXparentWindow_Component.cs" />
+    <Compile Include="Set3DView_Textured_Component.cs" />
+    <Compile Include="SetShapes_Component.cs" />
     <Compile Include="CreateSlider_Component.cs" />
     <Compile Include="ContainerContents_Component.cs" />
     <Compile Include="Create3DView_Component.cs" />
@@ -126,11 +138,13 @@
     <Compile Include="CreateStack_Component.cs" />
     <Compile Include="CreateTextBlock_Component.cs" />
     <Compile Include="CreateTextBox_Component.cs" />
+    <Compile Include="CreateTrueOnlyButton.cs" />
     <Compile Include="CreateViewBox_Component.cs" />
     <Compile Include="ElemFromGuid.cs" />
     <Compile Include="GetScreenDimensions.cs" />
     <Compile Include="LaunchWindow_Component.cs" />
     <Compile Include="LaunchWindow_Component_DEPRECATED.cs" />
+    <Compile Include="RestoreElementState_Component_DEPRECATED.cs" />
     <Compile Include="RestoreElementState_Component.cs" />
     <Compile Include="SetBrowser_Component.cs" />
     <Compile Include="SetChecklist_Component.cs" />
@@ -159,7 +173,9 @@
     <Compile Include="TabContainer_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="TabContainer_Component.cs" />
     <Compile Include="TabContainer_Component_DEPRECATED.cs" />
+    <Compile Include="TrueOnlyButton.cs" />
     <Compile Include="UIElement_Goo.cs" />
+    <Compile Include="Upgrade_RestoreStateComponent.cs" />
     <Compile Include="ValueListener.cs" />
   </ItemGroup>
   <ItemGroup>

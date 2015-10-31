@@ -41,6 +41,14 @@ namespace HumanUI
             }
         }
 
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>

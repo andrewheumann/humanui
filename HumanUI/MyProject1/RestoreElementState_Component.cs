@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace HumanUI
 {
-    public class RestoreElementState_Component : GH_Component
+    public class RestoreElementState_Component : GH_Component, IGH_VariableParameterComponent
     {
         /// <summary>
         /// Initializes a new instance of the RestoreElementState_Component class.
@@ -17,6 +17,7 @@ namespace HumanUI
                 "Restore the saved states of UI elements",
                 "Human", "UI Main")
         {
+            Params.ParameterSourcesChanged += new GH_ComponentParamServer.ParameterSourcesChangedEventHandler(ParamSourcesChanged);
         }
 
         /// <summary>
@@ -48,7 +49,18 @@ namespace HumanUI
             if (!DA.GetData<StateSet_Goo>("Saved States", ref states)) return;
             if (!DA.GetData<string>("State Name to restore", ref setName)) return;
             DA.GetData<bool>("Restore", ref restore);
-            if (!restore) return;
+
+
+            if (Params.Output.Count > 0)
+            {
+                
+                DA.SetData(0, restore);
+            }
+
+            if (!restore)
+            {
+                return;
+            }
             State stateToRestore = states.states[setName];
             //restore state
             foreach (KeyValuePair<UIElement_Goo, object> elementState in stateToRestore.stateDict)
@@ -71,7 +83,7 @@ namespace HumanUI
                 HUI_Util.TrySetElementValue(HUI_Util.extractBaseElement(element), elementState.Value);
             }
 
-
+            
         }
 
         /// <summary>
@@ -100,7 +112,50 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{d106b262-7a20-4151-b59a-872300f7ee9c}"); }
+            get { return new Guid("{A6567BB1-37D1-46CB-AD10-594FF726299B}"); }
+        }
+
+        private void ParamSourcesChanged(object sender, GH_ParamServerEventArgs e)
+        {
+            if (e.ParameterSide == GH_ParameterSide.Output && e.ParameterIndex == Params.Output.Count - 1)
+            {
+                IGH_Param new_Param = CreateParameter(GH_ParameterSide.Output, Params.Output.Count);
+                Params.RegisterOutputParam(new_Param);
+                VariableParameterMaintenance();
+                Params.OnParametersChanged();
+
+            }
+        }
+
+        public bool CanInsertParameter(GH_ParameterSide side, int index)
+        {
+            return side == GH_ParameterSide.Output && Params.Output.Count<1;
+        }
+
+        public bool CanRemoveParameter(GH_ParameterSide side, int index)
+        {
+            return side == GH_ParameterSide.Output;
+        }
+
+        public IGH_Param CreateParameter(GH_ParameterSide side, int index)
+        {
+            return new Grasshopper.Kernel.Parameters.Param_Boolean();
+        }
+
+        public bool DestroyParameter(GH_ParameterSide side, int index)
+        {
+            return true;
+        }
+
+        public void VariableParameterMaintenance()
+        {
+            for (int i = 0; i < Params.Output.Count; i++)
+            {
+                Params.Output[i].Name = "Complete";
+                Params.Output[i].NickName = "C";
+                Params.Output[i].Description = "Optional output parameter to indicate restore execution";
+                Params.Output[i].Access = GH_ParamAccess.item;
+            }
         }
     }
 }

@@ -339,6 +339,9 @@ namespace HumanUI
                case "System.Windows.Controls.Button":
                    Button b = u as Button;
                    return (System.Windows.Input.Mouse.LeftButton == System.Windows.Input.MouseButtonState.Pressed) && b.IsMouseOver;
+              case "HumanUI.TrueOnlyButton":
+                   TrueOnlyButton tob = u as TrueOnlyButton;
+                   return (System.Windows.Input.Mouse.LeftButton == System.Windows.Input.MouseButtonState.Pressed) && tob.IsMouseOver;
                case "System.Windows.Controls.Label":
                    Label l = u as Label;
                    return l.Content;

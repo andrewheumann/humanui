@@ -80,7 +80,7 @@ namespace HumanUI
                 {
                     foreach (UIElement_Goo goo in state.stateDict.Keys)
                     {
-                        if(System.Windows.Media.VisualTreeHelper.GetParent(goo.element) == null) allElementsHaveParents = false;
+                        if(FindTopmostParent<HumanUIBaseApp.MainWindow>(goo.element) == null) allElementsHaveParents = false;
                        
                     }
                 }
@@ -390,7 +390,7 @@ namespace HumanUI
                     //add the value and the elementGoo into the new real state
                     state.stateDict.Add(goo, valueSet);
                     //assumes that all elements, if properly deserialized and referenced back to the doc, have a parent element.
-                    if (System.Windows.Media.VisualTreeHelper.GetParent(goo.element) == null) allElementsHaveParents = false;
+                    if (FindTopmostParent<HumanUIBaseApp.MainWindow>(goo.element) == null) allElementsHaveParents = false;
                 }
                 //add the re-constituted state into the global state dictionary
                 savedStates.Add(stateName, state);
@@ -439,7 +439,21 @@ namespace HumanUI
 
 
 
+        public static T FindTopmostParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            //get parent item
+            DependencyObject parentObject = System.Windows.Media.VisualTreeHelper.GetParent(child);
 
+            //we've reached the end of the tree
+            if (parentObject == null) return null;
+
+            //check if the parent matches the type we're looking for
+            T parent = parentObject as T;
+            if (parent != null)
+                return parent;
+            else
+                return FindTopmostParent<T>(parentObject);
+        }
 
 
 

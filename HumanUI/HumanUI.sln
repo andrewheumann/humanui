@@ -9,6 +9,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug32|Any CPU = Debug32|Any CPU
 		Debug64|Any CPU = Debug64|Any CPU
+		LimitedRelease|Any CPU = LimitedRelease|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -16,6 +17,8 @@ Global
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Debug32|Any CPU.Build.0 = Debug32|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
+		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.LimitedRelease|Any CPU.ActiveCfg = LimitedRelease|Any CPU
+		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.LimitedRelease|Any CPU.Build.0 = LimitedRelease|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
