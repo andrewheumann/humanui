@@ -119,6 +119,7 @@
     <Compile Include="CreateGrid_Component.cs" />
     <Compile Include="CreateObjectsFromXaml_Component.cs" />
     <Compile Include="CreateXparentWindow_Component.cs" />
+    <Compile Include="RhinoCmdButton_Component.cs" />
     <Compile Include="Set3DView_Textured_Component.cs" />
     <Compile Include="SetShapes_Component.cs" />
     <Compile Include="CreateSlider_Component.cs" />
@@ -314,6 +315,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\setBrowser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateRhinoButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

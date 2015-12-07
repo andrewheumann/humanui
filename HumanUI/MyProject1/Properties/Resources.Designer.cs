@@ -233,6 +233,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateRhinoButton {
+            get {
+                object obj = ResourceManager.GetObject("CreateRhinoButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateShape {
             get {
                 object obj = ResourceManager.GetObject("CreateShape", resourceCulture);
