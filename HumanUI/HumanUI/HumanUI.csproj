@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug32</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C04DC96E-280E-42F1-A776-0079ACD5E8F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HumanUI</RootNamespace>
+    <AssemblyName>HumanUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LimitedRelease|AnyCPU'">
+    <OutputPath>bin\LimitedRelease\</OutputPath>
+    <DefineConstants>TRACE;LIMITEDRELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GH_IO">
+      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit">
+      <HintPath>..\packages\HelixToolkit.2015.1.461\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf">
+      <HintPath>..\packages\HelixToolkit.Wpf.2015.1.461\lib\net40\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net40\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5.0 (64-bit)\System\RhinoCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
+    <Compile Include="Custom Types\3DViewModel.cs" />
+    <Compile Include="Components\UI Main\AddElements_Component.cs" />
+    <Compile Include="Components\UI Main\AdjustElementPositioning_Component.cs" />
+    <Compile Include="Components\UI Main\AdjustElementAppearance_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateBrowser_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateButton_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateColorPicker_Component.cs" />
+    <Compile Include="Components\UI Containers\CreateGrid_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateObjectsFromXaml_Component.cs" />
+    <Compile Include="Components\UI Elements\RhinoCmdButton_Component.cs" />
+    <Compile Include="Components\UI Output\Set3DView_Textured_Component.cs" />
+    <Compile Include="Components\UI Output\SetShapes_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateSlider_Component.cs" />
+    <Compile Include="Components\UI Main\ContainerContents_Component.cs" />
+    <Compile Include="Components\UI Elements\Create3DView_Component.cs" />
+    <Compile Include="Deprecated\CreateButton_Component_DEPRECATED.cs" />
+    <Compile Include="Components\UI Elements\CreateCheckBox_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateCheckList_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateLabel_Component.cs" />
+    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateListBox_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateRadioButton_Component.cs" />
+    <Compile Include="Deprecated\CreateRadioButton_Component_DEPRECATED.cs" />
+    <Compile Include="Components\UI Elements\CreateMultiShape_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateShape_Component.cs" />
+    <Compile Include="Deprecated\CreateSlider_Component_DEPRECATED.cs" />
+    <Compile Include="Components\UI Containers\CreateStack_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateTextBlock_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateTrueOnlyButton.cs" />
+    <Compile Include="Components\UI Containers\CreateViewBox_Component.cs" />
+    <Compile Include="Components\Testing - Troubleshooting\ElemFromGuid_Component.cs" />
+    <Compile Include="Components\UI Main\GetScreenDimensions_Component.cs" />
+    <Compile Include="Components\UI Main\LaunchWindow_Component.cs" />
+    <Compile Include="Deprecated\LaunchWindow_Component_DEPRECATED.cs" />
+    <Compile Include="Deprecated\RestoreElementState_Component_DEPRECATED.cs" />
+    <Compile Include="Components\UI Main\RestoreElementState_Component.cs" />
+    <Compile Include="Components\UI Output\SetBrowser_Component.cs" />
+    <Compile Include="Components\UI Output\SetChecklist_Component.cs" />
+    <Compile Include="Components\UI Output\SetList_Component.cs" />
+    <Compile Include="Components\UI Output\SetTextBlock_Component.cs" />
+    <Compile Include="Components\UI Output\SetTextBox_Component.cs" />
+    <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
+    <Compile Include="Deprecated\SetWindowProperties_Component_DEPRECATED.cs" />
+    <Compile Include="Custom Types\StateSet_Goo.cs" />
+    <Compile Include="Components\UI Main\FilterUIElements_Component.cs" />
+    <Compile Include="HUI_Util.cs" />
+    <Compile Include="HumanUIInfo.cs" />
+    <Compile Include="Components\UI Elements\CreateImage_Component.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UI Main\SaveElementState_Component.cs" />
+    <Compile Include="Components\UI Output\Set3DView_Component.cs" />
+    <Compile Include="Components\UI Output\SetImage_Component.cs" />
+    <Compile Include="Components\UI Output\SetLabel_Component.cs" />
+    <Compile Include="Components\UI Output\SetShape_Component.cs" />
+    <Compile Include="Deprecated\TabContainer_Component_ALSO_DEPRECATED.cs" />
+    <Compile Include="Components\UI Containers\TabContainer_Component.cs" />
+    <Compile Include="Deprecated\TabContainer_Component_DEPRECATED.cs" />
+    <Compile Include="Custom Types\TrueOnlyButton.cs" />
+    <Compile Include="Custom Types\UIElement_Goo.cs" />
+    <Compile Include="Upgraders\Upgrade_RestoreStateComponent.cs" />
+    <Compile Include="Components\UI Main\ValueListener_Component.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ContainerContents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Create3dView.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateCheckbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateLabel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateListBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreatePullDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateRadioButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateSlider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateStack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateTextBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FilterElements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LaunchWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RestoreState.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveState.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Set3dView.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetLabel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TabControl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValueListener.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddElements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AdjustPositioning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetCheckList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createChecklist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetWindowProperties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorPicker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screenDimensions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateShapes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetShape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetShapes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateObjectsFromXaml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateTextBlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createBrowser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetTextBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetTextBlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateViewBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\createGrid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AdjustElementAppearance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setBrowser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateRhinoButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HumanUIBaseApp\HumanUIBaseApp\HumanUIBaseApp.csproj">
+      <Project>{cf0cf29b-b13d-485f-98ad-727a4e2736c7}</Project>
+      <Name>HumanUIBaseApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Erase "$(TargetPath)"
+
+XCopy "$(TargetDir)\HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll /c /q /y</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files (x86)\Rhinoceros 5\System\Rhino4.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FallbackCulture>en-US</FallbackCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
+    <StartProgram>C:\Program Files\Rhinoceros 5 (64-bit)\System\Rhino.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+</Project>

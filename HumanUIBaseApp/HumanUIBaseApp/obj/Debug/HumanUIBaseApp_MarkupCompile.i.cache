@@ -1,7 +1,7 @@
 ﻿HumanUIBaseApp
 
 
-winexe
+library
 C#
 .cs
 C:\Users\aheumann\Documents\humanui\HumanUIBaseApp\HumanUIBaseApp\obj\Debug\
@@ -9,10 +9,10 @@ HumanUIBaseApp
 none
 false
 DEBUG;TRACE
-C:\Users\aheumann\Documents\humanui\HumanUIBaseApp\HumanUIBaseApp\App.xaml
+
 11151548125
 
-61461227616
+5-535160663
 161834643456
 MainWindow.xaml;
 
