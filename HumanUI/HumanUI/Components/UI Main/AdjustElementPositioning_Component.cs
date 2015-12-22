@@ -42,10 +42,12 @@ namespace HumanUI
 
             pManager.AddIntegerParameter("Horizontal Alignment", "HA", "Horizontal alignment", GH_ParamAccess.item);
             pManager[5].Optional = true;
+            //set up custom params with selectable default values in menu 
             Param_Integer horizAlign = (Param_Integer)pManager[5];
             horizAlign.AddNamedValue("Left", 0);
             horizAlign.AddNamedValue("Center", 1);
             horizAlign.AddNamedValue("Right", 2);
+
             pManager.AddIntegerParameter("Vertical Alignment", "VA", "Vertical alignment", GH_ParamAccess.item);
             pManager[6].Optional = true;
             Param_Integer vertAlign = (Param_Integer)pManager[6];
@@ -144,7 +146,8 @@ namespace HumanUI
 
             }
 
-
+            // The absolute positioning setting is essentially just placing the items as the child of the window Grid, which is the parent of the Master Stack 
+            // Panel everything usually sits in. 
             if (absolute)
             {
                 try
@@ -168,9 +171,16 @@ namespace HumanUI
 
         }
 
+
+        /// <summary>
+        /// Creates a Thickness from string - either 4 numbers separated by commas, or 1 number applied everywhere, to mirror XAML syntax
+        /// - or a Point3d interpreted as the upper left corner.
+        /// </summary>
+        /// <param name="margin">The margin.</param>
+        /// <returns>Thickness</returns>
         Thickness thicknessFromString(string margin)
         {
-            if(margin.Contains("{")) {
+            if(margin.Contains("{")) { //Check if is a point converted to string
                 string[] vals = margin.Split(",{}".ToCharArray());
                 if (vals.Length == 3)
                 {
@@ -183,11 +193,11 @@ namespace HumanUI
                     }
                     try
                     {
-                        return new Thickness(margins[0], margins[1], 0, 0);
+                        return new Thickness(margins[0], margins[1], 0, 0); //set point coords to left and top values
                     }
                     catch { }
                 }
-                else if (vals.Length == 5)
+                else if (vals.Length == 5) // not sure what this case is representing - some other point representation?
                 {
                     List<double> margins = new List<double>();
                     foreach (string v in vals)
