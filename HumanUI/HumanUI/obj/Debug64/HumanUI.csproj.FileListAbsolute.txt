@@ -99,3 +99,4 @@ C:\Users\nholland\Documents\BitBucket\Hooey\HumanUI\HumanUI\obj\Debug64\HumanUI.
 C:\Users\nholland\Documents\BitBucket\Hooey\HumanUI\HumanUI\obj\Debug64\HumanUI.csproj.GenerateResource.Cache
 C:\Users\nholland\Documents\BitBucket\Hooey\HumanUI\HumanUI\obj\Debug64\HumanUI.dll
 C:\Users\nholland\Documents\BitBucket\Hooey\HumanUI\HumanUI\obj\Debug64\HumanUI.pdb
+C:\Users\aheumann\Documents\humanui\HumanUI\HumanUI\bin\De.TorstenMandelkow.MetroChart.dll

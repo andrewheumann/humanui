@@ -17,9 +17,9 @@ namespace HumanUI
         /// Initializes a new instance of the SetList_Component class.
         /// </summary>
         public SetPieGraph_Component()
-            : base("Set Pi eGraph Contents", "SetPieGraph",
+            : base("Set Pie Graph Contents", "SetPieGraph",
                 "Use this to set the contents of a Pie Graph",
-                "Human", "UI Output")
+                "Human", "UI Graphs")
         {
         }
 

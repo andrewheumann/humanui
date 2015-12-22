@@ -20,7 +20,7 @@ namespace HumanUI
         public CreateBarGraph_Component()
             : base("Create Bar Graph", "BarGraph",
                 "Creates a Bar Graph from Data and Categories.",
-                "Human", "UI Elements")
+                "Human", "UI Graphs")
         {
         }
 

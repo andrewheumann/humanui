@@ -22,7 +22,7 @@ namespace HumanUI
         public CreateBarGraphCluster_Component()
             : base("Create Clustered Bar Graph", "BarGraphC",
                 "Creates a Clustered Bar Graph from sets of Data and Categories.",
-                "Human", "UI Elements")
+                "Human", "UI Graphs")
         {
         }
 

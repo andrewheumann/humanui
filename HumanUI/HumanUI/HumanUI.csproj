@@ -133,7 +133,7 @@
     <Compile Include="Components\UI Output\Set3DView_Textured_Component.cs" />
     <Compile Include="Components\UI Output\SetShapes_Component.cs" />
     <Compile Include="Components\UI Elements\CreateSlider_Component.cs" />
-    <Compile Include="Components\UI Main\ContainerContents_Component.cs" />
+    <Compile Include="Deprecated\ContainerContents_Component.cs" />
     <Compile Include="Components\UI Elements\Create3DView_Component.cs" />
     <Compile Include="Deprecated\CreateButton_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateCheckBox_Component.cs" />
@@ -165,7 +165,7 @@
     <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
     <Compile Include="Deprecated\SetWindowProperties_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\StateSet_Goo.cs" />
-    <Compile Include="Components\UI Main\FilterUIElements_Component.cs" />
+    <Compile Include="Deprecated\FilterUIElements_Component.cs" />
     <Compile Include="HUI_Util.cs" />
     <Compile Include="HumanUIInfo.cs" />
     <Compile Include="Components\UI Elements\CreateImage_Component.cs" />

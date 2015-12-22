@@ -20,7 +20,7 @@ namespace HumanUI
         public CreatePieGraph_Component()
             : base("Create Pie Graph", "PieGraph",
                 "Creates a Pie Graph from Data and Categories.",
-                "Human", "UI Elements")
+                "Human", "UI Graphs")
         {
         }
 
