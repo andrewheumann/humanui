@@ -56,11 +56,11 @@ namespace HumanUI
             string SubTitle = "subtitle";
             //string[] names = { "a cat", "another cat", "a cat who stinks" };
             //double[] data = { 30, 40, 2.0 };
-            List<double> data = new List<double>();
+            List<double> listContents = new List<double>();
             List<string> names = new List<string>();
 
             //get GH input data
-            DA.GetDataList<double>("Data",  data);
+            DA.GetDataList<double>("Data",  listContents);
             DA.GetDataList<string>("Names", names);
             DA.GetData<string>("Title", ref Title);
             DA.GetData<string>("SubTitle", ref SubTitle);
@@ -71,7 +71,7 @@ namespace HumanUI
             ChartElem.ChartSubTitle = SubTitle;
                        
             //package the data into a custom chart model and series
-            CustomChartModel vm = new CustomChartModel(names.ToList(), data.ToList());
+            CustomChartModel vm = new CustomChartModel(names.ToList(), listContents.ToList());
             ChartSeries series = new ChartSeries();
             series.SeriesTitle = "Errors";
             series.DisplayMember = "Category";
@@ -104,7 +104,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateListBox;
+                return Properties.Resources.CreatePieGraph;
             }
         }
 
@@ -123,7 +123,7 @@ namespace HumanUI
 
         public class CustomChartModel   //loops through 2 lists and sets up a matching pairs of chart items
         {
-            public ObservableCollection<ChartItem> Chart { get; private set; }
+            public ObservableCollection<ChartItem> Chart { get;  set; }
 
             public CustomChartModel(List<string> categories, List<double> values)
             {
@@ -132,6 +132,10 @@ namespace HumanUI
                 {
                     Chart.Add(new ChartItem() { Category = categories[i], Number = values[i] });
                 }
+            }
+            public CustomChartModel()
+            {
+                Chart = new ObservableCollection<ChartItem>();
             }
 
         }

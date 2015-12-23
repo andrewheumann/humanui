@@ -30,8 +30,12 @@ namespace HumanUI
         {
             pManager.AddGenericParameter("Pie Graph to modify", "PG", "The Pie Graph object to modify", GH_ParamAccess.item);
             pManager.AddNumberParameter("New Pie Graph Values", "V", "The new values to graph in the pie graph", GH_ParamAccess.list);
-           // pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item, "Title");
-           // pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item, "subTitle");
+            pManager[1].Optional = true;
+            pManager.AddTextParameter("New Pie Graph Names", "N", "The names of the data items to be graphed", GH_ParamAccess.list);
+            pManager[2].Optional = true;
+            // pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item, "Title");
+            // pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item, "subTitle");
+            //pManager.AddIntegerParameter()
 
 
         }
@@ -52,30 +56,50 @@ namespace HumanUI
         {
             object GraphObject = null;
             List<double> listContents = new List<double>();
-            
+            List<string> names = new List<string>();
+
             //string Title;
-           // string SubTitle;
+            // string SubTitle;
 
             if (!DA.GetData<object>("Pie Graph to modify", ref GraphObject)) return;
-            if (!DA.GetDataList<double>("New Pie Graph Values", listContents)) return;
-            // DA.GetData<string>("Title", ref Title);
-            //DA.GetData<string>("SubTitle", ref SubTitle);
-
-            //var ChartElem = HUI_Util.GetUIElement<PieChart>(GraphObject);
-            //string series = ChartElem.Series[0].
-
-            //ChartElem.Series.Clear();
+            DA.GetDataList<double>("New Pie Graph Values", listContents);
+            DA.GetDataList<string>("New Pie Graph Names", names);
             
+            var ChartElem = HUI_Util.GetUIElement<PieChart>(GraphObject);
+            //CreatePieGraph_Component.CustomChartModel vm = new CreatePieGraph_Component.CustomChartModel();
+            ChartSeries series = ChartElem.Series[0];
+            //vm.Chart = series.ItemsSource as ObservableCollection<CreatePieGraph_Component.ChartItem>;
+            //if (!(vm.Chart.Count == listContents.Count))
+            //{
+            //    AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "the number of names and values are not matching");
+            //};
+            
+            //for (int i = 0; i < vm.Chart.Count; i++)
+            //{
+            //    vm.Chart[i].Number = listContents[i];
+            //    vm.Chart[i].Category = names[i];
+            //}
+            //series.ItemsSource = vm.Chart;
+            //ChartElem.Series.Clear();
 
-            //CreatePieGraph_Component.CustomChartModel vm = new CreatePieGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
+            CreatePieGraph_Component.CustomChartModel vm1 = new CreatePieGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
             //ChartSeries series = new ChartSeries();
             //series.SeriesTitle = "Errors";
             //series.DisplayMember = "Category";
             //series.ValueMember = "Number";
-            //series.ItemsSource = vm.Chart;
+            series.ItemsSource = vm1.Chart;
+            ChartElem
+
+            //Pass data to the chart
+            //ChartElem.Series.Add(series);
+
 
             // ScrollViewer sv = HUI_Util.GetUIElement<ScrollViewer>(ListObject);
             // ItemsControl ic = sv.Content as ItemsControl;
+
+
+
+
 
             //if (!DA.GetDataList<bool>("Selected", isSelected))
             //{
@@ -102,8 +126,8 @@ namespace HumanUI
             //}
 
 
-           // DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
-           
+            DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+
 
 
         }
