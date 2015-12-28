@@ -12,8 +12,12 @@ using System.Windows.Shapes;
 
 using System.Windows.Media;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to modify an existing single Shape component. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetShape_Component : GH_Component
     {
         /// <summary>
@@ -75,66 +79,79 @@ namespace HumanUI
                 double scale = 1.0;
                 int width = 0;
                 int height = 0;
+                
+                //Extract the path from the container grid
                 Path path = getPath(G.Children);
+                //save the old path
                 Path oldpath = path;
+                //if the user has supplied new shapes
                 if (DA.GetDataList<Curve>("Shape Curve", shapeCrvs))
                 {
 
                     Path newPath = new Path();
                     DA.GetData<double>("Scale", ref scale);
-                    newPath.Data = CreateShape_Component.pathGeomFromCrvs(shapeCrvs, scale,true);
+                    //use the method from the orig. component to translate curves into Geometry
+                    newPath.Data = Components.UI_Elements.CreateShape_Component.pathGeomFromCrvs(shapeCrvs, scale,true);
+                    //remove old path from Grid
                     G.Children.Remove(path);
                    
                     path = newPath;
                     G.Children.Add(path);
                 }
+                //if the user specified a new fill color
                 if (DA.GetData<System.Drawing.Color>("Fill Color", ref fillCol))
                 {
-
+                    //set fill
                     path.Fill = new SolidColorBrush(HUI_Util.ToMediaColor(fillCol));
                 }
                 else
                 {
+                    //otherwise use the old fill color
                     path.Fill = oldpath.Fill;
                 }
-
+                //if user supplied stroke weight
                 if (DA.GetData<double>("Stroke Weight", ref strokeWeight))
                 {
-
+                    //set the stroke weight
                     path.StrokeThickness = strokeWeight;
                 }
                 else
                 {
+                    //otherwise use the old stroke weight
                     path.StrokeThickness = oldpath.StrokeThickness;
                 }
-
+                //if the user specified a stroke color
                 if (DA.GetData<System.Drawing.Color>("Stroke Color", ref strokeCol))
                 {
-
+                    //set the stroke color
                     path.Stroke = new SolidColorBrush(HUI_Util.ToMediaColor(strokeCol));
                 }
                 else
                 {
+                    //otherwise use the old stroke color
                     path.Stroke = oldpath.Stroke;
                 }
 
-               
+               //if the user specified a new object width
                 if (DA.GetData<int>("Width", ref width))
                 {
-
+                    //set the grid width
                     G.Width = width;
                 }
                 else
                 {
+                    //otherwise use the old grid width
                     G.Width = oldpath.Width;
                 }
+                //if the user specified a new height
                 if (DA.GetData<int>("Height", ref height))
                 {
-
+                    //set the height
                     G.Height = height;
                 }
                 else
                 {
+                    //otherwise use the old height
                     G.Height = oldpath.Height;
                 }
                
@@ -144,6 +161,11 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Utility method to extract the Path object from a UIElementCollection
+        /// </summary>
+        /// <param name="col">The col.</param>
+        /// <returns>The first path found</returns>
         Path getPath(UIElementCollection col)
         {
             foreach (FrameworkElement u in col)

@@ -14,8 +14,12 @@ using Xceed.Wpf.Toolkit;
 
 using System.Collections;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
+    /// <summary>
+    /// This component handles all events / value retrieval from components that represent UI elements.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class ValueListener_Component : GH_Component
     {
         /// <summary>
@@ -31,7 +35,14 @@ namespace HumanUI
             updateMessage();
         }
 
-     
+        /// <summary>
+        /// Indicates whether the component is in "Live" or manual mode.
+        /// </summary>
+        private bool AddEventsEnabled = true;
+
+        /// <summary>
+        /// A list of all elements that have had events attached to them
+        /// </summary>
         private static List<UIElement> eventedElements;
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -77,6 +88,8 @@ namespace HumanUI
 
 
             //decide whether to populate the dictionary, or just populate filteredElements directly. 
+            //as in other components, I think this second case, where a key value pair is received by the component,
+            //is mostly obsolete, but I'm leaving it in for backwards compatibility.
             foreach (object o in elementObjects)
             {
                 UIElement elem = null;
@@ -140,43 +153,44 @@ namespace HumanUI
             GH_Structure<IGH_Goo> values = new GH_Structure<IGH_Goo>();
             GH_Structure<GH_Integer> indsOut = new GH_Structure<GH_Integer>();
             int i=0;
+            //for all of the UI elements we've decided to listen to
             foreach (UIElement u in elementsToListen)
             {
                 object value = HUI_Util.GetElementValue(u);
                 object indices = HUI_Util.GetElementIndex(u);
+                //check if the value is a list
                 IEnumerable list = null;
                 if ((value as string) == null) list = value as IEnumerable;
                 IEnumerable indList = indices as IEnumerable;
-                if (list != null)
+                if (list != null) //if it's a list object
                 {
                     foreach (object thing in list)
                     {
-                        values.Append(HUI_Util.GetRightType(thing),new GH_Path(i));
+                        //keep the results from each element in its own branch (in case an element has multiple values associated with it)
+                        values.Append(HUI_Util.GetRightType(thing),new GH_Path(i)); 
                     }
                 }
-                else
+                else //it's a single value
                 {
+                    //keep the results from each element in its own branch (in case an element has multiple values associated with it)
                     values.Append(HUI_Util.GetRightType(value), new GH_Path(i));
                 }
 
-                if (indList != null)
+                if (indList != null) //if there's an associated index list
                 {
                     foreach (int index in indList)
                     {
                         indsOut.Append(new GH_Integer(index), new GH_Path(i));
                     }
                 }
-                else
+                else // there's a single index
                 {
                     indsOut.Append(new GH_Integer((int)indices), new GH_Path(i));
                 }
 
 
 
-
-
-
-                //add listener events to elements 
+                //add listener events to element 
                 if (AddEventsEnabled)
                 {
                     eventedElements.Add(u);
@@ -193,13 +207,17 @@ namespace HumanUI
 
         }
 
-       
-
-       
-
-   
 
 
+
+
+
+
+
+        /// <summary>
+        /// Adds the appropriate listener events to a UIElement
+        /// </summary>
+        /// <param name="u">The UIElement.</param>
         void AddEvents(UIElement u)
         {
             eventedElements.Add(u);
@@ -301,6 +319,10 @@ namespace HumanUI
             }
         }
 
+        /// <summary>
+        /// Removes the appropriate listener events from a UIElement
+        /// </summary>
+        /// <param name="u">The UIElement.</param>
         void RemoveEvents(UIElement u)
         {
             switch (u.GetType().ToString())
@@ -377,12 +399,16 @@ namespace HumanUI
             }
         }
 
-        
 
+
+        /// <summary>
+        /// Event Handler to expire the component solution (to update when a UI element is triggered)
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         void ExpireThis(object sender, EventArgs e)
         {
           
-                // System.Windows.Forms.MessageBox.Show("Event Trigger");
                 ExpireSolution(true);
          
         }
@@ -410,16 +436,33 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Updates the black message flag at the bottom of the component based on live/manual update status.
+        /// </summary>
         private void updateMessage()
         {
             Message = AddEventsEnabled ? "Live" : "Manual Update";
         }
 
+        /// <summary>
+        /// Write all required data for deserialization to an IO archive - in this case just the Live/Manual update status.
+        /// </summary>
+        /// <param name="writer">Object to write with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Write(GH_IWriter writer)
         {
             writer.SetBoolean("SomeProperty", AddEventsEnabled);
             return base.Write(writer);
         }
+        /// <summary>
+        /// Read all required data for deserialization from an IO archive - in this case just the Live/Manual update status.
+        /// </summary>
+        /// <param name="reader">Object to read with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Read(GH_IReader reader)
         {
             AddEventsEnabled = false;
@@ -428,6 +471,10 @@ namespace HumanUI
             return base.Read(reader);
         }
 
+        /// <summary>
+        /// Add a menu controlling live/manual update status. 
+        /// </summary>
+        /// <param name="menu"></param>
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
             System.Windows.Forms.ToolStripMenuItem AddEventsMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Live Update", new EventHandler(this.Menu_AddEventsClicked), true, AddEventsEnabled);
@@ -438,11 +485,11 @@ namespace HumanUI
             this.RecordUndoEvent("Add Events");
             this.AddEventsEnabled = !this.AddEventsEnabled;
             updateMessage();
-            this.ExpireSolution(true);
+            this.ExpireSolution(true); //refresh the component so that events can be added/removed as appropriate. 
         }
 
 
-        private bool AddEventsEnabled = true;
+       
 
 
     }

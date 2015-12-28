@@ -9,12 +9,16 @@ using System.Drawing;
 using System.Windows.Shapes;
 using Grasshopper.Kernel.Types;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create composite graphics. Unlike "Create Shape" - which takes in multiple curves to represent a single shape (with holes etc)
+    /// this component allows for multiple shapes all arranged relative to one another, with different appearance properties.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateMultiShape_Component : GH_Component
     {
-      //  BoundingBox B = BoundingBox.Empty;
-       // Grid G = new Grid();
+
         /// <summary>
         /// Initializes a new instance of the CreateMultiShape_Component class.
         /// </summary>
@@ -61,7 +65,7 @@ namespace HumanUI
         protected override void SolveInstance(IGH_DataAccess DA)
         {
 
-         
+
             List<Curve> shapeCrvs = new List<Curve>();
             List<System.Drawing.Color> fillCol = new List<System.Drawing.Color>();
             List<double> strokeWeights = new List<double>();
@@ -72,10 +76,11 @@ namespace HumanUI
 
             bool hasFill = DA.GetDataList<System.Drawing.Color>("Fill Color", fillCol);
             bool hasWeight = DA.GetDataList<double>("Stroke Weight", strokeWeights);
-            bool hasStrokeCol = DA.GetDataList<System.Drawing.Color>("Stroke Color",  strokeCol);
-              DA.GetData<double>("Scale", ref scale);
+            bool hasStrokeCol = DA.GetDataList<System.Drawing.Color>("Stroke Color", strokeCol);
+            DA.GetData<double>("Scale", ref scale);
             if (!DA.GetDataList<Curve>("Shapes", shapeCrvs)) return;
 
+            //Set up a grid to contain all shapes
             Grid G = new Grid();
             if (DA.GetData<int>("Width", ref width))
             {
@@ -89,16 +94,21 @@ namespace HumanUI
             }
 
 
-            int i =0;
+            int i = 0;
+
+            //For all the curves the user inputs
             foreach (Curve c in shapeCrvs)
             {
 
 
-
+                //Set up a new path object
                 Path path = new Path();
+                //create a list to contain the single curve
                 List<Curve> crvList = new List<Curve>();
                 crvList.Add(c);
-                path.Data = pathGeomFromCrvs(crvList, scale, false);
+                //Set the path's data to the curve
+                path.Data = CreateShape_Component.pathGeomFromCrvs(crvList, scale, false);
+                //set all the properties
                 if (hasFill)
                 {
 
@@ -115,77 +125,15 @@ namespace HumanUI
 
                     path.Stroke = new SolidColorBrush(HUI_Util.ToMediaColor(strokeCol[i % strokeCol.Count]));
                 }
-                
+
                 i++;
+                //add the path object to the grid
                 G.Children.Add(path);
             }
-        
-          
-           
-           
 
-           
-
-           
-
-          
-     
-
-
+            //Pass out the grid
             DA.SetData("Shape", new UIElement_Goo(G, "Shape", InstanceGuid, DA.Iteration));
             
-        }
-
-
-       
-
-        public static Geometry pathGeomFromCrvs(List<Curve> c, double scale,bool rebox)
-        {
-            string crvString = "";
-           rebaseCrvs(c,scale,rebox);
-            foreach(Curve crv in c){
-                PolylineCurve p = new PolylineCurve();
-                Rhino.Geometry.Polyline pl = new Rhino.Geometry.Polyline();
-                if (!crv.TryGetPolyline(out pl)) { 
-                    p = crv.ToPolyline(0, 0, 0.1, 2.0, 0, 0, crv.GetLength() / 50, 0, true);
-                    p.TryGetPolyline(out pl);
-                }
-                crvString += "M ";
-                foreach (Point3d pt in pl)
-                {
-                    crvString += String.Format("{0:0.000},{1:0.000} ", pt.X, pt.Y);
-                }
-               
-
-            }
-           
-            return Geometry.Parse(crvString);
-        }
-
-        static void rebaseCrvs(List<Curve> crvs,double scale,bool rebox)
-        {
-            foreach (Curve c in crvs)
-            {
-                c.Transform(Rhino.Geometry.Transform.Mirror(Plane.WorldZX));
-                c.Transform(Rhino.Geometry.Transform.Scale(Point3d.Origin, scale));
-            }
-            if (rebox)
-            {
-                BoundingBox b = BoundingBox.Empty;
-                foreach (Curve c in crvs)
-                {
-                    b.Union(c.GetBoundingBox(true));
-                }
-
-                Point3d boxBase = b.PointAt(0, 0, 0);
-
-                foreach (Curve c in crvs)
-                {
-                    c.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase)));
-                }
-            }
-
-
         }
         
         /// <summary>

@@ -12,8 +12,12 @@ using System.Windows.Shapes;
 
 using System.Windows.Media;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to modify an existing "Shapes" container with multiple 2d shapes.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetShapes_Component : GH_Component
     {
         /// <summary>
@@ -61,14 +65,13 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            //placeholder variable to hold the generic element object
             object ShapeObject = null;
 
 
-            
-
-
-
             if (!DA.GetData<object>("Shape to Modify", ref ShapeObject)) return;
+
+            //Get grid container out of generic object
             Grid G = HUI_Util.GetUIElement<Grid>(ShapeObject);
             //change the shape
             if (G != null)
@@ -81,7 +84,7 @@ namespace HumanUI
                 int width = 0;
                 int height = 0;
                 Path oldpath = getPath(G.Children);
-               
+
 
                 bool hasWeight = false;
                 bool hasStrokeCol = false;
@@ -89,33 +92,18 @@ namespace HumanUI
 
                 DA.GetData<double>("Scale", ref scale);
 
-                if (DA.GetDataList<System.Drawing.Color>("Fill Colors", fillCol))
-                {
+                //Populate variables and store boolean results for later use. 
+                hasFill = DA.GetDataList<System.Drawing.Color>("Fill Colors", fillCol);
+                hasWeight = DA.GetDataList<double>("Stroke Weights", strokeWeights);
+                hasStrokeCol = DA.GetDataList<System.Drawing.Color>("Stroke Colors", strokeCol);
 
-                    hasFill = true;
-                }
-
-
-                if (DA.GetDataList<double>("Stroke Weights", strokeWeights))
-                {
-
-                    hasWeight = true;
-                }
-
-
-                if (DA.GetDataList<System.Drawing.Color>("Stroke Colors", strokeCol))
-                {
-
-                    hasStrokeCol = true;
-                }
-              
-
-
+                //If the user has specified new shapes:
                 if (DA.GetDataList<Curve>("Shape Curves", shapeCrvs))
                 {
                     G.Children.Clear();
 
                     int i = 0;
+                    //for all the curves
                     foreach (Curve c in shapeCrvs)
                     {
 
@@ -123,12 +111,16 @@ namespace HumanUI
 
                         Path path = new Path();
                         List<Curve> crvList = new List<Curve>();
+                        //We're passing a single curve as a list so that the multiple curves are not interpreted as "composite" - 
+                        //and therefore would be unable to be styled separately.
                         crvList.Add(c);
-                        path.Data = CreateShape_Component.pathGeomFromCrvs(crvList, scale, false);
+
+                        // Get Geometry from rhino curve objects. Note that "rebase" is set to false - so that relative position of 
+                        // multiple curves is preserved. This is the primary difference with the setShape component (as well as list access)
+                        path.Data = Components.UI_Elements.CreateShape_Component.pathGeomFromCrvs(crvList, scale, false);
                         if (hasFill)
                         {
-
-                            path.Fill = new SolidColorBrush(HUI_Util.ToMediaColor(fillCol[i % fillCol.Count]));
+                            path.Fill = new SolidColorBrush(HUI_Util.ToMediaColor(fillCol[i % fillCol.Count])); //hacky fix to approximate longest list matching
                         }
                         else
                         {
@@ -137,8 +129,7 @@ namespace HumanUI
 
                         if (hasWeight)
                         {
-
-                            path.StrokeThickness = strokeWeights[i % strokeWeights.Count];
+                            path.StrokeThickness = strokeWeights[i % strokeWeights.Count]; //hacky fix to approximate longest list matching
                         }
                         else
                         {
@@ -147,7 +138,7 @@ namespace HumanUI
                         if (hasStrokeCol)
                         {
 
-                            path.Stroke = new SolidColorBrush(HUI_Util.ToMediaColor(strokeCol[i % strokeCol.Count]));
+                            path.Stroke = new SolidColorBrush(HUI_Util.ToMediaColor(strokeCol[i % strokeCol.Count])); //hacky fix to approximate longest list matching
                         }
                         else
                         {
@@ -155,27 +146,18 @@ namespace HumanUI
                         }
 
                         i++;
+                        //Add the new path to the Grid
                         G.Children.Add(path);
                     }
 
-
-
-/*
-                    Path newPath = new Path();
-                    DA.GetData<double>("Scale", ref scale);
-                    newPath.Data = CreateShape_Component.pathGeomFromCrvs(shapeCrvs, scale, true);
-                    G.Children.Remove(path);
-
-                    path = newPath;
-                    G.Children.Add(path);*/
                 }
 
 
 
 
-             
 
 
+                //If the user has specified new dimensions for the container, update its dimensions, otherwise use the old ones.
                 if (DA.GetData<int>("Width", ref width))
                 {
 
@@ -200,7 +182,11 @@ namespace HumanUI
 
         }
 
-
+        /// <summary>
+        /// Utility method to extract the Path object from a UIElementCollection
+        /// </summary>
+        /// <param name="col">The col.</param>
+        /// <returns>The first path found</returns>
         Path getPath(UIElementCollection col)
         {
             foreach (FrameworkElement u in col)

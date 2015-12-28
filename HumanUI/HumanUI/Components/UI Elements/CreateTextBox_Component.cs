@@ -7,8 +7,12 @@ using System.Windows.Controls;
 using System.Windows;
 
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a stackpanel containing a textbox and an optional button for user entry. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateTextBox_Component : GH_Component
     {
         /// <summary>
@@ -51,28 +55,34 @@ namespace HumanUI
             if(!DA.GetData<string>("Default Text", ref defaultValue)) return;
             DA.GetData<string>("Label",ref label);
             DA.GetData<bool>("Update Button", ref includeButton);
+            //set up the stackpanel to contain the text box
             StackPanel sp = new StackPanel();
             sp.Orientation = Orientation.Horizontal;
+            //create the text box
             TextBox tb = new TextBox();
             tb.Text = defaultValue;
             tb.Width = 200;
+            //set up the button
             Button b = new Button();
             b.Width = 50;
             sp.Margin = new Thickness(4);
             Label l = new Label();
             l.Content = label;
+            //add the label and textbox to the stackpanel
             sp.Children.Add(l);
             sp.Children.Add(tb);
-            if (includeButton)
+            if (includeButton) // if the component is set to use a button for updating, add the button to the stack panel
             {
                 sp.Children.Add(b);
-                sp.Name = "GH_TextBox";
+                //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
+                sp.Name = "GH_TextBox"; 
             }
             else
             {
+                //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox_NoButton";
             }
-            
+            //pass out the stackpanel
             DA.SetData("Text Box", new UIElement_Goo(sp,String.Format("TextBox: {0}",label), InstanceGuid, DA.Iteration));
         }
 

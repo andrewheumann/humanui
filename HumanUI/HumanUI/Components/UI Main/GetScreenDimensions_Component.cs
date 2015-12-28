@@ -15,8 +15,12 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Rhino;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
+    /// <summary>
+    /// Component to retrieve dimensions of current screen.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class GetScreenDimensions_Component : GH_Component
     {
         /// <summary>
@@ -51,13 +55,17 @@ namespace HumanUI
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            //retrieve the screen object from the main Rhino app window. 
             Screen sc = Screen.FromHandle(RhinoApp.MainApplicationWindow.Handle);
 
+            //create a new "Graphics" to get the screen DPI multiplier
             Control c = new Control();
             Graphics graphics = c.CreateGraphics();
-            double mult = graphics.DpiX / 96;
-            double A = sc.Bounds.Right / mult;
-            double B = sc.Bounds.Bottom / mult;
+
+            //This seems to be necessary because WPF takes into account DPI scaling, whereas the screen measurements assume 96 DPI
+            double mult = graphics.DpiX / 96; 
+            double A = sc.Bounds.Right-sc.Bounds.Left / mult;
+            double B = sc.Bounds.Bottom-sc.Bounds.Top / mult;
             DA.SetData("Height", B);
             DA.SetData("Width", A);
         }

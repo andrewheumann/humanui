@@ -4,8 +4,12 @@ using System.Windows.Controls;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to update a browser object
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetBrowser_Component : GH_Component
     {
         /// <summary>
@@ -52,8 +56,10 @@ namespace HumanUI
             bool refresh = false;
             string URL = "";
             if (!DA.GetData<object>("Browser", ref obj)) return;
+            //get the web browser object
             WebBrowser wb = HUI_Util.GetUIElement<WebBrowser>(obj);
 
+            //Back
             if (DA.GetData<bool>("Back", ref back))
             {
                 if (wb.CanGoBack && back)
@@ -61,7 +67,7 @@ namespace HumanUI
                     wb.GoBack();
                 }
             }
-
+            //Forward
             if (DA.GetData<bool>("Forward", ref forward))
             {
                 if (wb.CanGoForward && forward)
@@ -69,7 +75,7 @@ namespace HumanUI
                     wb.GoForward();
                 }
             }
-
+            //Refresh
             if (DA.GetData<bool>("Refresh", ref refresh))
             {
                 if (refresh)
@@ -77,7 +83,7 @@ namespace HumanUI
                     wb.Refresh();
                 }
             }
-
+            //URL
             if (DA.GetData<string>("URL", ref URL))
             {
                 wb.Source = new Uri(URL);

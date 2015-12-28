@@ -9,6 +9,10 @@ namespace HumanUI
 {
 
 
+    /// <summary>
+    /// GH_Goo compatible data type containing a collection of States in a dictionary
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.Types.GH_Goo{System.Collections.Generic.Dictionary{System.String,HumanUI.State}}" />
     public class StateSet_Goo : GH_Goo<Dictionary<string, State>>
     {
         public Dictionary<string, State> states { get; set; }
@@ -80,7 +84,11 @@ namespace HumanUI
         }
     }
 
-    //represents a collection of elements and their state objects (number for slider, text for label, etc.)
+
+    /// <summary>
+    /// Represents a collection of elements and their state objects (number for slider, text for label, etc.)
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.Dictionary{HumanUI.UIElement_Goo,System.Object}" />
     public class State : Dictionary<UIElement_Goo, object>
     {
         public  Dictionary<UIElement_Goo, object> stateDict {get; set;}

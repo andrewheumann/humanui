@@ -4,8 +4,12 @@ using System.Windows.Controls;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// A component to create an ActiveX web control
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateBrowser_Component : GH_Component
     {
         /// <summary>
@@ -49,9 +53,13 @@ namespace HumanUI
             int width = -1;
             int height = -1;
             if (!DA.GetData<string>("URL", ref url)) return;
+
+            //initiate the WebBrowser object
             WebBrowser wb = new WebBrowser();
+            //point it to a URL
             wb.Source = new Uri(url);
 
+            //optionally set its dimensions
             if(DA.GetData<int>("Width",ref width)){
                 wb.Width = width;   
             }
@@ -59,6 +67,8 @@ namespace HumanUI
             {
                 wb.Height = height;
             }
+
+            //pass out the browser object
             DA.SetData("Browser", new UIElement_Goo(wb, String.Format("Browser: {0}", url), InstanceGuid, DA.Iteration));
         }
 

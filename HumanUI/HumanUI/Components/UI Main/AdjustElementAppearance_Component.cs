@@ -10,8 +10,12 @@ using HumanUIBaseApp;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
+    /// <summary>
+    /// Adjust the color and appearance of individual elements
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class AdjustElementAppearance_Component : GH_Component
     {
         /// <summary>

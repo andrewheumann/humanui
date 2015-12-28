@@ -7,8 +7,12 @@ using Grasshopper.Kernel.Types;
 
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to modify the contents of a multi-line Textblock object. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetTextBlock_Component : GH_Component
     {
         /// <summary>
@@ -45,13 +49,15 @@ namespace HumanUI
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             object TextBlockObject = null;
-            string newLabelContents = "";
-            if (!DA.GetData<string>("New Text Block contents", ref newLabelContents)) return;
+            string newTextBlockContents = "";
+            if (!DA.GetData<string>("New Text Block contents", ref newTextBlockContents)) return;
             if (!DA.GetData<object>("Text Block to modify", ref TextBlockObject)) return;
+            //extract the TextBlock object from the generic object
             TextBlock l = HUI_Util.GetUIElement<TextBlock>(TextBlockObject);
             if (l != null)
             {
-                l.Text = newLabelContents;
+                //set its contents
+                l.Text = newTextBlockContents;
             }
 
 

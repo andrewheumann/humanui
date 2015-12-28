@@ -6,6 +6,7 @@ using Rhino.Geometry;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class FilterUIElements_Component : GH_Component
     {
         /// <summary>

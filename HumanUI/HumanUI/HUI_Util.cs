@@ -21,7 +21,7 @@ namespace HumanUI
     /// <summary>
     /// A utility class containing shared methods utilized by several components.
     /// </summary>
-   static class HUI_Util
+   public static class HUI_Util
     {
         /// <summary>
         /// Removes the parent from a child UI Element. Since an element cannot have multiple parents, it is necessary to
@@ -40,6 +40,12 @@ namespace HumanUI
             }
         }
 
+       /// <summary>
+       /// Attempts to gets a UI element of type T from a given object.
+       /// </summary>
+       /// <typeparam name="T"></typeparam>
+       /// <param name="o">The object.</param>
+       /// <returns>The UI element</returns>
        public static T GetUIElement<T>(object o) where T: UIElement
        {
            T elem = null;
@@ -61,14 +67,23 @@ namespace HumanUI
        }
 
 
- 
 
+
+       /// <summary>
+       /// Utility method to convert from System.Drawing.Color to System.Windows.Media.Color
+       /// </summary>
+       /// <param name="color">The color as System.Drawing.Color.</param>
+       /// <returns>Color as System.Windows.Media.Color</returns>
        public static System.Windows.Media.Color ToMediaColor(System.Drawing.Color color)
        {
            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
        }
 
-
+       /// <summary>
+       /// Utility method to convert from System.Windows.Media.Color to System.Drawing.Color
+       /// </summary>
+       /// <param name="color">The color as System.Windows.Media.Color.</param>
+       /// <returns>Color as System.Drawing.Color</returns>
        public static System.Drawing.Color ToSysColor(System.Windows.Media.Color color)
        {
            return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
@@ -76,6 +91,12 @@ namespace HumanUI
 
 
 
+       /// <summary>
+       /// Extracts the base element from a parent element. HUI elements are sometimes composites - a "Slider" in HUI is actually a panel containing a slider 
+       /// and several text boxes, for instance. This method retrieves just the main object (slider, textbox, etc) itself.
+       /// </summary>
+       /// <param name="element">The element.</param>
+       /// <returns>The base UI Element</returns>
        public static UIElement extractBaseElement(UIElement element)
        {
            if (element is Panel)
@@ -100,7 +121,12 @@ namespace HumanUI
            }
        }
 
-
+       /// <summary>
+       /// Extracts the base elements from a list of parent elements. HUI elements are sometimes composites - a "Slider" in HUI is actually a panel 
+       /// containing a slider and several text boxes, for instance. 
+       /// </summary>
+       /// <param name="element">The element.</param>
+       /// <returns>The base UI Element</returns>
        public static void extractBaseElements(IEnumerable<UIElement> elements, List<UIElement> extractedElements)
        {
            foreach (UIElement elem in elements)
@@ -118,8 +144,10 @@ namespace HumanUI
                        case "GH_TextBox_NoButton":
                            extractedElements.Add(findTextBox(p));
                            break;
-                       default: // WE MAY HAVE TO FORGET ABOUT GETTING STUFF OUT OF CONTAINERS (TABS ETC)
-                           extractBaseElements(p.Children.Cast<UIElement>(), extractedElements);
+                       default:
+                           // This recursive operation is in case we've wound up with a panel inside a panel or some such thing. 
+                           // Not sure this ever actually occurs?
+                           extractBaseElements(p.Children.Cast<UIElement>(), extractedElements); 
                            break;
                    }
 
@@ -132,6 +160,11 @@ namespace HumanUI
        }
 
 
+       /// <summary>
+       /// Finds the text box in a panel.
+       /// </summary>
+       /// <param name="p">The p.</param>
+       /// <returns>the text box</returns>
        public static TextBox findTextBox(Panel p)
        {
            foreach (UIElement u in p.Children)
@@ -144,6 +177,11 @@ namespace HumanUI
            return null;
        }
 
+       /// <summary>
+       /// Finds the slider in a panel.
+       /// </summary>
+       /// <param name="p">The p.</param>
+       /// <returns>The slider</returns>
        static Slider findSlider(Panel p)
        {
            foreach (UIElement u in p.Children)
@@ -157,6 +195,11 @@ namespace HumanUI
        }
 
 
+       /// <summary>
+       /// Adds a UI Element Goo to a result dictionary, generating an appropriate string for the key to avoid conflicts.
+       /// </summary>
+       /// <param name="e">The element.</param>
+       /// <param name="resultDict">The result dictionary.</param>
        static public void AddToDict(UIElement_Goo e, Dictionary<string, UIElement_Goo> resultDict)
        {
            int tryCount = 0;
@@ -173,6 +216,11 @@ namespace HumanUI
        }
 
 
+       /// <summary>
+       /// Tries to set the element value based on the data type of the UI Element
+       /// </summary>
+       /// <param name="u">The ui element.</param>
+       /// <param name="o">The object.</param>
        static public void TrySetElementValue(UIElement u, object o)
        {
            try
@@ -181,7 +229,6 @@ namespace HumanUI
                {
                    case "System.Windows.Controls.Slider":
                        Slider s = u as Slider;
-                       //System.Windows.Forms.MessageBox.Show(o.GetType().ToString());
                        
                        s.Value = (double)o;
                        return;
@@ -236,6 +283,11 @@ namespace HumanUI
            }
        }
 
+       /// <summary>
+       /// Casts an arbitrary object to an IGH_Goo GH data type.
+       /// </summary>
+       /// <param name="o">The object.</param>
+       /// <returns></returns>
        public static IGH_Goo GetRightType(object o)
        {
            if (o == null) return new GH_ObjectWrapper(null);
@@ -259,6 +311,12 @@ namespace HumanUI
        }
 
 
+
+       /// <summary>
+       /// Utility method to de-concatenate a list of bools from a string for deserialization purposes
+       /// </summary>
+       /// <param name="str">The string</param>
+       /// <returns></returns>
        public static List<bool> boolsFromString(string str)
        {
            List<bool> bools = new List<bool>();
@@ -273,6 +331,11 @@ namespace HumanUI
            return bools;
        }
 
+       /// <summary>
+       /// Utility method to concatenate a list of bools into a string for serialization purposes
+       /// </summary>
+       /// <param name="bs">The boolean values.</param>
+       /// <returns></returns>
        public static string stringFromBools(List<bool> bs)
        {
            string str = "";
@@ -283,12 +346,19 @@ namespace HumanUI
            return str;
        }
 
+       /// <summary>
+       /// Retrieves the custom string name for a UIelement of a particular type.
+       /// </summary>
+       /// <param name="elem">The elem.</param>
+       /// <returns></returns>
        public static string elemType(UIElement elem)
        {
            if (elem is Panel)
            {
 
                Panel p = elem as Panel;
+               //special elements that consist of a panel that wraps other stuff should make sure to
+               //set the panel name to something distinctive so it can be differentiated here and elsewhere.
                switch (p.Name)
                {
                    case "GH_Slider":
@@ -310,12 +380,19 @@ namespace HumanUI
                }
 
            }
+           //at this point the element is not a panel so we just get its string name
            string baseType = elem.GetType().ToString();
+           //and clear out the "System.Windows.Controls." cruft.
            return baseType.Replace("System.Windows.Controls.", "");
           
        }
 
 
+       /// <summary>
+       /// Utility method to set the source of an Image object
+       /// </summary>
+       /// <param name="newImagePath">The new image path.</param>
+       /// <param name="l">The image.</param>
        public static void SetImageSource(string newImagePath, Image l)
        {
            Uri filePath = new Uri(newImagePath);
@@ -323,6 +400,12 @@ namespace HumanUI
            l.Source = bi;
        }
 
+       /// <summary>
+       /// Gets the index of the selected item in a selector object.
+       /// </summary>
+       /// <param name="selector">The selector.</param>
+       /// <param name="labelContent">Content of the label.</param>
+       /// <returns>the index of the item</returns>
        static int getSelectedItemIndex(Selector selector, string labelContent)
        {
            foreach (object o in selector.Items)
@@ -339,6 +422,12 @@ namespace HumanUI
            return -1;
        }
 
+
+       /// <summary>
+       /// Tries to get the element value from a UIElement, based on its type name. 
+       /// </summary>
+       /// <param name="u">The ui element.</param>
+       /// <returns></returns>
        static public object GetElementValue(UIElement u)
        {
            switch (u.GetType().ToString())
@@ -396,7 +485,6 @@ namespace HumanUI
                case "Xceed.Wpf.Toolkit.ColorPicker":
                    ColorPicker colP = u as ColorPicker;
 
-                   //return cbi.Content;
                    return HUI_Util.ToSysColor(colP.SelectedColor);
                case "System.Windows.Controls.ListView":
                    ListView v = u as ListView;
@@ -435,6 +523,11 @@ namespace HumanUI
        }
 
 
+       /// <summary>
+       /// Gets the selected index of a non-selector element.
+       /// </summary>
+       /// <param name="u">The u.</param>
+       /// <returns></returns>
        static public object GetElementIndex(UIElement u)
        {
            switch (u.GetType().ToString())

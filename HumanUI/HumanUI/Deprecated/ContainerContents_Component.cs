@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 namespace HumanUI
 {
+    /// <exclude />
     public class ContainerContents_Component : GH_Component
     {
         /// <summary>

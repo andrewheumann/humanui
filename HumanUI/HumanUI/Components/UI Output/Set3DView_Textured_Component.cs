@@ -8,8 +8,12 @@ using HelixToolkit.Wpf;
 
 using System.Windows.Media.Media3D;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// A special version of the set3DView component that accepts textures. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class Set3DViewTex_Component : GH_Component
     {
         /// <summary>
@@ -55,20 +59,23 @@ namespace HumanUI
             if (!DA.GetData<object>("3D View", ref o)) return;
             DA.GetDataList<Mesh>("Mesh to display", m);
 
+            bool hasTexture = DA.GetDataList<string>("Mesh Texture", texBitmap);
+            bool hasColor = DA.GetDataList<System.Drawing.Color>("Mesh Colors", cols);
+
+
             HelixViewport3D vp3 = HUI_Util.GetUIElement<HelixViewport3D>(o);
             ModelVisual3D mv3 = GetModelVisual3D(vp3);
             List<ModelVisual3D> mv3s = GetModels(vp3);
             List<Material> mats = new List<Material>();
 
-            bool hasTexture = DA.GetDataList<string>("Mesh Texture", texBitmap);
-            bool hasColor = DA.GetDataList<System.Drawing.Color>("Mesh Colors", cols);
-
+   
+            //empty out the helixviewport
             vp3.Children.Clear();
             vp3.Children.Add(new SunLight());
 
-            if (!hasColor && !hasTexture)
+            if (!hasColor && !hasTexture) //if user has not specified either color or texture
             {
-
+                //for all the models
                 foreach (ModelVisual3D mv30 in mv3s)
                 {
                     Model3DGroup model = mv30.Content as Model3DGroup;
@@ -77,25 +84,28 @@ namespace HumanUI
                         if (mod is GeometryModel3D)
                         {
                             GeometryModel3D geom = mod as GeometryModel3D;
+                            //extract the current material settings
                             mats.Add(geom.Material);
                         }
                     }
                 }
+                //pass in the new mesh with the existing materials
                 mv3.Content = new _3DViewModel(m, mats).Model;
             }
             else if(!hasTexture)
             {
-                
+                //pass in the new mesh with new colors
                 mv3.Content = new _3DViewModel(m, cols).Model;
             }
             else
             {
+                //pass in the new mesh with new textures
                 mv3.Content = new _3DViewModel(m, texBitmap).Model;
             }
 
 
 
-
+            //add the model back into the viewport
             vp3.Children.Add(mv3);
 
 
@@ -114,6 +124,11 @@ namespace HumanUI
             }
         }
 
+        /// <summary>
+        /// Extracts the ModelVisual3D from the HelixViewport
+        /// </summary>
+        /// <param name="vp3">The VP3.</param>
+        /// <returns>A ModelVisual3D</returns>
         ModelVisual3D GetModelVisual3D(HelixViewport3D vp3)
         {
             foreach (Visual3D v in vp3.Children)
@@ -127,6 +142,11 @@ namespace HumanUI
 
         }
 
+        /// <summary>
+        /// Extracts a list of ModelVisual3D from a given HelixViewport
+        /// </summary>
+        /// <param name="vp3">The Helix Viewport 3d.</param>
+        /// <returns>a list of ModelVisual3D </returns>
         List<ModelVisual3D> GetModels(HelixViewport3D vp3)
         {
             List<ModelVisual3D> models = new List<ModelVisual3D>();

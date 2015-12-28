@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.Testing
 {
-    //Utility component for testing purposes, hidden from user.
+    
+    /// <summary>
+    /// Utility component for testing purposes, hidden from user. Gets GUID and Index from a UI Element
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class ElemFromGuid_Component : GH_Component
     {
         /// <summary>

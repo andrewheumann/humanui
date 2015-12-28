@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace HumanUI.Components.UI_Main
 {
+
+    /// <summary>
+    /// This extends the main LaunchWindow_Component class to alter some of the behavior - adding the ability to allow transparent background colors. 
+    /// </summary>
+    /// <seealso cref="HumanUI.LaunchWindow_Component" />
     public class CreateTransparentWindow_Component : LaunchWindow_Component
     {
         public CreateTransparentWindow_Component()
@@ -13,6 +19,10 @@ namespace HumanUI.Components.UI_Main
 
         }
 
+
+        /// <summary>
+        /// Override the guid so it is recognized as a separate component
+        /// </summary>
         public override Guid ComponentGuid
         {
             get { 
@@ -20,9 +30,13 @@ namespace HumanUI.Components.UI_Main
             }
         }
 
+        /// <summary>
+        /// Enable transparency before calling on the main window implementation
+        /// </summary>
         protected override void SolveInstance(Grasshopper.Kernel.IGH_DataAccess DA)
         {
             if (!mw.AllowsTransparency) mw.AllowsTransparency = true;
+            mw.Background = new SolidColorBrush(Color.FromArgb(100,255,255,255));
             base.SolveInstance(DA);
         }
     }

@@ -7,8 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// A component to create a scrollviewer/listbox containing multiple checkbox items. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateCheckList_Component : GH_Component
     {
         /// <summary>
@@ -53,16 +57,21 @@ namespace HumanUI
             if (!DA.GetDataList<string>("Checklist Items", listItems)) return;
             
             DA.GetDataList<bool>("Selected", selected);
+            //initialize the scroll viewer
             ScrollViewer sv = new ScrollViewer();
             sv.CanContentScroll = true;
             sv.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            //initialize the itemsControl
             ItemsControl ic = new ItemsControl();
 
             if(DA.GetData<double>("Height", ref height)) {
+                //set height of the scrollViewer
                 sv.Height = height;
             }
+            //for all the items in the list
             for (int i = 0; i < listItems.Count;i++ )
             {
+                //create a new checkbox, and add it to the items control
                 string item = listItems[i];
                 bool isSelected = selected[i % selected.Count];
                 CheckBox cb = new CheckBox();
@@ -71,7 +80,10 @@ namespace HumanUI
                 cb.IsChecked = isSelected;
                 ic.Items.Add(cb);
             }
+            //put the items control into the scrollviewer
             sv.Content = ic;
+
+            //pass out the scrollviewer
             DA.SetData("Checklist", new UIElement_Goo(sv, "Checklist", InstanceGuid, DA.Iteration));
       
         }

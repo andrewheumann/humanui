@@ -9,12 +9,15 @@ using System.Drawing;
 using System.Windows.Shapes;
 using Grasshopper.Kernel.Types;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a single shape from one or more curves. Internal curves are treated as "holes" in the external shape
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateShape_Component : GH_Component
     {
-      //  BoundingBox B = BoundingBox.Empty;
-       // Grid G = new Grid();
+     
         /// <summary>
         /// Initializes a new instance of the CreateShape_Component class.
         /// </summary>
@@ -61,19 +64,7 @@ namespace HumanUI
         protected override void SolveInstance(IGH_DataAccess DA)
         {
 
-            //TODO - support multiple sets of objects in one shape??
-          /*  if (DA.Iteration == 0)
-            {
-                foreach (IGH_Goo goo in this.Params.Input[0].VolatileData.AllData(true))
-                {
-                    if (goo is IGH_GeometricGoo)
-                    {
-                        IGH_GeometricGoo geoGoo = goo as IGH_GeometricGoo;
-                        B.Union(geoGoo.GetBoundingBox(Rhino.Geometry.Transform.Identity));
-                    }
-                }
-                G = new Grid();
-            }*/
+    
             List<Curve> shapeCrvs = new List<Curve>();
             System.Drawing.Color fillCol = System.Drawing.Color.Transparent;
             double strokeWeight = 0.0;
@@ -83,9 +74,11 @@ namespace HumanUI
             int height = 0;
 
             if (!DA.GetDataList<Curve>("Shape", shapeCrvs)) return;
-
+            //initialize path object
             Path path = new Path();
             DA.GetData<double>("Scale", ref scale);
+
+            //set path data to geometry from curve list
             path.Data = pathGeomFromCrvs(shapeCrvs,scale,false);
             if (DA.GetData<System.Drawing.Color>("Fill Color", ref fillCol))
             {
@@ -105,6 +98,7 @@ namespace HumanUI
                 path.Stroke = new SolidColorBrush(HUI_Util.ToMediaColor(strokeCol));
             }
 
+            //initialize a grid to contain the shapes
             Grid G = new Grid();
             if (DA.GetData<int>("Width", ref width))
             {
@@ -118,56 +112,83 @@ namespace HumanUI
             }
             G.Children.Add(path);
 
-
+            //pass out the grid containing the shape
             DA.SetData("Shape", new UIElement_Goo(G, "Shape", InstanceGuid, DA.Iteration));
             
         }
 
 
-       
 
-        public static Geometry pathGeomFromCrvs(List<Curve> c, double scale,bool rebox)
+
+        /// <summary>
+        /// Creates a Geometry object from a List of Rhino Curves.
+        /// </summary>
+        /// <param name="c">The c.</param>
+        /// <param name="scale">The scale.</param>
+        /// <param name="rebox">if set to <c>true</c> [rebox].</param>
+        /// <returns></returns>
+        public static Geometry pathGeomFromCrvs(List<Curve> c, double scale, bool rebox)
         {
             string crvString = "";
-           rebaseCrvs(c,scale,rebox);
-            foreach(Curve crv in c){
+            //adapt curve location/positioning
+            rebaseCrvs(c, scale, rebox);
+            //for all the curves
+            foreach (Curve crv in c)
+            {
+                //try to convert to a polylineCurve and then get the polyline from that
                 PolylineCurve p = new PolylineCurve();
                 Rhino.Geometry.Polyline pl = new Rhino.Geometry.Polyline();
-                if (!crv.TryGetPolyline(out pl)) { 
+                if (!crv.TryGetPolyline(out pl))
+                {
                     p = crv.ToPolyline(0, 0, 0.1, 2.0, 0, 0, crv.GetLength() / 50, 0, true);
                     p.TryGetPolyline(out pl);
                 }
-                crvString += "M ";
-                foreach (Point3d pt in pl)
+                crvString += "M "; //Start structuring the notation syntax into a string - M starts a shape
+                foreach (Point3d pt in pl) //for all the points in the polyline
                 {
+                    // Add each vertex of the polyline. Closed polylines naturally have duplicate vertices at beginning and end
+                    // so no special accounting is necessary.
                     crvString += String.Format("{0:0.000},{1:0.000} ", pt.X, pt.Y);
                 }
-               
+
 
             }
-           
-            return Geometry.Parse(crvString);
+
+
+            return Geometry.Parse(crvString); //parses the curve string into a geometry object
         }
 
-        static void rebaseCrvs(List<Curve> crvs,double scale,bool rebox)
+        /// <summary>
+        /// Adapt the curves to be oriented, scaled, and positioned properly.
+        /// </summary>
+        /// <param name="crvs">The list of curves to adjust.</param>
+        /// <param name="scale">The scale.</param>
+        /// <param name="rebox">if set to <c>true</c>, reposition at the origin.</param>
+        static void rebaseCrvs(List<Curve> crvs, double scale, bool rebox)
         {
             foreach (Curve c in crvs)
             {
+                //Flip vertically - rhino coordinates have +Y up, screen coordinates have +Y down.
                 c.Transform(Rhino.Geometry.Transform.Mirror(Plane.WorldZX));
+                //scale about the world origin
                 c.Transform(Rhino.Geometry.Transform.Scale(Point3d.Origin, scale));
             }
-            if (rebox)
+            if (rebox) //if the user has specified to "rebox"
             {
+                //create a new empty bounding box
                 BoundingBox b = BoundingBox.Empty;
                 foreach (Curve c in crvs)
                 {
+                    //get the bounding box for the entire set of curves
                     b.Union(c.GetBoundingBox(true));
                 }
 
+                //Get the lower-left (actually upper-left now since we're in screen space) corner of the box
                 Point3d boxBase = b.PointAt(0, 0, 0);
 
                 foreach (Curve c in crvs)
                 {
+                    //Move all the individual curves such that their upper-left corner is at 0,0,0
                     c.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase)));
                 }
             }

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class CreateRadioButton_Component_DEPRECATED : GH_Component
     {
         /// <summary>

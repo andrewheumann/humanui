@@ -6,8 +6,12 @@ using Rhino.Geometry;
 using HelixToolkit.Wpf;
 using System.Windows.Media.Media3D;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a 3D Viewport object and populate it with a mesh.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class Create3DView_Component : GH_Component
     {
         /// <summary>
@@ -55,17 +59,24 @@ namespace HumanUI
             DA.GetData<double>("View Width", ref width);
             DA.GetData<double>("View Height", ref height);
 
-
+            //set up a 3d viewport
             HelixViewport3D vp3 = new HelixViewport3D();
+            //set its 3d properties
             vp3.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             vp3.Width = width;
             vp3.Height = height;
+            //these override the default mouse click behavior so that one can orbit/pan with left click instead of right. 
             vp3.RotateGesture.MouseAction = System.Windows.Input.MouseAction.LeftClick;
             vp3.PanGesture.MouseAction = System.Windows.Input.MouseAction.LeftClick;
             vp3.ZoomExtentsWhenLoaded = true;
+           
+            //set up default lighting
             vp3.Children.Add(new SunLight());
+            //create a 3d model
             ModelVisual3D mv3 = new ModelVisual3D();
+            // populate the content of the model with a new instance of our custom class
             mv3.Content = new _3DViewModel(m,cols).Model;
+            //set up a grid (but this is currently not added to the model)
             GridLinesVisual3D grid = new GridLinesVisual3D();
             grid.Width = 8;
             grid.Length = 8;
@@ -75,6 +86,7 @@ namespace HumanUI
             vp3.Children.Add(mv3);
         //    vp3.Children.Add(grid);
 
+            //pass out the 3d viewport object
             DA.SetData("3DView", new UIElement_Goo(vp3,"3D View", InstanceGuid, DA.Iteration));
         }
 

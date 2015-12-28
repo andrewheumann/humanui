@@ -10,6 +10,10 @@ using System.Windows.Controls;
 
 namespace HumanUI
 {
+    /// <summary>
+    /// A GH_Goo compatible wrapper class for all UI Elements. Contains additional info on the component that generated the element and a special name.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.Types.GH_Goo{System.Windows.UIElement}" />
     public class UIElement_Goo : GH_Goo<UIElement>
     {
       

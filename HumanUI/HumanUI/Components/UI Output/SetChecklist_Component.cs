@@ -6,8 +6,12 @@ using System.Windows.Data;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// A component to set the contents of an existing Checklist object
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetChecklist_Component : GH_Component
     {
         /// <summary>
@@ -52,7 +56,9 @@ namespace HumanUI
             if (!DA.GetData<object>("Checklist to modify", ref ListObject)) return;
             if (!DA.GetDataList<string>("New checklist contents", listContents)) return;
             
+            //Get the scroll viewer
             ScrollViewer sv = HUI_Util.GetUIElement<ScrollViewer>(ListObject);
+            //Get the itemsControl inside the scrollviewer
             ItemsControl ic = sv.Content as ItemsControl;
 
             if (!DA.GetDataList<bool>("Selected", isSelected))
@@ -60,10 +66,10 @@ namespace HumanUI
 
             }
             
-
+            //clear the items in there now
             ic.Items.Clear();
           
-
+            //set the new items
             for (int i = 0; i < listContents.Count; i++)
             {
                 string item = listContents[i];
@@ -73,7 +79,10 @@ namespace HumanUI
                 cb.Content = item;
                 if (isSelected.Count > 0)
                 {
-                    bool isSel = isSelected[i % isSelected.Count];
+                    // this is a cheap shortcut - but allows an approximation of "shortest list" behavior for cases of N and 1. If only one true is  
+                    // passed, all boxes true, if a list is passed, will behave as expected. Only list-length mismatches will behave differently - and if 
+                    // you're doing that, we have bigger problems anyway.
+                    bool isSel = isSelected[i % isSelected.Count]; 
                     cb.IsChecked = isSel;
                 }
                 ic.Items.Add(cb);

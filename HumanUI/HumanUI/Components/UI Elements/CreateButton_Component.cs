@@ -16,16 +16,23 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using HumanUIBaseApp;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
 
-    enum buttonStyle { Default, Square, Circle, Borderless};
+    /// <summary>
+    /// This represents the possible button styles, selectable from a user pulldown
+    /// </summary>
+    public enum buttonStyle { Default, Square, Circle, Borderless};
 
 
+    /// <summary>
+    /// A component to create a simple button object with either Text or Image content
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateButton_Component : GH_Component
     {
 
-        private buttonStyle bs = buttonStyle.Default;
+        protected buttonStyle bs = buttonStyle.Default;
 
 
         /// <summary>
@@ -39,6 +46,22 @@ namespace HumanUI
             UpdateMenu();
         }
 
+        /// <summary>
+        /// Special constructor for classes that extend this one
+        /// </summary>
+        public CreateButton_Component(string name, string nickname, string description)
+            : base(name, nickname,
+                description,
+                "Human", "UI Elements")
+        {
+            UpdateMenu();
+        }
+
+
+
+        /// <summary>
+        /// Updates the black message tag with the current button style.
+        /// </summary>
         private void UpdateMenu()
         {
             switch (bs)
@@ -62,6 +85,10 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Adds the button style options to the component right-click menu. 
+        /// </summary>
+        /// <param name="menu"></param>
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
             System.Windows.Forms.ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Default Style", new System.EventHandler(this.menu_makeDefaultStyle), true, bs == buttonStyle.Default);
@@ -76,6 +103,11 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Handles the Make Default Style event of the menu.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void menu_makeDefaultStyle(object sender, System.EventArgs e)
         {
             base.RecordUndoEvent("Button Style Change");
@@ -84,6 +116,11 @@ namespace HumanUI
             this.ExpireSolution(true);
         }
 
+        /// <summary>
+        /// Handles the Make Square Style event of the menu.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void menu_makeSquareStyle(object sender, System.EventArgs e)
         {
             base.RecordUndoEvent("Button Style Change");
@@ -93,6 +130,11 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Handles the Make Circle Style event of the menu.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void menu_makeCircleStyle(object sender, System.EventArgs e)
         {
             base.RecordUndoEvent("Button Style Change");
@@ -101,6 +143,11 @@ namespace HumanUI
             this.ExpireSolution(true);
         }
 
+        /// <summary>
+        /// Handles the Make Borderless event of the menu.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void menu_makeBorderless(object sender, System.EventArgs e)
         {
             base.RecordUndoEvent("Button Style Change");
@@ -111,11 +158,25 @@ namespace HumanUI
 
 
 
+        /// <summary>
+        /// Write all required data for deserialization to an IO archive. In this case it's just the button style
+        /// </summary>
+        /// <param name="writer">Object to write with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Write(GH_IWriter writer)
         {
             writer.SetInt32("ButtonStyle", (int)bs);
             return base.Write(writer);
         }
+        /// <summary>
+        /// Read all required data for deserialization from an IO archive. - In this case just the button style. 
+        /// </summary>
+        /// <param name="reader">Object to read with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Read(GH_IReader reader)
         {
             int readVal = -1;
@@ -157,65 +218,73 @@ namespace HumanUI
             bool hasText = DA.GetData<string>("Button Name", ref name);
             bool hasIcon = DA.GetData<string>("Image Path", ref imagePath);
             if (!hasText && !hasIcon) return;
+            //Initialize the button
             Button btn = new Button();
+            SetupButton(name, imagePath, hasText, hasIcon, btn, bs);         
+            //pass out the button
+            DA.SetData("Button", new UIElement_Goo(btn, name,InstanceGuid,DA.Iteration));
+
+        }
+
+        protected static void SetupButton(string name, string imagePath, bool hasText, bool hasIcon, Button btn, buttonStyle bs)
+        {
+            //Initialize a stackPanel to be contained inside the button
             StackPanel sp = new StackPanel();
             sp.Orientation = Orientation.Horizontal;
             if (hasIcon)
             {
+                //get img from file path, and if the button has an icon, add the image to the stack panel.
                 Image img = new Image();
                 Uri filePath = new Uri(imagePath);
                 BitmapImage bi = new BitmapImage(filePath);
                 img.Source = bi;
                 sp.Children.Add(img);
             }
-             if (hasText)
+            if (hasText)
             {
+                //if the button has associated text, create a text block and add it to the stack panel
                 TextBlock l = new TextBlock();
                 l.Text = name;
                 sp.Children.Add(l);
             }
-
-             btn.Content = sp;
-       
-          
-
-             ResourceDictionary ControlsResDict = new ResourceDictionary();
-             ControlsResDict.Source =
-            new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
-
-             switch (bs)
-             {
-                 case buttonStyle.Default:
-                     break;
-                 case buttonStyle.Square:
-                     btn.Style = new Style(typeof(Button), (Style)ControlsResDict["SquareButtonStyle"]);
-                     break;
-                 case buttonStyle.Circle:
-                     btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroCircleButtonStyle"]);
-                     break;
-                 case buttonStyle.Borderless:
-                    // Style btnStyle = (Style)Application.Current.FindResource(ToolBar.ButtonStyleKey);
-                   //  style.BasedOn = (Style)FindResource(ToolBar.ButtonStyleKey);
-                   //  btn.Style = new Style(typeof(Button), btnStyle);
-                    // btn.Padding = new Thickness(-5);
-                     btn.Margin = new Thickness(0);
-                     btn.Padding = new Thickness(-2);
-                        btn.BorderThickness = new Thickness(0);
-            btn.BorderBrush = Brushes.Transparent;
-          
-                     
-                     break;
-
-             }
+            //put the stack panel inside the button
+            btn.Content = sp;
 
 
-             Size size = new Size(double.PositiveInfinity, double.PositiveInfinity);
-             sp.Measure(size);
-             sp.Margin = new Thickness(2);
-             btn.Width = sp.DesiredSize.Width+20;
-             btn.Margin = new Thickness(4);
-                
-            DA.SetData("Button", new UIElement_Goo(btn, name,InstanceGuid,DA.Iteration));
+            //Retrieve the MahApps.Metro style dictionary
+            ResourceDictionary ControlsResDict = new ResourceDictionary();
+            ControlsResDict.Source =
+           new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
+
+            //based on the user selected button style, assign the appropriate style to the button
+            switch (bs)
+            {
+                case buttonStyle.Default:
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroButton"]);
+                    break;
+                case buttonStyle.Square:
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["SquareButtonStyle"]);
+                    break;
+                case buttonStyle.Circle:
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroCircleButtonStyle"]);
+                    break;
+                case buttonStyle.Borderless:
+                    // this one could probably be made to look a little better. I'm using a cheap trick that basically
+                    // insets the padding by two pixels in order to hide the border.
+                    btn.Margin = new Thickness(0);
+                    btn.Padding = new Thickness(-2);
+                    btn.BorderThickness = new Thickness(0);
+                    btn.BorderBrush = Brushes.Transparent;
+                    break;
+
+            }
+
+            //Measure the size of the stackpanel inside the button, size button accordingly
+            Size size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            sp.Measure(size);
+            sp.Margin = new Thickness(2);
+            btn.Width = sp.DesiredSize.Width + 20;
+            btn.Margin = new Thickness(4);
 
         }
 
@@ -226,7 +295,7 @@ namespace HumanUI
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
+                // You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
                 return Properties.Resources.CreateButton;
             }

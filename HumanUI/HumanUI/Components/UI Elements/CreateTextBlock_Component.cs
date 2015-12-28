@@ -9,8 +9,12 @@ using Grasshopper.Kernel.Parameters;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a multi-line text block
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateTextBlock_Component : GH_Component
     {
         /// <summary>
@@ -64,6 +68,7 @@ namespace HumanUI
             if (!DA.GetData<string>("Text", ref labelContent)) return;
             DA.GetData<int>("Text Size", ref labelSize);
             DA.GetData<int>("Justification", ref justification);
+            //initialize the textblock
             TextBlock l = new TextBlock();
             l.Text = labelContent;
             l.FontSize = labelSize;
@@ -87,6 +92,7 @@ namespace HumanUI
                     break;
 
             }
+            // pass out the text block
             DA.SetData("Text Block", new UIElement_Goo(l, String.Format("Text Block: {0}", labelContent), InstanceGuid, DA.Iteration));
            
      

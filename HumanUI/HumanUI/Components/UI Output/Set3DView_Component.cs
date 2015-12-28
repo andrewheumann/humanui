@@ -8,8 +8,12 @@ using HelixToolkit.Wpf;
 
 using System.Windows.Media.Media3D;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Set the contents of an existing 3D viewport
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class Set3DView_Component : GH_Component
     {
         /// <summary>
@@ -53,7 +57,9 @@ namespace HumanUI
             if(!DA.GetData<object>("3D View", ref o)) return;
             DA.GetDataList<Mesh>("Mesh to display", m);
            
+            //Get the 3d viewport object out of the input object
             HelixViewport3D vp3 = HUI_Util.GetUIElement<HelixViewport3D>(o);
+           
             ModelVisual3D mv3 = GetModelVisual3D(vp3);
             List<ModelVisual3D> mv3s = GetModels(vp3);
             List<Material> mats = new List<Material>();

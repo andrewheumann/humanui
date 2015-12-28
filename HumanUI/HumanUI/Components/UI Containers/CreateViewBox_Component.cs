@@ -8,8 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Containers
 {
+    /// <summary>
+    /// Create a "ViewBox" container - this essentially allows the arbitrary scaling up or down of contained elements. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateViewBox_Component : GH_Component
     {
         /// <summary>
@@ -53,23 +57,26 @@ namespace HumanUI
             if (!DA.GetDataList<UIElement_Goo>("UI Elements", elementsToAdd)) return;
             if(!DA.GetData<double>("Width",ref width)) return;
             if(!DA.GetData<double>("Height",ref height)) return;
-
+            //intitalize the viewbox
             Viewbox vb = new Viewbox();
             vb.Width = width;
             vb.Height = height;
             vb.Stretch = Stretch.Uniform;
 
+            //create a stackpanel to contain elements
             StackPanel sp = new StackPanel();
 
             foreach (UIElement_Goo u in elementsToAdd)
             {
+                //make sure elements don't already have a parent and add them to the stackpanel
                 HUI_Util.removeParent(u.element);
                 sp.Children.Add(u.element);
             }
+            //place the stackpanel inside the viewbox
             vb.Child = sp;
 
 
-
+            //pass out the viewbox object
             DA.SetData("ViewBox", new UIElement_Goo(vb, "ViewBox", InstanceGuid, DA.Iteration));
         }
 

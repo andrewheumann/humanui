@@ -303,6 +303,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateTrueButton {
+            get {
+                object obj = ResourceManager.GetObject("CreateTrueButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateViewBox {
             get {
                 object obj = ResourceManager.GetObject("CreateViewBox", resourceCulture);

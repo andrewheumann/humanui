@@ -10,6 +10,7 @@ using System.Windows.Data;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class CreateSlider_Component_DEPRECATED : GH_Component
     {
         /// <summary>

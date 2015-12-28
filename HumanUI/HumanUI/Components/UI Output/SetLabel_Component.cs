@@ -7,8 +7,12 @@ using Grasshopper.Kernel.Types;
 
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to modify the contents of an existing Label
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetLabel_Component : GH_Component
     {
         /// <summary>
@@ -49,6 +53,7 @@ namespace HumanUI
             if (!DA.GetData<string>("New Label contents", ref newLabelContents)) return;
             if (!DA.GetData<object>("Label to modify", ref LabelObject)) return;
             Label l = HUI_Util.GetUIElement<Label>(LabelObject);
+            //set label content
             if (l != null)
             {
                 l.Content = newLabelContents;

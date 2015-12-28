@@ -16,137 +16,32 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using HumanUIBaseApp;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
 
- 
 
-    public class CreateTrueOnlyButton_Component : GH_Component
+
+    /// <summary>
+    /// Component to create a special version of a button that always returns true, and only updates on press (not release)
+    /// - for special UI interaction cases. 
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
+    public class CreateTrueOnlyButton_Component : CreateButton_Component
     {
-
-        private buttonStyle bs = buttonStyle.Default;
-
 
         /// <summary>
         /// Initializes a new instance of the CreateTrueOnlyButton_Component class.
         /// </summary>
         public CreateTrueOnlyButton_Component()
             : base("Create True-Only Button", "True Button",
-                "Create a True only Button object.",
-                "Human", "UI Elements")
+                "Create a True only Button object.")
         {
-            UpdateMenu();
         }
 
-        private void UpdateMenu()
-        {
-            switch (bs)
-            {
-                case buttonStyle.Default:
-                    Message = "";
-                    break;
-                case buttonStyle.Square:
-                    Message = "Square Style";
-                    break;
-                case buttonStyle.Circle:
-                    Message = "Circle Style";
-                    break;
-                case buttonStyle.Borderless:
-                    Message = "Borderless";
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-
-        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
-        {
-            System.Windows.Forms.ToolStripMenuItem toolStripMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Default Style", new System.EventHandler(this.menu_makeDefaultStyle), true, bs == buttonStyle.Default);
-            toolStripMenuItem.ToolTipText = "Use the default button style.";
-            System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1 = GH_DocumentObject.Menu_AppendItem(menu, "Square Style", new System.EventHandler(this.menu_makeSquareStyle), true, bs == buttonStyle.Square);
-            toolStripMenuItem1.ToolTipText = "Use a flat, square button style.";
-            System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2 = GH_DocumentObject.Menu_AppendItem(menu, "Circle Style", new System.EventHandler(this.menu_makeCircleStyle), true, bs == buttonStyle.Circle);
-            toolStripMenuItem2.ToolTipText = "Use a circle (or ellipse) button style.";
-            System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3 = GH_DocumentObject.Menu_AppendItem(menu, "Borderless Style", new System.EventHandler(this.menu_makeBorderless), true, bs == buttonStyle.Borderless);
-            toolStripMenuItem3.ToolTipText = "Use a borderless button style.";
-
-        }
-
-
-        private void menu_makeDefaultStyle(object sender, System.EventArgs e)
-        {
-            base.RecordUndoEvent("Button Style Change");
-            this.bs = buttonStyle.Default;
-            this.UpdateMenu();
-            this.ExpireSolution(true);
-        }
-
-        private void menu_makeSquareStyle(object sender, System.EventArgs e)
-        {
-            base.RecordUndoEvent("Button Style Change");
-            this.bs = buttonStyle.Square;
-            this.UpdateMenu();
-            this.ExpireSolution(true);
-        }
-
-
-        private void menu_makeCircleStyle(object sender, System.EventArgs e)
-        {
-            base.RecordUndoEvent("Button Style Change");
-            this.bs = buttonStyle.Circle;
-            this.UpdateMenu();
-            this.ExpireSolution(true);
-        }
-
-        private void menu_makeBorderless(object sender, System.EventArgs e)
-        {
-            base.RecordUndoEvent("Button Style Change");
-            this.bs = buttonStyle.Borderless;
-            this.UpdateMenu();
-            this.ExpireSolution(true);
-        }
-
-
-
-        public override bool Write(GH_IWriter writer)
-        {
-            writer.SetInt32("ButtonStyle", (int)bs);
-            return base.Write(writer);
-        }
-        public override bool Read(GH_IReader reader)
-        {
-            int readVal = -1;
-            reader.TryGetInt32("ButtonStyle", ref readVal);
-            bs = (buttonStyle)readVal;
-            this.UpdateMenu();
-            return base.Read(reader);
-        }
-
-
+     
 
         /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
-        {
-            pManager.AddTextParameter("Button Name", "N", "The text to display on the button", GH_ParamAccess.item);
-            pManager[0].Optional = true;
-            pManager.AddTextParameter("Image Path", "I", "The image to display on the button.", GH_ParamAccess.item);
-            pManager[1].Optional = true;
-        }
-
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
-        {
-            pManager.AddGenericParameter("Button", "B", "The created Button", GH_ParamAccess.item);
-        }
-
-        /// <summary>
-        /// This is the method that actually does the work.
+        /// This is the method that actually does the work. Overriding the default solveInstance to use a TrueOnlyButton instead of a normal Button.
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
@@ -156,65 +51,10 @@ namespace HumanUI
             bool hasText = DA.GetData<string>("Button Name", ref name);
             bool hasIcon = DA.GetData<string>("Image Path", ref imagePath);
             if (!hasText && !hasIcon) return;
+            // TrueOnlyButton is a dumb class that extends Button with no additional functionality - but this way the 
+            // type-based switch statements in value listener are able to pick up the difference and behave accordingly.
             TrueOnlyButton btn = new TrueOnlyButton();
-            StackPanel sp = new StackPanel();
-            sp.Orientation = Orientation.Horizontal;
-            if (hasIcon)
-            {
-                Image img = new Image();
-                Uri filePath = new Uri(imagePath);
-                BitmapImage bi = new BitmapImage(filePath);
-                img.Source = bi;
-                sp.Children.Add(img);
-            }
-            if (hasText)
-            {
-                TextBlock l = new TextBlock();
-                l.Text = name;
-                sp.Children.Add(l);
-            }
-
-            btn.Content = sp;
-
-
-
-            ResourceDictionary ControlsResDict = new ResourceDictionary();
-            ControlsResDict.Source =
-           new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
-
-            switch (bs)
-            {
-                case buttonStyle.Default:
-                    btn.Style = new Style(typeof(Button),(Style)ControlsResDict["MetroButton"]);
-                    break;
-                case buttonStyle.Square:
-                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["SquareButtonStyle"]);
-                    break;
-                case buttonStyle.Circle:
-                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroCircleButtonStyle"]);
-                    break;
-                case buttonStyle.Borderless:
-                    // Style btnStyle = (Style)Application.Current.FindResource(ToolBar.ButtonStyleKey);
-                    //  style.BasedOn = (Style)FindResource(ToolBar.ButtonStyleKey);
-                    //  btn.Style = new Style(typeof(Button), btnStyle);
-                    // btn.Padding = new Thickness(-5);
-                    btn.Margin = new Thickness(0);
-                    btn.Padding = new Thickness(-2);
-                    btn.BorderThickness = new Thickness(0);
-                    btn.BorderBrush = Brushes.Transparent;
-
-
-                    break;
-
-            }
-
-
-            Size size = new Size(double.PositiveInfinity, double.PositiveInfinity);
-            sp.Measure(size);
-            sp.Margin = new Thickness(2);
-            btn.Width = sp.DesiredSize.Width + 20;
-            btn.Margin = new Thickness(4);
-
+            SetupButton(name, imagePath, hasText, hasIcon, btn, bs);         
             DA.SetData("Button", new UIElement_Goo(btn, name, InstanceGuid, DA.Iteration));
 
         }
@@ -228,7 +68,7 @@ namespace HumanUI
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateButton;
+                return Properties.Resources.CreateTrueButton;
             }
         }
 

@@ -18,6 +18,7 @@ using HumanUIBaseApp;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class CreateButton_Component_DEPRECATED : GH_Component
     {
 

@@ -5,8 +5,12 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a single radio button
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateRadioButton_Component : GH_Component
     {
         /// <summary>
@@ -52,9 +56,9 @@ namespace HumanUI
             RadioButton rb = new RadioButton();
             rb.Margin = new System.Windows.Thickness(2);
             rb.Content = btnName;
-            rb.GroupName = groupName;
+            rb.GroupName = groupName; //group name property automatically handles ensuring that only one button can be selected at a time. 
             rb.IsChecked = isSelected;
-
+            //pass out the radio button
             DA.SetData("Radio Button", new UIElement_Goo(rb, String.Format("Radio Button: {0}", btnName), InstanceGuid, DA.Iteration));
             
         }

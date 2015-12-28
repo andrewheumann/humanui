@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class RestoreElementState_Component_DEPRECATED : GH_Component
     {
         /// <summary>
@@ -72,7 +73,7 @@ namespace HumanUI
                     Guid id = elementState.Key.instanceGuid;
                     int index = elementState.Key.index;
 
-                    UIElement_Goo newGoo = SaveElementState_Component.getElementGoo(this.OnPingDocument(), id, index);
+                    UIElement_Goo newGoo = Components.UI_Main.SaveElementState_Component.getElementGoo(this.OnPingDocument(), id, index);
                     element = newGoo.element;
                 }
 

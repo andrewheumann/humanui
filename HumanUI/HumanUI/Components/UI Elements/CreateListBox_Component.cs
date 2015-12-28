@@ -7,8 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a "List Box" / Scrollable selector
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateListBox_Component : GH_Component
     {
         /// <summary>
@@ -52,15 +56,20 @@ namespace HumanUI
             if (!DA.GetDataList<string>("List Items", listItems)) return;
             DA.GetData<double>("Height", ref height);
             DA.GetData<int>("Selected Index",ref selectedIndex);
+
+            //Initialize the list box
             ListBox lb = new ListBox();
             lb.Height = height;
+            //for all the strings, add a new label as an item to the list box
             foreach (string item in listItems)
             {
                 Label label = new Label();
                 label.Content = item;
                 lb.Items.Add(label);
             }
+            //set the selected index
             lb.SelectedIndex = selectedIndex;
+            //pass out the listbox object
             DA.SetData("List Box", new UIElement_Goo(lb, "List Box", InstanceGuid, DA.Iteration));
         }
 

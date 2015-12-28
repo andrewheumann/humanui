@@ -7,8 +7,12 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Xceed.Wpf.Toolkit;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a customizable color picker from the Xceed WPF toolkit
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateColorPicker_Component : GH_Component
     {
         /// <summary>
@@ -50,17 +54,18 @@ namespace HumanUI
             System.Drawing.Color defaultCol = System.Drawing.Color.Transparent;
             List<System.Drawing.Color> availableCols = new List<System.Drawing.Color>();
 
-
+            //initialize the picker with default settings
             ColorPicker picker = new ColorPicker();
 
 
-
+            //If the user specified a default color, set the picker's selected color.
             if (DA.GetData<System.Drawing.Color>("Default Color", ref defaultCol))
             {
                 picker.SelectedColor = HUI_Util.ToMediaColor(defaultCol);
             }
 
 
+            //if the user specified a list of allowed colors, replace the picker's availableColors list and disable standard colors.
             if (DA.GetDataList<System.Drawing.Color>("Available Colors", availableCols))
             {
                 ObservableCollection<ColorItem> cols = new ObservableCollection<ColorItem>();

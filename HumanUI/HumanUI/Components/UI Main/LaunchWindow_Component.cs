@@ -14,7 +14,7 @@ using Grasshopper.Kernel.Types;
 using HumanUIBaseApp;
 using GH_IO.Serialization;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
     /// <summary>
     /// Represents the ownership status of a window - whether it is a child of Rhino, Grasshopper, or set to be always on top. 
@@ -99,6 +99,10 @@ namespace HumanUI
             mw.Title = windowName;
             mw.Height = height;
             mw.Width = width;
+            
+
+
+            //this nebulous "ShouldBeVisible" helps account for the fact that there are other conditions controling window visibility (see SetupWin and HideWindow methods in this class) - lets us separate what the user wants from what should actually happen at any moment.
             if (show)
             {
                 shouldBeVisible = true;
@@ -109,6 +113,8 @@ namespace HumanUI
                 shouldBeVisible = false;
                 mw.Hide();
             }
+
+
             if (DA.GetData<string>("Font Family", ref font))
             {
                 try

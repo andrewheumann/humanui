@@ -5,8 +5,12 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System.Windows.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// A component to create a single checkbox object
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateCheckBox_Component : GH_Component
     {
         /// <summary>
@@ -47,10 +51,12 @@ namespace HumanUI
             if (!DA.GetData<string>("Label", ref label)) return;
             DA.GetData<bool>("Starting Value", ref isSelected);
 
+            //create the checkbox object
             CheckBox cb = new CheckBox();
             cb.Margin = new System.Windows.Thickness(2);
             cb.Content = label;
             cb.IsChecked = isSelected;
+            //pass out the checkbox object
             DA.SetData("Checkbox", new UIElement_Goo(cb, String.Format("Checkbox: {0}", label), InstanceGuid, DA.Iteration));
 
         }

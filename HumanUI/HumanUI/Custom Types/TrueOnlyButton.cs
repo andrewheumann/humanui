@@ -17,7 +17,11 @@ using MahApps.Metro.Controls;
 using HumanUIBaseApp;
 namespace HumanUI
 {
-    //Dummy wrapper class extending Button so that event switches know which type to address
+
+    /// <summary>
+    /// Dummy wrapper class extending Button so that event switches know which type to address
+    /// </summary>
+    /// <seealso cref="System.Windows.Controls.Button" />
     public class TrueOnlyButton : Button
     {
         public TrueOnlyButton()

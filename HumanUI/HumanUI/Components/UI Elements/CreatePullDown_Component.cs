@@ -7,8 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create a Combobox ("Pulldown menu")
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreatePullDown_Component : GH_Component
     {
         /// <summary>
@@ -28,7 +32,7 @@ namespace HumanUI
         {
             pManager.AddTextParameter("List Items", "L", "The initial list of options to display in the list.", GH_ParamAccess.list);
             pManager.AddIntegerParameter("Selected Index", "I", "The initially selected index. Defaults to the first item.", GH_ParamAccess.item, 0);
-            }
+        }
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -50,8 +54,9 @@ namespace HumanUI
 
             if (!DA.GetDataList<string>("List Items", listItems)) return;
             DA.GetData<int>("Selected Index",ref selectedIndex);
+            //initialize combobox
             ComboBox pd = new ComboBox();
-          
+          //for each string add a label object to the combobox
             foreach (string item in listItems)
             {
                 Label label = new Label();
@@ -60,6 +65,8 @@ namespace HumanUI
             }
             pd.Margin = new Thickness(4);
             pd.SelectedIndex = selectedIndex;
+
+            //pass out the combobox
             DA.SetData("Pulldown", new UIElement_Goo(pd, "Pulldown", InstanceGuid, DA.Iteration));
         }
 

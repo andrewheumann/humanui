@@ -8,8 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Containers
 {
+    /// <summary>
+    /// A component to create a grid container
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateGrid_Component : GH_Component
     {
         /// <summary>
@@ -54,24 +58,28 @@ namespace HumanUI
             if (!DA.GetData<double>("Width", ref width)) return;
             if (!DA.GetData<double>("Height", ref height)) return;
 
+            //initialize the grid
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Left;
             grid.VerticalAlignment = VerticalAlignment.Top;
             grid.Name = "GH_Grid";
             grid.Width = width;
             grid.Height = height;
+            //for all the elements to add
             foreach (UIElement_Goo u in elementsToAdd)
             {
+                //make sure it doesn't already have a parent
                 HUI_Util.removeParent(u.element);
                 FrameworkElement fe = u.element as FrameworkElement;
                 if(fe != null){
+                    //set its alignment to be relative to upper left - this makes margin-based positioning easy
                     fe.HorizontalAlignment = HorizontalAlignment.Left;
                     fe.VerticalAlignment = VerticalAlignment.Top;
                 }
-              
+              //add it to the grid
                 grid.Children.Add(u.element);
             }
-
+            //pass the grid out
             DA.SetData("Grid", new UIElement_Goo(grid, "Grid", InstanceGuid, DA.Iteration));
         }
 

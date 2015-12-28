@@ -9,8 +9,12 @@ using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Windows;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// Component to create an updatable image object
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateImage_Component : GH_Component
     {
         /// <summary>
@@ -57,16 +61,20 @@ namespace HumanUI
             DA.GetData<double>("Image Height", ref height);
             try
             {
+                //initialize bitmap object from source
                 Bitmap b = new Bitmap(imgSrc);
-                if (height == 0)
+                // if the user hasn't specified a height 
+                // but has spec'd width, calc the height as a function of width and the bitmap dimensions.
+                if (height == 0) 
                 {
                     height = (b.Height / (double)b.Width) * width;
                 }
             }
-            catch (Exception e)
+            catch (Exception e) //pass any errors (like invalid url, etc) back to the user.
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error,e.ToString());
             }
+            //set up the image object
             System.Windows.Controls.Image img = new System.Windows.Controls.Image();
             try
             {
@@ -80,9 +88,10 @@ namespace HumanUI
                 img.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                 img.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             }
-            catch (Exception e) {
+            catch (Exception e) { //pass out any errors
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.ToString());
             }
+            //output the image object
             DA.SetData("Image", new UIElement_Goo(img, name, InstanceGuid, DA.Iteration));
         }
 

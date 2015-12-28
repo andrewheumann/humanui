@@ -5,8 +5,12 @@ using System.Windows.Controls.Primitives;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to set the contents of a selector object - either a ListBox or a Pulldown Menu (ComboBox)
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetList_Component : GH_Component
     {
         /// <summary>
@@ -51,24 +55,24 @@ namespace HumanUI
             if (!DA.GetData<object>("List to modify", ref ListObject)) return;
             if (!DA.GetDataList<string>("New list contents", listContents)) return;
             
+            //the selector parent class includes both ListBoxes and ComboBoxes
             Selector sel = HUI_Util.GetUIElement<Selector>(ListObject);
 
              if (!DA.GetData<int>("Selected Index", ref selectedIndex)) selectedIndex = sel.SelectedIndex;
 
-
+            //clear out the existing list
             sel.Items.Clear();
+
+            //add all items in the input list as Labels
             foreach (string item in listContents)
             {
                 Label label = new Label();
                 label.Content = item;
                 sel.Items.Add(label);
             }
-
+            //set selected index
             sel.SelectedIndex = selectedIndex;
             
-
-
-
 
 
         }

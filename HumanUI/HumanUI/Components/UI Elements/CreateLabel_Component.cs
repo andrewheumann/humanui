@@ -7,7 +7,7 @@ using Rhino.Geometry;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
     public class CreateLabel_Component : GH_Component
     {
@@ -27,12 +27,14 @@ namespace HumanUI
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Label Text", "T", "The text to display in the label", GH_ParamAccess.item);
+          
             pManager.AddIntegerParameter("Label Size", "S", "The size of the label to display", GH_ParamAccess.item,12);
             Param_Integer labelSize = (Param_Integer)pManager[1];
             labelSize.AddNamedValue("Micro", 8);
             labelSize.AddNamedValue("Normal", 12);
             labelSize.AddNamedValue("Heading", 18);
             labelSize.AddNamedValue("Major Heading", 24);
+      
             pManager.AddIntegerParameter("Justification", "J", "Text justification", GH_ParamAccess.item, 0);
             Param_Integer justification = (Param_Integer)pManager[2];
             justification.AddNamedValue("Left", 0);
@@ -61,10 +63,14 @@ namespace HumanUI
             if (!DA.GetData<string>("Label Text", ref labelContent)) return;
             DA.GetData<int>("Label Size", ref labelSize);
             DA.GetData<int>("Justification", ref justification);
+           //set up the label
             Label l = new Label();
+         //populate its properties
             l.Content = labelContent;
             l.FontSize = labelSize;
             l.HorizontalContentAlignment = (HorizontalAlignment)justification;
+           
+            //pass out the label object
             DA.SetData("Label", new UIElement_Goo(l, String.Format("Label: {0}", labelContent), InstanceGuid, DA.Iteration));
            
         }

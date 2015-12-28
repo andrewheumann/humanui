@@ -9,8 +9,12 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using HumanUIBaseApp;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
+    /// <summary>
+    /// Component to add elements to a HUI window
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class AddElements_Component : GH_Component
     {
         /// <summary>

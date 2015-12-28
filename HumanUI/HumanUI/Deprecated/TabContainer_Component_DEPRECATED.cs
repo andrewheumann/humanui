@@ -12,6 +12,7 @@ using MahApps.Metro.Controls;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class TabContainer_Component_DEPRECATED : GH_Component, IGH_VariableParameterComponent
     {
 

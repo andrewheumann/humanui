@@ -6,8 +6,12 @@ using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using System.Windows.Media.Imaging;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to modify the source of an existing image
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetImage_Component : GH_Component
     {
         /// <summary>
@@ -48,22 +52,8 @@ namespace HumanUI
             string newImagePath = "";
             if (!DA.GetData<string>("New Image Path", ref newImagePath)) return;
             if (!DA.GetData<object>("Image to modify", ref ImageObject)) return;
-            Image l = null;
-            switch (ImageObject.GetType().ToString())
-            {
-                case "HumanUI.UIElement_Goo":
-                    UIElement_Goo goo = ImageObject as UIElement_Goo;
-                    l = goo.element as Image;
-                    break;
-                case "Grasshopper.Kernel.Types.GH_ObjectWrapper":
-                    GH_ObjectWrapper wrapper = ImageObject as GH_ObjectWrapper;
-                    KeyValuePair<string, UIElement_Goo> kvp = (KeyValuePair<string, UIElement_Goo>)wrapper.Value;
-                    l = kvp.Value.element as Image;
+            Image l = HUI_Util.GetUIElement<Image>(ImageObject);
 
-                    break;
-                default:
-                    break;
-            }
             if (l != null)
             {
                 HUI_Util.SetImageSource(newImagePath, l);

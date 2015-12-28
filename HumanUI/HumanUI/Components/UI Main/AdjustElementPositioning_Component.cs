@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows;
 using HumanUIBaseApp;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
     /// <summary>
     /// Component to adjust element positioning
@@ -90,11 +90,17 @@ namespace HumanUI
             if (!DA.GetData<object>("Elements to adjust", ref elem)) return;
            
             DA.GetData<bool>("Absolute Positioning", ref absolute);
+
+            //This is the element we are adjusting
             FrameworkElement f = HUI_Util.GetUIElement<FrameworkElement>(elem);
 
+            //if user has supplied margin, set margin
             if (DA.GetData<string>("Margin", ref margin)) f.Margin = thicknessFromString(margin);
+
+            //get the window the element belongs to
             MainWindow m = Window.GetWindow(f) as MainWindow;
 
+            //if user specified width and/or height, set them
             if (DA.GetData<double>("Width", ref width))
             {
                 f.Width = width;
@@ -104,6 +110,7 @@ namespace HumanUI
                 f.Height = height;
             }
 
+            //if user specified vertical and/or horizontal alignment, set it
             if (DA.GetData<int>("Vertical Alignment", ref vertAlign))
             {
                 VerticalAlignment alignment = f.VerticalAlignment;
@@ -197,7 +204,7 @@ namespace HumanUI
                     }
                     catch { }
                 }
-                else if (vals.Length == 5) // not sure what this case is representing - some other point representation?
+                else if (vals.Length == 5) //I *think* this is to handle the fact that sometimes the string split will give you empty strings in [0] and [4].
                 {
                     List<double> margins = new List<double>();
                     foreach (string v in vals)
@@ -218,8 +225,8 @@ namespace HumanUI
             }
             else if (margin.Contains(","))
             {
-                string[] vals = margin.Split(',');
-                if (vals.Length == 4)
+                string[] vals = margin.Split(','); 
+                if (vals.Length == 4) //assume all values supplied left, top, right, bottom
                 {
 
 
@@ -238,13 +245,13 @@ namespace HumanUI
                 }
             }
             else
-            {
+            { //assume only one value supplied.
                 double tempVal = 0;
                 if(Double.TryParse(margin,out tempVal)){
                     return new Thickness(tempVal);
                 }
                
-            }
+            } //if none of the tryParses succeeded, you get this error
              AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Trouble parsing the margin input. Try a single value, a Point, or A,B,C,D format.");
                     return new Thickness(0);
             

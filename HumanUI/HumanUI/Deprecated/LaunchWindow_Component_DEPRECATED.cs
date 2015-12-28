@@ -16,6 +16,7 @@ using GH_IO.Serialization;
 
 namespace HumanUI
 {
+    /// <exclude />
     public class LaunchWindow_Component_DEPRECATED : GH_Component
     {
 

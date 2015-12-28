@@ -8,8 +8,12 @@ using Grasshopper.Kernel.Types;
 using System.Linq;
 using GH_IO.Serialization;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Main 
 {
+    /// <summary>
+    /// This component lets you save the states of selected elements for later retrieval.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SaveElementState_Component : GH_Component
     {
         /// <summary>
@@ -17,12 +21,10 @@ namespace HumanUI
         /// </summary>
         public SaveElementState_Component()
             : base("Save Element States", "SaveStates",
-                "This component lets you save the states of seleted elements for later retrieval",
+                "This component lets you save the states of selected elements for later retrieval",
                 "Human", "UI Main")
         {
-
             savedStates = new StateSet_Goo();
-              //    baseElems = new List<UIElement>();
         }
 
         /// <summary>
@@ -48,7 +50,9 @@ namespace HumanUI
             pManager.AddTextParameter("Saved State Names", "N", "The names of all currently saved states", GH_ParamAccess.list);
         }
 
+        //We have to maintain a parallel set of "Shadow states" which are serializable with the document, so that we can have saved states persist on save. 
         private Dictionary<string, Dictionary<Tuple<Guid, int>, object>> savedShadowStates = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
+       
         private StateSet_Goo savedStates;
         private List<UIElement> baseElems;
         private bool hasProperlyGrabbedShadowElements = false;
@@ -61,19 +65,20 @@ namespace HumanUI
         {
             try
             {
-                if (!hasProperlyGrabbedShadowElements)
+                if (!hasProperlyGrabbedShadowElements) //if we have not yet succeeded in retoring states from shadows
                 {
-               //     System.Windows.Forms.MessageBox.Show("Getting States from Shadows");
-                    hasProperlyGrabbedShadowElements = shadowToState();
+                    hasProperlyGrabbedShadowElements = shadowToState(); //try restoring states from shadows
                 }
             }
             catch (Exception e)
             {
+                //hopefully this never happens.
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, String.Format("It threw an {0} error when trying to restore shadow states",e.ToString()));
             }
 
             bool allElementsHaveParents = true;
-            //hacky hack fix for weird deserialization problem
+            //hacky hack fix for weird deserialization problem. It occasionally happens that elements are deserialized before they belong to a window - 
+            //if this happens we have to get them from the shadow state a second time. 
             if (savedStates != null)
             {
                 foreach (State state in savedStates.states.Values)
@@ -88,7 +93,6 @@ namespace HumanUI
 
             if (!allElementsHaveParents)
             {
-            //    System.Windows.Forms.MessageBox.Show("Getting States from Shadows, Again");
                 shadowToState();
             }
 
@@ -101,21 +105,22 @@ namespace HumanUI
             List<string> elementFilters = new List<string>();
 
             if (!DA.GetDataList<object>("Elements", elementObjects)) return;
+            if (!DA.GetData<string>("State Name", ref stateName)) return;
+            DA.GetData<bool>("Save State", ref saveState);
+            DA.GetData<bool>("Clear Saved States", ref clearState);
+
             bool hasFilters = DA.GetDataList<string>("Name Filter(s)", elementFilters);
 
 
 
-            if (!DA.GetData<string>("State Name", ref stateName)) return;
-            DA.GetData<bool>("Save State", ref saveState);
-            DA.GetData<bool>("Clear Saved States", ref clearState);
+     
             
             List<UIElement_Goo> filteredElements = new List<UIElement_Goo>();
 
-            //populate elems based on filtering
-        //    Dictionary<string, UIElement_Goo> elementDict = new Dictionary<string, UIElement_Goo>();//allElements.ToDictionary(pair => pair.Key, pair => pair.Value);
-
-
-
+            // This is necessary because sometimes elements will come in as UIElement_Goo,
+            // and sometimes they will be wrapped Key-Value pairs from a dictionary. I think this 
+            // latter case is now fairly rare - I think only the "Filter UI Element" component was outputting a dictionary
+            // but I'm leaving it in for backwards compatibility.
             foreach (object o in elementObjects)
             {
                 
@@ -163,7 +168,7 @@ namespace HumanUI
 
 
 
-
+            //clear the saved state info
             if (clearState)
             {
                 savedStates.Clear();
@@ -172,14 +177,13 @@ namespace HumanUI
            
 
         
-
+            //if the user has specified that the state should be saved
             if (saveState)
             {
-              //  baseElems.Clear();
+          
                 baseElems = new List<UIElement>();
-              //  HUI_Util.extractBaseElements(elems, baseElems);
 
-                //setting up a 1:1 correspondence between base elements and parent elements.
+                //setting up a 1:1 correspondence between base elements and parent elements (UI_ElementGoo).
                 foreach (UIElement_Goo u in filteredElements)
                 {
                     baseElems.Add(HUI_Util.extractBaseElement(u.element));
@@ -204,9 +208,6 @@ namespace HumanUI
             }
             DA.SetData("Saved States", savedStates);
             DA.SetDataList("Saved State Names", savedStates.Names);
-          // stateToShadow();
- 
- 
 
         }
 
@@ -233,6 +234,13 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Write all required data for deserialization to an IO archive.
+        /// </summary>
+        /// <param name="writer">Object to write with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Write(GH_IWriter writer)
         {
            
@@ -252,17 +260,23 @@ namespace HumanUI
                 State state = statePair.Value;
                 StateChunk.SetInt32("itemCount", state.stateDict.Count);
                 int j=0;
+                //Custom serialization logic 
+                //for each element in the state
                 foreach (KeyValuePair<UIElement_Goo, object> stateItem in state.stateDict)
                 {
+                    //get element and value
                     UIElement_Goo element = stateItem.Key;
                     object value = stateItem.Value;
                    
                     GH_IWriter stateItemChunk = StateChunk.CreateChunk("stateItem",j);
+                    //this info is used to retrieve the dynamic UI element on reserialization, by grabbing the component with matching instance guid
+                    //and getting the output item at the matching index.
                     stateItemChunk.SetString("ElementID", element.instanceGuid.ToString());
                     stateItemChunk.SetInt32("ElementIndex", element.index);
 
                     string stringValue = value.ToString();
                     string typeString = value.GetType().ToString();
+                    //special case for lists of bool - all other element "states" are single items. This only applies to a checklist object.
                     if (value is List<bool>)
                     {
 
@@ -270,29 +284,36 @@ namespace HumanUI
                         stringValue = HUI_Util.stringFromBools((List<bool>)value);
                     }
                     
+                    //store the value and a hint as to its type
                     stateItemChunk.SetString("ElementValue", stringValue);
-
-
-
                     stateItemChunk.SetString("ElementValueType", typeString);
                  
-                        j++;
+                        j++; //counting up elements in state
                 }
                
 
-                i++;
+                i++; //counting up states
             }
             return base.Write(writer);
         }
 
 
 
+        /// <summary>
+        /// Read all required data for deserialization from an IO archive.
+        /// </summary>
+        /// <param name="reader">Object to read with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
         public override bool Read(GH_IReader reader)
         {
-            //System.Windows.Forms.MessageBox.Show("Calling Read!");
+            // set up a "shadow" state set of only basic data types
+            // check out that wackadoodle data type - it's a Dictionary<string, Dictionary<Tuple<Guid, int>, object>>  :-p
             Dictionary<string, Dictionary<Tuple<Guid, int>, object>> stateSet = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
             GH_IReader stateSetChunk = reader.FindChunk("stateSetChunk");
             int stateCount = stateSetChunk.GetInt32("StateCount");
+            //for all the states in the archive
             for (int i = 0; i < stateCount; i++)
             {
                 Dictionary<Tuple<Guid, int>, object> state = new Dictionary<Tuple<Guid, int>, object>();
@@ -300,6 +321,7 @@ namespace HumanUI
                 string stateName = stateChunk.GetString("stateName");
                 int itemCount = stateChunk.GetInt32("itemCount");
 
+                //for all the elements in the state
                 for (int j = 0; j < itemCount; j++)
                 {
                     
@@ -330,6 +352,9 @@ namespace HumanUI
                 return base.Read(reader);
         }
 
+        /// <summary>
+        /// Converts a live state set to a shadow state set, made up of only simple, serializable data types.
+        /// </summary>
         void stateToShadow(){
             Dictionary<string, Dictionary<Tuple<Guid, int>, object>> stateSet = new Dictionary<string, Dictionary<Tuple<Guid, int>, object>>();
 
@@ -368,6 +393,10 @@ namespace HumanUI
         }
 
 
+        /// <summary>
+        /// Converts a shadow state set, made up of only simple, serializable data types, to a live state set. 
+        /// </summary>
+        /// <returns>True on success</returns>
         bool shadowToState()
         {
             bool allElementsHaveParents = true;
@@ -399,6 +428,12 @@ namespace HumanUI
             return allElementsHaveParents;
         }
 
+        /// <summary>
+        /// Gets the value of a serialized object from a string and the saved type.
+        /// </summary>
+        /// <param name="value">The string value.</param>
+        /// <param name="valueType">Data type of the value.</param>
+        /// <returns></returns>
         object getValue(string value, string valueType)
         {
             switch (valueType)
@@ -439,6 +474,12 @@ namespace HumanUI
 
 
 
+        /// <summary>
+        /// Recursive function to find the topmost parent of a dependencyobject (UI Element) matching a given type T.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="child">The child element.</param>
+        /// <returns></returns>
         public static T FindTopmostParent<T>(DependencyObject child) where T : DependencyObject
         {
             //get parent item

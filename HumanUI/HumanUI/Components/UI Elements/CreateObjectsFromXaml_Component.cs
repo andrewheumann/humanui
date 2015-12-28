@@ -7,8 +7,12 @@ using Rhino.Geometry;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Elements
 {
+    /// <summary>
+    /// A special component to parse XAML notation into UI Elements
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateObjectsFromXaml_Component : GH_Component
     {
         /// <summary>
@@ -46,16 +50,21 @@ namespace HumanUI
             string xaml= "";
             if (!DA.GetData<string>("XAML", ref xaml)) return;
 
+            //set up the parser
             ParserContext parserContext = new ParserContext();
             parserContext.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             parserContext.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
-            object xamlObj = System.Windows.Markup.XamlReader.Parse(xaml,parserContext); //XamlServices.Parse(xaml);
+            //Try to convert the xaml text into a XAML object
+            object xamlObj = System.Windows.Markup.XamlReader.Parse(xaml,parserContext); 
+            // try to extract the UI element from the xaml object
             UIElement uie = xamlObj as UIElement;
             if (uie == null)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "unable to convert xaml into a UI element");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Unable to convert xaml into a UI element");
+                return;
             }
+            //pass out the UI element
             DA.SetData("Object", new UIElement_Goo(uie, "Generic XAML", InstanceGuid, DA.Iteration));
       
         }

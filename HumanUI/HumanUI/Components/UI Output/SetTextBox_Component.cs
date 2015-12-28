@@ -5,8 +5,12 @@ using System.Windows.Controls;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Output
 {
+    /// <summary>
+    /// Component to set the contents of an existing TextBox object
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class SetTextBox_Component : GH_Component
     {
         /// <summary>
@@ -46,11 +50,14 @@ namespace HumanUI
             string newLabelContents = "";
             if (!DA.GetData<string>("New Text Box contents", ref newLabelContents)) return;
             if (!DA.GetData<object>("Text Box to modify", ref TextBlockObject)) return;
+            // Since HUI textboxes are actually stackpanels with textboxes inside (since they may or may not also contain a button)
+            // we have to grab the stackpanel first and then find the textbox inside it. 
             StackPanel sp = HUI_Util.GetUIElement<StackPanel>(TextBlockObject);
             TextBox tb = HUI_Util.findTextBox(sp);
             
             if (tb != null)
             {
+                //set the text of the textbox. 
                tb.Text = newLabelContents;
             }
 

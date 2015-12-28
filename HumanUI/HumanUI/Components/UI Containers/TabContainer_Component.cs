@@ -10,8 +10,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MahApps.Metro.Controls;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Containers
 {
+    /// <summary>
+    /// Component to create a tabbed view to selectively show content. This is a variable param component so new tabs can be added on the fly.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
+    /// <seealso cref="Grasshopper.Kernel.IGH_VariableParameterComponent" />
     public class TabContainer_Component : GH_Component, IGH_VariableParameterComponent
     {
 
@@ -57,10 +62,11 @@ namespace HumanUI
         {
             if (DA.Iteration > 0)
             {
+                //this component doesn't know how to handle data trees - multiple sets of tabs will require multiple tab components.
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "It looks like you're trying to do something with data trees here that doesn't make sense.");
                 return;
             }
-
+            //This is a complete list of elements to be included - We have a list of lists (with each list belonging to a particular tab)
             List<List<UIElement_Goo>> tabList = new List<List<UIElement_Goo>>();
 
             double fontSize = 26;
@@ -96,78 +102,29 @@ namespace HumanUI
 
             bool setSize = DA.GetData<double>("Tab Text Size", ref fontSize);
 
-        //    MetroWindow imaginaryWindow = new MetroWindow();
-            ResourceDictionary ControlsResDict = new ResourceDictionary();
-             ControlsResDict.Source = 
-            new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
-             ResourceDictionary ColorsResDict = new ResourceDictionary();
-             ColorsResDict.Source =
-            new Uri("/MahApps.Metro;component/Styles/Colors.xaml", UriKind.RelativeOrAbsolute);
-
-         //    imaginaryWindow.Resources.Add("a dict",myresourcedictionary);
-
-          //  Grid grid = new Grid();
-          //  imaginaryWindow.Content = grid;
-            // MetroTabItem tabItemForStyle = new MetroTabItem();
-          //   grid.Children.Add(tabItemForStyle);
-
-         //    imaginaryWindow.Show();
-
-           
-         
-
-            Style customTabStyle = new Style(typeof(TabItem), (Style) ControlsResDict["MetroTabItem"]);
-            customTabStyle.TargetType = typeof(TabItem);
-
-            //is selected trigger
-            Trigger selectionTrigger = new Trigger();
-            selectionTrigger.Property = TabItem.IsSelectedProperty;
-            selectionTrigger.Value = true;
-           
-            Setter setter = new Setter();
-            setter.Property = TextBlock.ForegroundProperty;
-            setter.Value = ColorsResDict["AccentColorBrush"];
-       
-            selectionTrigger.Setters.Add(setter);
-
-            //hover trigger
-            Trigger hoverTrigger = new Trigger();
-            hoverTrigger.Property = TabItem.IsMouseOverProperty;
-            hoverTrigger.Value = true;
-
-            Setter hoverSetter = new Setter();
-            hoverSetter.Property = TabItem.OpacityProperty;
-            hoverSetter.Value = 0.65;
-
-            hoverTrigger.Setters.Add(hoverSetter);
+            Style customTabStyle = CreateTabStyle();
 
 
-
-
-
-
-            customTabStyle.Triggers.Add(selectionTrigger);
-            customTabStyle.Triggers.Add(hoverTrigger);
-
-                //for each tab,
             int tabIndex = 0;
+            //For each tab
             foreach (List<UIElement_Goo> oneTab in tabList)
             {
                 //create a tabItem
                 TabItem tabItem = new TabItem();
                 tabItem.Style = customTabStyle;
-                 StackPanel tabHeader = new StackPanel();
-                   if(tabIndex<iconPaths.Count){
-                string imagePath = iconPaths[tabIndex];
+                StackPanel tabHeader = new StackPanel();
+                if (tabIndex < iconPaths.Count)
+                {
+                    string imagePath = iconPaths[tabIndex];
                     Image img = new Image();
                     Uri filePath = new Uri(imagePath);
-                BitmapImage bi = new BitmapImage(filePath);
+                    BitmapImage bi = new BitmapImage(filePath);
                     img.Source = bi;
-                       tabHeader.Children.Add(img);
-                       int pixWidth = bi.PixelWidth;
-                       int pixHeight = bi.PixelHeight;
-                       img.Height = fontSize;
-                       img.Width = fontSize * (pixWidth / pixHeight);
+                    tabHeader.Children.Add(img);
+                    int pixWidth = bi.PixelWidth;
+                    int pixHeight = bi.PixelHeight;
+                    img.Height = fontSize;
+                    img.Width = fontSize * (pixWidth / pixHeight);
                 }
 
                 string tabName = "New Tab";
@@ -218,6 +175,50 @@ namespace HumanUI
         }
 
         /// <summary>
+        /// Creates the tab style.
+        /// </summary>
+        /// <returns>A Style object</returns>
+        private static Style CreateTabStyle()
+        {
+            ResourceDictionary ControlsResDict = new ResourceDictionary();
+            ControlsResDict.Source =
+           new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
+            ResourceDictionary ColorsResDict = new ResourceDictionary();
+            ColorsResDict.Source =
+           new Uri("/MahApps.Metro;component/Styles/Colors.xaml", UriKind.RelativeOrAbsolute);
+
+
+            Style customTabStyle = new Style(typeof(TabItem), (Style)ControlsResDict["MetroTabItem"]);
+            customTabStyle.TargetType = typeof(TabItem);
+
+            //is selected trigger
+            Trigger selectionTrigger = new Trigger();
+            selectionTrigger.Property = TabItem.IsSelectedProperty;
+            selectionTrigger.Value = true;
+
+            Setter setter = new Setter();
+            setter.Property = TextBlock.ForegroundProperty;
+            setter.Value = ColorsResDict["AccentColorBrush"];
+
+            selectionTrigger.Setters.Add(setter);
+
+            //hover trigger
+            Trigger hoverTrigger = new Trigger();
+            hoverTrigger.Property = TabItem.IsMouseOverProperty;
+            hoverTrigger.Value = true;
+
+            Setter hoverSetter = new Setter();
+            hoverSetter.Property = TabItem.OpacityProperty;
+            hoverSetter.Value = 0.65;
+
+            hoverTrigger.Setters.Add(hoverSetter);
+
+            customTabStyle.Triggers.Add(selectionTrigger);
+            customTabStyle.Triggers.Add(hoverTrigger);
+            return customTabStyle;
+        }
+
+        /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
         protected override System.Drawing.Bitmap Icon
@@ -238,7 +239,7 @@ namespace HumanUI
             get { return new Guid("{EAF93260-86B3-4AE7-82D2-58E683DEAE7B}"); } 
         }
 
-    
+        #region VariableParameterImplementation 
 
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {
@@ -269,7 +270,7 @@ namespace HumanUI
 
         public bool DestroyParameter(GH_ParameterSide side, int index)
         {
-          //  Params.UnregisterInputParameter(Params.Input[index]);
+
             return true;
         }
 
@@ -290,7 +291,7 @@ namespace HumanUI
         }
 
 
-
+        #endregion
 
     }
 }

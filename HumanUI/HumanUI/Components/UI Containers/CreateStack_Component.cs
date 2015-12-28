@@ -8,8 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace HumanUI
+namespace HumanUI.Components.UI_Containers
 {
+    /// <summary>
+    /// Component to create a "Stack" layout element. This will keep elements from overlapping each other, laying them out either
+    /// vertically or horizontally.
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreateStack_Component : GH_Component
     {
         /// <summary>
@@ -50,14 +55,16 @@ namespace HumanUI
             if (!DA.GetDataList<UIElement_Goo>("UI Elements", elementsToAdd)) return;
             DA.GetData<bool>("Horizontal", ref horiz);
 
+            //initialize the stack panel container
             StackPanel sp = new StackPanel();
             sp.Name = "GH_Stack";
             sp.Orientation = horiz ? Orientation.Horizontal : Orientation.Vertical;
             foreach(UIElement_Goo u in elementsToAdd){
+                //Make sure it's not in some other container or window
                 HUI_Util.removeParent(u.element);
                 sp.Children.Add(u.element);
             }
-
+            //pass out the stack panel
             DA.SetData("Stack", new UIElement_Goo(sp, "Stack", InstanceGuid, DA.Iteration));
         }
 
