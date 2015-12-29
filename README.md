@@ -5,7 +5,7 @@
 
 
 
-![Human UI Window Example](https://bytebucket.org/andheum/humanui/raw/1f7dbf4f739ee5afdd0be025e6d9459a77599818/SupportingMaterials/SimpleExample3.gif)
+![Human UI Window Example](https://bytebucket.org/andheum/humanui/raw/6f144b09295e991a4e42db0a0414999d34640344/SupportingMaterials/SimpleExample3_sm.gif)
 
 # README #
 NBBJ Design Computation is excited to announce the release of a new plug-in for Grasshopper: Human UI. 
