@@ -1,3 +1,4 @@
+![Human UI](https://bytebucket.org/andheum/humanui/raw/14a8fde782f47a804ee68263b62447c114670fb9/SupportingMaterials/Logo2.png "Human UI")
 # README #
 
 On behalf of NBBJ Design Computation, I’m excited to announce the release of a new plug-in for Grasshopper: Human UI. 
