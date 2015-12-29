@@ -4,7 +4,7 @@
 ![NBBJ Digital Practice](https://bytebucket.org/andheum/humanui/raw/1f7dbf4f739ee5afdd0be025e6d9459a77599818/SupportingMaterials/nbbj-digitalPractice_med.png "NBBJ Digital Practice") 
 # README #
 
-On behalf of NBBJ Design Computation, I’m excited to announce the release of a new plug-in for Grasshopper: Human UI. 
+NBBJ Design Computation is excited to announce the release of a new plug-in for Grasshopper: Human UI. 
 
 Human UI lets you construct clean, WPF-based user interfaces for your Grasshopper definitions, without writing a single line of code.
 
