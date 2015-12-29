@@ -34,6 +34,7 @@ Going well beyond the capabilities of the “remote control panel,” Human UI m
 ### Credits ###
 Major contributions to this project so far:
 * Initial Development: **Andrew Heumann** / andheum / [@andrewheumann](https://twitter.com/andrewheumann)
-* Product Management: **Marc Syp** / marcsyp / [@mpsyp](https://twitter.com/mpsyp)
-* Graphing Components: **Nate Holland** / nateholland / [@_NateHolland](https://twitter.com/_NateHolland)
 
+* Product Management: **Marc Syp** / marcsyp / [@mpsyp](https://twitter.com/mpsyp)
+
+* Graphing Components: **Nate Holland** / nateholland / [@_NateHolland](https://twitter.com/_NateHolland)
