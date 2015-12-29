@@ -120,7 +120,7 @@ namespace HumanUI.Components.UI_Output
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Set3dView;
+                return Properties.Resources.Set3dView_textured;
             }
         }
 

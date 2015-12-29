@@ -30,6 +30,14 @@ namespace HumanUI.Components.UI_Main
             }
         }
 
+        protected override System.Drawing.Bitmap Icon
+        {
+            get
+            {
+                return Properties.Resources.LaunchWindow_Transparent;
+            }
+        }
+
         /// <summary>
         /// Enable transparency before calling on the main window implementation
         /// </summary>

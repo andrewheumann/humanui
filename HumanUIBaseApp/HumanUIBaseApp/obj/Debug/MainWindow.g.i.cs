@@ -48,22 +48,6 @@ namespace HumanUIBaseApp {
         #line default
         #line hidden
         
-        
-        #line 9 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Grid AbsPosGrid;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 11 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.StackPanel MasterStackPanel;
-        
-        #line default
-        #line hidden
-        
         private bool _contentLoaded;
         
         /// <summary>
@@ -96,12 +80,6 @@ namespace HumanUIBaseApp {
             {
             case 1:
             this.MasterGrid = ((System.Windows.Controls.Grid)(target));
-            return;
-            case 2:
-            this.AbsPosGrid = ((System.Windows.Controls.Grid)(target));
-            return;
-            case 3:
-            this.MasterStackPanel = ((System.Windows.Controls.StackPanel)(target));
             return;
             }
             this._contentLoaded = true;

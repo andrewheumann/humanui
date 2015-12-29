@@ -352,6 +352,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LaunchWindow_Transparent {
+            get {
+                object obj = ResourceManager.GetObject("LaunchWindow_Transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RestoreState {
             get {
                 object obj = ResourceManager.GetObject("RestoreState", resourceCulture);
@@ -385,6 +395,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap Set3dView {
             get {
                 object obj = ResourceManager.GetObject("Set3dView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Set3dView_textured {
+            get {
+                object obj = ResourceManager.GetObject("Set3dView_textured", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
