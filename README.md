@@ -13,23 +13,26 @@ Going well beyond the capabilities of the “remote control panel,” Human UI m
 * Human UI - WPF GUIs in Grasshopper
 * Beta 0.6
 
-### How do I get set up? ###
-
+### How do I get Human UI? ###
 * Summary of set up
-* Configuration
-* Dependencies
-* Deployment instructions
+
+### Releases ###
+* #### 0.6.0.0 - Initial Public / Open Source release
+
+### Dependencies ###
+* Rhino + RhinoCommon.dll
+* Grasshopper
+* [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+* [HelixToolkit.WPF](https://github.com/helix-toolkit)
+* [Xceed.WPF](http://wpftoolkit.codeplex.com/)
 
 ### Known Issues ###
 * Deleting the component that launched a currently open window can cause crashes
 * Switching back from a subsidiary GH doc back to the parent doc with a HUI window can spawn unwanted extra windows
 
-### Contribution guidelines ###
+### Credits ###
+Major contributions to this project so far:
+* Initial Development: **Andrew Heumann** / andheum / [@andrewheumann](https://twitter.com/andrewheumann)
+* Product Management: **Marc Syp** / marcsyp / [@mpsyp](https://twitter.com/mpsyp)
+* Graphing Components: **Nate Holland** / nateholland / [@_NateHolland](https://twitter.com/_NateHolland)
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Andrew Heumann
