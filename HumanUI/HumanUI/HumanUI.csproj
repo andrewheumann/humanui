@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Components\UI Graphs\CreateBarGraphCluster_Component.cs" />
     <Compile Include="Components\UI Graphs\CreateBarGraph_Component.cs" />
+    <Compile Include="Components\UI Graphs\CreateGraph_Component.cs" />
     <Compile Include="Components\UI Graphs\CreatePieGraph_Component .cs" />
     <Compile Include="Components\UI Graphs\SetPieGraph_Component.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
