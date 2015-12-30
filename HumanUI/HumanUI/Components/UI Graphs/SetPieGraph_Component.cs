@@ -30,9 +30,13 @@ namespace HumanUI
         {
             pManager.AddGenericParameter("Pie Graph to modify", "PG", "The Pie Graph object to modify", GH_ParamAccess.item);
             pManager.AddNumberParameter("New Pie Graph Values", "V", "The new values to graph in the pie graph", GH_ParamAccess.list);
-           // pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item, "Title");
-           // pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item, "subTitle");
-
+            pManager[1].Optional = true;
+            pManager.AddTextParameter("New Pie Graph Names", "N", "The names of the data items to be graphed", GH_ParamAccess.list);
+            pManager[2].Optional = true;
+            pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item);
+            pManager[3].Optional = true;
+            pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item);
+            pManager[4].Optional = true;
 
         }
 
@@ -52,58 +56,63 @@ namespace HumanUI
         {
             object GraphObject = null;
             List<double> listContents = new List<double>();
+            List<string> names = new List<string>();
+            string Title=null;
+            string SubTitle=null;
             
-            //string Title;
-           // string SubTitle;
-
+            //Get the Graph object and assign it
             if (!DA.GetData<object>("Pie Graph to modify", ref GraphObject)) return;
-            if (!DA.GetDataList<double>("New Pie Graph Values", listContents)) return;
-            // DA.GetData<string>("Title", ref Title);
-            //DA.GetData<string>("SubTitle", ref SubTitle);
+            var ChartElem = HUI_Util.GetUIElement<PieChart>(GraphObject);
 
-            //var ChartElem = HUI_Util.GetUIElement<PieChart>(GraphObject);
-            //string series = ChartElem.Series[0].
 
-            //ChartElem.Series.Clear();
+            //set new title and subtitle or get old ones
+            if (!DA.GetData<string>("Title", ref Title)) Title = ChartElem.ChartTitle;
+            if(!DA.GetData<string>("SubTitle", ref SubTitle)) SubTitle=ChartElem.ChartSubTitle;
             
 
-            //CreatePieGraph_Component.CustomChartModel vm = new CreatePieGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
-            //ChartSeries series = new ChartSeries();
-            //series.SeriesTitle = "Errors";
-            //series.DisplayMember = "Category";
-            //series.ValueMember = "Number";
-            //series.ItemsSource = vm.Chart;
+            //extract existing data from graph element
+            CreatePieGraph_Component.CustomChartModel dataExtractor = new CreatePieGraph_Component.CustomChartModel();
+            ChartSeries series = ChartElem.Series[0];
+            dataExtractor.Chart = series.ItemsSource as ObservableCollection<CreatePieGraph_Component.ChartItem>;
 
-            // ScrollViewer sv = HUI_Util.GetUIElement<ScrollViewer>(ListObject);
-            // ItemsControl ic = sv.Content as ItemsControl;
+            //if the data isnt supplied get it from old graph
+            if (!DA.GetDataList<double>("New Pie Graph Values", listContents))  
+            {  for (int i = 0; i < dataExtractor.Chart.Count; i++)
+                {
+                    listContents.Add(dataExtractor.Chart[i].Number);
+                }
+            }
 
-            //if (!DA.GetDataList<bool>("Selected", isSelected))
-            //{
-
-            //}
-
-
-            //ic.Items.Clear();
-
-
-            //for (int i = 0; i < listContents.Count; i++)
-            //{
-            //    string item = listContents[i];
-
-            //    CheckBox cb = new CheckBox();
-            //    cb.Margin = new System.Windows.Thickness(2);
-            //    cb.Content = item;
-            //    if (isSelected.Count > 0)
-            //    {
-            //        bool isSel = isSelected[i % isSelected.Count];
-            //        cb.IsChecked = isSel;
-            //    }
-            //    ic.Items.Add(cb);
-            //}
-
-
-           // DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+            //if the data isnt supplied get it from old graph
+            if (!DA.GetDataList<string>("New Pie Graph Names", names))    
+            {
+                for (int i = 0; i < dataExtractor.Chart.Count; i++)
+                {
+                    names.Add(dataExtractor.Chart[i].Category);
+                }
+            }
            
+
+
+            //make sure there are the same number of names and values
+            if (names.Count!=listContents.Count)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "different number of names and values supplied");
+            }
+
+
+            //reconstruct graph data
+            CreatePieGraph_Component.CustomChartModel vm = new CreatePieGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
+            
+            //assign new values back to graph
+            series.ItemsSource = vm.Chart;
+            ChartElem.ChartTitle = Title;
+            ChartElem.ChartSubTitle = SubTitle;
+            
+
+
+            DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+
 
 
         }

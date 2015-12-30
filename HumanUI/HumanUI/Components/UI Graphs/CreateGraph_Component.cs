@@ -9,17 +9,18 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Collections.ObjectModel;
 using De.TorstenMandelkow.MetroChart;
+using Grasshopper.Kernel.Parameters;
 
 namespace HumanUI
 {
-    public class CreatePieGraph_Component : GH_Component
+    public class CreateGraph_Component : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
-        public CreatePieGraph_Component()
-            : base("Create Pie Graph", "PieGraph",
-                "Creates a Pie Graph from Data and Categories.",
+        public CreateGraph_Component()
+            : base("Create Graph", "Graph",
+                "Creates a Graph from Data and Categories.",
                 "Human", "UI Graphs")
         {
         }
@@ -33,6 +34,11 @@ namespace HumanUI
             pManager.AddTextParameter("Names", "N", "The names of the data items to be graphed", GH_ParamAccess.list); 
             pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item, "Title");
             pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item, "subTitle");
+            pManager.AddIntegerParameter("Graph Type", "GT", "The type of Graph to create", GH_ParamAccess.item, 0);
+            Param_Integer graphTypes = (Param_Integer)pManager[4];
+            graphTypes.AddNamedValue("Pie Graph", 0);
+            graphTypes.AddNamedValue("Horizontal Bar Graph", 1);
+            graphTypes.AddNamedValue("Vertical Bar Graph", 2);
         }
 
         /// <summary>
@@ -54,26 +60,45 @@ namespace HumanUI
             var Collection = new ObservableCollection<ChartItem>();
             string Title = "title";
             string SubTitle = "subtitle";
-            //string[] names = { "a cat", "another cat", "a cat who stinks" };
-            //double[] data = { 30, 40, 2.0 };
             List<double> listContents = new List<double>();
             List<string> names = new List<string>();
+            int chartType = 0;
 
             //get GH input data
             DA.GetDataList<double>("Data",  listContents);
             DA.GetDataList<string>("Names", names);
             DA.GetData<string>("Title", ref Title);
             DA.GetData<string>("SubTitle", ref SubTitle);
-           
+            DA.GetData<int>("Graph Type", ref chartType);
+            ChartBase ChartElem = null;
+            switch (chartType)
+            {
+                case 0:
+                    var pieElem = new PieChart();
+                    ChartElem = pieElem;
+                    break;
+                case 1:
+                    var barElem = new ClusteredBarChart();
+                    ChartElem = barElem;
+                    break;
+                case 2:
+                    var columnElem = new ClusteredColumnChart();
+                    ChartElem = columnElem;
+                    break;
+                default:
+                    var defaultElem = new PieChart();
+                    ChartElem = defaultElem;
+                    break;
+            }
             //Create the chart and give it a name
-            var ChartElem = new PieChart();
+            
             ChartElem.ChartTitle = Title;
             ChartElem.ChartSubTitle = SubTitle;
                        
             //package the data into a custom chart model and series
             CustomChartModel vm = new CustomChartModel(names.ToList(), listContents.ToList());
             ChartSeries series = new ChartSeries();
-            series.SeriesTitle = "Errors";
+            series.SeriesTitle = " ";
             series.DisplayMember = "Category";
             series.ValueMember = "Number";
             series.ItemsSource = vm.Chart;
@@ -81,13 +106,6 @@ namespace HumanUI
             //Pass data to the chart
             ChartElem.Series.Add(series);
             
-
-            //Popup Window for testing
-            //Window window = new Window();
-            //Grid grid = new Grid();
-            //window.Content = grid;
-            //grid.Children.Add(ChartElem);
-            //window.Show();
 
             ChartElem.Height = 300;
             ChartElem.Width = 300;
@@ -144,7 +162,7 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{1A96F054-26DD-45C6-B09D-2760B476BB0A}"); }
+            get { return new Guid("{1A96F054-26DD-45C6-B09D-2760B496BB0A}"); }
                                    
         }
     }
