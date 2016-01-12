@@ -108,6 +108,7 @@
   <ItemGroup>
     <None Include="Components\UI Elements\Create_TEMPLATE_Component.cs" />
     <None Include="Components\UI Output\Set_TEMPLATE_Component.cs" />
+    <Compile Include="Components\UI Containers\CreateGrid_Component.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
     <Compile Include="Custom Types\3DViewModel.cs" />
     <Compile Include="Components\UI Main\AddElements_Component.cs" />
@@ -116,7 +117,7 @@
     <Compile Include="Components\UI Elements\CreateBrowser_Component.cs" />
     <Compile Include="Components\UI Elements\CreateButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateColorPicker_Component.cs" />
-    <Compile Include="Components\UI Containers\CreateGrid_Component.cs" />
+    <Compile Include="Deprecated\CreateGrid_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateObjectsFromXaml_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Output\Set3DView_Textured_Component.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Deprecated\TabContainer_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\TrueOnlyButton.cs" />
     <Compile Include="Custom Types\UIElement_Goo.cs" />
+    <Compile Include="Upgraders\Upgrade_GridComponent.cs" />
     <Compile Include="Upgraders\Upgrade_RestoreStateComponent.cs" />
     <Compile Include="Components\UI Main\ValueListener_Component.cs" />
   </ItemGroup>

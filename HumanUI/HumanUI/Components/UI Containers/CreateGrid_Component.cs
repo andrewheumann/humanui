@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Containers
         /// </summary>
         public CreateGrid_Component()
             : base("Create Grid", "Grid",
-                "Create a container with absolutely positioned elements. \n Their input order determines their Z order - set the margins \nwith the \"Adjust Element Positioning\" component to locate \nelements inside the grid.",
+                "Create a container with absolutely positioned elements. \n Their input order determines their Z order - set the margins \nwith the \"Adjust Element Positioning\" component to locate \nelements inside the grid.\n Use column and row definitions to create more advanced grids.",
                 "Human", "UI Containers")
         {
         }
@@ -33,8 +33,24 @@ namespace HumanUI.Components.UI_Containers
         {
             pManager.AddGenericParameter("UI Elements", "E", "The UI elements to place in the grid", GH_ParamAccess.list);
             pManager.AddNumberParameter("Width", "W", "The width of the grid", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Height", "H", "The height of the grid", GH_ParamAccess.item); 
-      
+            pManager[1].Optional = true;
+            pManager.AddNumberParameter("Height", "H", "The height of the grid", GH_ParamAccess.item);
+            pManager[2].Optional = true;
+            pManager.AddTextParameter("Row Definitions", "RD", "An optional list of Row Heights. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
+            pManager[3].Optional = true;
+            pManager.AddTextParameter("Column Definitions", "CD", "An optional list of Column Widths. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
+            pManager[4].Optional = true;
+            pManager.AddIntegerParameter("Element Row", "ER", "The rows to place the elements in, counting from 0 at the top.", GH_ParamAccess.list);
+            pManager[5].Optional = true;
+            pManager.AddIntegerParameter("Element Column", "EC", "The columns to place the elements in, counting from 0 at the left.", GH_ParamAccess.list);
+            pManager[6].Optional = true;
+            pManager.AddIntegerParameter("Element Row Span", "ERS", "How many rows each element should span. This will be 1 by default.", GH_ParamAccess.list, 1);
+            pManager[7].Optional = true;
+            pManager.AddIntegerParameter("Element Column Span", "ECS", "How many columns each element should span. This will be 1 by default.", GH_ParamAccess.list, 1);
+            pManager[8].Optional = true;
+
+
+
         }
 
         /// <summary>
@@ -54,29 +70,104 @@ namespace HumanUI.Components.UI_Containers
             List<UIElement_Goo> elementsToAdd = new List<UIElement_Goo>();
             double width = 0;
             double height = 0;
+            List<string> rowDefinitions = new List<string>();
+            List<string> colDefinitions = new List<string>();
+            List<int> elementRows = new List<int>();
+            List<int> elementCols = new List<int>();
+            List<int> elementRowSpans = new List<int>();
+            List<int> elementColSpans = new List<int>();
+
+
+
             if (!DA.GetDataList<UIElement_Goo>("UI Elements", elementsToAdd)) return;
-            if (!DA.GetData<double>("Width", ref width)) return;
-            if (!DA.GetData<double>("Height", ref height)) return;
+            bool hasWidth = DA.GetData<double>("Width", ref width);
+            bool hasHeight = DA.GetData<double>("Height", ref height);
+
+            bool hasRowDefs = DA.GetDataList<string>("Row Definitions", rowDefinitions);
+            bool hasColDefs = DA.GetDataList<string>("Column Definitions", colDefinitions);
+
+            bool hasElementRows = DA.GetDataList<int>("Element Row", elementRows);
+            bool hasElementCols = DA.GetDataList<int>("Element Column", elementCols);
+            DA.GetDataList<int>("Element Row Span", elementRowSpans);
+            DA.GetDataList<int>("Element Column Span", elementColSpans);
 
             //initialize the grid
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Left;
             grid.VerticalAlignment = VerticalAlignment.Top;
             grid.Name = "GH_Grid";
-            grid.Width = width;
-            grid.Height = height;
-            //for all the elements to add
-            foreach (UIElement_Goo u in elementsToAdd)
+            if (hasWidth)
             {
+                grid.Width = width;
+            }
+            else
+            {
+                grid.HorizontalAlignment = HorizontalAlignment.Stretch;
+            }
+            if (hasHeight)
+            {
+                grid.Height = height;
+            }
+            else
+            {
+                grid.VerticalAlignment = VerticalAlignment.Stretch;
+            }
+           
+
+            //set up a "GridLengthConverter" to handle parsing our strings.
+            GridLengthConverter gridLengthConverter = new GridLengthConverter();
+
+            //set up rows and columns if present
+            if (hasColDefs)
+            {
+                foreach (string colDef in colDefinitions)
+                {
+                    ColumnDefinition cd = new ColumnDefinition();
+                    cd.Width = (GridLength)gridLengthConverter.ConvertFromString(colDef);
+                    grid.ColumnDefinitions.Add(cd);
+                }
+
+            }
+            if (hasRowDefs)
+            {
+                foreach (string rowDef in rowDefinitions)
+                {
+                    RowDefinition rd = new RowDefinition();
+                    rd.Height = (GridLength)gridLengthConverter.ConvertFromString(rowDef);
+                    grid.RowDefinitions.Add(rd);
+                }
+
+            }
+
+
+            //for all the elements to add
+            for (int i = 0; i < elementsToAdd.Count; i++)
+            {
+                UIElement_Goo u = elementsToAdd[i];
                 //make sure it doesn't already have a parent
                 HUI_Util.removeParent(u.element);
                 FrameworkElement fe = u.element as FrameworkElement;
-                if(fe != null){
+                if (fe != null)
+                {
                     //set its alignment to be relative to upper left - this makes margin-based positioning easy
                     fe.HorizontalAlignment = HorizontalAlignment.Left;
                     fe.VerticalAlignment = VerticalAlignment.Top;
+
+                    //set up row and column positioning + spans
+                    if (hasElementCols && elementCols.Count > 0 && elementColSpans.Count > 0)
+                    {
+                        Grid.SetColumn(fe, elementCols[i % elementCols.Count]); // using hacky fake longest list matching. Will create a repeating pattern if it doesn't know what to do.
+                        Grid.SetColumnSpan(fe, elementColSpans[i % elementColSpans.Count]);
+                    }
+                    if (hasElementRows && elementRows.Count > 0 && elementRowSpans.Count > 0)
+                    {
+                        Grid.SetRow(fe, elementRows[i % elementRows.Count]); // using hacky fake longest list matching. Will create a repeating pattern if it doesn't know what to do.
+                        Grid.SetRowSpan(fe, elementRowSpans[i % elementRowSpans.Count]);
+
+                    }
+
                 }
-              //add it to the grid
+                //add it to the grid
                 grid.Children.Add(u.element);
             }
             //pass the grid out
@@ -103,7 +194,7 @@ namespace HumanUI.Components.UI_Containers
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{1E68A9A8-C28D-4799-854C-337DC4018917}"); }
+            get { return new Guid("{B618569A-868D-4A88-A035-FAA1416A841F}"); }
         }
     }
 }

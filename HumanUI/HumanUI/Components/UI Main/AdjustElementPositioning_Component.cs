@@ -47,6 +47,7 @@ namespace HumanUI.Components.UI_Main
             horizAlign.AddNamedValue("Left", 0);
             horizAlign.AddNamedValue("Center", 1);
             horizAlign.AddNamedValue("Right", 2);
+            horizAlign.AddNamedValue("Stretch", 3);
 
             pManager.AddIntegerParameter("Vertical Alignment", "VA", "Vertical alignment", GH_ParamAccess.item);
             pManager[6].Optional = true;
@@ -54,6 +55,7 @@ namespace HumanUI.Components.UI_Main
             vertAlign.AddNamedValue("Bottom", 0);
             vertAlign.AddNamedValue("Center", 1);
             vertAlign.AddNamedValue("Top", 2);
+            vertAlign.AddNamedValue("Stretch", 3);
 			
         }
 
@@ -124,6 +126,9 @@ namespace HumanUI.Components.UI_Main
                     case 2:
                         alignment = VerticalAlignment.Top;
                         break;
+                    case 3:
+                        alignment = VerticalAlignment.Stretch;
+                        break;
                     default:
                         break;
 
@@ -144,6 +149,9 @@ namespace HumanUI.Components.UI_Main
                         break;
                     case 2:
                         alignment = HorizontalAlignment.Right;
+                        break;
+                    case 3:
+                        alignment = HorizontalAlignment.Stretch;
                         break;
                     default:
                         break;
