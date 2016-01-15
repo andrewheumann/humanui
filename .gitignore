@@ -43,3 +43,6 @@ $RECYCLE.BIN/
 
 # Visual Studio 2014 CTP
 **/*.sln.ide
+HumanUI/HumanUI/obj/
+HumanUIBaseApp/HumanUIBaseApp/obj/
+HumanUI/HumanUI/bin/

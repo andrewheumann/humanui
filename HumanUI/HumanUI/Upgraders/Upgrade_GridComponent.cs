@@ -20,20 +20,14 @@ namespace HumanUI.Upgraders
             }
             var newComponent = GH_UpgradeUtil.SwapComponents(component, this.UpgradeTo);
 
+            //create a dummy instance of our new version of the component
             HumanUI.Components.UI_Containers.CreateGrid_Component testComp = new Components.UI_Containers.CreateGrid_Component();
 
-            IGH_Param RowDescription = testComp.Params.Input[3];
-            IGH_Param ColDescription = testComp.Params.Input[4];
-            IGH_Param ElementRows = testComp.Params.Input[5];
-            IGH_Param ElementCols = testComp.Params.Input[6];
-            IGH_Param ElementRowSpans = testComp.Params.Input[7];
-            IGH_Param ElementColSpans = testComp.Params.Input[8];
-            newComponent.Params.RegisterInputParam(RowDescription);
-            newComponent.Params.RegisterInputParam(ColDescription);
-            newComponent.Params.RegisterInputParam(ElementRows);
-            newComponent.Params.RegisterInputParam(ElementCols);
-            newComponent.Params.RegisterInputParam(ElementRowSpans);
-            newComponent.Params.RegisterInputParam(ElementColSpans);
+            //identify the indices of the newly added params (relative to the old version of the component)
+            int[] paramsToCopy = new int[] { 3, 4, 5, 6, 7, 8 };
+            //grab the input params at those indices and register them to the component
+            paramsToCopy.Select(i => testComp.Params.Input[i]).ToList().ForEach(p => newComponent.Params.RegisterInputParam(p));
+            //make sure display and such gets cleaned up
             newComponent.Params.OnParametersChanged();
             return newComponent;
         }
