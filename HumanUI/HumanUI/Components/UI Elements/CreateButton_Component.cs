@@ -220,6 +220,9 @@ namespace HumanUI.Components.UI_Elements
             if (!hasText && !hasIcon) return;
             //Initialize the button
             Button btn = new Button();
+            //make button not focusable
+            btn.Focusable = false;
+            
             SetupButton(name, imagePath, hasText, hasIcon, btn, bs);         
             //pass out the button
             DA.SetData("Button", new UIElement_Goo(btn, name,InstanceGuid,DA.Iteration));

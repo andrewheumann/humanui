@@ -14,12 +14,12 @@ namespace HumanUI.Components.UI_Elements
     /// Component to create a slider object, wrapped in a dock panel and containing labels indicating the name and current value
     /// </summary>
     /// <seealso cref="Grasshopper.Kernel.GH_Component" />
-    public class CreateSlider_Component : GH_Component
+    public class CreateSlider_Component_ALSO_DEPRECATED : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the CreateSliderComponent class.
         /// </summary>
-        public CreateSlider_Component()
+        public CreateSlider_Component_ALSO_DEPRECATED()
             : base("Create Slider", "Slider",
                 "Create a slider with a label and a value readout.",
                 "Human", "UI Elements")
@@ -33,6 +33,22 @@ namespace HumanUI.Components.UI_Elements
         {
             pManager.AddNumberParameter("Slider", "S", "The slider(s) to add to the window.", GH_ParamAccess.tree);
 
+        }
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
         }
 
         /// <summary>
