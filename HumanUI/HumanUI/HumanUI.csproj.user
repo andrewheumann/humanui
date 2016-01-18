@@ -6,4 +6,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
     <StartProgram>C:\Program Files\Rhinoceros 5.0 %2864-bit%29\System\Rhino.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug32|x64'">
+    <StartProgram>C:\Program Files\Rhinoceros 5.0 %2864-bit%29\System\Rhino.exe</StartProgram>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|x64'">
+    <StartProgram>C:\Program Files\Rhinoceros 5.0 %2864-bit%29\System\Rhino.exe</StartProgram>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
 </Project>
