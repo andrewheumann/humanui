@@ -19,7 +19,7 @@ namespace HumanUI
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
         public CreateGraph_Component()
-            : base("Create Graph", "Graph",
+            : base("Create Graph", " Graph",
                 "Creates a Graph from Data and Categories.",
                 "Human", "UI Graphs")
         {
@@ -39,6 +39,9 @@ namespace HumanUI
             graphTypes.AddNamedValue("Pie Graph", 0);
             graphTypes.AddNamedValue("Horizontal Bar Graph", 1);
             graphTypes.AddNamedValue("Vertical Bar Graph", 2);
+            graphTypes.AddNamedValue("Doughnut Graph", 3);
+            graphTypes.AddNamedValue("Gauge Graph", 4);
+            pManager.AddNumberParameter("GraphSize", "S", "The size of the graph", GH_ParamAccess.item, 300);
         }
 
         /// <summary>
@@ -46,7 +49,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Pie Graph", "PG", "The Pie Graph object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Graph", "G", "The Graph object", GH_ParamAccess.item);
         }
 
         
@@ -63,12 +66,14 @@ namespace HumanUI
             List<double> listContents = new List<double>();
             List<string> names = new List<string>();
             int chartType = 0;
+            double size = 300;
 
             //get GH input data
             DA.GetDataList<double>("Data",  listContents);
             DA.GetDataList<string>("Names", names);
             DA.GetData<string>("Title", ref Title);
             DA.GetData<string>("SubTitle", ref SubTitle);
+            DA.GetData<double>("GraphSize", ref size);
             DA.GetData<int>("Graph Type", ref chartType);
             ChartBase ChartElem = null;
             switch (chartType)
@@ -84,6 +89,15 @@ namespace HumanUI
                 case 2:
                     var columnElem = new ClusteredColumnChart();
                     ChartElem = columnElem;
+                    break;
+                case 3:
+                    var doughnutElem = new DoughnutChart();
+                    ChartElem = doughnutElem;
+                    break;
+                case 4:
+                    var guageElem = new RadialGaugeChart();
+                    ChartElem = guageElem;
+                    
                     break;
                 default:
                     var defaultElem = new PieChart();
@@ -105,12 +119,13 @@ namespace HumanUI
 
             //Pass data to the chart
             ChartElem.Series.Add(series);
+            ChartElem.ToolTipFormat = "{}Caption: {0}, Value: '{1}', Series: '{2}', Percentage: {3:P2}";
             
 
-            ChartElem.Height = 300;
-            ChartElem.Width = 300;
-            //Send Data to GH output
-            DA.SetData("Pie Graph", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+            ChartElem.MinWidth = 10;
+            ChartElem.MinHeight = 10;
+           
+            DA.SetData("Graph", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
         }
 
         /// <summary>

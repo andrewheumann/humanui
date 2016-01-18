@@ -11,14 +11,14 @@ using Rhino.Geometry;
 
 namespace HumanUI
 {
-    public class SetPieGraph_Component : GH_Component
+    public class SetGraph_Component : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the SetList_Component class.
         /// </summary>
-        public SetPieGraph_Component()
-            : base("Set Pie Graph Contents", "SetPieGraph",
-                "Use this to set the contents of a Pie Graph",
+        public SetGraph_Component()
+            : base("Set Graph Contents", "SetGraph",
+                "Use this to set the contents of a Graph",
                 "Human", "UI Graphs")
         {
         }
@@ -28,7 +28,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Pie Graph to modify", "PG", "The Pie Graph object to modify", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Graph to modify", "G", "The Pie Graph object to modify", GH_ParamAccess.item);
             pManager.AddNumberParameter("New Pie Graph Values", "V", "The new values to graph in the pie graph", GH_ParamAccess.list);
             pManager[1].Optional = true;
             pManager.AddTextParameter("New Pie Graph Names", "N", "The names of the data items to be graphed", GH_ParamAccess.list);
@@ -45,7 +45,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("TEST", "T", "The Pie Graph object", GH_ParamAccess.item);
+           // pManager.AddGenericParameter("TEST", "T", "The Pie Graph object", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace HumanUI
             string SubTitle=null;
             
             //Get the Graph object and assign it
-            if (!DA.GetData<object>("Pie Graph to modify", ref GraphObject)) return;
-            var ChartElem = HUI_Util.GetUIElement<PieChart>(GraphObject);
+            if (!DA.GetData<object>("Graph to modify", ref GraphObject)) return;
+            var ChartElem = HUI_Util.GetUIElement<ChartBase>(GraphObject);
 
 
             //set new title and subtitle or get old ones
@@ -71,9 +71,9 @@ namespace HumanUI
             
 
             //extract existing data from graph element
-            CreatePieGraph_Component.CustomChartModel dataExtractor = new CreatePieGraph_Component.CustomChartModel();
+            CreateGraph_Component.CustomChartModel dataExtractor = new CreateGraph_Component.CustomChartModel();
             ChartSeries series = ChartElem.Series[0];
-            dataExtractor.Chart = series.ItemsSource as ObservableCollection<CreatePieGraph_Component.ChartItem>;
+            dataExtractor.Chart = series.ItemsSource as ObservableCollection<CreateGraph_Component.ChartItem>;
 
             //if the data isnt supplied get it from old graph
             if (!DA.GetDataList<double>("New Pie Graph Values", listContents))  
@@ -91,27 +91,27 @@ namespace HumanUI
                     names.Add(dataExtractor.Chart[i].Category);
                 }
             }
-           
+
 
 
             //make sure there are the same number of names and values
-            if (names.Count!=listContents.Count)
+            if (names.Count != listContents.Count)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "different number of names and values supplied");
             }
 
 
             //reconstruct graph data
-            CreatePieGraph_Component.CustomChartModel vm = new CreatePieGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
-            
+            CreateGraph_Component.CustomChartModel vm = new CreateGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
+
             //assign new values back to graph
             series.ItemsSource = vm.Chart;
             ChartElem.ChartTitle = Title;
             ChartElem.ChartSubTitle = SubTitle;
-            
 
 
-            DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+
+            //DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
 
 
 
