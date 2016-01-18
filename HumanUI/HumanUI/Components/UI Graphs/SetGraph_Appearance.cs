@@ -129,22 +129,26 @@ namespace HumanUI
             ResourceDictionaryCollection pallete = new ResourceDictionaryCollection();
             //ObservableCollection<ResourceDictionary> colorCollector = new ObservableCollection<ResourceDictionary>;
             ResourceDictionary PalleteColors = new ResourceDictionary();
-            SolidColorBrush temp = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 70, 0));
-            PalleteColors.Add("Brush0", temp );
-            SolidColorBrush temp2= new SolidColorBrush(System.Windows.Media.Color.FromRgb(70, 0, 0));
-            PalleteColors.Add("Brush1", temp2);
-            //for (int i = 0; i < col.Count; i++)
-            //{
-            //    System.Drawing.Color color = col[i];
-            //    SolidColorBrush active = new SolidColorBrush(System.Windows.Media.Color.FromRgb(color.R,color.G, color.B));
-            //    string name = "brush" + i;
-            //    PalleteColors.Add(name, active);
-                
-                
-            //}
+            //SolidColorBrush temp = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 70, 0));
+            //PalleteColors.Add("Brush0", temp );
+            //SolidColorBrush temp2= new SolidColorBrush(System.Windows.Media.Color.FromRgb(70, 0, 0));
+            //PalleteColors.Add("Brush1", temp2);
+
+
+            for (int i = 0; i < col.Count; i++)
+            {
+                System.Drawing.Color color = col[i];
+                SolidColorBrush active = new SolidColorBrush(System.Windows.Media.Color.FromRgb(color.R, color.G, color.B));
+                string name = "brush" + i;
+                PalleteColors.Add(name, active);
+
+
+            }
+
+
             //colorCollector.Add("test" , PalleteColors);
             pallete.Add(PalleteColors);
-            pallete.
+            
             return pallete;
         }
 
