@@ -186,7 +186,19 @@ namespace HumanUI
        {
            foreach (UIElement u in p.Children)
            {
-               if (u is Slider)
+               if (u is Grid)
+               {
+                   Grid g = u as Grid;
+                   foreach (UIElement u2 in g.Children)
+                   {
+                       if (u2 is Slider)
+                       {
+                           return u2 as Slider;
+                       }
+                   }
+
+               }
+               else if (u is Slider)
                {
                    return u as Slider;
                }
