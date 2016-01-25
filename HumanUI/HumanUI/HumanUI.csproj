@@ -115,9 +115,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\UI Graphs\CreateBarGraphCluster_Component.cs" />
+    <Compile Include="Components\UI Graphs\CreateMultiGraph_Component.cs" />
     <Compile Include="Components\UI Graphs\CreateGraph_Component.cs" />
     <Compile Include="Components\UI Graphs\SetGraph_Appearance.cs" />
+    <Compile Include="Components\UI Graphs\SetMultiGraph_Component.cs" />
     <Compile Include="Components\UI Graphs\SetGraph_Component.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
     <Compile Include="Custom Types\3DViewModel.cs" />

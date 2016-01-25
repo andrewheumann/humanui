@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using De.TorstenMandelkow.MetroChart;
 using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
+using Grasshopper.Kernel.Parameters;
 
 namespace HumanUI
 {
@@ -20,8 +21,8 @@ namespace HumanUI
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
         public CreateBarGraphCluster_Component()
-            : base("Create Clustered Bar Graph", "BarGraphC",
-                "Creates a Clustered Bar Graph from sets of Data and Categories.",
+            : base("Create Multi Graph", "BarGraphC",
+                "Creates a Multi Graph from sets of Data and Categories.",
                 "Human", "UI Graphs")
         {
         }
@@ -36,6 +37,14 @@ namespace HumanUI
             pManager.AddTextParameter("Title", "T", "The title of the graph", GH_ParamAccess.item, "Title"); // item access?
             pManager.AddTextParameter("SubTitle", "sT", "The subtitle of the graph", GH_ParamAccess.item, "Subtitle");
             pManager.AddTextParameter("ClusterTitle", "cT", "The title of each bar cluster", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Graph Type", "GT", "The type of Graph to create", GH_ParamAccess.item, 0);
+            Param_Integer graphTypes = (Param_Integer)pManager[5];
+            graphTypes.AddNamedValue("Horizontal Cluster Bar Graph", 0);
+            graphTypes.AddNamedValue("Vertical Cluster Bar Graph", 1);
+            graphTypes.AddNamedValue("Horizontal Stacked Bar Graph", 2);
+            graphTypes.AddNamedValue("Vertical Stacked Bar Graph", 3);
+            graphTypes.AddNamedValue("Pie Chart", 4);
+            
         }
 
         /// <summary>
@@ -43,7 +52,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Bar Graph Cluster", "BGC", "The Bar Graph Cluster object", GH_ParamAccess.list);
+            pManager.AddGenericParameter("MultiGraph", "MG", "The Multi Graph object", GH_ParamAccess.list);
             
         }
 
@@ -61,6 +70,7 @@ namespace HumanUI
             GH_Structure<GH_Number> treeValues = new GH_Structure<GH_Number>();
             //GH_Structure<GH_String> treeNames = new GH_Structure<GH_String>();
             List<string> names = new List<string>();
+            int chartType = 0;
 
             //get GH input data
             DA.GetData<string>("Title", ref Title);
@@ -70,8 +80,39 @@ namespace HumanUI
             //DA.GetDataTree<GH_String>("Names", out treeNames);
             DA.GetDataList<string>("Names", names);
 
-            //Create the chart and give it a name
-            var ChartElem = new ClusteredBarChart();
+            DA.GetData<int>("Graph Type", ref chartType);
+            ChartBase ChartElem = null;
+            switch (chartType)
+            {
+                case 0:
+                    var ColumnCluster = new ClusteredColumnChart();
+                    ChartElem = ColumnCluster;
+                    break;
+                case 1:
+                    var BarCluster = new ClusteredBarChart();
+                    ChartElem = BarCluster;
+                    break;
+                case 2:
+                    var ColumnStack = new StackedColumnChart();
+                    ChartElem = ColumnStack;
+                    break;
+                case 3:
+                    var BarStack = new StackedBarChart();
+                    ChartElem = BarStack;
+                    break;
+                case 4:
+                    var pieElem = new PieChart();
+                    ChartElem = pieElem;
+
+                    break;
+                default:
+                    var defaultElem = new ClusteredBarChart();
+                    ChartElem = defaultElem;
+                    break;
+            }
+
+            //Give the chart its name
+            
             ChartElem.ChartTitle = Title;
             ChartElem.ChartSubTitle = SubTitle;
 
@@ -107,7 +148,7 @@ namespace HumanUI
             //ChartElem.Height = 300;
             //ChartElem.Width = 300;
             ////Send Data to GH output
-            DA.SetData("Bar Graph Cluster", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+            DA.SetData("MultiGraph", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
             DA.SetData("Test","listNames");
         }
 

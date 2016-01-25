@@ -33,6 +33,11 @@ namespace HumanUI
         {
             pManager.AddGenericParameter("Graph to modify", "G", "The Pie Graph object to modify", GH_ParamAccess.item);
             pManager.AddColourParameter("Colors", "C", "The graph colors", GH_ParamAccess.list);
+            pManager[1].Optional = true;
+            pManager.AddBooleanParameter("Legend", "L", "Legend on?", GH_ParamAccess.item);
+            pManager[2].Optional = true;
+            pManager.AddBooleanParameter("Title", "T", "Title on?", GH_ParamAccess.item);
+            pManager[3].Optional = true;
             //pManager.AddColourParameter("Background", "BC", "The background color of the element", GH_ParamAccess.item);
 
         }
@@ -42,7 +47,7 @@ namespace HumanUI
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-           // pManager.AddGenericParameter("TEST", "T", "The Pie Graph object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("TEST", "T", "The Pie Graph object", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -54,8 +59,9 @@ namespace HumanUI
             object GraphObject = null;
             List<double> listContents = new List<double>();
             List<string> names = new List<string>();
-            string Title=null;
-            string SubTitle=null;
+            bool Legend = true;
+            bool Title = true;
+            
             List<System.Drawing.Color> Col = new List<System.Drawing.Color>();
             System.Drawing.Color fgCol = System.Drawing.Color.Transparent;
 
@@ -63,62 +69,36 @@ namespace HumanUI
             if (!DA.GetData<object>("Graph to modify", ref GraphObject)) return;
             var ChartElem = HUI_Util.GetUIElement<ChartBase>(GraphObject);
 
+            DA.GetData<bool>("Legend", ref Legend);
+            DA.GetData<bool>("Title", ref Title);
             DA.GetDataList<System.Drawing.Color>("Colors", Col);
            // DA.GetData<System.Drawing.Color>("Background", ref fgCol);
 
-            ResourceDictionaryCollection Pallete = new ResourceDictionaryCollection();
 
+            ResourceDictionaryCollection Pallete = new ResourceDictionaryCollection();     
             Pallete = createResourceDictionary(Col);
 
-            
+            System.Windows.Media.Brush BorderBrush = new SolidColorBrush(HUI_Util.ToMediaColor(Col[0]));
+            ChartElem.BorderBrush = BorderBrush;
+
+            Visibility LegendVis = Visibility.Hidden;
+            if (Legend) LegendVis = Visibility.Visible;
+            ChartElem.ChartLegendVisibility = LegendVis;
+
+            Visibility TitleVis = Visibility.Hidden;
+            if (Title) TitleVis = Visibility.Visible;
+            ChartElem.ChartTitleVisibility = TitleVis;
+
+            //DoughnutChart Doughnut = ChartElem as DoughnutChart;
+            //Doughnut.
+
            
             ChartElem.Palette = Pallete;
-
-         
             
+            //String Selected = ChartElem.
+           
 
-            ////extract existing data from graph element
-            //CreateGraph_Component.CustomChartModel dataExtractor = new CreateGraph_Component.CustomChartModel();
-            //ChartSeries series = ChartElem.Series[0];
-            //dataExtractor.Chart = series.ItemsSource as ObservableCollection<CreateGraph_Component.ChartItem>;
-
-            ////if the data isnt supplied get it from old graph
-            //if (!DA.GetDataList<double>("New Pie Graph Values", listContents))  
-            //{  for (int i = 0; i < dataExtractor.Chart.Count; i++)
-            //    {
-            //        listContents.Add(dataExtractor.Chart[i].Number);
-            //    }
-            //}
-
-            ////if the data isnt supplied get it from old graph
-            //if (!DA.GetDataList<string>("New Pie Graph Names", names))    
-            //{
-            //    for (int i = 0; i < dataExtractor.Chart.Count; i++)
-            //    {
-            //        names.Add(dataExtractor.Chart[i].Category);
-            //    }
-            //}
-
-
-
-            ////make sure there are the same number of names and values
-            //if (names.Count != listContents.Count)
-            //{
-            //    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "different number of names and values supplied");
-            //}
-
-
-            ////reconstruct graph data
-            //CreateGraph_Component.CustomChartModel vm = new CreateGraph_Component.CustomChartModel(names.ToList(), listContents.ToList());
-
-            ////assign new values back to graph
-            //series.ItemsSource = vm.Chart;
-            //ChartElem.ChartTitle = Title;
-            //ChartElem.ChartSubTitle = SubTitle;
-
-
-
-            //DA.SetData("TEST", new UIElement_Goo(ChartElem, "Chart Elem", InstanceGuid, DA.Iteration));
+            DA.SetData("TEST", "Selected");
 
 
 
@@ -127,27 +107,19 @@ namespace HumanUI
         private ResourceDictionaryCollection createResourceDictionary(List<System.Drawing.Color> col)
         {
             ResourceDictionaryCollection pallete = new ResourceDictionaryCollection();
-            //ObservableCollection<ResourceDictionary> colorCollector = new ObservableCollection<ResourceDictionary>;
-            ResourceDictionary PalleteColors = new ResourceDictionary();
-            //SolidColorBrush temp = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 70, 0));
-            //PalleteColors.Add("Brush0", temp );
-            //SolidColorBrush temp2= new SolidColorBrush(System.Windows.Media.Color.FromRgb(70, 0, 0));
-            //PalleteColors.Add("Brush1", temp2);
-
-
+            
+           
             for (int i = 0; i < col.Count; i++)
             {
+                ResourceDictionary PalleteColors = new ResourceDictionary();
                 System.Drawing.Color color = col[i];
                 SolidColorBrush active = new SolidColorBrush(System.Windows.Media.Color.FromRgb(color.R, color.G, color.B));
                 string name = "brush" + i;
                 PalleteColors.Add(name, active);
-
-
+                pallete.Add(PalleteColors);
             }
-
-
-            //colorCollector.Add("test" , PalleteColors);
-            pallete.Add(PalleteColors);
+          
+            
             
             return pallete;
         }

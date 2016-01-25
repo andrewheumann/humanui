@@ -41,7 +41,7 @@ namespace HumanUI
             graphTypes.AddNamedValue("Vertical Bar Graph", 2);
             graphTypes.AddNamedValue("Doughnut Graph", 3);
             graphTypes.AddNamedValue("Gauge Graph", 4);
-            pManager.AddNumberParameter("GraphSize", "S", "The size of the graph", GH_ParamAccess.item, 300);
+            
         }
 
         /// <summary>
@@ -66,14 +66,14 @@ namespace HumanUI
             List<double> listContents = new List<double>();
             List<string> names = new List<string>();
             int chartType = 0;
-            double size = 300;
+            
 
             //get GH input data
             DA.GetDataList<double>("Data",  listContents);
             DA.GetDataList<string>("Names", names);
             DA.GetData<string>("Title", ref Title);
             DA.GetData<string>("SubTitle", ref SubTitle);
-            DA.GetData<double>("GraphSize", ref size);
+            
             DA.GetData<int>("Graph Type", ref chartType);
             ChartBase ChartElem = null;
             switch (chartType)
