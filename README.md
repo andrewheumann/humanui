@@ -20,8 +20,10 @@ Gone are the days of faking a user interface by laying out sliders and text pane
 In other words: Human UI makes your GH definition feel like a Windows app. Create tabbed views, dynamic sliders, pulldown menus, checkboxes, and even 3D viewports and web browsers that look great and make sense to anyone--including designers and clients with no understanding of Grasshopper.
 
 ### Links ###
-[Grasshopper Group](http://www.grasshopper3d.com/group/human-ui)
-[Food For Rhino](http://www.food4Rhino.com/project/humanui) (not yet active)
+
+* [Grasshopper Group](http://www.grasshopper3d.com/group/human-ui)
+
+* [Food For Rhino](http://www.food4Rhino.com/project/humanui) (not yet active)
 
 ### Credits ###
 Major contributions to this project so far:
