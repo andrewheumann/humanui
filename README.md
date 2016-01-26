@@ -10,19 +10,31 @@
 # README #
 NBBJ Design Computation is excited to announce the release of a new plug-in for Grasshopper: Human UI. 
 
-Human UI lets you construct clean, WPF-based user interfaces for your Grasshopper definitions, without writing a single line of code.
-
-This plug-in has been in development at NBBJ for the past year, and we are very excited to share it with you. It has been a huge asset in our own internal tool development, and we have decided to release it as an open source project so that all can benefit from it (and improve on it)!
+Human UI is a new interface paradigm for Grasshopper. Create professional looking Grasshopper apps with custom user interfaces without writing any code.
+As of January 2016, Human UI is now an open source project. It was originally developed at NBBJ by the Design Computation Leadership Team over the course of about 10 months in 2015-2016.
 
 Going well beyond the capabilities of the “remote control panel,” Human UI makes it easier to create a user-facing display for your Grasshopper definition – one that looks and feels like a Windows app – so you can use GH to build tools for other designers or even clients, without exposing the Grasshopper interface at all.
 
-### What is this repository for? ###
+Gone are the days of faking a user interface by laying out sliders and text panels and hiding wires on the Grasshopper canvas. Human UI interfaces are entirely separate from the Grasshopper canvas and leverage the power of Windows Presentation Foundation (WPF), a graphical subsystem for rendering user interfaces in the Windows environment.
 
-* Human UI - WPF GUIs in Grasshopper
-* Beta 0.6
+In other words: Human UI makes your GH definition feel like a Windows app. Create tabbed views, dynamic sliders, pulldown menus, checkboxes, and even 3D viewports and web browsers that look great and make sense to anyone--including designers and clients with no understanding of Grasshopper.
 
-### How do I get Human UI? ###
-* Summary of set up
+### Links ###
+[Grasshopper Group](http://www.grasshopper3d.com/group/human-ui)
+[Food For Rhino](http://www.food4Rhino.com/project/humanui) (not yet active)
+
+### Credits ###
+Major contributions to this project so far:
+
+* Initial Development: **Andrew Heumann** / andheum / [@andrewheumann](https://twitter.com/andrewheumann)
+
+* Product Management: **Marc Syp** / marcsyp / [@mpsyp](https://twitter.com/mpsyp)
+
+* Graphing Components: **Nate Holland** / nateholland / [@_NateHolland](https://twitter.com/_NateHolland)
+
+
+### How do I build Human UI from source? ###
+* Summary of set up coming soon!
 
 ### Releases ###
 * #### 0.6.0.0 - Initial Public / Open Source release
@@ -35,14 +47,4 @@ Going well beyond the capabilities of the “remote control panel,” Human UI m
 * [Xceed.WPF](http://wpftoolkit.codeplex.com/)
 
 ### Known Issues ###
-* Deleting the component that launched a currently open window can cause crashes
 * Switching back from a subsidiary GH doc back to the parent doc with a HUI window can spawn unwanted extra windows
-
-### Credits ###
-Major contributions to this project so far:
-
-* Initial Development: **Andrew Heumann** / andheum / [@andrewheumann](https://twitter.com/andrewheumann)
-
-* Product Management: **Marc Syp** / marcsyp / [@mpsyp](https://twitter.com/mpsyp)
-
-* Graphing Components: **Nate Holland** / nateholland / [@_NateHolland](https://twitter.com/_NateHolland)
