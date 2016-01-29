@@ -1,0 +1,7 @@
+HumanUIBaseApp/HumanUIBaseApp/bin/
+HumanUIBaseApp/HumanUIBaseApp/obj/
+HumanUI/HumanUI/bin/
+HumanUI/HumanUI/obj/
+HUI_Install/obj/
+HUI_Install/bin/
+*.suo
