@@ -9,6 +9,8 @@ using System.Windows;
 using HumanUIBaseApp;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
+using De.TorstenMandelkow.MetroChart; 
+
 
 namespace HumanUI.Components.UI_Main 
 {
@@ -83,6 +85,9 @@ namespace HumanUI.Components.UI_Main
             Panel panel = f as Panel;
             Selector selector = f as Selector;
             ScrollViewer sv = f as ScrollViewer;
+            ChartBase cb = f as ChartBase;
+           // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
+                  
             //if it's a panel color its children
             if (panel != null)
             {
@@ -132,6 +137,14 @@ namespace HumanUI.Components.UI_Main
         {
             Brush backgroundBrush = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol));
             Brush foregroundBrush = new SolidColorBrush(HUI_Util.ToMediaColor(fgCol));
+            //Try graoh
+            ChartBase ChartB = f as ChartBase;
+            if(ChartB!=null)
+            {
+                ChartB.Foreground = foregroundBrush;
+                ChartB.Background = backgroundBrush;
+                if (fontSize > 0) ChartB.FontSize = fontSize;
+            }
             //Try Label
             Label l = f as Label;
             if (l != null)

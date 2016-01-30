@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HumanUI</RootNamespace>
     <AssemblyName>HumanUI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LimitedRelease|AnyCPU'">
     <OutputPath>bin\LimitedRelease\</OutputPath>
@@ -48,67 +50,32 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug32|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug32\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug64\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LimitedRelease|x64'">
-    <OutputPath>bin\x64\LimitedRelease\</OutputPath>
-    <DefineConstants>TRACE;LIMITEDRELEASE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d5b8d1bbc99c4a2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
       <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="HelixToolkit">
-      <HintPath>..\packages\HelixToolkit.2015.1.461\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="HelixToolkit.Wpf">
-      <HintPath>..\packages\HelixToolkit.Wpf.2015.1.461\lib\net40\HelixToolkit.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+    <Reference Include="HelixToolkit, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MahApps.Metro.1.0.0.0\lib\net40\MahApps.Metro.dll</HintPath>
+      <HintPath>..\..\packages\HelixToolkit.2015.1.678\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\HelixToolkit.Wpf.2015.1.678\lib\net45\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RhinoCommon">
@@ -122,22 +89,41 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Components\UI Elements\Create_TEMPLATE_Component.cs" />
-    <None Include="Components\UI Output\Set_TEMPLATE_Component.cs" />
-    <Compile Include="Components\UI Containers\CreateGrid_Component.cs" />
-    <Compile Include="Components\UI Elements\CreateSilder_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
+    <Compile Include="Custom Types\ChartModel.cs" />
+    <Compile Include="Components\UI Graphs\CreateMultiChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\CreateChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\SetChart_Appearance.cs" />
+    <Compile Include="Components\UI Graphs\SetChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\SetMultiChart_Component.cs" />
+    <Compile Include="Deprecated\SetGraph_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
     <Compile Include="Custom Types\3DViewModel.cs" />
     <Compile Include="Components\UI Main\AddElements_Component.cs" />
@@ -146,12 +132,11 @@
     <Compile Include="Components\UI Elements\CreateBrowser_Component.cs" />
     <Compile Include="Components\UI Elements\CreateButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateColorPicker_Component.cs" />
-    <Compile Include="Deprecated\CreateGrid_Component_DEPRECATED.cs" />
+    <Compile Include="Components\UI Containers\CreateGrid_Component.cs" />
     <Compile Include="Components\UI Elements\CreateObjectsFromXaml_Component.cs" />
-    <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Output\Set3DView_Textured_Component.cs" />
     <Compile Include="Components\UI Output\SetShapes_Component.cs" />
-    <Compile Include="Deprecated\CreateSlider_Component_ALSO_DEPRECATED.cs" />
+    <Compile Include="Components\UI Elements\CreateSlider_Component.cs" />
     <Compile Include="Deprecated\ContainerContents_Component.cs" />
     <Compile Include="Components\UI Elements\Create3DView_Component.cs" />
     <Compile Include="Deprecated\CreateButton_Component_DEPRECATED.cs" />
@@ -170,7 +155,7 @@
     <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTrueOnlyButton.cs" />
     <Compile Include="Components\UI Containers\CreateViewBox_Component.cs" />
-    <Compile Include="Components\Testing\ElemFromGuid_Component.cs" />
+    <Compile Include="Components\Testing - Troubleshooting\ElemFromGuid_Component.cs" />
     <Compile Include="Components\UI Main\GetScreenDimensions_Component.cs" />
     <Compile Include="Components\UI Main\LaunchWindow_Component.cs" />
     <Compile Include="Deprecated\LaunchWindow_Component_DEPRECATED.cs" />
@@ -204,8 +189,6 @@
     <Compile Include="Deprecated\TabContainer_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\TrueOnlyButton.cs" />
     <Compile Include="Custom Types\UIElement_Goo.cs" />
-    <Compile Include="Upgraders\UpgradeSliderComponent.cs" />
-    <Compile Include="Upgraders\Upgrade_GridComponent.cs" />
     <Compile Include="Upgraders\Upgrade_RestoreStateComponent.cs" />
     <Compile Include="Components\UI Main\ValueListener_Component.cs" />
   </ItemGroup>
@@ -356,13 +339,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\CreateTrueButton.png" />
+    <None Include="Resources\CreatePieGraph.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Set3dView_textured.png" />
+    <None Include="Resources\SetMultiChart.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LaunchWindow_Transparent.png" />
+    <None Include="Resources\CreateMultiChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChartAppearance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetChart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -373,13 +365,18 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(AppData)\Grasshopper\Libraries\HumanUI\$(ProjectName).gha"</PostBuildEvent>
+    <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Erase "$(TargetPath)"
+
+Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
     <StartArguments>
     </StartArguments>
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files (x86)\Rhinoceros 5\System\Rhino4.exe</StartProgram>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <FallbackCulture>en-US</FallbackCulture>
@@ -390,5 +387,6 @@
     </StartArguments>
     <StartAction>Program</StartAction>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
 </Project>
