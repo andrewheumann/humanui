@@ -250,7 +250,22 @@
   <data name="CreateRhinoButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreateRhinoButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CreatePieGraph" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="CreatePieChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreatePieGraph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChartAppearance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChartAppearance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateMultiChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateMultiChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetMultiChart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetMultiChart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

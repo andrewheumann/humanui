@@ -9,7 +9,8 @@ using System.Windows;
 using HumanUIBaseApp;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
-using De.TorstenMandelkow.MetroChart;
+using De.TorstenMandelkow.MetroChart; 
+
 
 namespace HumanUI
 {
@@ -81,7 +82,7 @@ namespace HumanUI
             Selector selector = f as Selector;
             ScrollViewer sv = f as ScrollViewer;
             ChartBase cb = f as ChartBase;
-           // var ChartElem = HUI_Util.GetUIElement<ChartBase>(GraphObject);
+           // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
                   
             //if it's a panel color its children
             if (panel != null)

@@ -53,26 +53,28 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="De.TorstenMandelkow.MetroChart">
-      <HintPath>..\packages\Metro UI Graphing\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d5b8d1bbc99c4a2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
     </Reference>
-    <Reference Include="Grasshopper">
+    <Reference Include="Grasshopper, Version=1.0.0.20, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
     </Reference>
-    <Reference Include="HelixToolkit, Version=2015.1.649.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HelixToolkit.2015.1.649\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HelixToolkit, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\HelixToolkit.2015.1.678\lib\portable-net4+sl4+wp71+win8\HelixToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="HelixToolkit.Wpf, Version=2015.1.649.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HelixToolkit.Wpf.2015.1.649\lib\net45\HelixToolkit.Wpf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HelixToolkit.Wpf, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\HelixToolkit.Wpf.2015.1.678\lib\net45\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
@@ -88,8 +90,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
@@ -115,11 +116,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\UI Graphs\CreateMultiGraph_Component.cs" />
-    <Compile Include="Components\UI Graphs\CreateGraph_Component.cs" />
-    <Compile Include="Components\UI Graphs\SetGraph_Appearance.cs" />
-    <Compile Include="Components\UI Graphs\SetMultiGraph_Component.cs" />
-    <Compile Include="Components\UI Graphs\SetGraph_Component.cs" />
+    <Compile Include="Custom Types\ChartModel.cs" />
+    <Compile Include="Components\UI Graphs\CreateMultiChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\CreateChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\SetChart_Appearance.cs" />
+    <Compile Include="Components\UI Graphs\SetChart_Component.cs" />
+    <Compile Include="Components\UI Graphs\SetMultiChart_Component.cs" />
+    <Compile Include="Deprecated\SetGraph_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
     <Compile Include="Custom Types\3DViewModel.cs" />
     <Compile Include="Components\UI Main\AddElements_Component.cs" />
@@ -337,6 +340,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CreatePieGraph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetMultiChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateMultiChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChartAppearance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateChart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SetChart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

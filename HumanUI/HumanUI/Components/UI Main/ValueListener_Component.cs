@@ -13,6 +13,7 @@ using Grasshopper.Kernel.Data;
 using Xceed.Wpf.Toolkit;
 
 using System.Collections;
+using De.TorstenMandelkow.MetroChart;
 
 namespace HumanUI
 {
@@ -296,10 +297,25 @@ namespace HumanUI
                     tc.SelectionChanged -= ExpireThis;
                     tc.SelectionChanged += ExpireThis;
                     return;
+
+                case "De.TorstenMandelkow.MetroChart.ChartBase":
+                case "De.TorstenMandelkow.MetroChart.PieChart":
+                case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
+                case "De.TorstenMandelkow.MetroChart.ClusteredColumnChart":
+                case "De.TorstenMandelkow.MetroChart.DoughnutChart":
+                case "De.TorstenMandelkow.MetroChart.RadialGaugeChart":
+                case "De.TorstenMandelkow.MetroChart.StackedBarChart":
+                case "De.TorstenMandelkow.MetroChart.StackedColumnChart":
+                    ChartBase chart = u as ChartBase;
+                    chart.MouseUp -= ExpireThis;
+                    chart.MouseUp += ExpireThis;
+                    return;
                 default:
                     return;
             }
         }
+
+       
 
         void RemoveEvents(UIElement u)
         {
@@ -371,6 +387,17 @@ namespace HumanUI
                 case "System.Windows.Controls.TabControl":
                     TabControl tc = u as TabControl;
                     tc.SelectionChanged -= ExpireThis;
+                    return;
+                case "De.TorstenMandelkow.MetroChart.ChartBase":
+                case "De.TorstenMandelkow.MetroChart.PieChart":
+                case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
+                case "De.TorstenMandelkow.MetroChart.ClusteredColumnChart":
+                case "De.TorstenMandelkow.MetroChart.DoughnutChart":
+                case "De.TorstenMandelkow.MetroChart.RadialGaugeChart":
+                case "De.TorstenMandelkow.MetroChart.StackedBarChart":
+                case "De.TorstenMandelkow.MetroChart.StackedColumnChart":
+                    ChartBase chart = u as ChartBase;
+                    chart.MouseUp -= ExpireThis;
                     return;
                 default:
                     return;

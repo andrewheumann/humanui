@@ -4,6 +4,6 @@
     <StartProgram>C:\Program Files\Rhinoceros 5.0 %2864-bit%29\System\Rhino.exe</StartProgram>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
-    <StartProgram>C:\Program Files\Rhinoceros 5.0 %2864-bit%29\System\Rhino.exe</StartProgram>
+    <StartProgram>C:\Program Files\Rhinoceros 5 %2864-bit%29\System\Rhino.exe</StartProgram>
   </PropertyGroup>
 </Project>
