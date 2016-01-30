@@ -56,6 +56,7 @@
         <File Source="$(var.HumanUI.TargetDir)MahApps.Metro.dll"/>
         <File Source="$(var.HumanUI.TargetDir)System.Windows.Interactivity.dll" />
         <File Source="$(var.HumanUI.TargetDir)XCeed.Wpf.Toolkit.dll" />
+        <File Source="$(var.HumanUI.TargetDir)De.TorstenMandelkow.MetroChart.dll" />
       </Component>
 
     </ComponentGroup>

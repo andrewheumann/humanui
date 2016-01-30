@@ -356,6 +356,15 @@
   <ItemGroup>
     <None Include="Resources\SetChart.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateTrueButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LaunchWindow_Transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Set3dView_textured.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -367,7 +376,7 @@
   <PropertyGroup>
     <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
 Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
-Erase "$(TargetPath)"
+
 
 Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll</PostBuildEvent>
   </PropertyGroup>
