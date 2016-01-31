@@ -29,7 +29,7 @@ namespace HumanUI
         public CreateButton_Component_DEPRECATED()
             : base("Create Button", "Button",
                 "Create a Button object.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

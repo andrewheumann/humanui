@@ -23,7 +23,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateImage_Component()
             : base("Create Image", "Image",
                 "Creates an image object to be added to the window",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

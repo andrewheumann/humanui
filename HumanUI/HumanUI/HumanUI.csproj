@@ -151,6 +151,7 @@
     <Compile Include="Deprecated\SetWindowProperties_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\StateSet_Goo.cs" />
     <Compile Include="Deprecated\FilterUIElements_Component.cs" />
+    <Compile Include="HUI_PriorityLoad.cs" />
     <Compile Include="HUI_Util.cs" />
     <Compile Include="HumanUIInfo.cs" />
     <Compile Include="Components\UI Elements\CreateImage_Component.cs" />
@@ -345,6 +346,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Set3dView_textured.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

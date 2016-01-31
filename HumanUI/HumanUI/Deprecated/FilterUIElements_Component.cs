@@ -15,7 +15,7 @@ namespace HumanUI
         public FilterUIElements_Component()
             : base("Filter UI Elements", "Filter",
                 "This component allows you to select UI elements from a window by name, to let you listen for their values or set their properties dynamically.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

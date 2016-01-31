@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateTextBox_Component()
             : base("Create Text Box", "TextBox",
                 "Create a box for text entry, with a button to pass its value.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

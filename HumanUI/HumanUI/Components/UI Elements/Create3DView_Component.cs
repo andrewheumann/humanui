@@ -20,7 +20,7 @@ namespace HumanUI.Components.UI_Elements
         public Create3DView_Component()
             : base("Create 3D View", "3DView",
                 "Creates an orbitable 3d viewport with a custom-defined mesh",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

@@ -23,7 +23,7 @@ namespace HumanUI.Components
         public SetMultiChart_Component()
             : base("Set Multi Chart Contents", "SetMultiChart",
                 "Use this to set the contents of a MultiChart",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

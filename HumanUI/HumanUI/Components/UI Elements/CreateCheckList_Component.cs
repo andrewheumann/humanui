@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateCheckList_Component()
             : base("Create Checklist", "Checklist",
                 "Creates a listbox containing checkboxes.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

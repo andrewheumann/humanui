@@ -24,7 +24,7 @@ namespace HumanUI.Components
         public CreateMultiChart_Component()
             : base("Create Multi Chart", "MultiChart",
                 "Creates a Multi Chart from sets of Data and Categories.",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

@@ -23,7 +23,7 @@ namespace HumanUI.Components
         public SetChartAppearance_Component()
             : base("Chart Appearance", "ChartAppearance",
                 "Use this to set the appearnce of a Chart",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

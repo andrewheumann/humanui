@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreatePullDown_Component()
             : base("Create Pulldown Menu", "Pulldown",
                 "Creates a pulldown menu from which items can be selected.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

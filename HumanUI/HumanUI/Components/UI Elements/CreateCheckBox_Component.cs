@@ -19,7 +19,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateCheckBox_Component()
             : base("Create Checkbox", "Checkbox",
                 "Creates a single checkbox",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

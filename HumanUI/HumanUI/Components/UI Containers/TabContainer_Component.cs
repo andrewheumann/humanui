@@ -27,7 +27,7 @@ namespace HumanUI.Components.UI_Containers
         public TabContainer_Component()
             : base("Tabbed View", "Tabs",
                 "Creates a series of tabbed views that can contain UI element layouts",
-                "Human", "UI Containers")
+                "Human UI", "UI Containers")
         {
         }
 

@@ -18,7 +18,7 @@ namespace HumanUI.Components.UI_Output
         public SetBrowser_Component()
             : base("Set Browser", "SetBrowser",
                 "Control the Browser element - with back/forward buttons, and control over the displayed site etc.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

@@ -20,7 +20,7 @@ namespace HumanUI.Components.UI_Output
         public SetChecklist_Component()
             : base("Set Checklist Contents", "SetChecklist",
                 "Use this to set the contents of a checklist",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

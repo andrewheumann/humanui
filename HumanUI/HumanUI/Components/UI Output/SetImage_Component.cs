@@ -20,7 +20,7 @@ namespace HumanUI.Components.UI_Output
         public SetImage_Component()
             : base("Set Image", "SetImg",
                 "Change the content of an existing Image control.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

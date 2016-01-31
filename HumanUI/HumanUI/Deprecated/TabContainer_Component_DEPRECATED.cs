@@ -23,7 +23,7 @@ namespace HumanUI
         public TabContainer_Component_DEPRECATED()
             : base("Tabbed View", "Tabs",
                 "Creates a series of tabbed views that can contain UI element layouts",
-                "Human", "UI Containers")
+                "Human UI", "UI Containers")
         {
         }
 

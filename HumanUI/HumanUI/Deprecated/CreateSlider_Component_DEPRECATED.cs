@@ -19,7 +19,7 @@ namespace HumanUI
         public CreateSlider_Component_DEPRECATED()
             : base("Create Slider", "Slider",
                 "Create a slider with a label and a value readout.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

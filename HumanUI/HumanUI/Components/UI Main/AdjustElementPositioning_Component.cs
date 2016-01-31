@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Main
         public AdjustElementPositioning_Component()
             : base("Adjust Element Positioning", "AdjustPos",
                 "Adjust the margins, sizing, and other positioning information of an element. \nAbsolute positioning can get a little wonky, use at your own risk.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Containers
         public CreateGrid_Component()
             : base("Create Grid", "Grid",
                 "Create a container with absolutely positioned elements. \n Their input order determines their Z order - set the margins \nwith the \"Adjust Element Positioning\" component to locate \nelements inside the grid.\n Use column and row definitions to create more advanced grids.",
-                "Human", "UI Containers")
+                "Human UI", "UI Containers")
         {
         }
 

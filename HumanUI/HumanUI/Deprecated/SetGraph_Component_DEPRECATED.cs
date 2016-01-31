@@ -20,7 +20,7 @@ namespace HumanUI.Components
         public SetGraph_Component()
             : base("Set Graph Contents", "SetGraph",
                 "Use this to set the contents of a Graph",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

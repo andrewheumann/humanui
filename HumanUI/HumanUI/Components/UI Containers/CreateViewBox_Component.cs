@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Containers
         public CreateViewBox_Component()
             : base("Create View Box", "ViewBox",
                 "Scale a group of UI Elements by placing them in a ViewBox.",
-                "Human", "UI Containers")
+                "Human UI", "UI Containers")
         {
         }
 

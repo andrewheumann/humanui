@@ -23,7 +23,7 @@ namespace HumanUI
         public SetWindowProperties_Component_DEPRECATED()
             : base("Set Window Properties", "WinProps",
                 "Modify various properties of a Window.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

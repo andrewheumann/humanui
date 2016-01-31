@@ -43,7 +43,7 @@ namespace HumanUI.Components.UI_Main
         /// new tabs/panels will automatically be created.
         /// </summary>
         public LaunchWindow_Component()
-            : base("Launch Window", "LaunchWin", "This component launches a new blank control window.", "Human", "UI Main")
+            : base("Launch Window", "LaunchWin", "This component launches a new blank control window.", "Human UI", "UI Main")
         {
             UpdateMenu();
         }

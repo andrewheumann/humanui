@@ -19,7 +19,7 @@ namespace HumanUI.Components.UI_Output
         public SetList_Component()
             : base("Set List Contents", "SetList",
                 "Use this to set the contents of either a List Box or a Pulldown Menu",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

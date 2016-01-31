@@ -18,7 +18,7 @@ namespace HumanUI
         public ContainerContents_Component()
             : base("Container Contents", "Contents",
                 "Gets the child elements of a container element like a Stack or a Tab",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

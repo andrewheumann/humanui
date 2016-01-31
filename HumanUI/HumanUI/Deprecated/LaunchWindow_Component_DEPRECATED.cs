@@ -35,7 +35,7 @@ namespace HumanUI
         /// new tabs/panels will automatically be created.
         /// </summary>
         public LaunchWindow_Component_DEPRECATED()
-            : base("Launch Window", "LaunchWin", "This component launches a new blank control window.", "Human", "UI Main")
+            : base("Launch Window", "LaunchWin", "This component launches a new blank control window.", "Human UI", "UI Main")
      
         {
             UpdateMenu();

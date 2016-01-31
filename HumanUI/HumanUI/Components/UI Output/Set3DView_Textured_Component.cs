@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Output
         public Set3DViewTex_Component()
             : base("Set 3D View Textured", "Set3DViewTex",
                 "Allows you to modify the contents of an existing 3D view.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

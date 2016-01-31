@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Output
         public SetTextBlock_Component()
             : base("Set TextBlock Contents", "SetTextBlock",
                 "Modify the contents of an existing Text Block object.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

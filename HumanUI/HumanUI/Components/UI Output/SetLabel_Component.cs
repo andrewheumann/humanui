@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Output
         public SetLabel_Component()
             : base("Set Label Contents", "SetLabel",
                 "Modify the contents of an existing label object.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

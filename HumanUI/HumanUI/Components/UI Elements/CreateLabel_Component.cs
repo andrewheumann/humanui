@@ -17,7 +17,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateLabel_Component()
             : base("Create Label", "Label",
                 "Creates a label in the window.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

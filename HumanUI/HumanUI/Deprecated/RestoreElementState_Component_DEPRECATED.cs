@@ -16,7 +16,7 @@ namespace HumanUI
         public RestoreElementState_Component_DEPRECATED()
             : base("Restore Element States", "Restore",
                 "Restore the saved states of UI elements",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

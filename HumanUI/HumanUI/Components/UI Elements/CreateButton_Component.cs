@@ -41,7 +41,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateButton_Component()
             : base("Create Button", "Button",
                 "Create a Button object.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
             UpdateMenu();
         }
@@ -52,7 +52,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateButton_Component(string name, string nickname, string description)
             : base(name, nickname,
                 description,
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
             UpdateMenu();
         }

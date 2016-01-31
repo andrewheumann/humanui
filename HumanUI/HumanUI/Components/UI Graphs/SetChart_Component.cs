@@ -20,7 +20,7 @@ namespace HumanUI.Components
         public SetChart_LiveUpdate()
             : base("Set Chart Contents", "SetChart",
                 "Use this to set the contents of a Chart",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

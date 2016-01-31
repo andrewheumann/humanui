@@ -26,7 +26,7 @@ namespace HumanUI.Components.UI_Output
         public SetShapes_Component()
             : base("Set Shapes", "SetShapes",
                 "Replace an existing shape in the window",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

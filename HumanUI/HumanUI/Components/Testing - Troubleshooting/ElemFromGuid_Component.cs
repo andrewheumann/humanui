@@ -19,7 +19,7 @@ namespace HumanUI.Components.Testing
         public ElemFromGuid_Component()
             : base("ElemFromGuid", "Nickname",
                 "Description",
-                "Human", "UI Testing")
+                "Human UI", "UI Testing")
         {
         }
 

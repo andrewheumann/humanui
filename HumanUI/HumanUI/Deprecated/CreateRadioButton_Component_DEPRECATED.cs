@@ -16,7 +16,7 @@ namespace HumanUI
         public CreateRadioButton_Component_DEPRECATED()
             : base("Create Radio Button", "RadioBtn",
                 "Creates a single radio button. Be sure to assign a radio button group for proper switching behavior",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

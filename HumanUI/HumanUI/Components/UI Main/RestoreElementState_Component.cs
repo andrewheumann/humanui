@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Main
         public RestoreElementState_Component()
             : base("Restore Element States", "Restore",
                 "Restore the saved states of UI elements",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
           //set up listener for changed parameters so that appropriate maintenance can be performed.
             Params.ParameterSourcesChanged += new GH_ComponentParamServer.ParameterSourcesChangedEventHandler(ParamSourcesChanged);

@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Main
         public SaveElementState_Component()
             : base("Save Element States", "SaveStates",
                 "This component lets you save the states of selected elements for later retrieval",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
             savedStates = new StateSet_Goo();
         }

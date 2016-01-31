@@ -23,7 +23,7 @@ namespace HumanUI.Components.UI_Main
         public AddElements_Component()
             : base("Add Elements", "AddElems",
                 "Add WPF Controls to a window",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

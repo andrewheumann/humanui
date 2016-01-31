@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Output
         public Set3DView_Component()
             : base("Set 3D View", "Set3DView",
                 "Allows you to modify the contents of an existing 3D view.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

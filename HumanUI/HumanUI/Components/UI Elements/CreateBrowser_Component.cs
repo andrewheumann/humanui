@@ -18,7 +18,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateBrowser_Component()
             : base("Create Browser", "Browser",
                 "Creates a web browser window.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

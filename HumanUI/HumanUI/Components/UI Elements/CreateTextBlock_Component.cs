@@ -23,7 +23,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateTextBlock_Component()
             : base("Create Text Block", "TB",
                 "Creates a multi-line text block",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

@@ -29,7 +29,7 @@ namespace HumanUI.Components.UI_Main
         public SetWindowProperties_Component()
             : base("Set Window Properties", "WinProps",
                 "Modify various properties of a Window.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

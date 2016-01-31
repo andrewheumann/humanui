@@ -26,7 +26,7 @@ namespace HumanUI.Components.UI_Main
         public AdjustElementAppearance_Component()
             : base("Adjust Element Appearance", "AdjustElem",
                 "Adjust the color and appearance of individual elements.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

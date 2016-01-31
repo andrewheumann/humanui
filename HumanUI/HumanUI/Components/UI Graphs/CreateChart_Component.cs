@@ -24,7 +24,7 @@ namespace HumanUI.Components
         public CreateChart_Component()
             : base("Create Chart", " Chart",
                 "Creates a Chart from Data and Categories.",
-                "Human", "UI Graphs + Charts")
+                "Human UI", "UI Graphs + Charts")
         {
         }
 

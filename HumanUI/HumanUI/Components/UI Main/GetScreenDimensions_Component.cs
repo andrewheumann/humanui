@@ -29,7 +29,7 @@ namespace HumanUI.Components.UI_Main
         public GetScreenDimensions_Component()
             : base("Get Screen Dimensions", "GetScreen",
                 "Gets the dimensions of the current screen",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
         }
 

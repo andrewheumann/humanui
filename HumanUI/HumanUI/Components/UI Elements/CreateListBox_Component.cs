@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateListBox_Component()
             : base("Create List Box", "ListBox",
                 "Creates a list box from which items can be selected.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

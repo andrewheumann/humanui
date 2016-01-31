@@ -14,7 +14,7 @@ namespace HumanUI.Components.UI_Main
     public class CreateTransparentWindow_Component : LaunchWindow_Component
     {
         public CreateTransparentWindow_Component()
-            : base("Launch Transparent Window", "LaunchXPWin", "This component launches a new blank, transparent control window.", "Human", "UI Main")
+            : base("Launch Transparent Window", "LaunchXPWin", "This component launches a new blank, transparent control window.", "Human UI", "UI Main")
         {
 
         }

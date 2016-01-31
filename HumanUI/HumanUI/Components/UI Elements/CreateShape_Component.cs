@@ -24,7 +24,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateShape_Component()
             : base("Create Shape", "Shape",
                 "Creates a simple shape from a polyline",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

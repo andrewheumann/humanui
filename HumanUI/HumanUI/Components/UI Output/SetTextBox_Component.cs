@@ -19,7 +19,7 @@ namespace HumanUI.Components.UI_Output
         public SetTextBox_Component()
             : base("Set TextBox Contents", "SetTextBox",
                 "Modify the contents of an existing Text Box object.",
-                "Human", "UI Output")
+                "Human UI", "UI Output")
         {
         }
 

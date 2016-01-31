@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateObjectsFromXaml_Component()
             : base("Create Objects from XAML", "XAML",
                 "Creates UI elements from typed XAML syntax",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

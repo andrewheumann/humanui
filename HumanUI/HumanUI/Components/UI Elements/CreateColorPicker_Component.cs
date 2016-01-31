@@ -21,7 +21,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateColorPicker_Component()
             : base("Create Color Picker", "ColorPicker",
                 "Creates an interactive color picker, with an optionally supplied set of colors",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

@@ -25,7 +25,7 @@ namespace HumanUI
         public ValueListener_Component()
             : base("Value Listener", "Values",
                 "This component is used to retrieve the values of UI elements from the window. By default it will automatically refresh when those values change.",
-                "Human", "UI Main")
+                "Human UI", "UI Main")
         {
             eventedElements = new List<UIElement>();
             AddEventsEnabled = true;
