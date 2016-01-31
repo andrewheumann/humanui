@@ -1,3 +1,5 @@
+![Human UI](https://bytebucket.org/andheum/humanui/raw/0a6f7363f636fd73cb13962cb766af6354078305/SupportingMaterials/Icon-sm.png "Human UI Logo")
+
 ![Human UI](https://bytebucket.org/andheum/humanui/raw/14a8fde782f47a804ee68263b62447c114670fb9/SupportingMaterials/Logo2.png "Human UI")
 
 ## Initial development of Human UI by: ##
