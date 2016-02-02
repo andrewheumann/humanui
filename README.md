@@ -49,6 +49,7 @@ Major contributions to this project so far:
 * [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
 * [HelixToolkit.WPF](https://github.com/helix-toolkit)
 * [Xceed.WPF](http://wpftoolkit.codeplex.com/)
+* [De.TorstenMandelkow.MetroCharts](https://modernuicharts.codeplex.com/)
 
 ### Known Issues ###
 * Switching back from a subsidiary GH doc back to the parent doc with a HUI window can spawn unwanted extra windows
