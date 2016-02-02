@@ -25,7 +25,7 @@ In other words: Human UI makes your GH definition feel like a Windows app. Creat
 
 * [Grasshopper Group](http://www.grasshopper3d.com/group/human-ui)
 
-* [Food For Rhino](http://www.food4Rhino.com/project/humanui) (not yet active)
+* [Food For Rhino](http://www.food4Rhino.com/project/human-ui) 
 
 ### Credits ###
 Major contributions to this project so far:
@@ -41,7 +41,7 @@ Major contributions to this project so far:
 * Summary of set up coming soon!
 
 ### Releases ###
-* #### 0.6.0.0 - Initial Public / Open Source release
+* #### 0.6.2.0 - Initial Public / Open Source release
 
 ### Dependencies ###
 * Rhino + RhinoCommon.dll
