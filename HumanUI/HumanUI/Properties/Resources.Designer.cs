@@ -223,6 +223,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateMDSlider {
+            get {
+                object obj = ResourceManager.GetObject("CreateMDSlider", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateMultiChart {
             get {
                 object obj = ResourceManager.GetObject("CreateMultiChart", resourceCulture);
@@ -361,7 +371,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.6.2.0.
+        ///   Looks up a localized string similar to 0.6.6.5.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {

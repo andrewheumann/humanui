@@ -63,12 +63,12 @@ namespace HumanUI.Components.UI_Output
             //clear out the existing list
             sel.Items.Clear();
 
-            //add all items in the input list as Labels
+            //add all items in the input list as TextBlocks
             foreach (string item in listContents)
             {
-                Label label = new Label();
-                label.Content = item;
-                sel.Items.Add(label);
+                TextBlock textbox = new TextBlock();
+                textbox.Text = item;
+                sel.Items.Add(textbox);
             }
             //set selected index
             sel.SelectedIndex = selectedIndex;

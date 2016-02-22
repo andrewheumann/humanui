@@ -7,6 +7,9 @@ using Rhino.Geometry;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Grasshopper.Kernel.Data;
+using Grasshopper.Kernel.Types;
+using System.Windows.Input;
 
 namespace HumanUI.Components.UI_Elements
 {
@@ -40,7 +43,7 @@ namespace HumanUI.Components.UI_Elements
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Slider", "Sl", "The slider(s) to add to the window.", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Slider", "Sl", "The slider(s) to add to the window.", GH_ParamAccess.tree);
             pManager.AddNumberParameter("Snap Value", "Sn", "An optional value to round/snap slider to. This overrides the native settings on the GH slider.", GH_ParamAccess.list);
             pManager[1].Optional = true;
 
@@ -62,6 +65,7 @@ namespace HumanUI.Components.UI_Elements
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            GH_Structure<IGH_Goo> slidersAsObjects = new GH_Structure<IGH_Goo>();
             List<double> snapValues = new List<double>();
 
             //an optional value to store slider snapping
@@ -86,8 +90,31 @@ namespace HumanUI.Components.UI_Elements
             //lazy iterator for the snap values.
             int i = 0;
 
-            //Get all sliders attached to the first parameter
-            var attachedSliders = Params.Input[0].Sources.Cast<GH_NumberSlider>().ToList();
+            //container for sliders
+            var attachedSliders = new List<GH_NumberSlider>();
+
+            try
+            {
+                //Get all sliders attached to the first parameter
+                attachedSliders = Params.Input[0].Sources.Cast<GH_NumberSlider>().ToList();
+
+
+            }
+            catch
+            {
+                //Assume that sliders were not connected, try to read slider objects from the wrappers instead:
+                DA.GetDataTree<IGH_Goo>("Slider", out slidersAsObjects);
+                foreach (IGH_Goo goo in slidersAsObjects)
+                {
+                    if (goo is GH_ObjectWrapper)
+                    {
+                        GH_ObjectWrapper w = goo as GH_ObjectWrapper;
+                        attachedSliders.Add(w.Value as GH_NumberSlider);
+                    }
+                    
+                }
+
+            }
 
             foreach (GH_NumberSlider sl in attachedSliders)
             {
@@ -282,6 +309,13 @@ namespace HumanUI.Components.UI_Elements
             //establish format string for labels
             string numberFormat = integerSlider ? "{0:0}" : String.Concat("{0:F", decPlaces, "}");
 
+            //Set up a value entry box for doubleclick
+            SliderEntryTextBox ValueEntryBox = new SliderEntryTextBox(slider);
+            slider.AddHandler(Slider.MouseDoubleClickEvent, new MouseButtonEventHandler(ValueEntryBox.TriggerAction), true);
+           
+            
+
+
             if (showValueReadout) //if user has opted to show the value label
             {
                 //create a label for the slider readout
@@ -341,6 +375,7 @@ namespace HumanUI.Components.UI_Elements
             }
 
             // Add the slider to the grid - if it goes last it won't lose its interaction
+            SliderGrid.Children.Add(ValueEntryBox);
             SliderGrid.Children.Add(slider);
 
             //add the slider last - the last item added will fill the available space.
@@ -348,6 +383,10 @@ namespace HumanUI.Components.UI_Elements
             internalDockPanel.Name = "GH_Slider"; //this key is used in other methods to figure out that the panel is to be interpreted as a slider.
             return internalDockPanel;
         }
+
+
+
+
 
 
         /// <summary>

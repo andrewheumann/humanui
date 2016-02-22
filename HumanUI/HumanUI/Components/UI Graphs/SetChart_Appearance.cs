@@ -32,8 +32,8 @@ namespace HumanUI.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Chart to modify", "G", "The Pie Chart object to modify", GH_ParamAccess.item);
-            pManager.AddColourParameter("Colors", "C", "The Chart colors", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Chart to modify", "C", "The Chart object to modify", GH_ParamAccess.item);
+            pManager.AddColourParameter("Colors", "Co", "The Chart colors", GH_ParamAccess.list);
             pManager[1].Optional = true;
             pManager.AddBooleanParameter("Legend", "L", "Legend on?", GH_ParamAccess.item);
             pManager[2].Optional = true;

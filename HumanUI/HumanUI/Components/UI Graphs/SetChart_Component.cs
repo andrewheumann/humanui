@@ -29,7 +29,7 @@ namespace HumanUI.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Chart to modify", "G", "The Chart object to modify", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Chart to modify", "C", "The Chart object to modify", GH_ParamAccess.item);
             pManager.AddNumberParameter("New Chart Values", "V", "The new values to include in the Chart", GH_ParamAccess.list);
             pManager[1].Optional = true;
             pManager.AddTextParameter("New Chart Names", "N", "The names of the data items to be charted", GH_ParamAccess.list);

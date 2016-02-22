@@ -239,6 +239,10 @@ namespace HumanUI
                         RadioButton rb = u as RadioButton;
                         rb.IsChecked = (bool)o;
                         return;
+                    case "HumanUI.MDSliderElement":
+                        MDSliderElement mds = u as MDSliderElement;
+                        mds.SliderPoint = (Rhino.Geometry.Point3d)o;
+                        return;
                     default:
                         return;
                 }
@@ -340,10 +344,10 @@ namespace HumanUI
         {
             foreach (object o in selector.Items)
             {
-                if (o is Label)
+                if (o is TextBlock)
                 {
-                    Label l = o as Label;
-                    if (l.Content.ToString() == labelContent)
+                    TextBlock l = o as TextBlock;
+                    if (l.Text == labelContent)
                     {
                         return selector.Items.IndexOf(o);
                     }
@@ -351,6 +355,9 @@ namespace HumanUI
             }
             return -1;
         }
+
+
+
 
         static public object GetElementValue(UIElement u)
         {
@@ -398,10 +405,10 @@ namespace HumanUI
                     return tb.Text;
                 case "System.Windows.Controls.ComboBox":
                     ComboBox cb = u as ComboBox;
-                    Label cbi = cb.SelectedItem as Label;
+                    TextBlock cbi = cb.SelectedItem as TextBlock;
                     if (cbi != null)
                     {
-                        return cbi.Content;
+                        return cbi.Text;
                     }
                     else
                     {
@@ -469,7 +476,10 @@ namespace HumanUI
                     {
                         return null;
                     }
-                    
+                case "HumanUI.MDSliderElement":
+                    MDSliderElement mds = u as MDSliderElement;
+
+                    return mds.SliderPoint;
                 default:
                     return null;
             }
@@ -525,6 +535,32 @@ namespace HumanUI
                 default:
                     return -1;
             }
+        }
+
+
+        public static List<IGH_ActiveObject> SourcesRecursive(IGH_Param p, List<IGH_ActiveObject> possibleObjects)
+        {
+            List<IGH_ActiveObject> results = new List<IGH_ActiveObject>();
+            var sources = possibleObjects.Where(po => p.DependsOn(po));
+
+            var ParamSources = sources.Where(s => s is IGH_Param).Cast<IGH_Param>().ToList();
+
+            var ComponentSources = sources.Where(s => s is IGH_Component).Cast<IGH_Component>().ToList();
+
+            foreach (IGH_Param param in ParamSources)
+            {
+                results.Add(param);
+                results.AddRange(SourcesRecursive(param, possibleObjects));
+
+            }
+
+            foreach (IGH_Component component in ComponentSources)
+            {
+                results.Add(component);
+                component.Params.Input.ForEach(input => results.AddRange(SourcesRecursive(input, possibleObjects)));
+            }
+            return results;
+
         }
 
     }

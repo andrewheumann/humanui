@@ -50,8 +50,9 @@ namespace HumanUI.Components.UI_Main
             pManager.AddTextParameter("Accent Color", "A", "The color accent for the window.  Use the component \nmenu item \"Create Accent List\" so you don't have to guess", GH_ParamAccess.item);
             pManager[3].Optional = true;
             pManager.AddBooleanParameter("Show Title Bar", "TB", "Set to false to hide the window's title bar.", GH_ParamAccess.item, true);
-            pManager.AddColourParameter("Background Color", "BG", "Set the background color of the window.", GH_ParamAccess.item);
             pManager[4].Optional = true;
+            pManager.AddColourParameter("Background Color", "BG", "Set the background color of the window.", GH_ParamAccess.item);
+            pManager[5].Optional = true;
         }
 
         /// <summary>

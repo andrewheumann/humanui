@@ -6,21 +6,22 @@ using Rhino.Geometry;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Grasshopper.Kernel.Special;
 
 namespace HumanUI.Components.UI_Elements
 {
     /// <summary>
-    /// Component to create a "List Box" / Scrollable selector
+    /// Component to create a Combobox ("Pulldown menu")
     /// </summary>
     /// <seealso cref="Grasshopper.Kernel.GH_Component" />
-    public class CreateListBox_Component : GH_Component
+    public class CreatePullDown_Component_DEPRECATED : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
-        public CreateListBox_Component()
-            : base("Create List Box", "ListBox",
-                "Creates a list box from which items can be selected.",
+        public CreatePullDown_Component_DEPRECATED()
+            : base("Create Pulldown Menu", "Pulldown",
+                "Creates a pulldown menu from which items can be selected.",
                 "Human UI", "UI Elements")
         {
         }
@@ -32,7 +33,22 @@ namespace HumanUI.Components.UI_Elements
         {
             pManager.AddTextParameter("List Items", "L", "The initial list of options to display in the list.", GH_ParamAccess.list);
             pManager.AddIntegerParameter("Selected Index", "I", "The initially selected index. Defaults to the first item.", GH_ParamAccess.item, 0);
-            pManager.AddNumberParameter("Height", "H", "List box height in pixels.", GH_ParamAccess.item, 100);
+        }
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
+        public override bool Obsolete
+        {
+            get
+            {
+                return true;
+            }
         }
 
         /// <summary>
@@ -40,7 +56,7 @@ namespace HumanUI.Components.UI_Elements
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("List Box", "LB", "The list box object", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Pulldown", "PD", "The pulldown object", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -49,28 +65,29 @@ namespace HumanUI.Components.UI_Elements
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
+
+          
            
             List<string> listItems = new List<string>();
             int selectedIndex = 0;
-            double height = 100;
-            if (!DA.GetDataList<string>("List Items", listItems)) return;
-            DA.GetData<double>("Height", ref height);
-            DA.GetData<int>("Selected Index",ref selectedIndex);
 
-            //Initialize the list box
-            ListBox lb = new ListBox();
-            lb.Height = height;
-            //for all the strings, add a new textbox as an item to the list box
+            if (!DA.GetDataList<string>("List Items", listItems)) return;
+            DA.GetData<int>("Selected Index",ref selectedIndex);
+            //initialize combobox
+            ComboBox pd = new ComboBox();
+          //for each string add a label object to the combobox
             foreach (string item in listItems)
             {
-                TextBlock textbox = new TextBlock();
-                textbox.Text = item;
-                lb.Items.Add(textbox);
+                TextBlock label = new TextBlock();
+                label.Text = item;
+                pd.Items.Add(label);
             }
-            //set the selected index
-            lb.SelectedIndex = selectedIndex;
-            //pass out the listbox object
-            DA.SetData("List Box", new UIElement_Goo(lb, "List Box", InstanceGuid, DA.Iteration));
+            pd.Margin = new Thickness(4);
+            pd.SelectedIndex = selectedIndex;
+
+            //pass out the combobox
+            DA.SetData("Pulldown", new UIElement_Goo(pd, "Pulldown", InstanceGuid, DA.Iteration));
         }
 
         /// <summary>
@@ -82,7 +99,7 @@ namespace HumanUI.Components.UI_Elements
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateListBox;
+                return Properties.Resources.CreatePullDown;
             }
         }
 
@@ -91,7 +108,7 @@ namespace HumanUI.Components.UI_Elements
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{2dddb05e-5503-4506-8f9e-5c0f4c35f8b0}"); }
+            get { return new Guid("{1CA8D537-EF52-487C-828D-034B1BCA7361}"); }
         }
     }
 }

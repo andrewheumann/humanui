@@ -14,16 +14,15 @@ using Xceed.Wpf.Toolkit;
 
 using System.Collections;
 using De.TorstenMandelkow.MetroChart;
-using Grasshopper.Kernel.Parameters;
 
 namespace HumanUI
 {
-    public class ValueListener_Component : GH_Component, IGH_VariableParameterComponent
+    public class ValueListener_Component_DEPRECATED : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the ValueListener class.
         /// </summary>
-        public ValueListener_Component()
+        public ValueListener_Component_DEPRECATED()
             : base("Value Listener", "Values",
                 "This component is used to retrieve the values of UI elements from the window. By default it will automatically refresh when those values change.",
                 "Human UI", "UI Main")
@@ -31,6 +30,22 @@ namespace HumanUI
             eventedElements = new List<UIElement>();
             AddEventsEnabled = true;
             updateMessage();
+        }
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.hidden;
+            }
+        }
+
+        public override bool Obsolete
+        {
+            get
+            {
+                return true ;
+            }
         }
 
 
@@ -442,11 +457,11 @@ namespace HumanUI
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{D6BA0398-70A7-46E7-A068-274486EB0ACB}"); }
+            get { return new Guid("{78fb7e0c-ae2a-45ad-b09c-83df32d0b3bc}"); }
         }
 
 
-        internal void updateMessage()
+        private void updateMessage()
         {
             Message = AddEventsEnabled ? "Live" : "Manual Update";
         }
@@ -480,41 +495,6 @@ namespace HumanUI
 
         internal bool AddEventsEnabled = true;
 
-        //All the variable parameter stuff so that we can have an input for manually triggering an update w/o dispatch gymnastics.
 
-        public bool CanInsertParameter(GH_ParameterSide side, int index)
-        {
-            if (side == GH_ParameterSide.Input && index == 2 && Params.Input.Count==2) return true;
-            return false;
-        }
-
-        public bool CanRemoveParameter(GH_ParameterSide side, int index)
-        {
-            if (side == GH_ParameterSide.Input && index == 2 && Params.Input.Count == 3) return true;
-            return false;
-        }
-
-        public IGH_Param CreateParameter(GH_ParameterSide side, int index)
-        {
-            Param_Boolean manualTrigger = new Param_Boolean();
-            manualTrigger.NickName = "T";
-            manualTrigger.Name = "Trigger";
-            manualTrigger.Description = "An optional input parameter to force trigger an update (useful when the component is in manual mode)";
-            manualTrigger.Optional = true;
-            Params.RegisterInputParam(manualTrigger, index);
-            return manualTrigger;
-        }
-
-        public bool DestroyParameter(GH_ParameterSide side, int index)
-        {
-            return side == GH_ParameterSide.Input && index == 2;
-
-
-        }
-
-        public void VariableParameterMaintenance()
-        {
-            return;
-        }
     }
 }

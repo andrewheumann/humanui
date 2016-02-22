@@ -97,13 +97,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
+    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
+    <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_ValueListener.cs" />
+    <None Include="Components\UI Elements\Create_TEMPLATE_Component.cs" />
+    <None Include="Components\UI Output\Set_TEMPLATE_Component.cs" />
     <Compile Include="Custom Types\ChartModel.cs" />
     <Compile Include="Components\UI Graphs\CreateMultiChart_Component.cs" />
     <Compile Include="Components\UI Graphs\CreateChart_Component.cs" />
     <Compile Include="Components\UI Graphs\SetChart_Appearance.cs" />
     <Compile Include="Components\UI Graphs\SetChart_Component.cs" />
     <Compile Include="Components\UI Graphs\SetMultiChart_Component.cs" />
+    <Compile Include="Custom Types\MDSliderElement.cs" />
+    <Compile Include="Custom Types\SliderEntryTextBox.cs" />
+    <Compile Include="Deprecated\CreateGrid_Component_DEPRECATED.cs" />
+    <Compile Include="Deprecated\CreateSlider_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Deprecated\SetGraph_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Main\CreateTransparentWindow_Component.cs" />
     <Compile Include="Custom Types\3DViewModel.cs" />
@@ -124,7 +134,7 @@
     <Compile Include="Components\UI Elements\CreateCheckBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateCheckList_Component.cs" />
     <Compile Include="Components\UI Elements\CreateLabel_Component.cs" />
-    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Deprecated\CreatePullDown_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateListBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRadioButton_Component.cs" />
     <Compile Include="Deprecated\CreateRadioButton_Component_DEPRECATED.cs" />
@@ -151,6 +161,7 @@
     <Compile Include="Deprecated\SetWindowProperties_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\StateSet_Goo.cs" />
     <Compile Include="Deprecated\FilterUIElements_Component.cs" />
+    <Compile Include="Deprecated\ValueListener_Component_DEPRECATED.cs" />
     <Compile Include="HUI_PriorityLoad.cs" />
     <Compile Include="HUI_Util.cs" />
     <Compile Include="HumanUIInfo.cs" />
@@ -171,6 +182,8 @@
     <Compile Include="Deprecated\TabContainer_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\TrueOnlyButton.cs" />
     <Compile Include="Custom Types\UIElement_Goo.cs" />
+    <Compile Include="Upgraders\UpgradeSliderComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_GridComponent.cs" />
     <Compile Include="Upgraders\Upgrade_RestoreStateComponent.cs" />
     <Compile Include="Components\UI Main\ValueListener_Component.cs" />
   </ItemGroup>
@@ -352,6 +365,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\CreateMDSlider.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
