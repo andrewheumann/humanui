@@ -72,7 +72,8 @@ namespace HumanUI.Components.UI_Output
             if (!DA.GetData<object>("Shape to Modify", ref ShapeObject)) return;
 
             //Get grid container out of generic object
-            Grid G = HUI_Util.GetUIElement<Grid>(ShapeObject);
+            ClickableShapeGrid G = HUI_Util.GetUIElement<ClickableShapeGrid>(ShapeObject);
+            List<bool> oldStates = new List<bool>(G.SelectedStates.ToArray());
             //change the shape
             if (G != null)
             {
@@ -100,6 +101,7 @@ namespace HumanUI.Components.UI_Output
                 //If the user has specified new shapes:
                 if (DA.GetDataList<Curve>("Shape Curves", shapeCrvs))
                 {
+                   
                     G.Children.Clear();
 
                     int i = 0;
@@ -149,6 +151,7 @@ namespace HumanUI.Components.UI_Output
                         //Add the new path to the Grid
                         G.Children.Add(path);
                     }
+                    
 
                 }
 
@@ -178,6 +181,12 @@ namespace HumanUI.Components.UI_Output
                 }
 
 
+            }
+
+            if (G.Children.Count == oldStates.Count && G.clickMode == ClickableShapeGrid.ClickMode.ToggleMode)
+            {
+                G.SelectedStates = oldStates;
+                G.UpdateAppearance();
             }
 
         }

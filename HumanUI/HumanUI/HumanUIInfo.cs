@@ -20,7 +20,7 @@ namespace HumanUI
         {
             get
             {
-                return "Beta 0.6.7.0";
+                return "Beta 0.6.8.0";
             }
         }
         public override Bitmap Icon

@@ -80,7 +80,7 @@ namespace HumanUI
 
         public static UIElement extractBaseElement(UIElement element)
         {
-            if (element is Panel)
+            if (element is Panel && !(element is HumanUI.ClickableShapeGrid))
             {
 
                 Panel p = element as Panel;
@@ -107,7 +107,7 @@ namespace HumanUI
         {
             foreach (UIElement elem in elements)
             {
-                if (elem is Panel)
+                if (elem is Panel && !(elem is ClickableShapeGrid))
                 {
 
                     Panel p = elem as Panel;
@@ -480,6 +480,9 @@ namespace HumanUI
                     MDSliderElement mds = u as MDSliderElement;
 
                     return mds.SliderPoint;
+                case "HumanUI.ClickableShapeGrid":
+                    ClickableShapeGrid csg = u as ClickableShapeGrid;
+                    return csg.SelectedStates;
                 default:
                     return null;
             }
@@ -518,6 +521,21 @@ namespace HumanUI
                     }
 
                     return checkeds;
+                case "HumanUI.ClickableShapeGrid":
+                    ClickableShapeGrid csg = u as ClickableShapeGrid;
+                    List<int> selectedInds = new List<int>();
+                    int j = 0;
+                    foreach (bool b in csg.SelectedStates)
+                    {
+
+                        if (b)
+                        {
+                            selectedInds.Add(j);
+                        }
+                        j++;
+                    }
+
+                    return selectedInds;
                 case "System.Windows.Controls.ComboBox":
                     ComboBox cb = u as ComboBox;
                     if (cb != null)

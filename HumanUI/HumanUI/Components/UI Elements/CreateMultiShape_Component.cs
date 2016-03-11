@@ -8,9 +8,13 @@ using Rhino.Geometry;
 using System.Drawing;
 using System.Windows.Shapes;
 using Grasshopper.Kernel.Types;
+using System.Windows.Forms;
 
 namespace HumanUI.Components.UI_Elements
 {
+
+
+
     /// <summary>
     /// Component to create composite graphics. Unlike "Create Shape" - which takes in multiple curves to represent a single shape (with holes etc)
     /// this component allows for multiple shapes all arranged relative to one another, with different appearance properties.
@@ -27,7 +31,12 @@ namespace HumanUI.Components.UI_Elements
                 "Creates shapes from a polylines",
                 "Human UI", "UI Elements")
         {
+            clickMode = ClickableShapeGrid.ClickMode.None;
+            
         }
+
+
+        internal ClickableShapeGrid.ClickMode clickMode;
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -37,8 +46,8 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddCurveParameter("Shapes", "S", "The shapes to add as Polyline(s)", GH_ParamAccess.list);
             pManager.AddColourParameter("Fill Color", "FC", "The fill colors. Leave empty for no fill", GH_ParamAccess.list);
             pManager.AddNumberParameter("Stroke Weight", "SW", "The stroke weights. Leave empty or set to 0 for no stroke.", GH_ParamAccess.list);
-            pManager.AddColourParameter("Stroke Color", "SC", "The stroke colors", GH_ParamAccess.list,System.Drawing.Color.Black);
-            pManager.AddNumberParameter("Scale","Scl","Use this value to resize the shape.",GH_ParamAccess.item,1.0);
+            pManager.AddColourParameter("Stroke Color", "SC", "The stroke colors", GH_ParamAccess.list, System.Drawing.Color.Black);
+            pManager.AddNumberParameter("Scale", "Scl", "Use this value to resize the shape.", GH_ParamAccess.item, 1.0);
             pManager.AddIntegerParameter("Width", "W", "The width of the container for the shape. \nLeave blank to autosize.", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Height", "H", "The height of the container for the shape. \nLeave blank to autosize.", GH_ParamAccess.item);
             pManager[1].Optional = true;
@@ -81,7 +90,8 @@ namespace HumanUI.Components.UI_Elements
             if (!DA.GetDataList<Curve>("Shapes", shapeCrvs)) return;
 
             //Set up a grid to contain all shapes
-            Grid G = new Grid();
+            ClickableShapeGrid G = new ClickableShapeGrid();
+            G.clickMode = clickMode;
             if (DA.GetData<int>("Width", ref width))
             {
 
@@ -133,9 +143,9 @@ namespace HumanUI.Components.UI_Elements
 
             //Pass out the grid
             DA.SetData("Shape", new UIElement_Goo(G, "Shape", InstanceGuid, DA.Iteration));
-            
+
         }
-        
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -156,5 +166,102 @@ namespace HumanUI.Components.UI_Elements
         {
             get { return new Guid("{94288CED-76F6-438A-9216-E60C8290F640}"); }
         }
+
+
+        /// <summary>
+        /// Updates the component message based on the click mode.
+        /// </summary>
+        void UpdateMessage()
+        {
+            switch (clickMode)
+            {
+                case ClickableShapeGrid.ClickMode.ButtonMode:
+                    Message = "Button Mode";
+                    return;
+                case ClickableShapeGrid.ClickMode.None:
+                    Message = "";
+                    return;
+                case ClickableShapeGrid.ClickMode.ToggleMode:
+                    Message = "Toggle Mode";
+                    return;
+                case ClickableShapeGrid.ClickMode.PickerMode:
+                    Message = "Picker Mode";
+                    return;
+            }
+
+
+        }
+
+
+        /// <summary>
+        /// Write all required data for deserialization to an IO archive.
+        /// </summary>
+        /// <param name="writer">Object to write with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
+        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
+        {
+            writer.SetInt32("ClickMode", (int)clickMode);
+            return base.Write(writer);
+        }
+
+        /// <summary>
+        /// Read all required data for deserialization from an IO archive.
+        /// </summary>
+        /// <param name="reader">Object to read with.</param>
+        /// <returns>
+        /// True on success, false on failure.
+        /// </returns>
+        public override bool Read(GH_IO.Serialization.GH_IReader reader)
+        {
+            int clickVal = -1;
+            if (reader.TryGetInt32("ClickMode", ref clickVal))
+            {
+                clickMode = (ClickableShapeGrid.ClickMode)clickVal;
+            }
+            UpdateMessage();
+            return base.Read(reader);
+        }
+
+        protected override void AppendAdditionalComponentMenuItems(ToolStripDropDown menu)
+        {
+            GH_DocumentObject.Menu_AppendItem(menu, "Click Action:");
+            GH_DocumentObject.Menu_AppendItem(menu, "None", NoneClicked, true, clickMode == ClickableShapeGrid.ClickMode.None);
+            GH_DocumentObject.Menu_AppendItem(menu, "Button Mode", ButtonModeClicked, true, clickMode == ClickableShapeGrid.ClickMode.ButtonMode);
+            GH_DocumentObject.Menu_AppendItem(menu, "Toggle Mode", ToggleModeClicked, true, clickMode == ClickableShapeGrid.ClickMode.ToggleMode);
+            GH_DocumentObject.Menu_AppendItem(menu, "Picker Mode", PickerModeClicked, true, clickMode == ClickableShapeGrid.ClickMode.PickerMode);
+            base.AppendAdditionalComponentMenuItems(menu);
+        }
+
+        private void PickerModeClicked(object sender, EventArgs e)
+        {
+            clickMode = ClickableShapeGrid.ClickMode.PickerMode;
+            UpdateMessage();
+            ExpireSolution(true);
+        }
+
+        private void ToggleModeClicked(object sender, EventArgs e)
+        {
+            clickMode = ClickableShapeGrid.ClickMode.ToggleMode;
+            UpdateMessage();
+            ExpireSolution(true);
+        }
+
+        private void ButtonModeClicked(object sender, EventArgs e)
+        {
+            clickMode = ClickableShapeGrid.ClickMode.ButtonMode;
+            UpdateMessage();
+            ExpireSolution(true);
+        }
+
+        private void NoneClicked(object sender, EventArgs e)
+        {
+            clickMode = ClickableShapeGrid.ClickMode.None;
+            UpdateMessage();
+            ExpireSolution(true);
+        }
+
+
     }
 }

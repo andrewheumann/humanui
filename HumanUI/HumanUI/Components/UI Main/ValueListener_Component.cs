@@ -230,6 +230,25 @@ namespace HumanUI
                     mds.PropertyChanged -= ExpireThis;
                     mds.PropertyChanged += ExpireThis;
                     return;
+                case "HumanUI.ClickableShapeGrid":
+                   ClickableShapeGrid csg = u as ClickableShapeGrid;
+                   switch (csg.clickMode)
+                   {
+                       case ClickableShapeGrid.ClickMode.ButtonMode:
+                           csg.MouseUp -= ExpireThis;
+                           csg.MouseUp += ExpireThis;
+                           csg.MouseDown -= ExpireThis;
+                           csg.MouseDown += ExpireThis;
+                           return;
+                       case ClickableShapeGrid.ClickMode.PickerMode:
+                       case ClickableShapeGrid.ClickMode.ToggleMode:
+                           csg.MouseUp -= ExpireThis;
+                           csg.MouseUp += ExpireThis;
+                           return;
+                       case ClickableShapeGrid.ClickMode.None:
+                       default:
+                           return;
+                   }
                 case "System.Windows.Controls.Label":
                     Label l = u as Label;
                     return;
@@ -343,6 +362,23 @@ namespace HumanUI
                     MDSliderElement mds = u as MDSliderElement;
                     mds.PropertyChanged -= ExpireThis;
                     return;
+                case "HumanUI.ClickableShapeGrid":
+                    ClickableShapeGrid csg = u as ClickableShapeGrid;
+                    switch (csg.clickMode)
+                    {
+                        case ClickableShapeGrid.ClickMode.ButtonMode:
+                            csg.MouseUp -= ExpireThis;
+                            csg.MouseDown -= ExpireThis;
+                            return;
+                        case ClickableShapeGrid.ClickMode.PickerMode:
+                        case ClickableShapeGrid.ClickMode.ToggleMode:
+                            csg.MouseUp -= ExpireThis;
+                            return;
+                     case ClickableShapeGrid.ClickMode.None:
+                        default:
+                            return;
+                    }
+                    
                 case "System.Windows.Controls.Label":
                     Label l = u as Label;
                     return;
