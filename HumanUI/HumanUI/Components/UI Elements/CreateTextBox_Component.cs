@@ -31,7 +31,7 @@ namespace HumanUI.Components.UI_Elements
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Label", "L", "Optional label for the Text Box", GH_ParamAccess.item, "");
-            pManager.AddTextParameter("Default Text", "D", "The starting text in the text box", GH_ParamAccess.item,"");
+            pManager.AddTextParameter("Default Text", "D", "The starting text in the text box", GH_ParamAccess.item, "");
             pManager.AddBooleanParameter("Update Button", "U", "Set to true to associate text box \nwith a button for updates. Otherwise event listening will \nassociate with every change in text box content.", GH_ParamAccess.item, true);
         }
 
@@ -52,38 +52,45 @@ namespace HumanUI.Components.UI_Elements
             bool includeButton = true;
             string label = "";
             string defaultValue = "";
-            if(!DA.GetData<string>("Default Text", ref defaultValue)) return;
-            DA.GetData<string>("Label",ref label);
+            if (!DA.GetData<string>("Default Text", ref defaultValue)) return;
+            DA.GetData<string>("Label", ref label);
             DA.GetData<bool>("Update Button", ref includeButton);
             //set up the stackpanel to contain the text box
-            StackPanel sp = new StackPanel();
-            sp.Orientation = Orientation.Horizontal;
+            DockPanel sp = new DockPanel();
+            //  sp.Orientation = Orientation.Horizontal;
             //create the text box
             TextBox tb = new TextBox();
             tb.Text = defaultValue;
-            tb.Width = 200;
+
             //set up the button
             Button b = new Button();
             b.Width = 50;
             sp.Margin = new Thickness(4);
             Label l = new Label();
             l.Content = label;
-            //add the label and textbox to the stackpanel
+            //add the label to the stackpanel
             sp.Children.Add(l);
-            sp.Children.Add(tb);
+
+
+
             if (includeButton) // if the component is set to use a button for updating, add the button to the stack panel
             {
                 sp.Children.Add(b);
+                DockPanel.SetDock(b, Dock.Right);
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
-                sp.Name = "GH_TextBox"; 
+                sp.Name = "GH_TextBox";
             }
+
             else
             {
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox_NoButton";
             }
+            tb.HorizontalAlignment = HorizontalAlignment.Stretch;
+            sp.Children.Add(tb);
+
             //pass out the stackpanel
-            DA.SetData("Text Box", new UIElement_Goo(sp,String.Format("TextBox: {0}",label), InstanceGuid, DA.Iteration));
+            DA.SetData("Text Box", new UIElement_Goo(sp, String.Format("TextBox: {0}", label), InstanceGuid, DA.Iteration));
         }
 
         /// <summary>
@@ -104,7 +111,7 @@ namespace HumanUI.Components.UI_Elements
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{c8d203fe-7e84-416a-b93e-d1bd746f3f66}"); }
+            get { return new Guid("{41A3A0D8-E0F4-4B48-88B3-BF87D79A3CFD}"); }
         }
     }
 }

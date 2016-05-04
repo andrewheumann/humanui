@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanUI", "HumanUI\HumanUI\HumanUI.csproj", "{C04DC96E-280E-42F1-A776-0079ACD5E8F9}"
 EndProject
@@ -63,8 +63,8 @@ Global
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.LimitedRelease|x64.ActiveCfg = Release|x64
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.LimitedRelease|x64.Build.0 = Release|x64
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.LimitedRelease|x86.ActiveCfg = Release|Any CPU
-		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.ActiveCfg = Release|x64
-		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.Build.0 = Release|x64
+		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C04DC96E-280E-42F1-A776-0079ACD5E8F9}.Release|x64.ActiveCfg = Release|x64
@@ -99,7 +99,7 @@ Global
 		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|Any CPU.Build.0 = Release|x64
 		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|x64.ActiveCfg = Release|x64
+		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|x64.ActiveCfg = Release|Any CPU
 		{CF0CF29B-B13D-485F-98AD-727A4E2736C7}.Release|x86.ActiveCfg = Release|Any CPU
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -130,7 +130,7 @@ Global
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|Any CPU.Build.0 = Release|x64
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|Mixed Platforms.Build.0 = Release|x86
-		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|x64.ActiveCfg = Release|x64
+		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|x64.ActiveCfg = Release|x86
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|x86.ActiveCfg = Release|x86
 		{96FB4EAE-12CE-4D46-B3B3-DD93E5EA6A27}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

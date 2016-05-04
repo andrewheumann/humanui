@@ -9,10 +9,10 @@ using System.Windows;
 using HumanUIBaseApp;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
-using De.TorstenMandelkow.MetroChart; 
+using De.TorstenMandelkow.MetroChart;
 
 
-namespace HumanUI.Components.UI_Main 
+namespace HumanUI.Components.UI_Main
 {
     /// <summary>
     /// Adjust the color and appearance of individual elements
@@ -38,9 +38,9 @@ namespace HumanUI.Components.UI_Main
             pManager.AddGenericParameter("Elements to Adjust", "E", "The elements to adjust", GH_ParamAccess.item);
             pManager.AddColourParameter("Foreground", "FC", "The foreground color of the element", GH_ParamAccess.item, System.Drawing.Color.Black);
             pManager.AddColourParameter("Background", "BC", "The background color of the element", GH_ParamAccess.item);
-           pManager[2].Optional = true;
-           pManager.AddNumberParameter("Font Size", "S", "The font size of the element", GH_ParamAccess.item);
-           pManager[3].Optional = true;
+            pManager[2].Optional = true;
+            pManager.AddNumberParameter("Font Size", "S", "The font size of the element", GH_ParamAccess.item);
+            pManager[3].Optional = true;
         }
 
 
@@ -71,12 +71,13 @@ namespace HumanUI.Components.UI_Main
             System.Drawing.Color bgCol = System.Drawing.Color.Transparent;
             double fontSize = -1;
             object elem = null;
-           
+
             if (!DA.GetData<object>("Elements to Adjust", ref elem)) return;
 
             DA.GetData<System.Drawing.Color>("Foreground", ref fgCol);
             DA.GetData<System.Drawing.Color>("Background", ref bgCol);
             DA.GetData<double>("Font Size", ref fontSize);
+
 
             //Get the "FrameworkElement" (basic UI element) from an object
             FrameworkElement f = HUI_Util.GetUIElement<FrameworkElement>(elem);
@@ -86,8 +87,8 @@ namespace HumanUI.Components.UI_Main
             Selector selector = f as Selector;
             ScrollViewer sv = f as ScrollViewer;
             ChartBase cb = f as ChartBase;
-           // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
-                  
+            // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
+
             //if it's a panel color its children
             if (panel != null)
             {
@@ -96,7 +97,7 @@ namespace HumanUI.Components.UI_Main
                     ColorTextElement(child, fgCol, bgCol, fontSize);
                 }
             }
-                //if it's a selector, color its items
+            //if it's a selector, color its items
             else if (selector != null)
             {
                 foreach (UIElement child in selector.Items)
@@ -104,7 +105,7 @@ namespace HumanUI.Components.UI_Main
                     ColorTextElement(child, fgCol, bgCol, fontSize);
                 }
             }
-                //if it's an itemscontrol, color its items
+            //if it's an itemscontrol, color its items
             else if (sv != null)
             {
                 ItemsControl ic = sv.Content as ItemsControl;
@@ -117,29 +118,29 @@ namespace HumanUI.Components.UI_Main
                         {
                             ColorTextElement(uie, fgCol, bgCol, fontSize);
                         }
-                      
+
                     }
                 }
-               
+
             }
             else //otherwise assume it's just a root level element
             {
 
-                ColorTextElement(f, fgCol,bgCol,fontSize);
+                ColorTextElement(f, fgCol, bgCol, fontSize);
             }
 
 
 
-          }
+        }
 
         //color a UIElement. Runs through a list of possible types it recognizes and tries to color/format appropriately. 
-        private static void ColorTextElement( UIElement f, System.Drawing.Color fgCol,System.Drawing.Color bgCol,double fontSize)
+        private static void ColorTextElement(UIElement f, System.Drawing.Color fgCol, System.Drawing.Color bgCol, double fontSize)
         {
             Brush backgroundBrush = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol));
             Brush foregroundBrush = new SolidColorBrush(HUI_Util.ToMediaColor(fgCol));
             //Try graoh
             ChartBase ChartB = f as ChartBase;
-            if(ChartB!=null)
+            if (ChartB != null)
             {
                 ChartB.Foreground = foregroundBrush;
                 ChartB.Background = backgroundBrush;
@@ -153,7 +154,7 @@ namespace HumanUI.Components.UI_Main
                 if (bgCol != System.Drawing.Color.Transparent) l.Background = backgroundBrush;
                 if (fontSize > 0) l.FontSize = fontSize;
                 return;
-            } 
+            }
             // Try textbox
             TextBox tb = f as TextBox;
             if (tb != null)
@@ -185,12 +186,13 @@ namespace HumanUI.Components.UI_Main
             }
             //Try Checkbox
             CheckBox cb = f as CheckBox;
-            if (cb != null) {
+            if (cb != null)
+            {
                 cb.Foreground = foregroundBrush;
                 if (bgCol != System.Drawing.Color.Transparent) cb.Background = backgroundBrush;
                 if (fontSize > 0) cb.FontSize = fontSize;
                 return;
-                
+
             }
             //Try RadioButton
             RadioButton rb = f as RadioButton;
@@ -201,7 +203,7 @@ namespace HumanUI.Components.UI_Main
                 if (fontSize > 0) rb.FontSize = fontSize;
                 return;
             }
-           
+
         }
 
         /// <summary>

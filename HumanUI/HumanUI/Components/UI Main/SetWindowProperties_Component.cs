@@ -9,8 +9,9 @@ using Grasshopper.Kernel.Special;
 using Rhino.Geometry;
 using MahApps.Metro;
 using HumanUIBaseApp;
+using System.Windows.Controls;
 
-namespace HumanUI.Components.UI_Main 
+namespace HumanUI.Components
 {
     /// <summary>
     /// Component to Modify various properties of a HUI Window.
@@ -20,7 +21,7 @@ namespace HumanUI.Components.UI_Main
     {
         // These are all the accent colors supported by Mahapps.Metro, found here: 
         // https://github.com/MahApps/MahApps.Metro/tree/master/MahApps.Metro/Styles/Accents
-        private string[] ACCENT_COLORS = new string[] { "Amber", "Blue", "Brown", "Cobalt", "Crimson", "Cyan", "Emerald", "Green", "Indigo", "Lime", "Magenta", "Mauve", "Olive", "Orange", "Pink", "Purple", "Red", "Sienna", "Steel", "Taupe", "Teal", "Violet", "Yellow" }; 
+        private string[] ACCENT_COLORS = new string[] { "Amber", "Blue", "Brown", "Cobalt", "Crimson", "Cyan", "Emerald", "Green", "Indigo", "Lime", "Magenta", "Mauve", "Olive", "Orange", "Pink", "Purple", "Red", "Sienna", "Steel", "Taupe", "Teal", "Violet", "Yellow" };
 
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace HumanUI.Components.UI_Main
             pManager[4].Optional = true;
             pManager.AddColourParameter("Background Color", "BG", "Set the background color of the window.", GH_ParamAccess.item);
             pManager[5].Optional = true;
+            pManager.AddNumberParameter("Scale Factor", "SF", "An absolute scaling factor used to modify the size of the window.", GH_ParamAccess.item, 1.0);
         }
 
         /// <summary>
@@ -68,14 +70,15 @@ namespace HumanUI.Components.UI_Main
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-   
+
             MainWindow mw = null;
-     
-           
+
+
 
             Point3d startLoc = Point3d.Unset;
             int theme = 0;
             string colorName = "";
+            double scaleFactor = 1.0;
             if (!DA.GetData<MainWindow>("Window", ref mw)) return;
             //if the user has spec'd a location, move the window
             if (DA.GetData<Point3d>("Starting Location", ref startLoc))
@@ -99,6 +102,12 @@ namespace HumanUI.Components.UI_Main
                         break;
                 }
             }
+            //get scale factor
+            DA.GetData<double>("Scale Factor", ref scaleFactor);
+            Grid masterGrid = mw.Content as Grid;
+            masterGrid.LayoutTransform = new ScaleTransform(scaleFactor, scaleFactor);
+             
+
 
             //set title bar visibility
             bool showTitleBar = true;
@@ -116,8 +125,8 @@ namespace HumanUI.Components.UI_Main
             if (DA.GetData<string>("Accent Color", ref colorName))
             {
                 //get the current accent and theme so that theme can be preserved while accent changes
-                Tuple<AppTheme,Accent> currStyle = ThemeManager.DetectAppStyle(mw);
-               
+                Tuple<AppTheme, Accent> currStyle = ThemeManager.DetectAppStyle(mw);
+
                 ThemeManager.ChangeAppStyle(mw, ThemeManager.GetAccent(colorName), currStyle.Item1);
             }
 
@@ -169,6 +178,9 @@ namespace HumanUI.Components.UI_Main
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void createAccentList(object sender, System.EventArgs e)
         {
+            GH_DocumentIO docIO = new GH_DocumentIO();
+            docIO.Document = new GH_Document();
+
             //initialize object
             GH_ValueList vl = new GH_ValueList();
             //clear default contents
@@ -183,12 +195,22 @@ namespace HumanUI.Components.UI_Main
             vl.NickName = "Accent Colors";
             //get active GH doc
             GH_Document doc = OnPingDocument();
+            if (docIO.Document == null) return;
             // place the object
-            doc.AddObject(vl, false, doc.ObjectCount + 1);
+            docIO.Document.AddObject(vl, false, 1);
             //get the pivot of the "accent" param
             PointF currPivot = Params.Input[3].Attributes.Pivot;
             //set the pivot of the new object
             vl.Attributes.Pivot = new PointF(currPivot.X - 120, currPivot.Y - 11);
+
+            docIO.Document.SelectAll();
+            docIO.Document.ExpireSolution();
+            docIO.Document.MutateAllIds();
+            IEnumerable<IGH_DocumentObject> objs = docIO.Document.Objects;
+            doc.DeselectAll();
+            doc.UndoUtil.RecordAddObjectEvent("Create Accent List", objs);
+            doc.MergeDocument(docIO.Document);
+            //doc.ScheduleSolution(10);
         }
 
         /// <summary>
@@ -196,7 +218,7 @@ namespace HumanUI.Components.UI_Main
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}"); }
+            get { return new Guid("{14A1EE78-6536-43B2-B6D8-4B26A736F0A9}"); }
         }
     }
 }

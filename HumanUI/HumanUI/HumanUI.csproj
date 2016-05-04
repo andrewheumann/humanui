@@ -39,10 +39,10 @@
       <HintPath>..\..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
     <Reference Include="GH_IO">
-      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\GH_IO.dll</HintPath>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\Grasshopper.dll</HintPath>
     </Reference>
     <Reference Include="HelixToolkit, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,8 +60,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RhinoCommon">
-      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5 (64-bit)\System\RhinoCommon.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Rhinoceros 5 (64-bit)\System\RhinoCommon.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -100,8 +99,14 @@
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
+    <Compile Include="Components\UI Main\CaptureWindow_Component.cs" />
+    <Compile Include="Components\UI Main\HideShowElement_Component.cs" />
+    <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
     <Compile Include="Custom Types\ClickableShapeGrid.cs" />
     <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_SetWindowPropertiesComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_TextBoxComponent.cs" />
     <Compile Include="Upgraders\Upgrade_ValueListener.cs" />
     <None Include="Components\UI Elements\Create_TEMPLATE_Component.cs" />
     <None Include="Components\UI Output\Set_TEMPLATE_Component.cs" />
@@ -144,7 +149,7 @@
     <Compile Include="Deprecated\CreateSlider_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Containers\CreateStack_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTextBlock_Component.cs" />
-    <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
+    <Compile Include="Deprecated\CreateTextBox_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateTrueOnlyButton.cs" />
     <Compile Include="Components\UI Containers\CreateViewBox_Component.cs" />
     <Compile Include="Components\Testing - Troubleshooting\ElemFromGuid_Component.cs" />
@@ -158,7 +163,7 @@
     <Compile Include="Components\UI Output\SetList_Component.cs" />
     <Compile Include="Components\UI Output\SetTextBlock_Component.cs" />
     <Compile Include="Components\UI Output\SetTextBox_Component.cs" />
-    <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
+    <Compile Include="Deprecated\SetWindowProperties_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Deprecated\SetWindowProperties_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\StateSet_Goo.cs" />
     <Compile Include="Deprecated\FilterUIElements_Component.cs" />
@@ -329,12 +334,6 @@
     <None Include="Resources\CreateRhinoButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HumanUIBaseApp\HumanUIBaseApp\HumanUIBaseApp.csproj">
-      <Project>{cf0cf29b-b13d-485f-98ad-727a4e2736c7}</Project>
-      <Name>HumanUIBaseApp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CreatePieGraph.png" />
   </ItemGroup>
   <ItemGroup>
@@ -369,7 +368,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\captureWindow.png" />
+    <None Include="Resources\HideShowElement.png" />
     <None Include="Resources\CreateMDSlider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HumanUIBaseApp\HumanUIBaseApp\HumanUIBaseApp.csproj">
+      <Project>{cf0cf29b-b13d-485f-98ad-727a4e2736c7}</Project>
+      <Name>HumanUIBaseApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

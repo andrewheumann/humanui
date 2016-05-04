@@ -275,7 +275,7 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.TextBox":
                     TextBox tb = u as TextBox;
-                    StackPanel p = tb.Parent as StackPanel;
+                    Panel p = tb.Parent as Panel;
                     List<Button> btns = p.Children.OfType<Button>().ToList<Button>();
                     if (btns.Count > 0)
                     {
@@ -383,7 +383,7 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.TextBox":
                     TextBox tb = u as TextBox;
-                    StackPanel p = tb.Parent as StackPanel;
+                    Panel p = tb.Parent as Panel;
                     List<Button> btns = p.Children.OfType<Button>().ToList<Button>();
 
                     foreach (Button btn0 in btns)
