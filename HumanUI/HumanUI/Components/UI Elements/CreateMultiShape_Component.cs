@@ -146,6 +146,14 @@ namespace HumanUI.Components.UI_Elements
 
         }
 
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
+        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

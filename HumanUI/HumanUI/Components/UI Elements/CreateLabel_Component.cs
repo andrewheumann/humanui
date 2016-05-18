@@ -43,6 +43,14 @@ namespace HumanUI.Components.UI_Elements
            
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.primary;
+            }
+        }
+
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>

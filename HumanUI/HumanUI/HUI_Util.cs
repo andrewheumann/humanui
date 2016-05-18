@@ -138,6 +138,10 @@ namespace HumanUI
         {
             foreach (UIElement u in p.Children)
             {
+                if(u is Panel)
+                {
+                    return findTextBox(u as Panel);
+                }
                 if (u is TextBox)
                 {
                     return u as TextBox;
@@ -150,7 +154,7 @@ namespace HumanUI
         {
             foreach (UIElement u in p.Children)
             {
-              
+
                 if (u is Slider)
                 {
                     return u as Slider;
@@ -442,6 +446,9 @@ namespace HumanUI
                     Image img = u as Image;
 
                     return img.Source.ToString();
+                case "System.Windows.Controls.Expander":
+                    Expander exp = u as Expander;
+                    return exp.IsExpanded;
                 case "System.Windows.Controls.TabControl":
                     TabControl tc = u as TabControl;
                     TabItem ti = tc.SelectedItem as TabItem;
@@ -461,7 +468,7 @@ namespace HumanUI
                 case "De.TorstenMandelkow.MetroChart.StackedColumnChart":
                     ChartBase chart = u as ChartBase;
                     ChartItem selectedItem = chart.SelectedItem as ChartItem;
-                    
+
                     if (selectedItem != null)
                     {
                         string response = "";

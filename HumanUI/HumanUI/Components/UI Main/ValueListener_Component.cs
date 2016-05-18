@@ -316,6 +316,13 @@ namespace HumanUI
                     return;
                 case "System.Windows.Controls.Image":
                     return;
+                case "System.Windows.Controls.Expander":
+                    Expander exp = u as Expander;
+                    exp.Expanded -= ExpireThis;
+                    exp.Collapsed -= ExpireThis;
+                    exp.Expanded += ExpireThis;
+                    exp.Collapsed += ExpireThis;
+                    return;
                 case "System.Windows.Controls.TabControl":
                     TabControl tc = u as TabControl;
                     tc.SelectionChanged -= ExpireThis;
@@ -428,6 +435,11 @@ namespace HumanUI
                     rb.Unchecked -= ExpireThis;
                     return;
                 case "System.Windows.Controls.Image":
+                    return;
+                case "System.Windows.Controls.Expander":
+                    Expander exp = u as Expander;
+                    exp.Expanded -= ExpireThis;
+                    exp.Collapsed -= ExpireThis;
                     return;
                 case "System.Windows.Controls.TabControl":
                     TabControl tc = u as TabControl;

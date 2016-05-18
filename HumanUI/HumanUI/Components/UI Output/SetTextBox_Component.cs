@@ -52,7 +52,7 @@ namespace HumanUI.Components.UI_Output
             if (!DA.GetData<object>("Text Box to modify", ref TextBlockObject)) return;
             // Since HUI textboxes are actually stackpanels with textboxes inside (since they may or may not also contain a button)
             // we have to grab the stackpanel first and then find the textbox inside it. 
-            StackPanel sp = HUI_Util.GetUIElement<StackPanel>(TextBlockObject);
+            Panel sp = HUI_Util.GetUIElement<Panel>(TextBlockObject);
             TextBox tb = HUI_Util.findTextBox(sp);
             
             if (tb != null)

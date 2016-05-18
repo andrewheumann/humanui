@@ -96,10 +96,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
+    <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateTooltip_Component.cs" />
     <Compile Include="Components\UI Main\CaptureWindow_Component.cs" />
     <Compile Include="Components\UI Main\HideShowElement_Component.cs" />
     <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
@@ -368,6 +371,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\Expander.png" />
+    <None Include="Resources\ScrollViewer.png" />
+    <None Include="Resources\CreateTooltip.png" />
     <None Include="Resources\captureWindow.png" />
     <None Include="Resources\HideShowElement.png" />
     <None Include="Resources\CreateMDSlider.png" />

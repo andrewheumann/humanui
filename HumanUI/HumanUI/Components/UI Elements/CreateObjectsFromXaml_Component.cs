@@ -41,6 +41,15 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddGenericParameter("Object", "O", "The XAML object tree", GH_ParamAccess.item);
         }
 
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.tertiary;
+            }
+        }
+
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>

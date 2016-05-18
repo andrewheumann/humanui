@@ -95,6 +95,15 @@ namespace HumanUI.Components.UI_Elements
             DA.SetData("Image", new UIElement_Goo(img, name, InstanceGuid, DA.Iteration));
         }
 
+
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
+        }
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

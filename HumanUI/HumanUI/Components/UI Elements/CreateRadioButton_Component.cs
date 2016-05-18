@@ -33,6 +33,14 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddBooleanParameter("Initially Selected", "S", "Whether or not this button should be selected initially.", GH_ParamAccess.item,false);
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.primary;
+            }
+        }
+
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>

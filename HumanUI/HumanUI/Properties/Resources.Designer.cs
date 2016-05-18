@@ -363,6 +363,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateTooltip {
+            get {
+                object obj = ResourceManager.GetObject("CreateTooltip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateTrueButton {
             get {
                 object obj = ResourceManager.GetObject("CreateTrueButton", resourceCulture);
@@ -386,6 +396,16 @@ namespace HumanUI.Properties {
         internal static string CURRENT_VERSION {
             get {
                 return ResourceManager.GetString("CURRENT_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Expander {
+            get {
+                object obj = ResourceManager.GetObject("Expander", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -475,6 +495,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap screenDimensions {
             get {
                 object obj = ResourceManager.GetObject("screenDimensions", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ScrollViewer {
+            get {
+                object obj = ResourceManager.GetObject("ScrollViewer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

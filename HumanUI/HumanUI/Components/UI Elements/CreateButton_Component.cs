@@ -57,7 +57,13 @@ namespace HumanUI.Components.UI_Elements
             UpdateMenu();
         }
 
-
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.primary;
+            }
+        }
 
         /// <summary>
         /// Updates the black message tag with the current button style.

@@ -93,10 +93,17 @@ namespace HumanUI.Components.UI_Elements
             get { return new Guid("{cf49dbbd-93b5-4f9f-81ea-f585f20a5843}"); }
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
+        }
 
-      
 
 
-       
+
+
     }
 }
