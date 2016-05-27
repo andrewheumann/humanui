@@ -5,7 +5,7 @@
         Title="MainWindow" Height="596.358" Width="449.951" EnableDWMDropShadow="True" >
     <Grid Name="MasterGrid">
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="MasterScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <Grid Name="AbsPosGrid">
               
                 <StackPanel Name="MasterStackPanel" Margin="10" >

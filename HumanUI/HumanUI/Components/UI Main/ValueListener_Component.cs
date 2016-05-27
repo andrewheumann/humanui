@@ -230,6 +230,16 @@ namespace HumanUI
                     mds.PropertyChanged -= ExpireThis;
                     mds.PropertyChanged += ExpireThis;
                     return;
+                case "HumanUI.GraphMapperElement":
+                    GraphMapperElement gme = u as GraphMapperElement;
+                    gme.PropertyChanged -= ExpireThis;
+                    gme.PropertyChanged += ExpireThis;
+                    return;
+                case "HumanUI.FilePicker":
+                    FilePicker fp = u as FilePicker;
+                    fp.PropertyChanged -= ExpireThis;
+                    fp.PropertyChanged += ExpireThis;
+                    return;
                 case "HumanUI.ClickableShapeGrid":
                    ClickableShapeGrid csg = u as ClickableShapeGrid;
                    switch (csg.clickMode)
@@ -368,6 +378,14 @@ namespace HumanUI
                 case "HumanUI.MDSliderElement":
                     MDSliderElement mds = u as MDSliderElement;
                     mds.PropertyChanged -= ExpireThis;
+                    return;
+                case "HumanUI.GraphMapperElement":
+                    GraphMapperElement gme = u as GraphMapperElement;
+                    gme.PropertyChanged -= ExpireThis;
+                    return;
+                case "HumanUI.FilePicker":
+                    FilePicker fp = u as FilePicker;
+                    fp.PropertyChanged -= ExpireThis;
                     return;
                 case "HumanUI.ClickableShapeGrid":
                     ClickableShapeGrid csg = u as ClickableShapeGrid;

@@ -391,7 +391,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.6.6.5.
+        ///   Looks up a localized string similar to 0.7.1.0.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -412,9 +412,29 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FilePicker {
+            get {
+                object obj = ResourceManager.GetObject("FilePicker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FilterElements {
             get {
                 object obj = ResourceManager.GetObject("FilterElements", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GraphMapper {
+            get {
+                object obj = ResourceManager.GetObject("GraphMapper", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

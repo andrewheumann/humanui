@@ -107,7 +107,7 @@ namespace HumanUI
         {
             foreach (UIElement elem in elements)
             {
-                if (elem is Panel && !(elem is ClickableShapeGrid))
+                if (elem is Panel && !(elem is ClickableShapeGrid) && !(elem is FilePicker))
                 {
 
                     Panel p = elem as Panel;
@@ -247,6 +247,15 @@ namespace HumanUI
                         MDSliderElement mds = u as MDSliderElement;
                         mds.SliderPoint = (Rhino.Geometry.Point3d)o;
                         return;
+                    case "HumanUI.GraphMapperElement":
+                        GraphMapperElement gme = u as GraphMapperElement;
+                       
+                        gme.SetByCurve((Rhino.Geometry.NurbsCurve)o);
+                        return;
+                    case "HumanUI.FilePicker":
+                        FilePicker fp = u as FilePicker;
+                        fp.Path = (string)o;
+                        return;
                     default:
                         return;
                 }
@@ -272,6 +281,7 @@ namespace HumanUI
                     return new GH_String((string)o);
                 case "System.Drawing.Color":
                     return new GH_Colour((System.Drawing.Color)o);
+           
                 default:
                     return new GH_ObjectWrapper(o);
 
@@ -487,6 +497,12 @@ namespace HumanUI
                     MDSliderElement mds = u as MDSliderElement;
 
                     return mds.SliderPoint;
+                case "HumanUI.GraphMapperElement":
+                    GraphMapperElement gme = u as GraphMapperElement;
+                    return gme.GetCurve().ToNurbsCurve();
+                case "HumanUI.FilePicker":
+                    FilePicker fp = u as FilePicker;
+                    return fp.Path;
                 case "HumanUI.ClickableShapeGrid":
                     ClickableShapeGrid csg = u as ClickableShapeGrid;
                     return csg.SelectedStates;

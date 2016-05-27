@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
@@ -107,6 +108,9 @@
     <Compile Include="Components\UI Main\HideShowElement_Component.cs" />
     <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
     <Compile Include="Custom Types\ClickableShapeGrid.cs" />
+    <Compile Include="Components\UI Elements\CreateGraphMapper_Component.cs" />
+    <Compile Include="Custom Types\FilePicker.cs" />
+    <Compile Include="Custom Types\GraphMapperElement.cs" />
     <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
     <Compile Include="Upgraders\Upgrade_SetWindowPropertiesComponent.cs" />
     <Compile Include="Upgraders\Upgrade_TextBoxComponent.cs" />
@@ -371,6 +375,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\FilePicker.png" />
+    <None Include="Resources\GraphMapper.png" />
     <None Include="Resources\Expander.png" />
     <None Include="Resources\ScrollViewer.png" />
     <None Include="Resources\CreateTooltip.png" />

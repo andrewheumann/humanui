@@ -50,6 +50,18 @@ namespace HumanUIBaseApp
             this.DataContext = o;
         }
 
+        public bool HorizontalScrollingEnabled
+        {
+            get
+            {
+               return MasterScrollViewer.HorizontalScrollBarVisibility == ScrollBarVisibility.Auto;
+            }
+            set
+            {
+                MasterScrollViewer.HorizontalScrollBarVisibility = value ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled;
+            }
+        }
+
 
         /// <summary>
         /// Sets the font of most text elements in the window.
@@ -61,7 +73,7 @@ namespace HumanUIBaseApp
             TextElement.SetFontFamily(MasterStackPanel, ff);
 
 
-           
+
         }
 
 
@@ -70,8 +82,9 @@ namespace HumanUIBaseApp
         /// </summary>
         /// <param name="elem">The element to add.</param>
         /// <returns>The index of the added element</returns>
-        public int AddElement(UIElement elem){
-              return MasterStackPanel.Children.Add(elem);
+        public int AddElement(UIElement elem)
+        {
+            return MasterStackPanel.Children.Add(elem);
         }
 
         /// <summary>

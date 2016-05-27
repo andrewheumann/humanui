@@ -33,7 +33,7 @@ namespace HumanUI.Components.UI_Main
 
         protected MainWindow mw;
         bool shouldBeVisible = true;
-
+        bool enableHorizScroll = false;
 
         /// <summary>
         /// Each implementation of GH_Component must provide a public 
@@ -99,6 +99,7 @@ namespace HumanUI.Components.UI_Main
             mw.Title = windowName;
             mw.Height = height;
             mw.Width = width;
+            mw.HorizontalScrollingEnabled = enableHorizScroll;
             
 
 
@@ -298,6 +299,18 @@ namespace HumanUI.Components.UI_Main
             toolStripMenuItem1.ToolTipText = "When selected, the window is made a child of the Rhino window - when the Rhino window is hidden or minimized, it will disappear.";
             ToolStripMenuItem toolStripMenuItem2 = GH_DocumentObject.Menu_AppendItem(menu, "Always On Top", new System.EventHandler(this.menu_makeAlwaysOnTop), true, winChildStatus == childStatus.AlwaysOnTop);
             toolStripMenuItem2.ToolTipText = "When selected, the window is always on top, floating above other apps.";
+            GH_DocumentObject.Menu_AppendSeparator(menu);
+            ToolStripMenuItem toolStripMenuItem3 = GH_DocumentObject.Menu_AppendItem(menu, "Enable Horizontal Scrolling", new System.EventHandler(this.menu_toggleHorizScroll), true, enableHorizScroll);
+            toolStripMenuItem.ToolTipText = "When enabled, the window will show a scroll bar when content exceeds the window width";
+
+        }
+
+        private void menu_toggleHorizScroll(object sender, EventArgs e)
+        {
+            RecordUndoEvent("Horizontal Scrolling Toggle");
+            enableHorizScroll = !enableHorizScroll;
+            SetupWin();
+            ExpireSolution(true);
         }
 
         // Event handlers for each menu selection
@@ -375,7 +388,9 @@ namespace HumanUI.Components.UI_Main
         public override bool Write(GH_IWriter writer)
         {
             writer.SetInt32("ChildStatus", (int)winChildStatus);
-                 return base.Write(writer);
+            writer.SetBoolean("EnableHorizScroll", enableHorizScroll);
+            return base.Write(writer);
+          
         }
 
         /// <summary>
@@ -385,7 +400,12 @@ namespace HumanUI.Components.UI_Main
         {
             int readVal = -1;
             reader.TryGetInt32("ChildStatus", ref readVal);
+
+            bool enableHorizScroll = false;
+            reader.TryGetBoolean("EnableHorizScroll", ref enableHorizScroll);
+
             winChildStatus = (childStatus)readVal;
+            this.enableHorizScroll = enableHorizScroll;
             this.UpdateMenu();
             return base.Read(reader);
         }
