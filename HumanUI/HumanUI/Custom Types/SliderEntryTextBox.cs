@@ -13,6 +13,8 @@ namespace HumanUI
     public class SliderEntryTextBox : TextBox
     {
         internal Slider slider;
+
+
         public SliderEntryTextBox(Slider s)
             : base()
         {

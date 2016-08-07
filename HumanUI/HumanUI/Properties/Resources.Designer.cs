@@ -391,11 +391,21 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.1.0.
+        ///   Looks up a localized string similar to 0.7.2.0.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
                 return ResourceManager.GetString("CURRENT_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataTable {
+            get {
+                object obj = ResourceManager.GetObject("DataTable", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -425,6 +435,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap FilterElements {
             get {
                 object obj = ResourceManager.GetObject("FilterElements", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GradientEditor {
+            get {
+                object obj = ResourceManager.GetObject("GradientEditor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -575,6 +595,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetCheckList {
             get {
                 object obj = ResourceManager.GetObject("SetCheckList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetDataTable {
+            get {
+                object obj = ResourceManager.GetObject("SetDataTable", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

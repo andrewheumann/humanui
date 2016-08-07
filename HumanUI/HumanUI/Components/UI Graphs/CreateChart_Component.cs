@@ -119,7 +119,7 @@ namespace HumanUI.Components
             //Create the chart and give it a name
             
             ChartElem.ChartTitle = Title;
-            ChartElem.ChartTitleVisibility = hasTitle ? Visibility.Visible : Visibility.Hidden;
+            ChartElem.ChartTitleVisibility = hasTitle ? Visibility.Visible : Visibility.Collapsed;
             ChartElem.ChartSubTitle = SubTitle;
                        
           
@@ -148,7 +148,7 @@ namespace HumanUI.Components
             //Pass data to the chart
             ChartElem.Series.Add(series);
             ChartElem.ToolTipFormat = "{}Caption: {0}, Value: '{1}', Series: '{2}', Percentage: {3:P2}";
-            
+           
 
             ChartElem.MinWidth = 10;
             ChartElem.MinHeight = 10;

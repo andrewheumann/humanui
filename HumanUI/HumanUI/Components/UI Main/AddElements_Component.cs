@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using HumanUIBaseApp;
+using System.Windows.Forms;
+using GH_IO.Serialization;
 
 namespace HumanUI.Components.UI_Main
 {
@@ -25,6 +27,7 @@ namespace HumanUI.Components.UI_Main
                 "Add WPF Controls to a window",
                 "Human UI", "UI Main")
         {
+            DoVLChecking = true;
         }
 
         /// <summary>
@@ -66,18 +69,19 @@ namespace HumanUI.Components.UI_Main
             //clear out any old elements
             mw.clearElements();
 
-
-            //check for any value listener connected to the same window
-            var ActiveObjects = OnPingDocument().ActiveObjects();
-            var AllSources = HUI_Util.SourcesRecursive(Params.Input[1], ActiveObjects);
-            var ValueListenerSources = AllSources.OfType<ValueListener_Component>();
-            if (ValueListenerSources.Count() != 0)
+            if (DoVLChecking)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, VALUE_LISTENER_WARNING);
+                //check for any value listener connected to the same window
+                var ActiveObjects = OnPingDocument().ActiveObjects();
+                var AllSources = HUI_Util.SourcesRecursive(Params.Input[1], ActiveObjects);
+                var ValueListenerSources = AllSources.OfType<ValueListener_Component>();
+                if (ValueListenerSources.Count() != 0)
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, VALUE_LISTENER_WARNING);
+
+                }
 
             }
-
-
             //for all the elements, remove its parent, add it to the window, and add it to our tracking dictionary
             foreach (UIElement_Goo u in elementsToAdd)
             {
@@ -117,6 +121,45 @@ namespace HumanUI.Components.UI_Main
             }
         }
 
+
+        bool DoVLChecking = true;
+
+        void updateMessage()
+        {
+            Message = DoVLChecking ? "" : "Fast Mode";
+
+        }
+
+        protected override void AppendAdditionalComponentMenuItems(ToolStripDropDown menu)
+        {
+            GH_DocumentObject.Menu_AppendItem(menu, "Disable Flow Loop Checking (Fast Mode)", FastModeClicked, true, !DoVLChecking);
+        }
+
+        private void FastModeClicked(object sender, EventArgs e)
+        {
+            DoVLChecking = !DoVLChecking;
+            updateMessage();
+            ExpireSolution(true);
+
+        }
+
+
+        public override bool Write(GH_IWriter writer)
+        {
+            writer.SetBoolean("DoVLChecking", DoVLChecking);
+            return base.Write(writer);
+        }
+
+        public override bool Read(GH_IReader reader)
+        {
+            bool check = true;
+            reader.TryGetBoolean("DoVLChecking", ref check);
+            DoVLChecking = check;
+            updateMessage();
+            ExpireSolution(true);
+            return base.Read(reader);
+        }
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
@@ -126,9 +169,9 @@ namespace HumanUI.Components.UI_Main
         }
 
         public string VALUE_LISTENER_WARNING =
-            "In general, it's not a good idea to drive the creation of \n"+
-            "elements with the results of a value listener. Instead, use \n"+
-            "the value listener to drive a \"Set\" operation, from the \n"+
+            "In general, it's not a good idea to drive the creation of \n" +
+            "elements with the results of a value listener. Instead, use \n" +
+            "the value listener to drive a \"Set\" operation, from the \n" +
             "UI Output tab, to update the contents of an existing element \n" +
             "in the window. Otherwise, every time something in the window \n" +
             "changes, triggering your value listener, the entire window needs \n" +

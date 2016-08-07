@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Special;
@@ -129,7 +130,7 @@ namespace HumanUI.Components.UI_Elements
 
                 // Because we're actually outputting a list of objects (unlike most other UI element components) we have to
                 // calc the output index ourselves.
-                sliderPanels.Add(new UIElement_Goo(MakeSlider(sl, ref sliderLabels, snapValues[i % snapValues.Count]), sl.ImpliedNickName, InstanceGuid, sliderIndex));
+                sliderPanels.Add(new UIElement_Goo(MakeSlider(sl, ref sliderLabels, snapValues[i % snapValues.Count]), String.IsNullOrWhiteSpace(sl.NickName) ? "" : sl.ImpliedNickName, InstanceGuid, sliderIndex));
                 sliderIndex++;
 
                 // increment snapvalue index
@@ -139,6 +140,19 @@ namespace HumanUI.Components.UI_Elements
 
             //this sequence makes sure that all the slider labels fed through one component align with one another
 
+            var width = MaxLabelWidth(sliderLabels);
+            //set the width of all the labels to be wide enough to accommodate the widest one.  
+            foreach (Label l in sliderLabels)
+            {
+                l.Width = width;
+            }
+            //pass out the sliders
+            DA.SetDataList("Sliders", sliderPanels);
+        }
+
+        //return the greatest width from a list of label elements
+        private static double MaxLabelWidth(List<Label> sliderLabels)
+        {
             double width = 0;
             foreach (Label l in sliderLabels)
             {
@@ -150,13 +164,7 @@ namespace HumanUI.Components.UI_Elements
                     width = l.DesiredSize.Width;
                 }
             }
-            //set the width of all the labels to be wide enough to accommodate the widest one.  
-            foreach (Label l in sliderLabels)
-            {
-                l.Width = width;
-            }
-            //pass out the sliders
-            DA.SetDataList("Sliders", sliderPanels);
+            return width;
         }
 
         /// <summary>
@@ -227,7 +235,7 @@ namespace HumanUI.Components.UI_Elements
         {
             int decimalPlaces = slider.Slider.DecimalPlaces;
             string name = slider.ImpliedNickName;
-            if (String.IsNullOrWhiteSpace(name) || name.Length == 0) name = "Slider";
+            //if (String.IsNullOrWhiteSpace(name) || name.Length == 0) name = "Slider";
             return createNewSliderWithLabels(slider.Slider.Minimum, slider.Slider.Maximum, slider.Slider.Value, name, slider.Slider.Type == Grasshopper.GUI.Base.GH_SliderAccuracy.Integer, decimalPlaces, ref labelList, snapValue);
         }
 
@@ -299,7 +307,7 @@ namespace HumanUI.Components.UI_Elements
             label.Content = name;
 
             //Pass it out to slider labels so its width can be reconciled later
-            sliderLabels.Add(label);
+           if(!string.IsNullOrWhiteSpace(name)) sliderLabels.Add(label);
 
 
 
@@ -311,7 +319,7 @@ namespace HumanUI.Components.UI_Elements
             //set to stretch so it fills available horizontal width
             internalDockPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             //add the name label and dock it left
-            internalDockPanel.Children.Add(label);
+            if (!string.IsNullOrWhiteSpace(name)) internalDockPanel.Children.Add(label);
             DockPanel.SetDock(label, Dock.Left);
 
             //establish format string for labels
@@ -329,8 +337,11 @@ namespace HumanUI.Components.UI_Elements
                 //create a label for the slider readout
                 Label readout = new Label();
 
+                //convert all chars in max to 0s so the label is wide enough when measured
+                var maxString = new string(max.ToString(CultureInfo.InvariantCulture).ToCharArray().Select(c => '0').ToArray());
+                
                 //set to max to establish theoretical max width to avoid jumping
-                readout.Content = max;
+                readout.Content = maxString;
 
                 //format the readout number values
                 readout.ContentStringFormat = numberFormat;

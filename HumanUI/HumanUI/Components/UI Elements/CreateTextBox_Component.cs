@@ -77,7 +77,7 @@ namespace HumanUI.Components.UI_Elements
             Label l = new Label();
             l.Content = label;
             //add the label to the stackpanel
-            sp.Children.Add(l);
+           if(!string.IsNullOrWhiteSpace(label)) sp.Children.Add(l);
 
 
 

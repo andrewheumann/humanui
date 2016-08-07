@@ -40,9 +40,11 @@
     </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\GH_IO.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\Grasshopper.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="HelixToolkit, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,18 +101,24 @@
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTooltip_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateDataTable_Component.cs" />
     <Compile Include="Components\UI Main\CaptureWindow_Component.cs" />
     <Compile Include="Components\UI Main\HideShowElement_Component.cs" />
     <Compile Include="Components\UI Main\SetWindowProperties_Component.cs" />
+    <Compile Include="Components\UI Output\SetDataTable_Component.cs" />
     <Compile Include="Custom Types\ClickableShapeGrid.cs" />
     <Compile Include="Components\UI Elements\CreateGraphMapper_Component.cs" />
     <Compile Include="Custom Types\FilePicker.cs" />
+    <Compile Include="Custom Types\GradientHandle.cs" />
     <Compile Include="Custom Types\GraphMapperElement.cs" />
+    <Compile Include="Custom Types\HUI_Gradient.cs" />
+    <Compile Include="Custom Types\HUI_GradientEditor.cs" />
     <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
     <Compile Include="Upgraders\Upgrade_SetWindowPropertiesComponent.cs" />
     <Compile Include="Upgraders\Upgrade_TextBoxComponent.cs" />
@@ -375,6 +383,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\SetDataTable.png" />
+    <None Include="Resources\GradientEditor.png" />
+    <None Include="Resources\DataTable.png" />
     <None Include="Resources\FilePicker.png" />
     <None Include="Resources\GraphMapper.png" />
     <None Include="Resources\Expander.png" />

@@ -220,6 +220,11 @@ namespace HumanUI
                     b.PreviewMouseUp -= ExpireThis;
                     b.PreviewMouseUp += ExpireThis;
                     return;
+                case "System.Windows.Controls.DataGrid":
+                    DataGrid datagrid = u as DataGrid;
+                    datagrid.SelectedCellsChanged -= ExpireThis;
+                    datagrid.SelectedCellsChanged += ExpireThis;
+                    return;
                 case "HumanUI.TrueOnlyButton":
                     TrueOnlyButton tob = u as TrueOnlyButton;
                     tob.PreviewMouseDown -= ExpireThis;
@@ -234,6 +239,11 @@ namespace HumanUI
                     GraphMapperElement gme = u as GraphMapperElement;
                     gme.PropertyChanged -= ExpireThis;
                     gme.PropertyChanged += ExpireThis;
+                    return;
+                case "HumanUI.HUI_GradientEditor":
+                    HUI_GradientEditor hge = u as HUI_GradientEditor;
+                    hge.PropertyChanged -= ExpireThis;
+                    hge.PropertyChanged += ExpireThis;
                     return;
                 case "HumanUI.FilePicker":
                     FilePicker fp = u as FilePicker;
@@ -371,6 +381,10 @@ namespace HumanUI
                     b.PreviewMouseDown -= ExpireThis;
                     b.PreviewMouseUp -= ExpireThis;
                     return;
+                case "System.Windows.Controls.DataGrid":
+                    DataGrid datagrid = u as DataGrid;
+                    datagrid.SelectedCellsChanged -= ExpireThis;
+                    return;
                 case "HumanUI.TrueOnlyButton":
                     TrueOnlyButton tob = u as TrueOnlyButton;
                     tob.PreviewMouseDown -= ExpireThis;
@@ -382,6 +396,10 @@ namespace HumanUI
                 case "HumanUI.GraphMapperElement":
                     GraphMapperElement gme = u as GraphMapperElement;
                     gme.PropertyChanged -= ExpireThis;
+                    return;
+                case "HumanUI.HUI_GradientEditor":
+                    HUI_GradientEditor hge = u as HUI_GradientEditor;
+                    hge.PropertyChanged -= ExpireThis;
                     return;
                 case "HumanUI.FilePicker":
                     FilePicker fp = u as FilePicker;

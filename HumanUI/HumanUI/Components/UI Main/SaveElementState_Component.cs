@@ -283,6 +283,12 @@ namespace HumanUI.Components.UI_Main
                         typeString = "LIST OF BOOL";
                         stringValue = HUI_Util.stringFromBools((List<bool>)value);
                     }
+
+                    if(value is List<string>)
+                    {
+                        typeString = "LIST OF STRING";
+                        stringValue = HUI_Util.stringFromStrings((List<string>)value);
+                    }
                     
                     //store the value and a hint as to its type
                     stateItemChunk.SetString("ElementValue", stringValue);
@@ -449,6 +455,8 @@ namespace HumanUI.Components.UI_Main
                     return bl;
                 case "LIST OF BOOL":
                     return HUI_Util.boolsFromString(value);
+                case "LIST OF STRING":
+                    return HUI_Util.stringsFromString(value);
                 case "System.Drawing.Color":
                     string[] res = value.Split("=,]".ToCharArray());
                     int A, R, G, B;

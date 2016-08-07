@@ -83,11 +83,22 @@ namespace HumanUI.Components.UI_Main
             FrameworkElement f = HUI_Util.GetUIElement<FrameworkElement>(elem);
 
             //try a few casts to see if it's a container
+            Grid g = f as Grid;
             Panel panel = f as Panel;
             Selector selector = f as Selector;
             ScrollViewer sv = f as ScrollViewer;
             ChartBase cb = f as ChartBase;
             // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
+            if(g != null)
+            {
+                foreach (UIElement child in g.Children)
+                {
+                    ColorTextElement(child, fgCol, bgCol, fontSize);
+                }
+                g.Background = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol));
+            }
+
+
 
             //if it's a panel color its children
             if (panel != null)
@@ -96,6 +107,7 @@ namespace HumanUI.Components.UI_Main
                 {
                     ColorTextElement(child, fgCol, bgCol, fontSize);
                 }
+                panel.Background = new SolidColorBrush( HUI_Util.ToMediaColor(bgCol));
             }
             //if it's a selector, color its items
             else if (selector != null)

@@ -16,6 +16,7 @@ using Xceed.Wpf.Toolkit;
 using Grasshopper.Kernel;
 using De.TorstenMandelkow.MetroChart;
 using HumanUI.Components;
+using System.Data;
 
 namespace HumanUI
 {
@@ -80,7 +81,7 @@ namespace HumanUI
 
         public static UIElement extractBaseElement(UIElement element)
         {
-            if (element is Panel && !(element is HumanUI.ClickableShapeGrid))
+            if (element is Panel && !(element is HumanUI.ClickableShapeGrid) && !(element is HumanUI.FilePicker))
             {
 
                 Panel p = element as Panel;
@@ -107,7 +108,7 @@ namespace HumanUI
         {
             foreach (UIElement elem in elements)
             {
-                if (elem is Panel && !(elem is ClickableShapeGrid) && !(elem is FilePicker))
+                if (elem is Panel && !(elem is ClickableShapeGrid) && !(elem is FilePicker) && !(elem is HUI_GradientEditor))
                 {
 
                     Panel p = elem as Panel;
@@ -138,7 +139,7 @@ namespace HumanUI
         {
             foreach (UIElement u in p.Children)
             {
-                if(u is Panel)
+                if (u is Panel)
                 {
                     return findTextBox(u as Panel);
                 }
@@ -243,14 +244,46 @@ namespace HumanUI
                         RadioButton rb = u as RadioButton;
                         rb.IsChecked = (bool)o;
                         return;
+                    case "System.Windows.Controls.DataGrid":
+                        DataGrid datagrid = u as DataGrid;
+                        List<string> selectedRowContents = (List<string>)o;
+                        try
+                        {
+                            DataView dv = datagrid.ItemsSource as DataView;
+                            foreach(DataRowView drv in dv)
+                            {
+                                var items = drv.Row.ItemArray.Cast<string>().ToList();
+                                items.RemoveAt(0); //get rid of hidden index column
+                                bool selectRow = true;
+                                for(int counter = 0; counter < items.Count; counter++)
+                                {
+                                    if (selectedRowContents[counter] != items[counter])
+                                    {
+                                        selectRow = false;
+                                        break;
+                                    }
+                                }
+                                if (selectRow) datagrid.SelectedItem = drv;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        return;
                     case "HumanUI.MDSliderElement":
                         MDSliderElement mds = u as MDSliderElement;
                         mds.SliderPoint = (Rhino.Geometry.Point3d)o;
                         return;
                     case "HumanUI.GraphMapperElement":
                         GraphMapperElement gme = u as GraphMapperElement;
-                       
+
                         gme.SetByCurve((Rhino.Geometry.NurbsCurve)o);
+                        return;
+                    case "HumanUI.HUI_GradientEditor":
+                        HUI_GradientEditor hge = u as HUI_GradientEditor;
+                        HUI_Gradient gradient = HUI_Gradient.FromString((string)o);
+                        hge.Gradient = gradient;
                         return;
                     case "HumanUI.FilePicker":
                         FilePicker fp = u as FilePicker;
@@ -274,6 +307,7 @@ namespace HumanUI
                 case "System.Boolean":
                     return new GH_Boolean((bool)o);
                 case "System.Int32":
+                    return new GH_Integer((int)o);
                 case "System.Double":
                 case "System.Single":
                     return new GH_Number((double)o);
@@ -281,7 +315,7 @@ namespace HumanUI
                     return new GH_String((string)o);
                 case "System.Drawing.Color":
                     return new GH_Colour((System.Drawing.Color)o);
-           
+
                 default:
                     return new GH_ObjectWrapper(o);
 
@@ -346,6 +380,10 @@ namespace HumanUI
 
         }
 
+        internal static string stringFromStrings(List<string> values)
+        {
+            return string.Join("|", values);
+        }
 
         public static void SetImageSource(string newImagePath, Image l)
         {
@@ -493,6 +531,24 @@ namespace HumanUI
                     {
                         return null;
                     }
+                case "System.Windows.Controls.DataGrid":
+                    DataGrid datagrid = u as DataGrid;
+                    var SelectedItem = datagrid.SelectedItem;
+                    //System.Data.DataView dv = datagrid.ItemsSource as System.Data.DataView;
+                    List<string> result = new List<string>();
+                    try
+                    {
+                        System.Data.DataRowView drv = SelectedItem as System.Data.DataRowView;
+                        result = drv.Row.ItemArray.Cast<string>().ToList();
+                        result.RemoveAt(0);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    return result;
+
                 case "HumanUI.MDSliderElement":
                     MDSliderElement mds = u as MDSliderElement;
 
@@ -500,6 +556,9 @@ namespace HumanUI
                 case "HumanUI.GraphMapperElement":
                     GraphMapperElement gme = u as GraphMapperElement;
                     return gme.GetCurve().ToNurbsCurve();
+                case "HumanUI.HUI_GradientEditor":
+                    HUI_GradientEditor hge = u as HUI_GradientEditor;
+                    return hge.Gradient.ToString();
                 case "HumanUI.FilePicker":
                     FilePicker fp = u as FilePicker;
                     return fp.Path;
@@ -511,6 +570,10 @@ namespace HumanUI
             }
         }
 
+        internal static List<string> stringsFromString(string value)
+        {
+            return value.Split('|').ToList();
+        }
 
         static public object GetElementIndex(UIElement u)
         {
@@ -569,12 +632,23 @@ namespace HumanUI
                     {
                         return -1;
                     }
-
+                case "System.Windows.Controls.DataGrid":
+                    DataGrid datagrid = u as DataGrid;
+                    int selectedRow = -1;
+                    try
+                    {
+                        DataRowView drv = datagrid.SelectedItem as DataRowView;
+                        string indexName = (string)drv.Row.ItemArray[0];
+                        selectedRow = Int32.Parse(indexName);
+                    }
+                    catch { }
+                    return selectedRow;
                 case "System.Windows.Controls.TabControl":
                     TabControl tc = u as TabControl;
                     return tc.SelectedIndex;
                 default:
                     return -1;
+
             }
         }
 
