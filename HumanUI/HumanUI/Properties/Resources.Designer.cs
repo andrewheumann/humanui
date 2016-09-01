@@ -363,6 +363,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap createToggle {
+            get {
+                object obj = ResourceManager.GetObject("createToggle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateTooltip {
             get {
                 object obj = ResourceManager.GetObject("CreateTooltip", resourceCulture);
@@ -391,7 +401,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.2.0.
+        ///   Looks up a localized string similar to 0.7.2.1.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {

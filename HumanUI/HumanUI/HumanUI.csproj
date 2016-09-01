@@ -101,6 +101,8 @@
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
+    <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
@@ -383,6 +385,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\createToggle.png" />
     <None Include="Resources\SetDataTable.png" />
     <None Include="Resources\GradientEditor.png" />
     <None Include="Resources\DataTable.png" />

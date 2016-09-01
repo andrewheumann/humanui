@@ -15,6 +15,7 @@ using Xceed.Wpf.Toolkit;
 using System.Collections;
 using De.TorstenMandelkow.MetroChart;
 using Grasshopper.Kernel.Parameters;
+using MahApps.Metro.Controls;
 
 namespace HumanUI
 {
@@ -348,7 +349,11 @@ namespace HumanUI
                     tc.SelectionChanged -= ExpireThis;
                     tc.SelectionChanged += ExpireThis;
                     return;
-
+                case "MahApps.Metro.Controls.ToggleSwitch":
+                    ToggleSwitch ts = u as ToggleSwitch;
+                    ts.IsCheckedChanged -= ExpireThis;
+                    ts.IsCheckedChanged += ExpireThis;
+                    return;
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":
                 case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
@@ -481,6 +486,10 @@ namespace HumanUI
                     TabControl tc = u as TabControl;
                     tc.SelectionChanged -= ExpireThis;
                     return;
+                case "MahApps.Metro.Controls.ToggleSwitch":
+                    ToggleSwitch ts = u as ToggleSwitch;
+                    ts.IsCheckedChanged -= ExpireThis;
+                    return;
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":
                 case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
@@ -492,6 +501,7 @@ namespace HumanUI
                     ChartBase chart = u as ChartBase;
                     chart.MouseUp -= ExpireThis;
                     return;
+               
                 default:
                     return;
             }

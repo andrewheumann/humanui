@@ -17,6 +17,7 @@ using Grasshopper.Kernel;
 using De.TorstenMandelkow.MetroChart;
 using HumanUI.Components;
 using System.Data;
+using MahApps.Metro.Controls;
 
 namespace HumanUI
 {
@@ -239,6 +240,10 @@ namespace HumanUI
                     case "System.Windows.Controls.CheckBox":
                         CheckBox chb = u as CheckBox;
                         chb.IsChecked = (bool)o;
+                        return;
+                    case "MahApps.Metro.Controls.ToggleSwitch":
+                        ToggleSwitch ts = u as ToggleSwitch;
+                        ts.IsChecked = (bool) o;
                         return;
                     case "System.Windows.Controls.RadioButton":
                         RadioButton rb = u as RadioButton;
@@ -505,7 +510,10 @@ namespace HumanUI
                         ti = tc.Items[0] as TabItem;
                     }
                     return ti.Header.ToString();
-
+                case "MahApps.Metro.Controls.ToggleSwitch":
+                    ToggleSwitch ts = u as ToggleSwitch;
+                 
+                    return ts.IsChecked;
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":
                 case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":

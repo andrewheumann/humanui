@@ -338,8 +338,8 @@ namespace HumanUI.Components.UI_Elements
                 Label readout = new Label();
 
                 //convert all chars in max to 0s so the label is wide enough when measured
-                var maxString = new string(max.ToString(CultureInfo.InvariantCulture).ToCharArray().Select(c => '0').ToArray());
-                
+                var maxString = new string(string.Format(numberFormat,max).ToCharArray().Select(c => '0').ToArray())+"0";
+                var maxStringBase = max.ToString(numberFormat, CultureInfo.InvariantCulture);
                 //set to max to establish theoretical max width to avoid jumping
                 readout.Content = maxString;
 
