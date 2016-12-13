@@ -16,6 +16,7 @@ using System.Collections;
 using De.TorstenMandelkow.MetroChart;
 using Grasshopper.Kernel.Parameters;
 using MahApps.Metro.Controls;
+using RangeSlider = MahApps.Metro.Controls.RangeSlider;
 
 namespace HumanUI
 {
@@ -354,6 +355,11 @@ namespace HumanUI
                     ts.IsCheckedChanged -= ExpireThis;
                     ts.IsCheckedChanged += ExpireThis;
                     return;
+                case "MahApps.Metro.Controls.RangeSlider":
+                    RangeSlider rs = u as RangeSlider;
+                    rs.RangeSelectionChanged -= ExpireThis;
+                    rs.RangeSelectionChanged += ExpireThis;
+                    return;
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":
                 case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
@@ -489,6 +495,10 @@ namespace HumanUI
                 case "MahApps.Metro.Controls.ToggleSwitch":
                     ToggleSwitch ts = u as ToggleSwitch;
                     ts.IsCheckedChanged -= ExpireThis;
+                    return;
+                case "MahApps.Metro.Controls.RangeSlider":
+                    RangeSlider rs = u as RangeSlider;
+                    rs.RangeSelectionChanged -= ExpireThis;
                     return;
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":

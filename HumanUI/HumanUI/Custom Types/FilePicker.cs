@@ -74,6 +74,7 @@ namespace HumanUI
             b.Content = buttonLabel;
             SetDock(b, Dock.Right);
             tb = new TextBox();
+            tb.IsEnabled = false;
             if (isFile) Path = startingPath;
             tb.MinWidth = 50;
             tb.HorizontalAlignment = HorizontalAlignment.Stretch;

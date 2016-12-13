@@ -18,7 +18,7 @@ namespace HumanUI.Components.UI_Elements
         public Create_TEMPLATE_Component()
             : base("Create SOME_UI_ELEMENT", "SOME_UI_ELEMENT",
                 "Description",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

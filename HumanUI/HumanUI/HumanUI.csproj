@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Markdown.Xaml">
+      <HintPath>..\..\..\Markdown.XAML\src\Markdown.Xaml.Demo\bin\Debug\Markdown.Xaml.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -101,7 +104,10 @@
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
+    <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
+    <Compile Include="Custom Types\MarkdownViewer.cs" />
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
@@ -385,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\CreateRangeSlider.png" />
     <None Include="Resources\createToggle.png" />
     <None Include="Resources\SetDataTable.png" />
     <None Include="Resources\GradientEditor.png" />

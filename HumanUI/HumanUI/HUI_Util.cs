@@ -18,6 +18,8 @@ using De.TorstenMandelkow.MetroChart;
 using HumanUI.Components;
 using System.Data;
 using MahApps.Metro.Controls;
+using Rhino.Geometry;
+using RangeSlider = MahApps.Metro.Controls.RangeSlider;
 
 namespace HumanUI
 {
@@ -243,7 +245,13 @@ namespace HumanUI
                         return;
                     case "MahApps.Metro.Controls.ToggleSwitch":
                         ToggleSwitch ts = u as ToggleSwitch;
-                        ts.IsChecked = (bool) o;
+                        ts.IsChecked = (bool)o;
+                        return;
+                    case "MahApps.Metro.Controls.RangeSlider":
+                        RangeSlider rs = u as RangeSlider;
+                        var valueRange = (Interval)o;
+                        rs.UpperValue = valueRange.Max;
+                        rs.LowerValue = valueRange.Min;
                         return;
                     case "System.Windows.Controls.RadioButton":
                         RadioButton rb = u as RadioButton;
@@ -255,12 +263,12 @@ namespace HumanUI
                         try
                         {
                             DataView dv = datagrid.ItemsSource as DataView;
-                            foreach(DataRowView drv in dv)
+                            foreach (DataRowView drv in dv)
                             {
                                 var items = drv.Row.ItemArray.Cast<string>().ToList();
                                 items.RemoveAt(0); //get rid of hidden index column
                                 bool selectRow = true;
-                                for(int counter = 0; counter < items.Count; counter++)
+                                for (int counter = 0; counter < items.Count; counter++)
                                 {
                                     if (selectedRowContents[counter] != items[counter])
                                     {
@@ -320,7 +328,8 @@ namespace HumanUI
                     return new GH_String((string)o);
                 case "System.Drawing.Color":
                     return new GH_Colour((System.Drawing.Color)o);
-
+                case "Rhino.Geometry.Interval":
+                    return new GH_Interval((Interval)o);
                 default:
                     return new GH_ObjectWrapper(o);
 
@@ -512,8 +521,12 @@ namespace HumanUI
                     return ti.Header.ToString();
                 case "MahApps.Metro.Controls.ToggleSwitch":
                     ToggleSwitch ts = u as ToggleSwitch;
-                 
+
                     return ts.IsChecked;
+                case "MahApps.Metro.Controls.RangeSlider":
+                    RangeSlider rs = u as RangeSlider;
+
+                    return new Interval(rs.LowerValue, rs.UpperValue);
                 case "De.TorstenMandelkow.MetroChart.ChartBase":
                 case "De.TorstenMandelkow.MetroChart.PieChart":
                 case "De.TorstenMandelkow.MetroChart.ClusteredBarChart":
