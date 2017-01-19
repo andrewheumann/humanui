@@ -107,6 +107,7 @@
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
+    <Compile Include="Deprecated\CaptureWindow_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\MarkdownViewer.cs" />
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
@@ -391,6 +392,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\MarkdownViewer.png" />
     <None Include="Resources\CreateRangeSlider.png" />
     <None Include="Resources\createToggle.png" />
     <None Include="Resources\SetDataTable.png" />

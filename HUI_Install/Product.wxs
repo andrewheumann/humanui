@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="EFB91EB9-458B-438B-BFC1-1B020E5D96F5" Name="Human UI" Language="1033" Version="0.7.2.1" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
+  <Product Id="EFB91EB9-458B-438B-BFC1-1B020E5D96F5" Name="Human UI" Language="1033" Version="0.7.2.4" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
    
@@ -55,6 +55,8 @@
         <File Source="$(var.HumanUI.TargetDir)HelixToolkit.dll"/>
         <File Source="$(var.HumanUI.TargetDir)HelixToolkit.Wpf.dll"/>
         <File Source="$(var.HumanUI.TargetDir)MahApps.Metro.dll"/>
+        <File Source="$(var.HumanUI.TargetDir)Markdown.Xaml.dll"/>
+        <File Source="$(var.HumanUI.TargetDir)Styles.Default.Xaml"/>
         <File Source="$(var.HumanUI.TargetDir)System.Windows.Interactivity.dll" />
         <File Source="$(var.HumanUI.TargetDir)XCeed.Wpf.Toolkit.dll" />
         <File Source="$(var.HumanUI.TargetDir)De.TorstenMandelkow.MetroChart.dll" />
