@@ -411,7 +411,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.2.4.
+        ///   Looks up a localized string similar to 0.7.2.5.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -642,6 +642,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap setExpander {
+            get {
+                object obj = ResourceManager.GetObject("setExpander", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SetImage {
             get {
                 object obj = ResourceManager.GetObject("SetImage", resourceCulture);
@@ -695,6 +705,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetShapes {
             get {
                 object obj = ResourceManager.GetObject("SetShapes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetTab {
+            get {
+                object obj = ResourceManager.GetObject("SetTab", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
