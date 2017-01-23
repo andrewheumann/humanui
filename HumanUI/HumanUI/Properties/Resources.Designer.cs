@@ -622,6 +622,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SetCheckbox {
+            get {
+                object obj = ResourceManager.GetObject("SetCheckbox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SetCheckList {
             get {
                 object obj = ResourceManager.GetObject("SetCheckList", resourceCulture);
