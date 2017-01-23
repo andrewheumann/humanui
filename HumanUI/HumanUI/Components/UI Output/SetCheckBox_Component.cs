@@ -17,8 +17,8 @@ namespace HumanUI.Components.UI_Output
         /// Initializes a new instance of the SetLabel_Component class.
         /// </summary>
         public SetCheckBox_Component()
-            : base("Set CheckBox Contents", "SetCheckBox",
-                "Modify the contents of an existing Check Box object.",
+            : base("Set CheckBox", "SetCheckBox",
+                "Modify an existing Check Box object.",
                 "Human UI", "UI Output")
         {
         }
@@ -49,12 +49,11 @@ namespace HumanUI.Components.UI_Output
         {
             object CheckBoxObject = null;
             bool isSelected = false;
-            bool SetLabel = false;
-            bool SetChecked = false;
+           
             string newLabelContents = "";
-            if(DA.GetData<string>("New Check Box Label", ref newLabelContents)) SetLabel=true;
+            bool SetLabel=DA.GetData<string>("New Check Box Label", ref newLabelContents);
             if (!DA.GetData<object>("Check Box to modify", ref CheckBoxObject)) return;
-            if (DA.GetData<bool>("New Value", ref isSelected)) SetChecked=true;
+            bool SetChecked = DA.GetData<bool>("New Value", ref isSelected);
             // Since HUI textboxes are actually stackpanels with textboxes inside (since they may or may not also contain a button)
             // we have to grab the stackpanel first and then find the textbox inside it. 
             //Panel sp = HUI_Util.GetUIElement<Panel>(TextBlockObject);
