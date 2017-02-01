@@ -443,10 +443,10 @@ namespace HumanUI
                     return l.Content;
                 case "System.Windows.Controls.ListBox":
                     ListBox lb = u as ListBox;
-                    Label lab = lb.SelectedItem as Label;
+                    TextBlock lab = lb.SelectedItem as TextBlock;
                     if (lab != null)
                     {
-                        return lab.Content;
+                        return lab.Text;
                     }
                     else
                     {
