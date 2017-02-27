@@ -411,7 +411,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.2.6.
+        ///   Looks up a localized string similar to 0.7.2.7.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -715,6 +715,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetShapes {
             get {
                 object obj = ResourceManager.GetObject("SetShapes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SetSlider {
+            get {
+                object obj = ResourceManager.GetObject("SetSlider", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

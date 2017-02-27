@@ -425,7 +425,10 @@ namespace HumanUI.Components.UI_Main
                     //add the value and the elementGoo into the new real state
                     state.stateDict.Add(goo, valueSet);
                     //assumes that all elements, if properly deserialized and referenced back to the doc, have a parent element.
-                    if (FindTopmostParent<HumanUIBaseApp.MainWindow>(goo.element) == null) allElementsHaveParents = false;
+                    if (FindTopmostParent<HumanUIBaseApp.MainWindow>(goo.element) == null)
+                    {
+                        allElementsHaveParents = false;
+                    }
                 }
                 //add the re-constituted state into the global state dictionary
                 savedStates.Add(stateName, state);

@@ -109,6 +109,7 @@
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
+    <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
     <Compile Include="Deprecated\CaptureWindow_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\MarkdownViewer.cs" />
@@ -399,6 +400,7 @@
     <Content Include="Grasshopper.dll" />
     <Content Include="Markdown.Xaml.dll" />
     <Content Include="Resources\SetCheckbox.png" />
+    <None Include="Resources\SetSlider.png" />
     <Content Include="RhinoCommon.dll" />
     <None Include="Resources\SetTab.png" />
     <None Include="Resources\setExpander.png" />

@@ -91,6 +91,12 @@ namespace HumanUI
         {
             get
             {
+                if (!String.IsNullOrEmpty(tb.Text) && tb.Text!= _path)
+                {
+                    _path = tb.Text;
+                    OnPropertyChanged("Path Changed");
+                    //THIS NASTY!!!!
+                }
                 return _path;
             }
             set
