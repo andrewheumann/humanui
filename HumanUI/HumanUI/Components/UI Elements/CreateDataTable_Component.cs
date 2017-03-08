@@ -8,7 +8,9 @@ using Grasshopper.Kernel.Types;
 using System.Windows.Controls;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 using Grasshopper.Kernel.Parameters;
+using DataGrid = System.Windows.Controls.DataGrid;
 
 namespace HumanUI.Components
 {
@@ -112,6 +114,7 @@ namespace HumanUI.Components
             }
 
             DataTable dt = ConvertListToDataTable(dataToConvert, columnHeadings);
+          
             dg.AutoGeneratingColumn += dataGrid_AutoGeneratingColumn;
             dg.AutoGenerateColumns = true;
             if (columnWidth == -1)
@@ -153,9 +156,11 @@ namespace HumanUI.Components
 
         private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+           
             //Set properties on the columns during auto-generation 
             switch (e.Column.Header.ToString())
             {
+                
                 case "HUI_Index":
                     e.Column.Visibility = System.Windows.Visibility.Collapsed;
                     break;
@@ -184,7 +189,9 @@ namespace HumanUI.Components
             // Add columns.
             for (int i = 1; i < columns; i++)
             {
-                table.Columns.Add(columnHeadings[i - 1]);
+                var heading = columnHeadings[i - 1];
+                if (String.IsNullOrWhiteSpace(heading) || heading == ".") heading = '\u2800'.ToString();
+                table.Columns.Add(heading,typeof(string));
 
             }
 

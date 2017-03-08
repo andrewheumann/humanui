@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
+    <Compile Include="Components\UI Containers\CreateWrapPanel_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
@@ -396,12 +397,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
-    <Content Include="GH_IO.dll" />
-    <Content Include="Grasshopper.dll" />
-    <Content Include="Markdown.Xaml.dll" />
+    <None Include="Resources\CreateWrapPanel.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
-    <Content Include="RhinoCommon.dll" />
     <None Include="Resources\SetTab.png" />
     <None Include="Resources\setExpander.png" />
     <None Include="Resources\MarkdownViewer.png" />
