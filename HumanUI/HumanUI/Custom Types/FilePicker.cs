@@ -78,6 +78,9 @@ namespace HumanUI
             if (isFile) Path = startingPath;
             tb.MinWidth = 50;
             tb.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+
+
             b.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClick));
             Children.Add(b);
             Children.Add(tb);
@@ -104,7 +107,7 @@ namespace HumanUI
                 if (_path != value)
                 {
                     _path = value;
-
+                    tb.Text = _path;
                     OnPropertyChanged("Path Changed");
                 }
 
@@ -118,7 +121,7 @@ namespace HumanUI
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
-            tb.Text = _path;
+         
         }
 
         private void ButtonClick(object sender, RoutedEventArgs e)

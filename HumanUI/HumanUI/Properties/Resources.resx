@@ -215,7 +215,7 @@
     <value>..\Resources\screenDimensions.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CURRENT_VERSION" xml:space="preserve">
-    <value>0.7.3.0</value>
+    <value>0.7.3.1</value>
   </data>
   <data name="createBrowser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\createBrowser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -339,5 +339,8 @@
   </data>
   <data name="CreateWrapPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreateWrapPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WindowStatus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WindowStatus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
