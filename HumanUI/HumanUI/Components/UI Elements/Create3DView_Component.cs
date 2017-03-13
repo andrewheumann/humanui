@@ -84,6 +84,9 @@ namespace HumanUI.Components.UI_Elements
             grid.MajorDistance = 1;
             grid.Thickness = 0.01;
             vp3.Children.Add(mv3);
+
+
+            
         //    vp3.Children.Add(grid);
 
             //pass out the 3d viewport object

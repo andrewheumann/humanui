@@ -37,6 +37,9 @@ namespace HumanUI
 
 
         private static List<UIElement> eventedElements;
+
+
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -376,7 +379,6 @@ namespace HumanUI
                     return;
             }
         }
-
 
 
         void RemoveEvents(UIElement u)
