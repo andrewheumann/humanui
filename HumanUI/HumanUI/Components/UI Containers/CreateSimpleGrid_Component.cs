@@ -23,7 +23,7 @@ namespace HumanUI.Components.UI_Containers
         /// </summary>
         public CreateSimpleGrid_Component()
           : base("Create Simple Grid", "SimpleGrid",
-                "Create a container with absolutely positioned elements. \n Their input order determines their Z order - set the margins \nwith the \"Adjust Element Positioning\" component to locate \nelements inside the grid.\n Use column and row definitions to create more advanced grids.",
+                "Create a container with elements in a grid according to the path structure provided. Each branch path will be treated as a column and Elements will be placed in the column from top to bottom. Use the \"Adjust Element Positioning\" component to locate elements inside the grid cell. Use column and row definitions to control sizing.",
                 "Human UI", "UI Containers")
         {
         }
@@ -33,15 +33,20 @@ namespace HumanUI.Components.UI_Containers
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("UI Elements", "E", "The UI elements to place in the grid. Elements will be ordered top to bottom in columns by path.", GH_ParamAccess.tree);
+
+            //GH_String rowDefault = new GH_String("Auto");
+            //List<GH_String> rowDefaults = new List<GH_String>();
+            //rowDefaults.Add(rowDefault);
+
+            pManager.AddGenericParameter("UI Elements", "E", "The UI elements to place in the grid. Each path branch will form a column of the provided UI Elements from top to bottom.", GH_ParamAccess.tree);
             pManager.AddNumberParameter("Width", "W", "The width of the grid", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Height", "H", "The height of the grid", GH_ParamAccess.item);
             pManager[2].Optional = true;
             // Perhaps change the Row Definitions to Tree access to pull only the first branch
-            pManager.AddTextParameter("Row Definitions", "RD", "An optional list of Row Heights. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
+            pManager.AddTextParameter("Row Definitions", "RD", "An optional repeating pattern of Row Heights - use 'Auto' to inherit, numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list, new[] { "Auto" });
             pManager[3].Optional = true;
-            pManager.AddTextParameter("Column Definitions", "CD", "An optional list of Column Widths. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
+            pManager.AddTextParameter("Column Definitions", "CD", "An optional flat list of Column Widths - use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
             pManager[4].Optional = true;
 
 
@@ -119,12 +124,28 @@ namespace HumanUI.Components.UI_Containers
             }
             if (hasRowDefs)
             {
-                foreach (string rowDef in rowDefinitions)
+                int maxCount = 0;
+
+                // Find the count of the longest list
+                for (int i = 0; i < elementsToAdd.PathCount; i++)
+                {
+                    if (elementsToAdd.Branches[i].Count > maxCount)
+                    {
+                        maxCount = elementsToAdd.Branches[i].Count;
+                    }
+                }
+
+                // Build up the row heights based on a repeating pattern
+                for (int i = 0; i < maxCount; i++)
                 {
                     RowDefinition rd = new RowDefinition();
-                    rd.Height = (GridLength)gridLengthConverter.ConvertFromString(rowDef);
+                    rd.Height = (GridLength)gridLengthConverter.ConvertFromString(rowDefinitions[i % rowDefinitions.Count]);
                     grid.RowDefinitions.Add(rd);
                 }
+
+
+            } else
+            {
 
             }
 
