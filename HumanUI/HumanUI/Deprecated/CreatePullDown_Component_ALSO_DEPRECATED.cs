@@ -16,12 +16,12 @@ namespace HumanUI.Components.UI_Elements
     /// Component to create a Combobox ("Pulldown menu")
     /// </summary>
     /// <seealso cref="Grasshopper.Kernel.GH_Component" />
-    public class CreatePullDown_Component : GH_Component
+    public class CreatePullDown_Component_ALSO_DEPRECATED : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
-        public CreatePullDown_Component()
+        public CreatePullDown_Component_ALSO_DEPRECATED()
             : base("Create Pulldown Menu", "Pulldown",
                 "Creates a pulldown menu from which items can be selected.",
                 "Human UI", "UI Elements")
@@ -160,13 +160,12 @@ namespace HumanUI.Components.UI_Elements
             }
         }
 
-
-/// <summary>
-/// Gets the unique ID for this component. Do not change this ID after release.
-/// </summary>
-public override Guid ComponentGuid
+        /// <summary>
+        /// Gets the unique ID for this component. Do not change this ID after release.
+        /// </summary>
+        public override Guid ComponentGuid
         {
-            get { return new Guid("{fc6ae741-ecd1-432f-abb4-36b3f439c6f5}"); }
+            get { return new Guid("{8F5B1D66-DE73-47A2-9678-9E59CEA106C0}"); }
         }
     }
 }
