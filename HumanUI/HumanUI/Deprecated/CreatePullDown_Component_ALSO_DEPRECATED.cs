@@ -53,7 +53,7 @@ namespace HumanUI.Components.UI_Elements
         {
             get
             {
-                return GH_Exposure.primary;
+                return GH_Exposure.hidden;
             }
         }
 
