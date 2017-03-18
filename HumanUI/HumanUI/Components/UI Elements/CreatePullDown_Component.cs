@@ -18,6 +18,10 @@ namespace HumanUI.Components.UI_Elements
     /// <seealso cref="Grasshopper.Kernel.GH_Component" />
     public class CreatePullDown_Component : GH_Component
     {
+
+        // Set show-label boolean for custom right-click menu
+        private bool showLabel;
+
         /// <summary>
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
@@ -26,7 +30,42 @@ namespace HumanUI.Components.UI_Elements
                 "Creates a pulldown menu from which items can be selected.",
                 "Human UI", "UI Elements")
         {
+            showLabel = true;
         }
+
+        // Create right-click menu item for show-label
+        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
+        {
+            System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
+            ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
+        }
+
+        // Method called on click event of Menu Item
+        public void Menu_ShowLabelClicked(object sender, System.EventArgs e)
+        {
+            RecordUndoEvent("Show Label Toggle");
+            showLabel = !showLabel;
+            //updateMessage();
+            ExpireSolution(true);
+        }
+
+        // Methods to save the boolean state of the component between file opens
+
+        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
+        {
+            writer.SetBoolean("showLabel", showLabel);
+
+            return base.Write(writer);
+        }
+
+
+        public override bool Read(GH_IO.Serialization.GH_IReader reader)
+        {
+            showLabel = reader.GetBoolean("showLabel");
+            //updateMessage();
+            return base.Read(reader);
+        }
+
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -119,16 +158,16 @@ namespace HumanUI.Components.UI_Elements
                 l.Content = label;
 
                 //add the label to the stackpanel if showLabel is true
-                if (!string.IsNullOrWhiteSpace(label))
+                if (!string.IsNullOrWhiteSpace(label) & showLabel)
                 {
                     sp.Name = "GH_PullDown_Label";
                     sp.Children.Add(l);
-                } else if (1>0)
+                } else
                 {
                     sp.Name = "GH_PullDown_NoLabel";
                 }
 
-                List<UIElement_Goo> combobox = new List<UIElement_Goo>() { new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator) };
+                //List<UIElement_Goo> combobox = new List<UIElement_Goo>() { new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator) };
 
                 sp.Children.Add(pd);
 
@@ -166,11 +205,35 @@ namespace HumanUI.Components.UI_Elements
                         pd.SelectedIndex = valList.ListItems.IndexOf(valList.FirstSelectedItem);
                     }
 
-                    //pass out the combobox
-                    goosOut.Add(new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator));
-                    Iterator++;
+                    DockPanel sp = new DockPanel();
+                    //  sp.Orientation = Orientation.Horizontal;
+
+                    //set up the button
+                    sp.Margin = new Thickness(4);
+                    Label l = new Label();
+                    l.Content = label;
+
+                    //add the label to the stackpanel if showLabel is true
+                    if (!string.IsNullOrWhiteSpace(label) & showLabel)
+                    {
+                        sp.Name = "GH_PullDown_Label";
+                        sp.Children.Add(l);
+                    }
+                    else
+                    {
+                        sp.Name = "GH_PullDown_NoLabel";
+                    }
+
+                    sp.Children.Add(pd);
+
+                    //pass out the stackpanel
+                    DA.SetData("Pulldown", new UIElement_Goo(sp, String.Format("Pulldown: {0}", label), InstanceGuid, DA.Iteration));
+
+                    ////pass out the combobox
+                    //goosOut.Add(new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator));
+                    //Iterator++;
                 }
-                DA.SetDataList("Pulldown", goosOut);
+                //DA.SetDataList("Pulldown", goosOut);
             }
 
 

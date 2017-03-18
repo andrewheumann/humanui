@@ -35,12 +35,12 @@ namespace HumanUI.Components.UI_Elements
         // Create right-click menu item for show-label
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
-            System.Windows.Forms.ToolStripMenuItem AddEventsMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show label", new EventHandler(this.Menu_AddEventsClicked), true, showLabel);
-            AddEventsMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
+            System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
+            ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
         }
 
         // Method called on click event of Menu Item
-        public void Menu_AddEventsClicked(object sender, System.EventArgs e)
+        public void Menu_ShowLabelClicked(object sender, System.EventArgs e)
         {
             RecordUndoEvent("Show Label Toggle");
             showLabel = !showLabel;
