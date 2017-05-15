@@ -34,19 +34,14 @@ namespace HumanUI.Components.UI_Containers
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
 
-            //GH_String rowDefault = new GH_String("Auto");
-            //List<GH_String> rowDefaults = new List<GH_String>();
-            //rowDefaults.Add(rowDefault);
-
             pManager.AddGenericParameter("UI Elements", "E", "The UI elements to place in the grid. Each path branch will form a column of the provided UI Elements from top to bottom.", GH_ParamAccess.tree);
             pManager.AddNumberParameter("Width", "W", "The width of the grid", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddNumberParameter("Height", "H", "The height of the grid", GH_ParamAccess.item);
             pManager[2].Optional = true;
-            // Perhaps change the Row Definitions to Tree access to pull only the first branch
-            pManager.AddTextParameter("Row Definitions", "RD", "An optional repeating pattern of Row Heights - use 'Auto' to inherit, numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list, new[] { "Auto" });
+            pManager.AddTextParameter("Row Definitions", "RD", "An optional repeating pattern of Row Heights - use 'Auto' to inherit, numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list, "Auto");
             pManager[3].Optional = true;
-            pManager.AddTextParameter("Column Definitions", "CD", "An optional flat list of Column Widths - use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list);
+            pManager.AddTextParameter("Column Definitions", "CD", "An optional flat list of Column Widths - use 'Auto' to inherit, use numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)", GH_ParamAccess.list, "Auto");
             pManager[4].Optional = true;
 
 
@@ -66,18 +61,13 @@ namespace HumanUI.Components.UI_Containers
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Grasshopper.Kernel.Data.GH_Structure<UIElement_Goo> elementsToAdd = new Grasshopper.Kernel.Data.GH_Structure<UIElement_Goo>();
+            Grasshopper.Kernel.Data.GH_Structure<IGH_Goo> elementsToAdd = new Grasshopper.Kernel.Data.GH_Structure<IGH_Goo>();
             double width = 0;
             double height = 0;
             List<string> rowDefinitions = new List<string>();
             List<string> colDefinitions = new List<string>();
             
-          
-
-
-         
-            if (!DA.GetDataTree(0, out elementsToAdd)) return;
-            
+            if (!DA.GetDataTree<IGH_Goo>(0, out elementsToAdd)) return;
             bool hasWidth = DA.GetData<double>("Width", ref width);
             bool hasHeight = DA.GetData<double>("Height", ref height);
 
@@ -114,14 +104,15 @@ namespace HumanUI.Components.UI_Containers
             //set up rows and columns if present
             if (hasColDefs)
             {
-                foreach (string colDef in colDefinitions)
+                for (int i = 0; i < elementsToAdd.PathCount; i++)
                 {
                     ColumnDefinition cd = new ColumnDefinition();
-                    cd.Width = (GridLength)gridLengthConverter.ConvertFromString(colDef);
+                    cd.Width = (GridLength)gridLengthConverter.ConvertFromString(colDefinitions[i % colDefinitions.Count]);  // use repeating pattern of supplied list
                     grid.ColumnDefinitions.Add(cd);
                 }
 
             }
+
             if (hasRowDefs)
             {
                 int maxCount = 0;
@@ -139,7 +130,7 @@ namespace HumanUI.Components.UI_Containers
                 for (int i = 0; i < maxCount; i++)
                 {
                     RowDefinition rd = new RowDefinition();
-                    rd.Height = (GridLength)gridLengthConverter.ConvertFromString(rowDefinitions[i % rowDefinitions.Count]);
+                    rd.Height = (GridLength)gridLengthConverter.ConvertFromString(rowDefinitions[i % rowDefinitions.Count]);  // use repeating pattern of supplied list
                     grid.RowDefinitions.Add(rd);
                 }
 
@@ -152,12 +143,11 @@ namespace HumanUI.Components.UI_Containers
 
             for (int i = 0; i < elementsToAdd.PathCount; i++)
             {
-               // int[] path = (int[])elementsToAdd.Paths[i].Indices.Clone();
-                var branch = elementsToAdd.Branches[i];
+                List<IGH_Goo> branch = elementsToAdd.Branches[i];
                 //for all the elements in each branch
                 for (int j = 0; j < branch.Count; j++)
                 {
-                    UIElement_Goo u = branch[j];
+                    UIElement_Goo u = branch[j] as UIElement_Goo;
                     //make sure it doesn't already have a parent
                     HUI_Util.removeParent(u.element);
                     FrameworkElement fe = u.element as FrameworkElement;
