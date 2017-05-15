@@ -51,13 +51,7 @@ namespace HumanUI.Components.UI_Elements
 
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -108,12 +102,6 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{B412D7D3-02E2-4A8E-BDCC-2E1F8B2A8834}"); }
-        }
-
-
-
+        public override Guid ComponentGuid => new Guid("{B412D7D3-02E2-4A8E-BDCC-2E1F8B2A8834}");
     }
 }

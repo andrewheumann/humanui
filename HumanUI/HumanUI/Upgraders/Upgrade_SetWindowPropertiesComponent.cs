@@ -10,23 +10,11 @@ namespace HumanUI.Upgraders
 
     public class Upgrade_SetWindowPropertiesComponent2to3 : IGH_UpgradeObject
     {
-        public Guid UpgradeFrom
-        {
-            get { return new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}"); }
-        }
+        public Guid UpgradeFrom => new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}");
 
-        public Guid UpgradeTo
-        {
-            get { return new Guid("{14A1EE78-6536-43B2-B6D8-4B26A736F0A9}"); }
-        }
+        public Guid UpgradeTo => new Guid("{14A1EE78-6536-43B2-B6D8-4B26A736F0A9}");
 
-        public DateTime Version
-        {
-            get
-            {
-                return new DateTime(2016, 05, 04);
-            }
-        }
+        public DateTime Version => new DateTime(2016, 05, 04);
 
         public IGH_DocumentObject Upgrade(IGH_DocumentObject target, GH_Document document)
         {

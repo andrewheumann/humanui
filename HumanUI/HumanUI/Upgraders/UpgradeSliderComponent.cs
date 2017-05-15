@@ -27,20 +27,11 @@ namespace HumanUI.Upgraders
             return newComponent;
         }
 
-        public Guid UpgradeFrom
-        {
-            get { return new Guid("{16231ddc-6473-42d4-b81f-e0c5e90e8fbd}"); }
-        }
+        public Guid UpgradeFrom => new Guid("{16231ddc-6473-42d4-b81f-e0c5e90e8fbd}");
 
-        public Guid UpgradeTo
-        {
-            get { return new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}"); }
-        }
+        public Guid UpgradeTo => new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}");
 
-        public DateTime Version
-        {
-            get { return new DateTime(2016, 1, 16); }
-        }
+        public DateTime Version => new DateTime(2016, 1, 16);
     }
 
 
@@ -64,19 +55,10 @@ namespace HumanUI.Upgraders
             return newComponent;
         }
 
-        public Guid UpgradeFrom
-        {
-            get { return new Guid("{E4F276AF-46FB-478E-B10A-B95E7B04DFF0}"); }
-        }
+        public Guid UpgradeFrom => new Guid("{E4F276AF-46FB-478E-B10A-B95E7B04DFF0}");
 
-        public Guid UpgradeTo
-        {
-            get { return new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}"); }
-        }
+        public Guid UpgradeTo => new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}");
 
-        public DateTime Version
-        {
-            get { return new DateTime(2016, 1, 16); }
-        }
+        public DateTime Version => new DateTime(2016, 1, 16);
     }
 }

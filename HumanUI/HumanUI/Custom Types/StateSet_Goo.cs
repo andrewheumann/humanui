@@ -16,13 +16,8 @@ namespace HumanUI
     public class StateSet_Goo : GH_Goo<Dictionary<string, State>>
     {
         public Dictionary<string, State> states { get; set; }
-        public int Count
-        {
-            get
-            {
-                return states.Count;
-            }
-        }
+        public int Count => states.Count;
+
         public StateSet_Goo()
         {
              states = new Dictionary<string, State>(); 
@@ -48,10 +43,7 @@ namespace HumanUI
             return new StateSet_Goo(states);
         }
 
-        public override bool IsValid
-        {
-            get { return states!=null; }
-        }
+        public override bool IsValid => states!=null;
 
         public override string ToString()
         {
@@ -69,19 +61,11 @@ namespace HumanUI
             states.Clear();
         }
 
-        public string[] Names {
-            get { return states.Keys.ToArray<string>(); }
-            }
+        public string[] Names => states.Keys.ToArray<string>();
 
-        public override string TypeDescription
-        {
-            get { return "A collection of saved interface states"; }
-        }
+        public override string TypeDescription => "A collection of saved interface states";
 
-        public override string TypeName
-        {
-            get { return "UI Element State Collection"; }
-        }
+        public override string TypeName => "UI Element State Collection";
     }
 
 

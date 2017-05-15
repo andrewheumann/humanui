@@ -39,13 +39,7 @@ namespace HumanUI
             VariableParameterMaintenance();
         }
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -129,36 +123,18 @@ namespace HumanUI
             
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.TabControl;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.TabControl;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{669ED7CD-5B59-4484-B179-4E8934AB39B3}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{669ED7CD-5B59-4484-B179-4E8934AB39B3}");
 
-    
 
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {

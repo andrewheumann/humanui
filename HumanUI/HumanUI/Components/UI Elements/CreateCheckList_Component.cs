@@ -45,13 +45,7 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddGenericParameter("Checklist", "CL", "The checklist object", GH_ParamAccess.item);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -99,22 +93,11 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.createChecklist;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.createChecklist;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{6e21dbe5-ecb8-4530-8a22-7cd713cf40d5}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{6e21dbe5-ecb8-4530-8a22-7cd713cf40d5}");
     }
 }

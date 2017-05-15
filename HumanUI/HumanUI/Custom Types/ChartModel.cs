@@ -43,10 +43,7 @@ namespace HumanUI.Components
 
         public string Category
         {
-            get
-            {
-                return _category;
-            }
+            get => _category;
 
             set
             {
@@ -61,10 +58,7 @@ namespace HumanUI.Components
         private float _number;
         public float Number
         {
-            get
-            {
-                return _number;
-            }
+            get => _number;
 
             set
             {

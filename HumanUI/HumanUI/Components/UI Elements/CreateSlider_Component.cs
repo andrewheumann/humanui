@@ -63,13 +63,7 @@ namespace HumanUI.Components.UI_Elements
 
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -183,15 +177,7 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateSlider;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.CreateSlider;
 
 
         /// <summary>
@@ -431,11 +417,7 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}"); }
-        }
-
+        public override Guid ComponentGuid => new Guid("{C77ACC8A-FE64-43F0-9485-D23744F6152E}");
 
 
         public override bool Write(GH_IO.Serialization.GH_IWriter writer)

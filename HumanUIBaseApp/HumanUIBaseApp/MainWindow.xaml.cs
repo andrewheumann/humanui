@@ -52,14 +52,8 @@ namespace HumanUIBaseApp
 
         public bool HorizontalScrollingEnabled
         {
-            get
-            {
-               return MasterScrollViewer.HorizontalScrollBarVisibility == ScrollBarVisibility.Auto;
-            }
-            set
-            {
-                MasterScrollViewer.HorizontalScrollBarVisibility = value ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled;
-            }
+            get => MasterScrollViewer.HorizontalScrollBarVisibility == ScrollBarVisibility.Auto;
+            set => MasterScrollViewer.HorizontalScrollBarVisibility = value ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled;
         }
 
 

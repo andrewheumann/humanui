@@ -221,23 +221,12 @@ namespace HumanUI.Components.UI_Containers
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.TabControl;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.TabControl;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{EAF93260-86B3-4AE7-82D2-58E683DEAE7B}"); } 
-        }
+        public override Guid ComponentGuid => new Guid("{EAF93260-86B3-4AE7-82D2-58E683DEAE7B}");
 
         #region VariableParameterImplementation 
 

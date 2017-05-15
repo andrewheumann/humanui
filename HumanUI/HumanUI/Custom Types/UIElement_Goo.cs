@@ -35,10 +35,7 @@ namespace HumanUI
         }
 
      
-        public override bool IsValid
-        {
-            get { return (element != null); }
-        }
+        public override bool IsValid => (element != null);
 
         public override string ToString()
         {
@@ -54,14 +51,8 @@ namespace HumanUI
             }
         }
 
-        public override string TypeDescription
-        {
-            get { return "A UI element"; }
-        }
+        public override string TypeDescription => "A UI element";
 
-        public override string TypeName
-        {
-            get { return "UI Element"; }
-        }
+        public override string TypeName => "UI Element";
     }
 }

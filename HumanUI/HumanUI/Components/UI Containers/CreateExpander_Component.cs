@@ -71,22 +71,11 @@ namespace HumanUI.Components.UI_Containers
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.Expander;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.Expander;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{3cec9da4-eb68-4063-9325-57850921a8b2}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{3cec9da4-eb68-4063-9325-57850921a8b2}");
     }
 }

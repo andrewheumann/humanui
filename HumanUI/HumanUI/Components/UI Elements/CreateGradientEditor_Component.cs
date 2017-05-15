@@ -84,22 +84,11 @@ namespace HumanUI.Components
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.GradientEditor;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.GradientEditor;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{818ce7bb-0e46-4203-bc92-419bb786ba49}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{818ce7bb-0e46-4203-bc92-419bb786ba49}");
     }
 }

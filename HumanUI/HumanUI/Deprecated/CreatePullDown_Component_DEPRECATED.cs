@@ -35,21 +35,9 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddIntegerParameter("Selected Index", "I", "The initially selected index. Defaults to the first item.", GH_ParamAccess.item, 0);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -93,22 +81,11 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.CreatePullDown;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.CreatePullDown;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{1CA8D537-EF52-487C-828D-034B1BCA7361}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{1CA8D537-EF52-487C-828D-034B1BCA7361}");
     }
 }

@@ -45,13 +45,7 @@ namespace HumanUI
         }
         public GradientStopCollection Stops { get; set; }
 
-        public LinearGradientBrush Brush
-        {
-            get
-            {
-                return new LinearGradientBrush(Stops, new Point(0, 0), new Point(1, 0));
-            }
-        }
+        public LinearGradientBrush Brush => new LinearGradientBrush(Stops, new Point(0, 0), new Point(1, 0));
 
         public HUI_Gradient(GradientStopCollection stops)
         {

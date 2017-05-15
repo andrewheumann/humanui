@@ -400,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\simpleGrid.png" />
     <None Include="Resources\WindowStatus.png" />
     <None Include="Resources\CreateWrapPanel.png" />
     <Content Include="Resources\SetCheckbox.png" />

@@ -45,13 +45,7 @@ namespace HumanUI
             pManager.AddGenericParameter("Tabs", "T", "The Tab control", GH_ParamAccess.item);
         }
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -124,25 +118,13 @@ namespace HumanUI
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.TabControl;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.TabControl;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{df93e843-3893-4ffc-b2e3-666190768b8e}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{df93e843-3893-4ffc-b2e3-666190768b8e}");
 
-    
 
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {
@@ -172,13 +154,7 @@ namespace HumanUI
             return true;
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         public void VariableParameterMaintenance()
         {

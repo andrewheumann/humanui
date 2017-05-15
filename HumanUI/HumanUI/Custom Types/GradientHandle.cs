@@ -21,13 +21,7 @@ namespace HumanUI
 
         public bool Hide { get; internal set; }
 
-        public GradientStop GradientStop
-        {
-            get
-            {
-                return new GradientStop(Color, T);
-            }
-        }
+        public GradientStop GradientStop => new GradientStop(Color, T);
         public Ellipse handleEllipse { get; private set; }
 
         private HUI_GradientEditor GradientEditor;

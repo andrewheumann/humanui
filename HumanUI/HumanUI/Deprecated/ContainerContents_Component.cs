@@ -135,30 +135,13 @@ namespace HumanUI
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.ContainerContents;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.ContainerContents;
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{5215a6c0-8e04-4987-a87d-fef05f1a4a6b}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{5215a6c0-8e04-4987-a87d-fef05f1a4a6b}");
     }
 }

@@ -30,13 +30,7 @@ namespace HumanUI
             pManager.AddTextParameter("State Name to restore", "N", "The name of the state to restore", GH_ParamAccess.item);
         }
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -86,30 +80,13 @@ namespace HumanUI
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.RestoreState;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.RestoreState;
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{d106b262-7a20-4151-b59a-872300f7ee9c}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{d106b262-7a20-4151-b59a-872300f7ee9c}");
     }
 }

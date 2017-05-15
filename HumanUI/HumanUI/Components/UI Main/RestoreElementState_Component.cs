@@ -104,31 +104,14 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.RestoreState;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.RestoreState;
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.tertiary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{A6567BB1-37D1-46CB-AD10-594FF726299B}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{A6567BB1-37D1-46CB-AD10-594FF726299B}");
 
         //if the user adds/removes a parameter, this is the event handler
         private void ParamSourcesChanged(object sender, GH_ParamServerEventArgs e)

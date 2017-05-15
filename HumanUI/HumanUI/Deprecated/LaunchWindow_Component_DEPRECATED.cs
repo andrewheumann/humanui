@@ -55,13 +55,7 @@ namespace HumanUI
       
         }
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Registers all the output parameters for this component.
@@ -121,25 +115,14 @@ namespace HumanUI
         /// Provides an Icon for every component that will be visible in the User Interface.
         /// Icons need to be 24x24 pixels.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                // You can add image files to your project resources and access them like this:
-                //return Resources.IconForThisComponent;
-                return Properties.Resources.LaunchWindow;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.LaunchWindow;
 
         /// <summary>
         /// Each component must have a unique Guid to identify it. 
         /// It is vital this Guid doesn't change otherwise old ghx files 
         /// that use the old ID will partially fail during loading.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{f9d46462-5227-4c4e-9268-0b678960d7a9}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{f9d46462-5227-4c4e-9268-0b678960d7a9}");
 
         protected override void BeforeSolveInstance()
         {
@@ -220,13 +203,7 @@ namespace HumanUI
             }
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         protected override void AppendAdditionalComponentMenuItems(ToolStripDropDown menu)
         {
