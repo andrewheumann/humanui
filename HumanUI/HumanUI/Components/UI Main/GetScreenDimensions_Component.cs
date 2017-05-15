@@ -64,8 +64,8 @@ namespace HumanUI.Components.UI_Main
 
             //This seems to be necessary because WPF takes into account DPI scaling, whereas the screen measurements assume 96 DPI
             double mult = graphics.DpiX / 96; 
-            double A = sc.Bounds.Right-sc.Bounds.Left / mult;
-            double B = sc.Bounds.Bottom-sc.Bounds.Top / mult;
+            double A = (sc.Bounds.Right-sc.Bounds.Left ) / mult;
+            double B = (sc.Bounds.Bottom-sc.Bounds.Top) / mult;
             DA.SetData("Height", B);
             DA.SetData("Width", A);
         }

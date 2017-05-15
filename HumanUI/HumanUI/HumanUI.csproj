@@ -109,6 +109,7 @@
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
+    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
-    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Deprecated\CreatePullDown_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTooltip_Component.cs" />

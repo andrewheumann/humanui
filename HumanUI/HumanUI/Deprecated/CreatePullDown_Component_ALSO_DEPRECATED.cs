@@ -16,66 +16,26 @@ namespace HumanUI.Components.UI_Elements
     /// Component to create a Combobox ("Pulldown menu")
     /// </summary>
     /// <seealso cref="Grasshopper.Kernel.GH_Component" />
-    public class CreatePullDown_Component : GH_Component
+    public class CreatePullDown_Component_ALSO_DEPRECATED : GH_Component
     {
-
-        // Set show-label boolean for custom right-click menu
-        private bool showLabel;
-
         /// <summary>
         /// Initializes a new instance of the CreateListBox_Component class.
         /// </summary>
-        public CreatePullDown_Component()
+        public CreatePullDown_Component_ALSO_DEPRECATED()
             : base("Create Pulldown Menu", "Pulldown",
                 "Creates a pulldown menu from which items can be selected.",
                 "Human UI", "UI Elements")
         {
-            showLabel = true;
         }
-
-        // Create right-click menu item for show-label
-        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
-        {
-            System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
-            ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
-        }
-
-        // Method called on click event of Menu Item
-        public void Menu_ShowLabelClicked(object sender, System.EventArgs e)
-        {
-            RecordUndoEvent("Show Label Toggle");
-            showLabel = !showLabel;
-            //updateMessage();
-            ExpireSolution(true);
-        }
-
-        // Methods to save the boolean state of the component between file opens
-
-        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
-        {
-            writer.SetBoolean("showLabel", showLabel);
-
-            return base.Write(writer);
-        }
-
-
-        public override bool Read(GH_IO.Serialization.GH_IReader reader)
-        {
-            showLabel = reader.GetBoolean("showLabel");
-            //updateMessage();
-            return base.Read(reader);
-        }
-
 
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Label", "L", "Optional label for the Text Box", GH_ParamAccess.item, "");
             pManager.AddGenericParameter("List Items", "L", "The initial list of options to display in the list.", GH_ParamAccess.list);
             pManager.AddIntegerParameter("Selected Index", "I", "The initially selected index. Defaults to the first item.", GH_ParamAccess.item);
-            pManager[2].Optional = true;
+            pManager[1].Optional = true;
         }
 
         /// <summary>
@@ -93,7 +53,7 @@ namespace HumanUI.Components.UI_Elements
         {
             get
             {
-                return GH_Exposure.primary;
+                return GH_Exposure.hidden;
             }
         }
 
@@ -103,9 +63,6 @@ namespace HumanUI.Components.UI_Elements
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            string label = "";
-            DA.GetData<string>("Label", ref label);
-
             if (DA.Iteration == 0) Iterator = 0;
             List<GH_ValueList> GHValLists = new List<GH_ValueList>();
 
@@ -117,7 +74,7 @@ namespace HumanUI.Components.UI_Elements
             bool selectedIndexSupplied = DA.GetData<int>("Selected Index", ref selectedIndex);
 
             //try to retrieve any attached GHValueLists
-            GHValLists.AddRange(Params.Input[1].Sources.Where(s => s is GH_ValueList).Cast<GH_ValueList>());
+            GHValLists.AddRange(Params.Input[0].Sources.Where(s => s is GH_ValueList).Cast<GH_ValueList>());
 
             //if GHValLists is empty, either user has supplied direct text or direct value list objects, e.g. from metahopper output
 
@@ -149,34 +106,9 @@ namespace HumanUI.Components.UI_Elements
                 pd.Margin = new Thickness(4);
                 pd.SelectedIndex = selectedIndex;
 
-                DockPanel sp = new DockPanel();
-                //  sp.Orientation = Orientation.Horizontal;
-                
-                //set up the button
-                sp.Margin = new Thickness(4);
-                Label l = new Label();
-                l.Content = label;
-
-                //add the label to the stackpanel if showLabel is true
-                if (!string.IsNullOrWhiteSpace(label) & showLabel)
-                {
-                    sp.Name = "GH_PullDown_Label";
-                    sp.Children.Add(l);
-                } else
-                {
-                    sp.Name = "GH_PullDown_NoLabel";
-                }
-
-                //List<UIElement_Goo> combobox = new List<UIElement_Goo>() { new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator) };
-
-                sp.Children.Add(pd);
-
-                //pass out the stackpanel
-                DA.SetData("Pulldown", new UIElement_Goo(sp, String.Format("Pulldown: {0}", label), InstanceGuid, DA.Iteration));
-
-                ////pass out the combobox
-                //DA.SetDataList("Pulldown", new List<UIElement_Goo>() { new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator) });
-                //Iterator++;
+                //pass out the combobox
+                DA.SetDataList("Pulldown", new List<UIElement_Goo>() { new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator) });
+                Iterator++;
             }
             else
             {
@@ -205,35 +137,11 @@ namespace HumanUI.Components.UI_Elements
                         pd.SelectedIndex = valList.ListItems.IndexOf(valList.FirstSelectedItem);
                     }
 
-                    DockPanel sp = new DockPanel();
-                    //  sp.Orientation = Orientation.Horizontal;
-
-                    //set up the button
-                    sp.Margin = new Thickness(4);
-                    Label l = new Label();
-                    l.Content = label;
-
-                    //add the label to the stackpanel if showLabel is true
-                    if (!string.IsNullOrWhiteSpace(label) & showLabel)
-                    {
-                        sp.Name = "GH_PullDown_Label";
-                        sp.Children.Add(l);
-                    }
-                    else
-                    {
-                        sp.Name = "GH_PullDown_NoLabel";
-                    }
-
-                    sp.Children.Add(pd);
-
-                    //pass out the stackpanel
-                    DA.SetData("Pulldown", new UIElement_Goo(sp, String.Format("Pulldown: {0}", label), InstanceGuid, DA.Iteration));
-
-                    ////pass out the combobox
-                    //goosOut.Add(new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator));
-                    //Iterator++;
+                    //pass out the combobox
+                    goosOut.Add(new UIElement_Goo(pd, "Pulldown", InstanceGuid, Iterator));
+                    Iterator++;
                 }
-                //DA.SetDataList("Pulldown", goosOut);
+                DA.SetDataList("Pulldown", goosOut);
             }
 
 
@@ -252,13 +160,12 @@ namespace HumanUI.Components.UI_Elements
             }
         }
 
-
-/// <summary>
-/// Gets the unique ID for this component. Do not change this ID after release.
-/// </summary>
-public override Guid ComponentGuid
+        /// <summary>
+        /// Gets the unique ID for this component. Do not change this ID after release.
+        /// </summary>
+        public override Guid ComponentGuid
         {
-            get { return new Guid("{fc6ae741-ecd1-432f-abb4-36b3f439c6f5}"); }
+            get { return new Guid("{8F5B1D66-DE73-47A2-9678-9E59CEA106C0}"); }
         }
     }
 }

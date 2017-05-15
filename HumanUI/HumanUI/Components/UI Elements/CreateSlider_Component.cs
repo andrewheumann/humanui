@@ -25,6 +25,8 @@ namespace HumanUI.Components.UI_Elements
         private bool showTooltip;
         private bool showValueReadout;
         private bool showBounds;
+        private bool showLabel;
+
         /// <summary>
         /// Initializes a new instance of the CreateSliderComponent class.
         /// </summary>
@@ -37,6 +39,17 @@ namespace HumanUI.Components.UI_Elements
             showTooltip = false;
             showValueReadout = true;
             showBounds = false;
+            showLabel = true;
+        }
+
+
+        // Method called on click event of Menu Item
+        public void Menu_ShowLabelClicked(object sender, System.EventArgs e)
+        {
+            RecordUndoEvent("Show Label Toggle");
+            showLabel = !showLabel;
+            //updateMessage();
+            ExpireSolution(true);
         }
 
         /// <summary>
@@ -194,7 +207,8 @@ namespace HumanUI.Components.UI_Elements
             valueLabelMenuItem.ToolTipText = "Display a label to the right of the slider showing its current value.";
             System.Windows.Forms.ToolStripMenuItem showBoundsMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Slider Limits", new System.EventHandler(this.menu_showBounds), true, showBounds);
             showBoundsMenuItem.ToolTipText = "Display a label to the right of the slider showing its current value.";
-
+            System.Windows.Forms.ToolStripMenuItem showLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
+            showLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
         }
 
         private void menu_showBounds(object sender, EventArgs e)
@@ -306,9 +320,11 @@ namespace HumanUI.Components.UI_Elements
             label.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Right;
             label.Content = name;
 
-            //Pass it out to slider labels so its width can be reconciled later
-           if(!string.IsNullOrWhiteSpace(name)) sliderLabels.Add(label);
-
+            if (showLabel)
+            {
+                //Pass it out to slider labels so its width can be reconciled later
+                if (!string.IsNullOrWhiteSpace(name)) sliderLabels.Add(label);
+            }
 
 
             //set up a dockpanel to contain the three elements: name label, slider, and readout label. 
@@ -318,9 +334,13 @@ namespace HumanUI.Components.UI_Elements
             internalDockPanel.Margin = new Thickness(4);
             //set to stretch so it fills available horizontal width
             internalDockPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-            //add the name label and dock it left
-            if (!string.IsNullOrWhiteSpace(name)) internalDockPanel.Children.Add(label);
-            DockPanel.SetDock(label, Dock.Left);
+            
+            if (showLabel)
+            {
+                //add the name label and dock it left
+                if (!string.IsNullOrWhiteSpace(name)) internalDockPanel.Children.Add(label);
+                DockPanel.SetDock(label, Dock.Left);
+            }
 
             //establish format string for labels
             string numberFormat = integerSlider ? "{0:0}" : String.Concat("{0:F", decPlaces, "}");
@@ -424,6 +444,7 @@ namespace HumanUI.Components.UI_Elements
             writer.SetBoolean("ShowTooltip", showTooltip);
             writer.SetBoolean("ShowValLabel", showValueReadout);
             writer.SetBoolean("ShowBounds", showBounds);
+            writer.SetBoolean("showLabel", showLabel);
             return base.Write(writer);
         }
 
@@ -433,6 +454,7 @@ namespace HumanUI.Components.UI_Elements
             showTooltip = reader.GetBoolean("ShowTooltip");
             showValueReadout = reader.GetBoolean("ShowValLabel");
             showBounds = reader.GetBoolean("ShowBounds");
+            showLabel = reader.GetBoolean("showLabel");
             return base.Read(reader);
         }
     }
