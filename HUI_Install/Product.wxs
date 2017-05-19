@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="EFB91EB9-458B-438B-BFC1-1B020E5D96F5" Name="Human UI" Language="1033" Version="0.7.3.2" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
+  <!--A new product Id must be generated for each release!-->
+  <Product Id="4A469132-90DC-4420-9B84-E0E12CF4934A" Name="Human UI" Language="1033" Version="0.7.5.0" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
    
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."  AllowSameVersionUpgrades="yes" />
     <MediaTemplate EmbedCab="yes"/>
-
+   
     <Feature Id="ProductFeature" Title="HUI_Install" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="OtherFolders" />
