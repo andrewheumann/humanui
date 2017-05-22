@@ -20,10 +20,7 @@ namespace HumanUI
 
         public Rhino.Geometry.Point3d SliderPoint
         {
-            get
-            {
-                return new Rhino.Geometry.Point3d(XSlider.Value / XSlider.Maximum, YSlider.Value / YSlider.Maximum, 0);
-            }
+            get => new Rhino.Geometry.Point3d(XSlider.Value / XSlider.Maximum, YSlider.Value / YSlider.Maximum, 0);
             set
             {
              //   OnPropertyChanged("SliderPoint");

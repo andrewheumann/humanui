@@ -32,19 +32,10 @@ namespace HumanUI.Upgraders
             return newComponent;
         }
 
-        public Guid UpgradeFrom
-        {
-            get { return new Guid("{1E68A9A8-C28D-4799-854C-337DC4018917}"); }
-        }
+        public Guid UpgradeFrom => new Guid("{1E68A9A8-C28D-4799-854C-337DC4018917}");
 
-        public Guid UpgradeTo
-        {
-            get { return new Guid("{B618569A-868D-4A88-A035-FAA1416A841F}"); }
-        }
+        public Guid UpgradeTo => new Guid("{B618569A-868D-4A88-A035-FAA1416A841F}");
 
-        public DateTime Version
-        {
-            get { return new DateTime(2016, 1, 11, 13, 0, 0); }
-        }
+        public DateTime Version => new DateTime(2016, 1, 11, 13, 0, 0);
     }
 }

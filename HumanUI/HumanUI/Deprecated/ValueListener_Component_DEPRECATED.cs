@@ -32,21 +32,9 @@ namespace HumanUI
             updateMessage();
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true ;
-            }
-        }
+        public override bool Obsolete => true;
 
 
         private static List<UIElement> eventedElements;
@@ -442,23 +430,12 @@ namespace HumanUI
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.ValueListener;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.ValueListener;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{78fb7e0c-ae2a-45ad-b09c-83df32d0b3bc}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{78fb7e0c-ae2a-45ad-b09c-83df32d0b3bc}");
 
 
         private void updateMessage()

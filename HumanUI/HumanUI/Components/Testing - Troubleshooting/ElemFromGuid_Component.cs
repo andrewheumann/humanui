@@ -40,13 +40,7 @@ namespace HumanUI.Components.Testing
             pManager.AddIntegerParameter("Index", "i", "", GH_ParamAccess.item);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -63,22 +57,11 @@ namespace HumanUI.Components.Testing
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => null;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{d6b1d3c9-f9a9-4523-8ecd-1def6fdc753f}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{d6b1d3c9-f9a9-4523-8ecd-1def6fdc753f}");
     }
 }

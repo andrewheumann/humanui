@@ -98,15 +98,7 @@ namespace HumanUI.Components.UI_Output
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.Set3dView;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.Set3dView;
 
         ModelVisual3D GetModelVisual3D(HelixViewport3D vp3){
            foreach(Visual3D v in vp3.Children){
@@ -138,9 +130,6 @@ namespace HumanUI.Components.UI_Output
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{3472130d-fc0e-409d-9295-f93ecaf1afb5}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{3472130d-fc0e-409d-9295-f93ecaf1afb5}");
     }
 }

@@ -40,10 +40,9 @@
     </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\GH_IO.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\Grasshopper.dll</HintPath>
+      <HintPath>..\..\HumanUIBaseApp\HumanUIBaseApp\bin\Debug\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HelixToolkit, Version=2015.1.678.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
@@ -103,11 +102,13 @@
   <ItemGroup>
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
+    <Compile Include="Components\UI Containers\CreateSimpleGrid_Component.cs" />
     <Compile Include="Components\UI Containers\CreateWrapPanel_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
+    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
-    <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Deprecated\CreatePullDown_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTextBox_Component.cs" />
     <Compile Include="Components\UI Elements\CreateTooltip_Component.cs" />
@@ -398,6 +399,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateMDSlider.png" />
+    <None Include="Resources\simpleGrid.png" />
     <None Include="Resources\WindowStatus.png" />
     <None Include="Resources\CreateWrapPanel.png" />
     <Content Include="Resources\SetCheckbox.png" />

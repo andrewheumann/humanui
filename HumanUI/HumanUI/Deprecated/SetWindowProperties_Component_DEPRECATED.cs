@@ -102,23 +102,9 @@ namespace HumanUI
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.SetWindowProperties;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.SetWindowProperties;
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         public override void AppendAdditionalMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
@@ -143,22 +129,13 @@ namespace HumanUI
             vl.Attributes.Pivot = new PointF(currPivot.X - 120, currPivot.Y - 11);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
         /// 
 
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{aa3816cc-918e-4383-9125-8f00922f154a}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{aa3816cc-918e-4383-9125-8f00922f154a}");
     }
 }

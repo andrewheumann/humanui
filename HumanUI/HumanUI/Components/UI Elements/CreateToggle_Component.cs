@@ -81,15 +81,7 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                // TODO: Replace this with your own icon. Add a png file to the Resources.resx file under Properties in the Solution Explorer - 
-                // then you should be able to refer to it here.
-                return Properties.Resources.createToggle;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.createToggle;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.

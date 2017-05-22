@@ -421,7 +421,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.3.1.
+        ///   Looks up a localized string similar to 0.7.5.0.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -775,6 +775,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap SetWindowProperties {
             get {
                 object obj = ResourceManager.GetObject("SetWindowProperties", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap simpleGrid {
+            get {
+                object obj = ResourceManager.GetObject("simpleGrid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -22,10 +22,7 @@ namespace HumanUI
         public bool fileMustExist { get; set; }
         public string filter
         {
-            get
-            {
-                return _filter;
-            }
+            get => _filter;
             set
             {
                 if (value.Contains("|"))

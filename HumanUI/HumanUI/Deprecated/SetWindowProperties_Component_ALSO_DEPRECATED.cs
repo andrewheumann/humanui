@@ -142,15 +142,8 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.SetWindowProperties;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.SetWindowProperties;
+
         /// <summary>
         /// Adds to the context menu an option to create a pre-populated accent color list object
         /// </summary>
@@ -204,28 +197,13 @@ namespace HumanUI.Components.UI_Main
             //doc.ScheduleSolution(10);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.hidden;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
-        public override bool Obsolete
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{B2CA4D57-1F81-4CE5-AED6-2A39FB285814}");
     }
 }

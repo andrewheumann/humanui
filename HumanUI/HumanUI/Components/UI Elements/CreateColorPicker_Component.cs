@@ -37,13 +37,7 @@ namespace HumanUI.Components.UI_Elements
         }
 
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
 
         /// <summary>
@@ -96,22 +90,11 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.ColorPicker;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.ColorPicker;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{0c914dd3-ed91-4255-9c47-0148c126ea25}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{0c914dd3-ed91-4255-9c47-0148c126ea25}");
     }
 }

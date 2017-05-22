@@ -17,7 +17,7 @@ namespace HumanUI
         private string _markdownText;
         public string MarkdownText
         {
-            get { return _markdownText; }
+            get => _markdownText;
             set
             {
                 _markdownText = value;

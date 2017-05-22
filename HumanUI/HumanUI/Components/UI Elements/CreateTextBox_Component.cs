@@ -18,12 +18,53 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Initializes a new instance of the CreateTextBox_Component class.
         /// </summary>
+        /// 
+
+        // Set show-label boolean for custom right-click menu
+        private bool showLabel;
+
+
         public CreateTextBox_Component()
             : base("Create Text Box", "TextBox",
                 "Create a box for text entry, with a button to pass its value.",
                 "Human UI", "UI Elements")
         {
+            showLabel = true;
         }
+        
+        // Create right-click menu item for show-label
+        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
+        {
+            System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
+            ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
+        }
+
+        // Method called on click event of Menu Item
+        public void Menu_ShowLabelClicked(object sender, System.EventArgs e)
+        {
+            RecordUndoEvent("Show Label Toggle");
+            showLabel = !showLabel;
+            //updateMessage();
+            ExpireSolution(true);
+        }
+
+        // Methods to save the boolean state of the component between file opens
+
+        public override bool Write(GH_IO.Serialization.GH_IWriter writer)
+        {
+            writer.SetBoolean("showLabel", showLabel);
+
+            return base.Write(writer);
+        }
+
+
+        public override bool Read(GH_IO.Serialization.GH_IReader reader)
+        {
+            showLabel = reader.GetBoolean("showLabel");
+            //updateMessage();
+            return base.Read(reader);
+        }
+
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -43,13 +84,7 @@ namespace HumanUI.Components.UI_Elements
             pManager.AddGenericParameter("Text Box", "TB", "The created text box.", GH_ParamAccess.item);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// This is the method that actually does the work.
@@ -76,8 +111,8 @@ namespace HumanUI.Components.UI_Elements
             sp.Margin = new Thickness(4);
             Label l = new Label();
             l.Content = label;
-            //add the label to the stackpanel
-           if(!string.IsNullOrWhiteSpace(label)) sp.Children.Add(l);
+            //add the label to the stackpanel if showLabel is true
+           if(!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
 
 
 
@@ -104,22 +139,11 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.CreateTextBox;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.CreateTextBox;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{41A3A0D8-E0F4-4B48-88B3-BF87D79A3CFD}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{41A3A0D8-E0F4-4B48-88B3-BF87D79A3CFD}");
     }
 }

@@ -27,13 +27,7 @@ namespace HumanUI.Components.UI_Main
         {
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.secondary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.secondary;
 
 
         /// <summary>

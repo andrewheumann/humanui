@@ -34,26 +34,17 @@ namespace HumanUI
         /// <summary>
         /// Gets the ComponentGuid of the old object (the object to be updated).
         /// </summary>
-        public Guid UpgradeFrom
-        {
-            get { return new Guid("{d106b262-7a20-4151-b59a-872300f7ee9c}"); }
-        }
+        public Guid UpgradeFrom => new Guid("{d106b262-7a20-4151-b59a-872300f7ee9c}");
 
         /// <summary>
         /// Gets the ComponentGuid of the new object (the object that will be inserted).
         /// </summary>
-        public Guid UpgradeTo
-        {
-            get { return new Guid("{A6567BB1-37D1-46CB-AD10-594FF726299B}"); }
-        }
+        public Guid UpgradeTo => new Guid("{A6567BB1-37D1-46CB-AD10-594FF726299B}");
 
         /// <summary>
         /// Return a DateTime object that indicates when this upgrade mechanism was written,
         /// so that it becomes possible to distinguish competing upgrade mechanisms.
         /// </summary>
-        public DateTime Version
-        {
-            get { return new DateTime(2015, 8, 31); }
-        }
+        public DateTime Version => new DateTime(2015, 8, 31);
     }
 }

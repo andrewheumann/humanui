@@ -100,26 +100,12 @@ namespace HumanUI.Components.UI_Main
 
 
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.AddElements;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.AddElements;
 
 
         bool DoVLChecking = true;
@@ -163,10 +149,7 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{73b5e187-b35d-45bd-8495-9e06b429bc07}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{73b5e187-b35d-45bd-8495-9e06b429bc07}");
 
         public string VALUE_LISTENER_WARNING =
             "In general, it's not a good idea to drive the creation of \n" +

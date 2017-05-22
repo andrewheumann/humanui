@@ -137,25 +137,14 @@ namespace HumanUI.Components.UI_Main
         /// Provides an Icon for every component that will be visible in the User Interface.
         /// Icons need to be 24x24 pixels.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-
-                return Properties.Resources.LaunchWindow;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.LaunchWindow;
 
         /// <summary>
         /// Each component must have a unique Guid to identify it. 
         /// It is vital this Guid doesn't change otherwise old ghx files 
         /// that use the old ID will partially fail during loading.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{0A6B8A40-57A4-4D8D-9F09-F34869655D1E}"); }
-        }
-
+        public override Guid ComponentGuid => new Guid("{0A6B8A40-57A4-4D8D-9F09-F34869655D1E}");
 
 
         /// <summary>
@@ -280,13 +269,7 @@ namespace HumanUI.Components.UI_Main
         /// Gets the exposure of this object in the Graphical User Interface.
         /// The default is to expose everywhere.
         /// </summary>
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.primary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.primary;
 
         /// <summary>
         /// Overriding this function to add component menu for Child status. 

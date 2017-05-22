@@ -26,10 +26,8 @@ namespace HumanUI
         int HandleSize = 15;
         private Point _c0, _c1, _c2, _c3;
         public Point C0 {
-            get
-            {
-                return _c0;
-            }  set
+            get => _c0;
+            set
             {
                 _c0 = value;
                 try
@@ -44,10 +42,7 @@ namespace HumanUI
 
         public Point C1
         {
-            get
-            {
-                return _c1;
-            }
+            get => _c1;
             set
             {
                 _c1 = value;
@@ -68,10 +63,7 @@ namespace HumanUI
 
         public Point C2
         {
-            get
-            {
-                return _c2;
-            }
+            get => _c2;
             set
             {
                 _c2 = value;
@@ -92,10 +84,7 @@ namespace HumanUI
 
         public Point C3
         {
-            get
-            {
-                return _c3;
-            }
+            get => _c3;
             set
             {
                 _c3 = value;

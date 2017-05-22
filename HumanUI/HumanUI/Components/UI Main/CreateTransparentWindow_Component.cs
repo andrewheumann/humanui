@@ -23,20 +23,9 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Override the guid so it is recognized as a separate component
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { 
-                return new Guid("{106D7436-7223-454A-A2DA-57EE118E6815}"); 
-            }
-        }
+        public override Guid ComponentGuid => new Guid("{106D7436-7223-454A-A2DA-57EE118E6815}");
 
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                return Properties.Resources.LaunchWindow_Transparent;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.LaunchWindow_Transparent;
 
         /// <summary>
         /// Enable transparency before calling on the main window implementation

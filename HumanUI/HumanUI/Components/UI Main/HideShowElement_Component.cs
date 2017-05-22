@@ -63,33 +63,16 @@ namespace HumanUI.Components.UI_Main
             f.Visibility = show ? Visibility.Visible : (collapse ? Visibility.Collapsed : Visibility.Hidden);
         }
 
-        public override GH_Exposure Exposure
-        {
-            get
-            {
-                return GH_Exposure.secondary;
-            }
-        }
+        public override GH_Exposure Exposure => GH_Exposure.secondary;
 
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.HideShowElement;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.HideShowElement;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{a3c49442-c136-4553-9a0d-637d5fbf27d4}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{a3c49442-c136-4553-9a0d-637d5fbf27d4}");
     }
 }

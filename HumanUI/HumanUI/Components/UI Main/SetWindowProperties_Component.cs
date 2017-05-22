@@ -151,15 +151,8 @@ namespace HumanUI.Components
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return Properties.Resources.SetWindowProperties;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.SetWindowProperties;
+
         /// <summary>
         /// Adds to the context menu an option to create a pre-populated accent color list object
         /// </summary>
@@ -216,9 +209,6 @@ namespace HumanUI.Components
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("{14A1EE78-6536-43B2-B6D8-4B26A736F0A9}"); }
-        }
+        public override Guid ComponentGuid => new Guid("{14A1EE78-6536-43B2-B6D8-4B26A736F0A9}");
     }
 }
