@@ -31,7 +31,7 @@ namespace HumanUI.Components.UI_Elements
         {
             showLabel = true;
         }
-        
+
         // Create right-click menu item for show-label
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
@@ -60,7 +60,7 @@ namespace HumanUI.Components.UI_Elements
 
         public override bool Read(GH_IO.Serialization.GH_IReader reader)
         {
-            showLabel = reader.GetBoolean("showLabel");
+            reader.TryGetBoolean("showLabel", ref showLabel);
             //updateMessage();
             return base.Read(reader);
         }
@@ -112,7 +112,7 @@ namespace HumanUI.Components.UI_Elements
             Label l = new Label();
             l.Content = label;
             //add the label to the stackpanel if showLabel is true
-           if(!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
+            if (!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
 
 
 

@@ -127,7 +127,7 @@ namespace HumanUI.Components.UI_Elements
                         GH_ObjectWrapper w = goo as GH_ObjectWrapper;
                         attachedSliders.Add(w.Value as GH_NumberSlider);
                     }
-                    
+
                 }
 
             }
@@ -320,7 +320,7 @@ namespace HumanUI.Components.UI_Elements
             internalDockPanel.Margin = new Thickness(4);
             //set to stretch so it fills available horizontal width
             internalDockPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-            
+
             if (showLabel)
             {
                 //add the name label and dock it left
@@ -334,8 +334,8 @@ namespace HumanUI.Components.UI_Elements
             //Set up a value entry box for doubleclick
             SliderEntryTextBox ValueEntryBox = new SliderEntryTextBox(slider);
             slider.AddHandler(Slider.MouseDoubleClickEvent, new MouseButtonEventHandler(ValueEntryBox.TriggerAction), true);
-           
-            
+
+
 
 
             if (showValueReadout) //if user has opted to show the value label
@@ -344,7 +344,7 @@ namespace HumanUI.Components.UI_Elements
                 Label readout = new Label();
 
                 //convert all chars in max to 0s so the label is wide enough when measured
-                var maxString = new string(string.Format(numberFormat,max).ToCharArray().Select(c => '0').ToArray())+"0";
+                var maxString = new string(string.Format(numberFormat, max).ToCharArray().Select(c => '0').ToArray()) + "0";
                 var maxStringBase = max.ToString(numberFormat, CultureInfo.InvariantCulture);
                 //set to max to establish theoretical max width to avoid jumping
                 readout.Content = maxString;
@@ -436,7 +436,8 @@ namespace HumanUI.Components.UI_Elements
             showTooltip = reader.GetBoolean("ShowTooltip");
             showValueReadout = reader.GetBoolean("ShowValLabel");
             showBounds = reader.GetBoolean("ShowBounds");
-            showLabel = reader.GetBoolean("showLabel");
+            reader.TryGetBoolean("showLabel", ref showLabel);
+
             return base.Read(reader);
         }
     }
