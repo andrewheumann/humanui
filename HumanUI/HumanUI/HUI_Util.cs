@@ -75,9 +75,11 @@ namespace HumanUI
         }
 
 
-        public static System.Drawing.Color ToSysColor(System.Windows.Media.Color color)
+        public static System.Drawing.Color ToSysColor(System.Windows.Media.Color? color)
         {
-            return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            if (color == null) return System.Drawing.Color.Transparent;
+            var uColor = (System.Windows.Media.Color)color;
+            return System.Drawing.Color.FromArgb(uColor.A, uColor.R, uColor.G, uColor.B);
         }
 
 
