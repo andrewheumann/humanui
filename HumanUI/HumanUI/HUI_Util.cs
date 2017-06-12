@@ -75,9 +75,11 @@ namespace HumanUI
         }
 
 
-        public static System.Drawing.Color ToSysColor(System.Windows.Media.Color color)
+        public static System.Drawing.Color ToSysColor(System.Windows.Media.Color? color)
         {
-            return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            if (color == null) return System.Drawing.Color.Transparent;
+            var uColor = (System.Windows.Media.Color)color;
+            return System.Drawing.Color.FromArgb(uColor.A, uColor.R, uColor.G, uColor.B);
         }
 
 
@@ -120,6 +122,9 @@ namespace HumanUI
                         case "GH_Slider":
                             extractedElements.Add(findSlider(p));
                             break;
+                        case "GH_PullDown_Label":
+                            extractedElements.Add(findElement<Selector>(p));
+                            break;
                         case "GH_TextBox":
                         case "GH_TextBox_NoButton":
                             extractedElements.Add(findTextBox(p));
@@ -137,6 +142,11 @@ namespace HumanUI
             }
         }
 
+
+        public static T findElement<T>(Panel p)
+        {
+            return p.Children.OfType<T>().FirstOrDefault();
+        }
 
         public static TextBox findTextBox(Panel p)
         {

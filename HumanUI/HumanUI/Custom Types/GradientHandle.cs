@@ -169,7 +169,7 @@ namespace HumanUI
 
         }
 
-        private void Cp_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        private void Cp_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             if (e.NewValue != null)
             {

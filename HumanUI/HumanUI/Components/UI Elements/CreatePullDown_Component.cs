@@ -61,7 +61,7 @@ namespace HumanUI.Components.UI_Elements
 
         public override bool Read(GH_IO.Serialization.GH_IReader reader)
         {
-            showLabel = reader.GetBoolean("showLabel");
+           reader.TryGetBoolean("showLabel", ref showLabel);
             //updateMessage();
             return base.Read(reader);
         }
