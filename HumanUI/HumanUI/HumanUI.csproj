@@ -38,11 +38,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
-    <Reference Include="GH_IO">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Grasshopper for Rhino 5\GH_IO.dll</HintPath>
+    <Reference Include="GH_IO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Grasshopper References\GH_IO.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>..\..\HumanUIBaseApp\HumanUIBaseApp\bin\Debug\Grasshopper.dll</HintPath>
+      <HintPath>..\..\Grasshopper References\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HelixToolkit, Version=2015.1.715.0, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
@@ -60,8 +62,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RhinoCommon">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Rhinoceros 5 (64-bit)\System\RhinoCommon.dll</HintPath>
+    <Reference Include="RhinoCommon, Version=5.1.30000.17, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Grasshopper References\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +82,7 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -108,6 +113,7 @@
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
+    <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
@@ -400,6 +406,7 @@
     <None Include="Resources\simpleGrid.png" />
     <None Include="Resources\WindowStatus.png" />
     <None Include="Resources\CreateWrapPanel.png" />
+    <None Include="Resources\set3dViewProps.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />

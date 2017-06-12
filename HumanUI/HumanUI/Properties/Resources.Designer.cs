@@ -421,7 +421,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.7.0.
+        ///   Looks up a localized string similar to 0.7.9.0.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -605,6 +605,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap Set3dView_textured {
             get {
                 object obj = ResourceManager.GetObject("Set3dView_textured", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap set3dViewProps {
+            get {
+                object obj = ResourceManager.GetObject("set3dViewProps", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

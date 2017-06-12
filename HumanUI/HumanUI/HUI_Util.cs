@@ -122,6 +122,9 @@ namespace HumanUI
                         case "GH_Slider":
                             extractedElements.Add(findSlider(p));
                             break;
+                        case "GH_PullDown_Label":
+                            extractedElements.Add(findElement<Selector>(p));
+                            break;
                         case "GH_TextBox":
                         case "GH_TextBox_NoButton":
                             extractedElements.Add(findTextBox(p));
@@ -139,6 +142,11 @@ namespace HumanUI
             }
         }
 
+
+        public static T findElement<T>(Panel p)
+        {
+            return p.Children.OfType<T>().FirstOrDefault();
+        }
 
         public static TextBox findTextBox(Panel p)
         {

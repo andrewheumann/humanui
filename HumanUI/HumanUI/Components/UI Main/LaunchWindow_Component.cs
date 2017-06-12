@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using System.Windows.Interop;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
@@ -191,6 +192,9 @@ namespace HumanUI.Components.UI_Main
                 default:
                     break;
             }
+
+
+            ElementHost.EnableModelessKeyboardInterop(mw);
 
             //make sure to hide the window when the user switches active GH document. 
             Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;

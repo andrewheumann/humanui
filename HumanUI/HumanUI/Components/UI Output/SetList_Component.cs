@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Grasshopper.Kernel;
@@ -54,9 +56,17 @@ namespace HumanUI.Components.UI_Output
             int selectedIndex = -1;
             if (!DA.GetData<object>("List to modify", ref ListObject)) return;
             if (!DA.GetDataList<string>("New list contents", listContents)) return;
-            
+
+           
+           
             //the selector parent class includes both ListBoxes and ComboBoxes
             Selector sel = HUI_Util.GetUIElement<Selector>(ListObject);
+
+            if (sel == null)
+            {
+                var listPanel = HUI_Util.GetUIElement<DockPanel>(ListObject);
+                sel = listPanel.Children.OfType<Selector>().FirstOrDefault();
+            }
 
              if (!DA.GetData<int>("Selected Index", ref selectedIndex)) selectedIndex = sel.SelectedIndex;
 

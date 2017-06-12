@@ -64,7 +64,15 @@ namespace HumanUI.Components.UI_Elements
             UIElement uie = xamlObj as UIElement;
             if (uie == null)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Unable to convert xaml into a UI element");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Unable to convert xaml into a UI element");
+                try
+                {
+                    DA.SetData("Object",xamlObj);
+                }
+                catch
+                {
+                    
+                }
                 return;
             }
             //pass out the UI element
