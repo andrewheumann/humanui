@@ -68,9 +68,9 @@ namespace HumanUI.Components.UI_Main
 
             if (!DA.GetData<object>("Elements to Adjust", ref elem)) return;
 
-            DA.GetData<System.Drawing.Color>("Foreground", ref fgCol);
-            DA.GetData<System.Drawing.Color>("Background", ref bgCol);
-            DA.GetData<double>("Font Size", ref fontSize);
+            var hasfgCol = DA.GetData<System.Drawing.Color>("Foreground", ref fgCol);
+            var hasbgCol = DA.GetData<System.Drawing.Color>("Background", ref bgCol);
+            var hasFontSize = DA.GetData<double>("Font Size", ref fontSize);
 
 
             //Get the "FrameworkElement" (basic UI element) from an object
@@ -82,8 +82,34 @@ namespace HumanUI.Components.UI_Main
             Selector selector = f as Selector;
             ScrollViewer sv = f as ScrollViewer;
             ChartBase cb = f as ChartBase;
+            Expander exp = f as Expander;
+
+
+            if (exp != null)
+            {
+                if (hasfgCol) exp.Foreground = new SolidColorBrush(HUI_Util.ToMediaColor(fgCol));
+                if (hasbgCol) exp.Background = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol));
+                if (!hasFontSize) return;
+                var header = exp.Header;
+                TextBlock myHeader = null;
+                if (header is string)
+                {
+                    myHeader = new TextBlock();
+                    myHeader.Text = header as string;
+
+                }
+                else
+                {
+                    myHeader = exp.Header as TextBlock;
+                    
+                }
+                myHeader.FontSize = fontSize;
+                exp.Header = myHeader;
+                return;
+            }
+
             // var ChartElem = HUI_Util.GetUIElement<ChartBase>(ChartObject);
-            if(g != null)
+            if (g != null)
             {
                 foreach (UIElement child in g.Children)
                 {
@@ -101,7 +127,7 @@ namespace HumanUI.Components.UI_Main
                 {
                     ColorTextElement(child, fgCol, bgCol, fontSize);
                 }
-                panel.Background = new SolidColorBrush( HUI_Util.ToMediaColor(bgCol));
+                panel.Background = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol));
             }
             //if it's a selector, color its items
             else if (selector != null)
