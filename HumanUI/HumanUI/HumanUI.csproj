@@ -104,6 +104,7 @@
     <Compile Include="Components\UI Containers\CreateSimpleGrid_Component.cs" />
     <Compile Include="Components\UI Containers\CreateWrapPanel_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
+    <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Deprecated\CaptureWindow_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\MarkdownViewer.cs" />
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
-    <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
+    <Compile Include="Deprecated\CreateGradientEditor_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateMDSlider_Component.cs" />
     <Compile Include="Deprecated\CreatePullDown_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoCmdButton_Component.cs" />
