@@ -2,6 +2,7 @@
 *.suo
 *.user
 *.sln.docstates
+*.zip
 
 # OS generated files #
 .DS_Store*
@@ -47,5 +48,11 @@ HumanUIBaseApp/HumanUIBaseApp/obj/
 HumanUI/HumanUI/bin/
 HUI_Install/bin/
 HUI_Install/obj/
-HumanUIBaseApp/HumanUIBaseApp/bin/
-UpgradeLog*.*
+HumanUIBaseApp/HumanUIBaseApp/bin/*
+
+# NuGet Dependencies
+packages/
+.gitignore_BACKUP_15864
+.gitignore_BASE_15864
+.gitignore_LOCAL_15864
+.gitignore_REMOTE_15864

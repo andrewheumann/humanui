@@ -421,7 +421,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.7.9.0.
+        ///   Looks up a localized string similar to 0.8.0.0.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {
@@ -535,6 +535,16 @@ namespace HumanUI.Properties {
         internal static System.Drawing.Bitmap LaunchWindow_Transparent {
             get {
                 object obj = ResourceManager.GetObject("LaunchWindow_Transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MakeChildWindow {
+            get {
+                object obj = ResourceManager.GetObject("MakeChildWindow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

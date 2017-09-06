@@ -178,6 +178,18 @@ namespace HumanUI.Components.UI_Main
             mw.Closed += mw_Closed;
 
             //set ownership based on child status 
+            SetChildStatus(mw,winChildStatus);
+
+            ElementHost.EnableModelessKeyboardInterop(mw);
+
+            //make sure to hide the window when the user switches active GH document. 
+            Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
+            Grasshopper.Instances.ActiveCanvas.DocumentChanged += HideWindow;
+
+        }
+
+        internal static void SetChildStatus(MainWindow mw, childStatus winChildStatus)
+        {
             switch (winChildStatus)
             {
                 case childStatus.ChildOfGH:
@@ -192,14 +204,6 @@ namespace HumanUI.Components.UI_Main
                 default:
                     break;
             }
-
-
-            ElementHost.EnableModelessKeyboardInterop(mw);
-
-            //make sure to hide the window when the user switches active GH document. 
-            Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
-            Grasshopper.Instances.ActiveCanvas.DocumentChanged += HideWindow;
-
         }
 
         //Utility functions to set the ownership of a window object
