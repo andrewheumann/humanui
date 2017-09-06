@@ -47,4 +47,7 @@ HumanUIBaseApp/HumanUIBaseApp/obj/
 HumanUI/HumanUI/bin/
 HUI_Install/bin/
 HUI_Install/obj/
-HumanUIBaseApp/HumanUIBaseApp/bin/
+HumanUIBaseApp/HumanUIBaseApp/bin/*
+
+# NuGet Dependencies
+packages/
