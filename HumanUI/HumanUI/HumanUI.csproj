@@ -404,6 +404,7 @@
     <None Include="Resources\WindowStatus.png" />
     <None Include="Resources\CreateWrapPanel.png" />
     <None Include="Resources\set3dViewProps.png" />
+    <None Include="Resources\MakeChildWindow.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />

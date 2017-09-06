@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Interop;
+using System.Drawing;
 
 namespace HumanUI.Components.UI_Main
 {
@@ -62,5 +63,7 @@ namespace HumanUI.Components.UI_Main
 
 
         }
+
+        protected override Bitmap Icon => Properties.Resources.MakeChildWindow;
     }
 }
