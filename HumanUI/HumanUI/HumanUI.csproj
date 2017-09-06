@@ -112,6 +112,7 @@
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Components\UI Main\MakeChildWindow_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
