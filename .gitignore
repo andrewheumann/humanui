@@ -52,7 +52,4 @@ HumanUIBaseApp/HumanUIBaseApp/bin/*
 
 # NuGet Dependencies
 packages/
-.gitignore_BACKUP_15864
-.gitignore_BASE_15864
-.gitignore_LOCAL_15864
-.gitignore_REMOTE_15864
+
