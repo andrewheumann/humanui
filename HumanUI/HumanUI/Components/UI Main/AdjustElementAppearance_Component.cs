@@ -36,7 +36,7 @@ namespace HumanUI.Components.UI_Main
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Elements to Adjust", "E", "The elements to adjust", GH_ParamAccess.item);
-            pManager.AddColourParameter("Foreground", "FC", "The foreground color of the element", GH_ParamAccess.item);
+            pManager.AddColourParameter("Foreground", "FC", "The foreground color of the element", GH_ParamAccess.item, System.Drawing.Color.Black);
             pManager[1].Optional = true;
             pManager.AddColourParameter("Background", "BC", "The background color of the element", GH_ParamAccess.item);
             pManager[2].Optional = true;

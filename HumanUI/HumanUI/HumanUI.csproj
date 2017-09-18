@@ -108,6 +108,7 @@
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Components\UI Main\AdjustElementAppearance_Component.cs" />
     <Compile Include="Components\UI Main\MakeChildWindow_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Custom Types\HUI_Gradient.cs" />
     <Compile Include="Custom Types\HUI_GradientEditor.cs" />
     <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_AdjustElementAppearance.cs" />
     <Compile Include="Upgraders\Upgrade_SetWindowPropertiesComponent.cs" />
     <Compile Include="Upgraders\Upgrade_TextBoxComponent.cs" />
     <Compile Include="Upgraders\Upgrade_ValueListener.cs" />
@@ -157,7 +159,7 @@
     <Compile Include="Custom Types\3DViewModel.cs" />
     <Compile Include="Components\UI Main\AddElements_Component.cs" />
     <Compile Include="Components\UI Main\AdjustElementPositioning_Component.cs" />
-    <Compile Include="Components\UI Main\AdjustElementAppearance_Component.cs" />
+    <Compile Include="Deprecated\AdjustElementAppearance_Component_DEPRECATED.cs" />
     <Compile Include="Components\UI Elements\CreateBrowser_Component.cs" />
     <Compile Include="Components\UI Elements\CreateButton_Component.cs" />
     <Compile Include="Components\UI Elements\CreateColorPicker_Component.cs" />
