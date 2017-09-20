@@ -6,17 +6,21 @@ using Rhino.Geometry;
 
 namespace HumanUI.Components.UI_Output
 {
-    public class SetTabs_Component : GH_Component
+    public class SetTabs_Component_DEPRECATED : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the SetTabs_Component class.
         /// </summary>
-        public SetTabs_Component()
+        public SetTabs_Component_DEPRECATED()
           : base("Set Tabbed View", "SetTab",
               "Sets the properties of a tabbed view",
               "Human UI", "UI Output")
         {
         }
+
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
+
+        public override bool Obsolete => true;
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -24,11 +28,10 @@ namespace HumanUI.Components.UI_Output
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Tabbed View", "T", "The tabbed view to modify", GH_ParamAccess.item);
-            pManager[pManager.AddTextParameter("Tab Names", "N", "The list of names corresponding to each tab (optional)",
+            pManager[pManager.AddTextParameter("Tab Names", "N", "The list of names corresponding to each tab",
                 GH_ParamAccess.list)].Optional = true;
-            pManager[pManager.AddBooleanParameter("Show Tabs", "S", "Provide a list of boolean values to selectively hide/show tabs (optional)", GH_ParamAccess.list)].Optional = true;
-            pManager[pManager.AddIntegerParameter("Set Tab Index", "I", "The index value of the tab to select (optional)", GH_ParamAccess.item)].Optional = true;
-
+            pManager[pManager.AddBooleanParameter("Show Tabs", "S", "Provide a list of boolean values to selectively hide/show tabs.", GH_ParamAccess.list)].Optional = true;
+        
         }
 
         /// <summary>
@@ -47,11 +50,9 @@ namespace HumanUI.Components.UI_Output
             object tabContainer = null;
             List<string> tabNames = new List<string>();
             List<bool> hideTabs = new List<bool>();
-            int selectIndex = -1;
             if (!DA.GetData("Tabbed View", ref tabContainer)) return;
             bool hasNames = DA.GetDataList("Tab Names", tabNames);
             bool hasHideTabs = DA.GetDataList("Show Tabs", hideTabs);
-            bool hasIndex = DA.GetData(3, ref selectIndex);
             TabControl tabControl = HUI_Util.GetUIElement<TabControl>(tabContainer);
 
             for (int i = 0; i < tabControl.Items.Count; i++)
@@ -60,7 +61,7 @@ namespace HumanUI.Components.UI_Output
                 var tabItem = item as TabItem;
                 if (hasNames && tabNames.Count > i)
                 {
-                    tabItem.Header = tabNames[i];
+                   tabItem.Header = tabNames[i];
                 }
                 if (hasHideTabs && hideTabs.Count > i)
                 {
@@ -69,14 +70,10 @@ namespace HumanUI.Components.UI_Output
                         : System.Windows.Visibility.Collapsed;
                     if (!hideTabs[i] && tabControl.SelectedIndex == i)
                     {
-                        tabControl.SelectedIndex = (i + 1) % tabControl.Items.Count;
+                        tabControl.SelectedIndex = (i + 1)%tabControl.Items.Count;
                     }
                 }
-
-            }
-            if (hasIndex)
-            {
-                tabControl.SelectedIndex = selectIndex;
+               
             }
         }
 
@@ -88,9 +85,6 @@ namespace HumanUI.Components.UI_Output
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("1e63a1ca-e3e8-44ad-8ee6-0a660e01c84b"); }
-        }
+        public override Guid ComponentGuid => new Guid("{0a32b740-1539-4417-ba73-c4885329bd77}");
     }
 }

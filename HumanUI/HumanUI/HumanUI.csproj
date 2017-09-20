@@ -115,6 +115,7 @@
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
+    <Compile Include="Deprecated\SetTabs_Component_DEPRECATED.cs" />
     <Compile Include="Deprecated\CaptureWindow_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\MarkdownViewer.cs" />
     <Compile Include="Deprecated\CreateFilePicker_Component_Deprecated.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Custom Types\HUI_Gradient.cs" />
     <Compile Include="Custom Types\HUI_GradientEditor.cs" />
     <Compile Include="Upgraders\Upgrade_CreatePulldownComponent.cs" />
+    <Compile Include="Upgraders\Upgrade_SetTabs.cs" />
     <Compile Include="Upgraders\Upgrade_SetWindowPropertiesComponent.cs" />
     <Compile Include="Upgraders\Upgrade_TextBoxComponent.cs" />
     <Compile Include="Upgraders\Upgrade_ValueListener.cs" />
