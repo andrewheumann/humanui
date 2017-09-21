@@ -16,7 +16,7 @@ namespace HumanUI.Components.UI_Output
         /// </summary>
         public SetColorPicker_Component()
           : base("Set Color Picker", "SetColorPicker",
-                "Use this to set a color picker",
+                "Use this to set the values of a color picker",
                 "Human UI", "UI Output")
         {
         }
@@ -28,7 +28,7 @@ namespace HumanUI.Components.UI_Output
         {
             //The first input should be the UI element itself -as direct output from
             // the corresponding "Create" Component
-            pManager.AddGenericParameter("Color picker to modify", "CP", "The Color Picker object to modify", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Color picker to modify", "CP", "The color picker object to modify", GH_ParamAccess.item);
             pManager.AddColourParameter("Default Color", "D", "The color displayed on the picker. Optional.", GH_ParamAccess.item);
             pManager[1].Optional = true;
             pManager.AddColourParameter("Available Colors", "C", "An optional list of possible colors to limit the user's selection. \nIf left blank, the existing set of available colors will not be changed.", GH_ParamAccess.list);
@@ -87,15 +87,7 @@ namespace HumanUI.Components.UI_Output
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
-            }
-        }
+        protected override System.Drawing.Bitmap Icon => Properties.Resources.SetColorPicker;
 
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.

@@ -432,6 +432,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\SetColorPicker.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
