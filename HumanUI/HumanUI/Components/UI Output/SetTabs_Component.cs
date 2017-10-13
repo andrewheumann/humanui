@@ -77,7 +77,10 @@ namespace HumanUI.Components.UI_Output
             if (hasIndex)
             {
                 tabControl.SelectedIndex = selectIndex;
-                ExpireSolution(true);
+
+                // In order to register the tab state properly, you must pull the tabControl into focus.  
+                // Otherwise, the next time you click on the contents it will revert to the last index position properly registered.
+                tabControl.Focus();
             }
         }
 
