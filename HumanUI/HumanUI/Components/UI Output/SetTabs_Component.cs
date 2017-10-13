@@ -77,6 +77,7 @@ namespace HumanUI.Components.UI_Output
             if (hasIndex)
             {
                 tabControl.SelectedIndex = selectIndex;
+                ExpireSolution(true);
             }
         }
 
