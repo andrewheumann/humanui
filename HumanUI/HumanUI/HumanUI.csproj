@@ -112,6 +112,7 @@
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
+    <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
@@ -431,6 +432,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\SetColorPicker.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
