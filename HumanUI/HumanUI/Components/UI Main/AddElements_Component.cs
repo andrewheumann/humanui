@@ -85,7 +85,7 @@ namespace HumanUI.Components.UI_Main
             //for all the elements, remove its parent, add it to the window, and add it to our tracking dictionary
             foreach (UIElement_Goo u in elementsToAdd)
             {
-
+                if (u == null) continue;
                 HUI_Util.removeParent(u.element);
                 mw.AddElement(u.element);
                 HUI_Util.AddToDict(u, resultDict);

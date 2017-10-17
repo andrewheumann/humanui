@@ -105,10 +105,13 @@
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
+    <Compile Include="Components\UI Elements\CreateRhinoPickButton.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
+    <Compile Include="Components\UI Main\GetElementProperties_Component.cs" />
     <Compile Include="Components\UI Main\MakeChildWindow_Component.cs" />
+    <Compile Include="Components\UI Main\SetElementProperty_Component.cs" />
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
+    <Compile Include="Custom Types\HUI_RhPickButton.cs" />
     <Compile Include="Deprecated\SetTabs_Component_DEPRECATED.cs" />
     <Compile Include="Deprecated\CaptureWindow_Component_DEPRECATED.cs" />
     <Compile Include="Custom Types\MarkdownViewer.cs" />
@@ -408,6 +412,7 @@
     <None Include="Resources\CreateWrapPanel.png" />
     <None Include="Resources\set3dViewProps.png" />
     <None Include="Resources\MakeChildWindow.png" />
+    <None Include="Resources\GetProps.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />
@@ -435,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\SetColorPicker.png" />
+    <None Include="Resources\SetProp.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

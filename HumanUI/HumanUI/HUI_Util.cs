@@ -448,6 +448,9 @@ namespace HumanUI
                 case "HumanUI.TrueOnlyButton":
                     TrueOnlyButton tob = u as TrueOnlyButton;
                     return (System.Windows.Input.Mouse.LeftButton == System.Windows.Input.MouseButtonState.Pressed) && tob.IsMouseOver;
+                case "HumanUI.HUI_RhPickButton":
+                    HUI_RhPickButton rpb = u as HUI_RhPickButton;
+                    return rpb.objIDs;
                 case "System.Windows.Controls.Label":
                     Label l = u as Label;
                     return l.Content;

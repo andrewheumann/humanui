@@ -235,6 +235,11 @@ namespace HumanUI
                     tob.PreviewMouseDown -= ExpireThis;
                     tob.PreviewMouseDown += ExpireThis;
                     return;
+                case "HumanUI.HUI_RhPickButton":
+                    HUI_RhPickButton rpb = u as HUI_RhPickButton;
+                    rpb.PickCompleted -= ExpireThis;
+                    rpb.PickCompleted += ExpireThis;
+                    return;
                 case "HumanUI.MDSliderElement":
                     MDSliderElement mds = u as MDSliderElement;
                     mds.PropertyChanged -= ExpireThis;
@@ -401,6 +406,10 @@ namespace HumanUI
                 case "HumanUI.TrueOnlyButton":
                     TrueOnlyButton tob = u as TrueOnlyButton;
                     tob.PreviewMouseDown -= ExpireThis;
+                    return;
+                case "HumanUI.HUI_RhPickButton":
+                    HUI_RhPickButton rpb = u as HUI_RhPickButton;
+                    rpb.PickCompleted -= ExpireThis;
                     return;
                 case "HumanUI.MDSliderElement":
                     MDSliderElement mds = u as MDSliderElement;

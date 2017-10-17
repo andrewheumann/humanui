@@ -17,7 +17,7 @@ using Grasshopper.Kernel;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-//[assembly: GH_Loading(GH_LoadingDemand.ForceDirect)]
+[assembly: GH_Loading(GH_LoadingDemand.ForceDirect)]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible 

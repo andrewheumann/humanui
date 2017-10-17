@@ -50,7 +50,7 @@ namespace HumanUI.Components.UI_Elements
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            string xaml= "";
+            string xaml = "";
             if (!DA.GetData<string>("XAML", ref xaml)) return;
 
             //set up the parser
@@ -59,25 +59,25 @@ namespace HumanUI.Components.UI_Elements
             parserContext.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
 
             //Try to convert the xaml text into a XAML object
-            object xamlObj = System.Windows.Markup.XamlReader.Parse(xaml,parserContext); 
+            object xamlObj = System.Windows.Markup.XamlReader.Parse(xaml, parserContext);
             // try to extract the UI element from the xaml object
             UIElement uie = xamlObj as UIElement;
             if (uie == null)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Unable to convert xaml into a UI element");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Remark, "Unable to convert xaml into a UI element - However, object may still be valid as a property.");
                 try
                 {
-                    DA.SetData("Object",xamlObj);
+                    DA.SetData("Object", xamlObj);
                 }
                 catch
                 {
-                    
+
                 }
                 return;
             }
             //pass out the UI element
             DA.SetData("Object", new UIElement_Goo(uie, "Generic XAML", InstanceGuid, DA.Iteration));
-      
+
         }
 
         /// <summary>
