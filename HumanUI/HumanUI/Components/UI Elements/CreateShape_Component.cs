@@ -8,6 +8,7 @@ using Rhino.Geometry;
 using System.Drawing;
 using System.Windows.Shapes;
 using Grasshopper.Kernel.Types;
+using System.Linq;
 
 namespace HumanUI.Components.UI_Elements
 {
@@ -133,7 +134,7 @@ namespace HumanUI.Components.UI_Elements
         {
             string crvString = "";
             //adapt curve location/positioning
-            rebaseCrvs(c, scale, rebox);
+            rebaseGeometry(c.OfType<GeometryBase>(), scale, rebox);
             //for all the curves
             foreach (Curve crv in c)
             {
@@ -163,35 +164,35 @@ namespace HumanUI.Components.UI_Elements
         /// <summary>
         /// Adapt the curves to be oriented, scaled, and positioned properly.
         /// </summary>
-        /// <param name="crvs">The list of curves to adjust.</param>
+        /// <param name="geo">The list of geometry to adjust.</param>
         /// <param name="scale">The scale.</param>
         /// <param name="rebox">if set to <c>true</c>, reposition at the origin.</param>
-        static void rebaseCrvs(List<Curve> crvs, double scale, bool rebox)
+        static void rebaseGeometry(IEnumerable<GeometryBase> geo, double scale, bool rebox)
         {
-            foreach (Curve c in crvs)
+            foreach (GeometryBase g in geo)
             {
                 //Flip vertically - rhino coordinates have +Y up, screen coordinates have +Y down.
-                c.Transform(Rhino.Geometry.Transform.Mirror(Plane.WorldZX));
+                g.Transform(Rhino.Geometry.Transform.Mirror(Plane.WorldZX));
                 //scale about the world origin
-                c.Transform(Rhino.Geometry.Transform.Scale(Point3d.Origin, scale));
+                g.Transform(Rhino.Geometry.Transform.Scale(Point3d.Origin, scale));
             }
             if (rebox) //if the user has specified to "rebox"
             {
                 //create a new empty bounding box
                 BoundingBox b = BoundingBox.Empty;
-                foreach (Curve c in crvs)
+                foreach (GeometryBase g in geo)
                 {
                     //get the bounding box for the entire set of curves
-                    b.Union(c.GetBoundingBox(true));
+                    b.Union(g.GetBoundingBox(true));
                 }
 
                 //Get the lower-left (actually upper-left now since we're in screen space) corner of the box
                 Point3d boxBase = b.PointAt(0, 0, 0);
 
-                foreach (Curve c in crvs)
+                foreach (GeometryBase g in geo)
                 {
                     //Move all the individual curves such that their upper-left corner is at 0,0,0
-                    c.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase)));
+                    g.Transform(Rhino.Geometry.Transform.Translation(new Vector3d(-boxBase)));
                 }
             }
 
