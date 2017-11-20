@@ -94,6 +94,8 @@ namespace HumanUI
                 {
                     case "GH_Slider":
                         return findSlider(p);
+                    case "GH_PullDown_Label":
+                        return findElement<Selector>(p);
                     case "GH_TextBox":
                     case "GH_TextBox_NoButton":
                         return findTextBox(p);
