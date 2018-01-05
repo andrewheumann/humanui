@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <!--A new product Id must be generated for each release!-->
-  <Product Id="ECC382C2-DDC7-4D2B-AA24-E5BA509D5933" Name="Human UI" Language="1033" Version="0.8.1.0" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
+  <Product Id="702399EE-A73D-4DA3-A0B9-30926EA5CD53" Name="Human UI" Language="1033" Version="0.8.1.1" Manufacturer="Human" UpgradeCode="06F04C34-81D6-4E23-A3D5-5B90012697A8">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
    
