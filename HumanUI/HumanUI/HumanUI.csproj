@@ -414,6 +414,7 @@
     <None Include="Resources\set3dViewProps.png" />
     <None Include="Resources\MakeChildWindow.png" />
     <None Include="Resources\GetProps.png" />
+    <None Include="Resources\AddElementsToShapes.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />

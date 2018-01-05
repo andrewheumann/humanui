@@ -94,7 +94,7 @@ namespace HumanUI.Components.UI_Elements
             string prompt = "";
             bool allowMultiple = true;
             bool allowNone = true;
-            bool clear = false;
+            //bool clear = false;
             int filterInt = 0;
 
             bool hasText = DA.GetData<string>("Button Name", ref name);

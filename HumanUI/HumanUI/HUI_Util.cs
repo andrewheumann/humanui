@@ -37,13 +37,20 @@ namespace HumanUI
         public static void removeParent(UIElement child)
         {
             var parent = VisualTreeHelper.GetParent(child);
-            if (parent == null) return; // if it has no parent
+            if (parent == null)
+            {
+                parent = child.GetParentObject();
+            }
+            if (parent == null) return; //object has no parent
 
             var parentAsPanel = parent as Panel;
             if (parentAsPanel != null)
             {
                 parentAsPanel.Children.Remove(child);
             }
+
+            
+
         }
 
         public static T GetUIElement<T>(object o) where T : UIElement

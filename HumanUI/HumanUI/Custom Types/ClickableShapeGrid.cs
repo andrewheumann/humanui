@@ -41,9 +41,8 @@ namespace HumanUI
                 SelectedStates.Add(false);
             }
             if (clickMode == ClickMode.None) return;
-            if (visualAdded != null)
+            if (visualAdded is Path p)
             {
-                Path p = visualAdded as Path;
                 p.AddHandler(Path.MouseDownEvent, new MouseButtonEventHandler(pathMouseDown));
                 p.AddHandler(Path.MouseUpEvent, new MouseButtonEventHandler(pathMouseUp));
                 // ColorToneEffect tint = new ColorToneEffect(){ DarkColor=(Color)ColorConverter.ConvertFromString( "#FFCBCBCB"), LightColor = (Color)ColorConverter.ConvertFromString("#FF787878"), ToneAmount=0.04, Desaturation = 0.06};
@@ -51,11 +50,10 @@ namespace HumanUI
                 p.Effect = glow;
                 //   tint.ToneAmount = 0;
             }
-            if (visualRemoved != null)
+            if (visualRemoved is Path pr)
             {
-                Path p = visualRemoved as Path;
-                p.RemoveHandler(Path.MouseDownEvent, new MouseButtonEventHandler(pathMouseDown));
-                p.RemoveHandler(Path.MouseUpEvent, new MouseButtonEventHandler(pathMouseUp));
+                pr.RemoveHandler(Path.MouseDownEvent, new MouseButtonEventHandler(pathMouseDown));
+                pr.RemoveHandler(Path.MouseUpEvent, new MouseButtonEventHandler(pathMouseUp));
             }
         }
 

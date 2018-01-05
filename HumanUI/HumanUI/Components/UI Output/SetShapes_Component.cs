@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Windows.Shapes;
 
 using System.Windows.Media;
+using System.Linq;
 
 namespace HumanUI.Components.UI_Output
 {
@@ -101,8 +102,15 @@ namespace HumanUI.Components.UI_Output
                 //If the user has specified new shapes:
                 if (DA.GetDataList<Curve>("Shape Curves", shapeCrvs))
                 {
-                   
-                    G.Children.Clear();
+
+                    //G.Children.Clear();
+
+                    //remove all shape children
+                    var itemsToRemove = G.Children.OfType<FrameworkElement>()
+                         .Where(c => (c is Shape)).ToList();
+
+                    itemsToRemove
+                        .ForEach(g => G.Children.Remove(g));
 
                     int i = 0;
                     //for all the curves

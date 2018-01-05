@@ -2,6 +2,7 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,8 @@ namespace HumanUI.Components
 
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Shape to add to", "S", "The Shape object to add text to", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Element to add", "E", "The element(s) to add to the shapes", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Shape to add to", "S", "The Shape object to add element(s) to", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Element to add", "E", "The element(s) to add to the shapes. For text use a TextBlock or Label, for instance.", GH_ParamAccess.list);
             pManager.AddPointParameter("Element Location", "L", "The point at which to position the element", GH_ParamAccess.list);
             pManager.AddNumberParameter("Scale", "Sc", "The scale (this should match whatever you're using for your shape)", GH_ParamAccess.item, 1);
         }
@@ -32,6 +33,8 @@ namespace HumanUI.Components
         {
 
         }
+
+        protected override Bitmap Icon => Properties.Resources.AddElementsToShapes;
 
         protected override void SolveInstance(IGH_DataAccess DA)
         {
@@ -61,8 +64,12 @@ namespace HumanUI.Components
             var itemsToRemove = G.Children.OfType<FrameworkElement>()
                  .Where(c => !(c is Shape)).ToList();
 
-            itemsToRemove
-                .ForEach(g => G.Children.Remove(g));
+            //itemsToRemove
+            //    .ForEach(g => G.Children?.Remove(g));
+            foreach (var g in itemsToRemove)
+            {
+                G.Children.Remove(g);
+            }
 
             var p = new Rhino.Geometry.Polyline(elemPoints);
 
@@ -87,19 +94,26 @@ namespace HumanUI.Components
 
 
                 fe.Margin = new Thickness(0);
+                try
+                {
 
-                G.Children.Add(fe);
-                fe.RenderTransform = System.Windows.Media.Transform.Identity;
-                fe.LayoutTransform = System.Windows.Media.Transform.Identity;
-                fe.HorizontalAlignment = HorizontalAlignment.Left;
-                fe.VerticalAlignment = VerticalAlignment.Top;
-                fe.UpdateLayout();
-                fe.Measure(new Size(10000, 10000));
-                var currP = u.element.TransformToAncestor(G);
-                var point = new System.Windows.Point(fe.ActualWidth / 2, fe.ActualHeight / 2);
-                point = currP.Transform(point);
-                fe.RenderTransform = new TranslateTransform(location.X - point.X, location.Y - point.Y);
-               
+                    G.Children.Add(fe);
+                    fe.RenderTransform = System.Windows.Media.Transform.Identity;
+                    fe.LayoutTransform = System.Windows.Media.Transform.Identity;
+                    fe.HorizontalAlignment = HorizontalAlignment.Left;
+                    fe.VerticalAlignment = VerticalAlignment.Top;
+                    fe.UpdateLayout();
+                    fe.Measure(new System.Windows.Size(10000, 10000));
+                    var currP = u.element.TransformToAncestor(G);
+                    var point = new System.Windows.Point(fe.ActualWidth / 2, fe.ActualHeight / 2);
+                    point = currP.Transform(point);
+                    fe.RenderTransform = new TranslateTransform(location.X - point.X, location.Y - point.Y);
+                }
+                catch (Exception e)
+                {
+                    var exceptionMsg = e.Message;
+                }
+
 
             }
 

@@ -73,6 +73,16 @@ namespace HumanUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddElementsToShapes {
+            get {
+                object obj = ResourceManager.GetObject("AddElementsToShapes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AdjustElementAppearance {
             get {
                 object obj = ResourceManager.GetObject("AdjustElementAppearance", resourceCulture);
