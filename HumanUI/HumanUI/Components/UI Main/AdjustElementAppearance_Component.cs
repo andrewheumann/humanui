@@ -33,7 +33,7 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Elements to Adjust", "E", "The elements to adjust", GH_ParamAccess.item);
             pManager.AddColourParameter("Foreground", "FC", "The foreground color of the element", GH_ParamAccess.item);
@@ -51,7 +51,7 @@ namespace HumanUI.Components.UI_Main
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
 
         }
@@ -88,10 +88,10 @@ namespace HumanUI.Components.UI_Main
                 if (!hasFontSize) return;
                 var header = exp.Header;
                 TextBlock myHeader = null;
-                if (header is string)
+                if (header is string headString)
                 {
                     myHeader = new TextBlock();
-                    myHeader.Text = header as string;
+                    myHeader.Text = headString;
 
                 }
                 else
@@ -185,14 +185,14 @@ namespace HumanUI.Components.UI_Main
             if (f is ChartBase ChartB)
             {
                 if (fgCol.HasValue) ChartB.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) ChartB.Background = backgroundBrush;
+                if (bgCol.HasValue) ChartB.Background = backgroundBrush;
                 if (fontSize > 0) ChartB.FontSize = fontSize;
             }
             //Try Label
             if (f is Label l)
             {
                 if (fgCol.HasValue) l.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) l.Background = backgroundBrush;
+                if (bgCol.HasValue) l.Background = backgroundBrush;
                 if (fontSize > 0) l.FontSize = fontSize;
                 return;
             }
@@ -200,7 +200,7 @@ namespace HumanUI.Components.UI_Main
             if (f is TextBox tb)
             {
                 if (fgCol.HasValue) tb.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) tb.Background = backgroundBrush;
+                if (bgCol.HasValue) tb.Background = backgroundBrush;
                 if (fontSize > 0) tb.FontSize = fontSize;
                 return;
             }
@@ -209,7 +209,7 @@ namespace HumanUI.Components.UI_Main
             if (f is TextBlock textblock)
             {
                 if (fgCol.HasValue) textblock.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) textblock.Background = backgroundBrush;
+                if (bgCol.HasValue) textblock.Background = backgroundBrush;
                 if (fontSize > 0) textblock.FontSize = fontSize;
                 return;
             }
@@ -218,7 +218,7 @@ namespace HumanUI.Components.UI_Main
             if (f is Button b)
             {
                 if (fgCol.HasValue) b.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) b.Background = backgroundBrush;
+                if (bgCol.HasValue) b.Background = backgroundBrush;
                 if (fontSize > 0) b.FontSize = fontSize;
                 return;
             }
@@ -226,7 +226,7 @@ namespace HumanUI.Components.UI_Main
             if (f is CheckBox cb)
             {
                 if (fgCol.HasValue) cb.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) cb.Background = backgroundBrush;
+                if (bgCol.HasValue) cb.Background = backgroundBrush;
                 if (fontSize > 0) cb.FontSize = fontSize;
                 return;
 
@@ -235,7 +235,7 @@ namespace HumanUI.Components.UI_Main
             if (f is RadioButton rb)
             {
                 if (fgCol.HasValue) rb.Foreground = foregroundBrush;
-                if (bgCol.HasValue && bgCol.Value != System.Drawing.Color.Transparent) rb.Background = backgroundBrush;
+                if (bgCol.HasValue) rb.Background = backgroundBrush;
                 if (fontSize > 0) rb.FontSize = fontSize;
                 return;
             }
