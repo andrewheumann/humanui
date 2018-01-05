@@ -42,6 +42,7 @@ $RECYCLE.BIN/
 .sass-cache
 
 # Visual Studio 2014 CTP
+.vs/*
 **/*.sln.ide
 HumanUI/HumanUI/obj/
 HumanUIBaseApp/HumanUIBaseApp/obj/
