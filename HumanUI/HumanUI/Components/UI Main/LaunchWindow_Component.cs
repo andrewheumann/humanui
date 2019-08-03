@@ -242,7 +242,7 @@ namespace HumanUI.Components.UI_Main
                     try
                     {
                        
-                     if(shouldBeVisible)   mw.Show();
+                     if(shouldBeVisible && e.NewDocument != null)   mw.Show();
                     }
                     catch
                     {
