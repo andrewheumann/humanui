@@ -42,6 +42,10 @@ Major contributions to this project so far:
 
 ### Releases ###
 * #### 0.6.2.0 - Initial Public / Open Source release
+* a bunch of other releases where i forgot to update the readme my bad ✌
+* #### 0.8.1.2 - fix for the phantom window problem
+
+
 
 ### Dependencies ###
 * Rhino + RhinoCommon.dll
@@ -50,9 +54,6 @@ Major contributions to this project so far:
 * [HelixToolkit.WPF](https://github.com/helix-toolkit)
 * [Xceed.WPF](http://wpftoolkit.codeplex.com/)
 * [De.TorstenMandelkow.MetroCharts](https://modernuicharts.codeplex.com/)
-
-### Known Issues ###
-* Switching back from a subsidiary GH doc back to the parent doc with a HUI window can spawn unwanted extra windows
 
 
 ### License ###

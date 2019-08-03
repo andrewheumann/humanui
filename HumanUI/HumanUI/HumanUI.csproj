@@ -462,9 +462,11 @@
   <PropertyGroup>
     <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
 Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
+Copy "$(TargetPath)" $(SolutionDir)dist\$(ProjectName).gha
 
 
-Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll</PostBuildEvent>
+Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll
+Copy "$(TargetDir)HumanUIBaseApp.dll" $(SolutionDir)dist\HumanUIBaseApp.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
     <StartArguments>
