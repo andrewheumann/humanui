@@ -106,7 +106,6 @@
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoPickButton.cs" />
-    <Compile Include="Components\UI Elements\CreateSeparator_Component.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
@@ -418,7 +417,6 @@
     <None Include="Resources\MakeChildWindow.png" />
     <None Include="Resources\GetProps.png" />
     <None Include="Resources\AddElementsToShapes.png" />
-    <None Include="Resources\CreateSeparator.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />
