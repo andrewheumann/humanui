@@ -13,18 +13,25 @@ using Grasshopper.Kernel.Types;
 using Grasshopper.Kernel.Data;
 
 namespace HumanUI.Components.UI_Containers
-{
-    public class CreateSimpleGrid_Component : GH_Component
+{   
+
+    /// <summary>
+    /// A component to create a simple grid container
+    /// </summary>
+    /// <seealso cref="Grasshopper.Kernel.GH_Component" />
+    public class CreateSimpleGrid_Component_ALSO_DEPRECATED : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the CreateSimpleGrid_Component class.
+        /// Initializes a new instance of the MyComponent1 class.
         /// </summary>
-        public CreateSimpleGrid_Component()
+        public CreateSimpleGrid_Component_ALSO_DEPRECATED()
           : base("Create Simple Grid", "SimpleGrid",
                 "Create a container with elements in a grid according to the path structure provided. Each branch path will be treated as a column and Elements will be placed in the column from top to bottom. Use the \"Adjust Element Positioning\" component to locate elements inside the grid cell. Use column and row definitions to control sizing.",
                 "Human UI", "UI Containers")
         {
         }
+
+        public override GH_Exposure Exposure => GH_Exposure.hidden;
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -83,9 +90,8 @@ namespace HumanUI.Components.UI_Containers
                 {
                     AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Grid Membership list length must equal the number of Elements branches.");
                     return;
-                }
-            }
-            else
+                } 
+            } else
             {
                 // Create a default list of a single branch grouping to apply to all trees
                 memberships = new List<int>() { 0 };
@@ -95,31 +101,31 @@ namespace HumanUI.Components.UI_Containers
 
             // Create an array of the membership values
             int[] membershipArray = hasMemberships ? memberships.ToArray() : defaultMembership;
-
+            
             // Create empty list of branch metadata and populate with values
             List<BranchMetadata> branchMetaData = new List<BranchMetadata>();
 
-            for (int i = 0; i < elementsToAdd.Branches.Count(); i++)
+            for (int i = 0; i<elementsToAdd.Branches.Count(); i++)
             {
                 int myMembership = hasMemberships ? membershipArray[i] : 0;
-
+                
                 BranchMetadata bm = new BranchMetadata(i, myMembership);
                 branchMetaData.Add(bm);
             }
 
             // Sort and group the metadata
             var branchGroupings = branchMetaData
-                .OrderBy(b => b.membershipIndex)
+                .OrderBy(b => b.membershipIndex)   
                 .GroupBy(b => b.membershipIndex);
 
 
             // create an empty List of grids and populate 
-
+            
             List<Grid> grids = new List<Grid>();
-
+            
             foreach (var group in branchGroupings)
             {
-
+                
                 //initialize a grid
                 Grid grid = new Grid();
                 grid.HorizontalAlignment = HorizontalAlignment.Left;
@@ -153,7 +159,7 @@ namespace HumanUI.Components.UI_Containers
             {
                 // Count the number of branches in this array
                 int currentBranchCount = group.Count();
-
+                
                 //set up a "GridLengthConverter" to handle parsing our strings.
                 GridLengthConverter gridLengthConverter = new GridLengthConverter();
 
@@ -165,7 +171,7 @@ namespace HumanUI.Components.UI_Containers
                         ColumnDefinition cd = new ColumnDefinition();
                         cd.Width = (GridLength)gridLengthConverter.ConvertFromString(colDefinitions[i % colDefinitions.Count]);  // use repeating pattern of supplied list
                         // Note: group.Key is the index of the group/grid
-                        grids[group.Key].ColumnDefinitions.Add(cd);
+                        grids[group.Key].ColumnDefinitions.Add(cd);     
                     }
 
                 }
@@ -218,24 +224,24 @@ namespace HumanUI.Components.UI_Containers
                         if (fe != null)
                         {
                             //set its alignment to be relative to upper left - this makes margin-based positioning easy
-                            fe.HorizontalAlignment = HorizontalAlignment.Stretch;
+                            fe.HorizontalAlignment = HorizontalAlignment.Left;
                             fe.VerticalAlignment = VerticalAlignment.Top;
 
                             //set up row and column positioning
                             Grid.SetColumn(fe, currentColumn);
                             Grid.SetRow(fe, j);
                         }
-
+                        
                         //add it to the grid
                         grids[group.Key].Children.Add(u.element);
-
+                        
                     }
 
                     // Increment the column index
                     currentColumn++;
                 }
             }
-
+            
             // Create the list of Elements and add each grid
             List<UIElement_Goo> output = new List<UIElement_Goo>();
             foreach (Grid g in grids)
@@ -270,9 +276,6 @@ namespace HumanUI.Components.UI_Containers
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
-        public override Guid ComponentGuid
-        {
-            get { return new Guid("4df77b45-0d74-44ea-9445-6d5d8b1d17ad"); }
-        }
+        public override Guid ComponentGuid => new Guid("{a39c7889-7ce1-489a-8165-84cbe841dd67}");
     }
 }
