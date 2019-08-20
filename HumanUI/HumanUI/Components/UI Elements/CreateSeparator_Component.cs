@@ -84,8 +84,7 @@ namespace HumanUI.Components.UI_Elements
         {
             var brush = new System.Windows.Media.SolidColorBrush(color);
 
-            rect.Stroke = brush;
-            rect.StrokeThickness = thickness;
+            rect.Fill = brush;
             rect.HorizontalAlignment = HorizontalAlignment.Stretch;
             rect.VerticalAlignment = VerticalAlignment.Stretch;
 
