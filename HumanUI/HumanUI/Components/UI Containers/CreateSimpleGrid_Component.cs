@@ -217,9 +217,10 @@ namespace HumanUI.Components.UI_Containers
                         FrameworkElement fe = u.element as FrameworkElement;
                         if (fe != null)
                         {
-                            //set its alignment to be relative to upper left - this makes margin-based positioning easy
+                            // set its alignment to stretch
+                            // this will allow elements like sliders, pulldowns, and separators to fill the cell
                             fe.HorizontalAlignment = HorizontalAlignment.Stretch;
-                            fe.VerticalAlignment = VerticalAlignment.Top;
+                            fe.VerticalAlignment = VerticalAlignment.Stretch;
 
                             //set up row and column positioning
                             Grid.SetColumn(fe, currentColumn);
