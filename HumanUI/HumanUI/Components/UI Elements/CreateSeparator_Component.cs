@@ -29,11 +29,11 @@ namespace HumanUI.Components.UI_Elements
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Thickness", "T", "The thickness of the separator.", GH_ParamAccess.item, 1);
+            pManager.AddNumberParameter("Thickness", "T", "The thickness of the separator.", GH_ParamAccess.item, 0.5);
             pManager.AddBooleanParameter("Horizontal", "H", "Separator is horizontal.", GH_ParamAccess.item, true);
-            pManager.AddColourParameter("Color", "C", "The color of the separator", GH_ParamAccess.item, System.Drawing.Color.Black);
-            pManager.AddNumberParameter("Width", "W", "The width of the separator. Default is Stretch.", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Height", "H", "The height of the separator. Default is Stretch.", GH_ParamAccess.item);
+            pManager.AddColourParameter("Color", "C", "The color of the separator (optional).", GH_ParamAccess.item, System.Drawing.Color.Black);
+            pManager.AddNumberParameter("Width", "W", "The width of the separator (optional). Default is Stretch.", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Height", "H", "The height of the separator (optional). Default is Stretch.", GH_ParamAccess.item);
             pManager[2].Optional = true;
             pManager[3].Optional = true;
             pManager[4].Optional = true;
@@ -53,7 +53,7 @@ namespace HumanUI.Components.UI_Elements
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            double thickness = 1;
+            double thickness = 0.5;
             var horizontal = true;
             var color = new GH_Colour();
             double width = 0;
