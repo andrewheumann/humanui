@@ -107,6 +107,7 @@
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
     <Compile Include="Components\UI Elements\CreateRangeSlider.cs" />
     <Compile Include="Components\UI Elements\CreateRhinoPickButton.cs" />
+    <Compile Include="Components\UI Elements\CreateSeparator_Component.cs" />
     <Compile Include="Components\UI Elements\CreateToggle_Component.cs" />
     <Compile Include="Components\UI Elements\Create_MarkdownViewer_Component.cs" />
     <Compile Include="Components\UI Elements\CreatePullDown_Component.cs" />
@@ -117,7 +118,9 @@
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\AddElementsToShape_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
+    <Compile Include="Components\UI Output\SetButton_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
+    <Compile Include="Components\UI Output\SetMdSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
@@ -418,6 +421,8 @@
     <None Include="Resources\MakeChildWindow.png" />
     <None Include="Resources\GetProps.png" />
     <None Include="Resources\AddElementsToShapes.png" />
+    <None Include="Resources\SetButton.png" />
+    <None Include="Resources\CreateSeparator.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />
@@ -446,6 +451,7 @@
   <ItemGroup>
     <Content Include="Resources\SetColorPicker.png" />
     <None Include="Resources\SetProp.png" />
+    <None Include="Resources\SetMDSlider.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
