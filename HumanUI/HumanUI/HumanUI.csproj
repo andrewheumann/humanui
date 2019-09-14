@@ -116,6 +116,7 @@
     <Compile Include="Components\UI Main\WindowStatus_Component.cs" />
     <Compile Include="Components\UI Output\AddElementsToShape_Component.cs" />
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
+    <Compile Include="Components\UI Output\SetButton_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
@@ -418,6 +419,7 @@
     <None Include="Resources\MakeChildWindow.png" />
     <None Include="Resources\GetProps.png" />
     <None Include="Resources\AddElementsToShapes.png" />
+    <None Include="Resources\SetButton.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />
@@ -435,9 +437,7 @@
     <None Include="Resources\CreateTooltip.png" />
     <None Include="Resources\captureWindow.png" />
     <None Include="Resources\HideShowElement.png" />
-    <None Include="..\..\..\..\..\Dropbox\CreateMDSlider.png">
-      <Link>Resources\CreateMDSlider.png</Link>
-    </None>
+    <None Include="Resources\CreateMDSlider.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\HumanUIBaseApp\HumanUIBaseApp\HumanUIBaseApp.csproj">
