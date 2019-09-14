@@ -120,6 +120,7 @@
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
+    <Compile Include="Components\UI Output\SetMdSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
     <Compile Include="Custom Types\HUI_RhPickButton.cs" />
@@ -447,6 +448,7 @@
   <ItemGroup>
     <Content Include="Resources\SetColorPicker.png" />
     <None Include="Resources\SetProp.png" />
+    <None Include="Resources\SetMDSlider.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
