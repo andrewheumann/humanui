@@ -101,6 +101,7 @@
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Containers\CreateSimpleGrid_Component.cs" />
+    <Compile Include="Deprecated\CreateSimpleGrid_Component_ALSO_DEPRECATED.cs" />
     <Compile Include="Components\UI Containers\CreateWrapPanel_Component.cs" />
     <Compile Include="Components\UI Elements\CreateFilePicker_Component.cs" />
     <Compile Include="Components\UI Elements\CreateGradientEditor_Component.cs" />
@@ -119,10 +120,7 @@
     <Compile Include="Components\UI Output\Set3DViewProperties_Component.cs" />
     <Compile Include="Components\UI Output\SetButton_Component.cs" />
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
-    <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
-    <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetMdSlider_Component.cs" />
-    <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
