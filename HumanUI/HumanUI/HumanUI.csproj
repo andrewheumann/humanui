@@ -119,6 +119,7 @@
     <Compile Include="Components\UI Output\SetCheckBox_Component.cs" />
     <Compile Include="Components\UI Output\SetColorPicker_Component.cs" />
     <Compile Include="Components\UI Output\SetExpander_Component.cs" />
+    <Compile Include="Components\UI Output\SetMdSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetSlider_Component.cs" />
     <Compile Include="Components\UI Output\SetTabs_Component.cs" />
     <Compile Include="Custom Types\HUI_RhPickButton.cs" />
@@ -434,7 +435,9 @@
     <None Include="Resources\CreateTooltip.png" />
     <None Include="Resources\captureWindow.png" />
     <None Include="Resources\HideShowElement.png" />
-    <None Include="Resources\CreateMDSlider.png" />
+    <None Include="..\..\..\..\..\Dropbox\CreateMDSlider.png">
+      <Link>Resources\CreateMDSlider.png</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\HumanUIBaseApp\HumanUIBaseApp\HumanUIBaseApp.csproj">
@@ -445,6 +448,7 @@
   <ItemGroup>
     <Content Include="Resources\SetColorPicker.png" />
     <None Include="Resources\SetProp.png" />
+    <None Include="Resources\SetMDSlider.png" />
     <Content Include="Styles.Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
