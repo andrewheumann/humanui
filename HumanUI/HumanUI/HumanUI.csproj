@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\UI Containers\CreateBorder_Component.cs" />
     <Compile Include="Components\UI Containers\CreateExpander_Component.cs" />
     <Compile Include="Components\UI Containers\CreateScrollViewer_Component.cs" />
     <Compile Include="Components\UI Containers\CreateSimpleGrid_Component.cs" />
@@ -423,6 +424,8 @@
     <None Include="Resources\AddElementsToShapes.png" />
     <None Include="Resources\SetButton.png" />
     <None Include="Resources\CreateSeparator.png" />
+    <None Include="Resources\CreateWrapPanel1.png" />
+    <None Include="Resources\CreateBorder.png" />
     <Content Include="Resources\SetCheckbox.png" />
     <None Include="Resources\SetSlider.png" />
     <None Include="Resources\SetTab.png" />

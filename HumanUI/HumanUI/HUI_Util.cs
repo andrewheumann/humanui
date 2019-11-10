@@ -43,13 +43,17 @@ namespace HumanUI
             }
             if (parent == null) return; //object has no parent
 
-            var parentAsPanel = parent as Panel;
-            if (parentAsPanel != null)
+            if (parent is Panel parentAsPanel)
             {
                 parentAsPanel.Children.Remove(child);
             }
 
-            
+            if (parent is Border parentAsBorder)
+            {
+                parentAsBorder.Child = null;
+            }
+
+
 
         }
 
