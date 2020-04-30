@@ -44,6 +44,7 @@ Major contributions to this project so far:
 * #### 0.6.2.0 - Initial Public / Open Source release
 * a bunch of other releases where i forgot to update the readme my bad ✌
 * #### 0.8.1.2 - fix for the phantom window problem
+* #### 0.8.5 - better setup for build with yak, fix for transparent tabs
 
 
 

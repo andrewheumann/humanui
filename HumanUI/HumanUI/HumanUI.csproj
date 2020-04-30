@@ -470,13 +470,13 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Erase %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
-Copy "$(TargetPath)" %25appdata%25\Grasshopper\Libraries\HumanUI\$(ProjectName).gha
-Copy "$(TargetPath)" $(SolutionDir)dist\$(ProjectName).gha
+    <PostBuildEvent>if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.5\$(ProjectName).gha
+if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.5\$(ProjectName).gha
+if $(ConfigurationName) == Release Copy "$(TargetPath)" $(SolutionDir)dist\$(ProjectName).gha
 
-
-Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\Grasshopper\Libraries\HumanUI\HumanUIBaseApp.dll
-Copy "$(TargetDir)HumanUIBaseApp.dll" $(SolutionDir)dist\HumanUIBaseApp.dll</PostBuildEvent>
+if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.5\HumanUIBaseApp.dll
+if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.5\HumanUIBaseApp.dll
+if $(ConfigurationName) == Release Copy "$(TargetDir)HumanUIBaseApp.dll" $(SolutionDir)dist\HumanUIBaseApp.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">
     <StartArguments>

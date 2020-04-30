@@ -125,6 +125,11 @@ namespace HumanUI.Components.UI_Main
                 if (hasbgCol) panel.Background = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol.Value));
             }
 
+            if (f is TabControl tabControl)
+            {
+                if (hasbgCol) tabControl.Background = new SolidColorBrush(HUI_Util.ToMediaColor(bgCol.Value));
+            }
+
             //if it's a selector, color its items
             else if (selector != null)
             {
