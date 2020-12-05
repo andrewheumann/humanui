@@ -42,7 +42,7 @@ namespace HumanUI.Components
             sizingMode.AddNamedValue("Equal", -1);
             sizingMode.AddNamedValue("Size to Cells", -2);
             sizingMode.AddNamedValue("Size to Header", -3);
-
+            sizingMode.AddNamedValue("Auto", -4);
 
 
 
@@ -122,6 +122,10 @@ namespace HumanUI.Components
             else if (columnWidth == -3)
             {
                 dg.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.SizeToHeader);
+            }
+            else if (columnWidth == -4)
+            {
+                dg.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Auto);
             }
             else
             {
