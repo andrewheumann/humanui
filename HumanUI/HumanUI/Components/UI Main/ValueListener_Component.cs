@@ -380,6 +380,11 @@ namespace HumanUI
                     chart.MouseUp -= ExpireThis;
                     chart.MouseUp += ExpireThis;
                     return;
+                case "System.Windows.Controls.WebBrowser":
+                    WebBrowser wb = u as WebBrowser;
+                    wb.Navigated -= ExpireThis;
+                    wb.Navigated += ExpireThis;
+                    return;
                 default:
                     return;
             }

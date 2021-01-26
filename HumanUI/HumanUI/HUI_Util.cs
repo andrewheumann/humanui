@@ -612,6 +612,9 @@ namespace HumanUI
                 case "HumanUI.ClickableShapeGrid":
                     ClickableShapeGrid csg = u as ClickableShapeGrid;
                     return csg.SelectedStates;
+                case "System.Windows.Controls.WebBrowser":
+                    WebBrowser wb = u as WebBrowser;
+                    return wb.Source?.AbsoluteUri;
                 default:
                     return null;
             }
