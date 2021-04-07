@@ -169,7 +169,7 @@ namespace HumanUI.Components.UI_Main
             //try closing a window if it's already up
             try
             {
-                mw.Close();
+                mw?.Close();
             }
             catch { }
 
@@ -182,10 +182,17 @@ namespace HumanUI.Components.UI_Main
 
             ElementHost.EnableModelessKeyboardInterop(mw);
 
-            //make sure to hide the window when the user switches active GH document. 
-            Grasshopper.Instances.ActiveCanvas.DocumentChanged -= HideWindow;
-            Grasshopper.Instances.ActiveCanvas.DocumentChanged += HideWindow;
-
+            // 6 April 2021 - S. Baer
+            // Check for the possibility of a null canvas. If the window is only
+            // shown using the Grasshopper Player and Grasshopper itself has never
+            // been run, then there is no canvas.
+            var canvas = Grasshopper.Instances.ActiveCanvas;
+            if (canvas!=null)
+            {
+                //make sure to hide the window when the user switches active GH document.
+                canvas.DocumentChanged -= HideWindow;
+                canvas.DocumentChanged += HideWindow;
+            }
         }
 
         internal static void SetChildStatus(MainWindow mw, childStatus winChildStatus)
