@@ -5,5 +5,5 @@ authors:
 - Andrew Heumann
 description: WPF-based User Interface library for Grasshopper
 url: https://discourse.mcneel.com/c/grasshopper/human-ui
-keywords:
-- guid:1b2ec1b3-ab86-44c1-81d4-176f567b3592
+secret:
+  id: 1b2ec1b3-ab86-44c1-81d4-176f567b3592

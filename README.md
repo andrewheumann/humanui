@@ -45,6 +45,8 @@ Major contributions to this project so far:
 * a bunch of other releases where i forgot to update the readme my bad ✌
 * #### 0.8.1.2 - fix for the phantom window problem
 * #### 0.8.5 - better setup for build with yak, fix for transparent tabs
+* #### 0.8.6 - Allow "Auto" sizing on data table columns
+* #### 0.8.7 - fix for grasshopper player crash, update xceed toolkit
 
 
 
