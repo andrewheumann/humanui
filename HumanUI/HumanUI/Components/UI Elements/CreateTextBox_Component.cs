@@ -22,6 +22,7 @@ namespace HumanUI.Components.UI_Elements
 
         // Set show-label boolean for custom right-click menu
         private bool showLabel;
+        private bool enterEvent;
 
 
         public CreateTextBox_Component()
@@ -37,6 +38,16 @@ namespace HumanUI.Components.UI_Elements
         {
             System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
             ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
+
+            System.Windows.Forms.ToolStripMenuItem EnterListenerMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Use Enter to submit", new EventHandler(this.Menu_EnterEventClicked), true, enterEvent);
+            ShowLabelMenuItem.ToolTipText = "If checked, the text will be submitted when Enter key is pressed.";
+        }
+
+        private void Menu_EnterEventClicked(object sender, EventArgs e)
+        {
+            RecordUndoEvent("Enter Event Toggle");
+            enterEvent = !enterEvent;
+            ExpireSolution(true);
         }
 
         // Method called on click event of Menu Item
@@ -53,6 +64,7 @@ namespace HumanUI.Components.UI_Elements
         public override bool Write(GH_IO.Serialization.GH_IWriter writer)
         {
             writer.SetBoolean("showLabel", showLabel);
+            writer.SetBoolean("enterEvent", enterEvent);
 
             return base.Write(writer);
         }
@@ -61,6 +73,7 @@ namespace HumanUI.Components.UI_Elements
         public override bool Read(GH_IO.Serialization.GH_IReader reader)
         {
             reader.TryGetBoolean("showLabel", ref showLabel);
+            reader.TryGetBoolean("enterEvent", ref enterEvent);
             //updateMessage();
             return base.Read(reader);
         }
@@ -114,7 +127,9 @@ namespace HumanUI.Components.UI_Elements
             //add the label to the stackpanel if showLabel is true
             if (!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
 
-
+            // save enter event in a textbox tag
+            if (enterEvent)
+                tb.Tag = "enterEvent";
 
             if (includeButton) // if the component is set to use a button for updating, add the button to the stack panel
             {
