@@ -23,6 +23,7 @@ namespace HumanUI.Components.UI_Elements
         // Set show-label boolean for custom right-click menu
         private bool showLabel;
         private bool enterEvent;
+        private bool enterMenuEnabled;
 
 
         public CreateTextBox_Component()
@@ -32,7 +33,7 @@ namespace HumanUI.Components.UI_Elements
         {
             showLabel = true;
         }
-
+                
         // Create right-click menu item for show-label
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
@@ -41,6 +42,11 @@ namespace HumanUI.Components.UI_Elements
 
             System.Windows.Forms.ToolStripMenuItem EnterListenerMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Use Enter to submit", new EventHandler(this.Menu_EnterEventClicked), true, enterEvent);
             ShowLabelMenuItem.ToolTipText = "If checked, the text will be submitted when Enter key is pressed.";
+            if (!enterMenuEnabled)
+            {
+                EnterListenerMenuItem.Enabled = false;
+                EnterListenerMenuItem.Checked = true;
+            }
         }
 
         private void Menu_EnterEventClicked(object sender, EventArgs e)
@@ -127,9 +133,7 @@ namespace HumanUI.Components.UI_Elements
             //add the label to the stackpanel if showLabel is true
             if (!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
 
-            // save enter event in a textbox tag
-            if (enterEvent)
-                tb.Tag = "enterEvent";
+            
 
             if (includeButton) // if the component is set to use a button for updating, add the button to the stack panel
             {
@@ -137,15 +141,25 @@ namespace HumanUI.Components.UI_Elements
                 DockPanel.SetDock(b, Dock.Right);
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox";
+
+                // disable menu item (enter will still work)
+                enterMenuEnabled = false;
             }
 
             else
             {
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox_NoButton";
+
+                enterMenuEnabled = true;
             }
+
             tb.HorizontalAlignment = HorizontalAlignment.Stretch;
             sp.Children.Add(tb);
+
+            // save enter event in a textbox tag
+            if (enterEvent || !enterMenuEnabled)
+                tb.Tag = "enterEvent";
 
             //pass out the stackpanel
             DA.SetData("Text Box", new UIElement_Goo(sp, String.Format("TextBox: {0}", label), InstanceGuid, DA.Iteration));
