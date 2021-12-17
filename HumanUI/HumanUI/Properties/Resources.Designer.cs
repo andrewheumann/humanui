@@ -451,7 +451,7 @@ namespace HumanUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.8.7.
+        ///   Looks up a localized string similar to 0.8.8.
         /// </summary>
         internal static string CURRENT_VERSION {
             get {

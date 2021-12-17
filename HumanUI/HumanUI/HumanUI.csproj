@@ -467,12 +467,12 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.7\$(ProjectName).gha
-if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.7\$(ProjectName).gha
+    <PostBuildEvent>if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.8\$(ProjectName).gha
+if $(ConfigurationName) == Debug Copy "$(TargetPath)" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.8\$(ProjectName).gha
 if $(ConfigurationName) == Release Copy "$(TargetPath)" $(SolutionDir)dist\$(ProjectName).gha
 
-if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.7\HumanUIBaseApp.dll
-if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.7\HumanUIBaseApp.dll
+if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\6.0\human-ui\0.8.8\HumanUIBaseApp.dll
+if $(ConfigurationName) == Debug Copy "$(TargetDir)HumanUIBaseApp.dll" %25appdata%25\McNeel\Rhinoceros\packages\7.0\human-ui\0.8.8\HumanUIBaseApp.dll
 if $(ConfigurationName) == Release Copy "$(TargetDir)HumanUIBaseApp.dll" $(SolutionDir)dist\HumanUIBaseApp.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug32|AnyCPU' ">

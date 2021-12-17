@@ -70,11 +70,11 @@ namespace HumanUI
 
             if (double.TryParse(this.Text, out value))
             {
-                if (value > slider.Maximum)
+                if (value >= slider.Maximum)
                 {
                     slider.Value = slider.Maximum;
                 }
-                if (value < slider.Minimum)
+                if (value <= slider.Minimum)
                 {
                     slider.Value = slider.Minimum;
                 }
