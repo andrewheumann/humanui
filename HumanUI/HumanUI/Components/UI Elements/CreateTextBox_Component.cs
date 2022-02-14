@@ -22,6 +22,8 @@ namespace HumanUI.Components.UI_Elements
 
         // Set show-label boolean for custom right-click menu
         private bool showLabel;
+        private bool enterEvent;
+        private bool enterMenuEnabled;
 
 
         public CreateTextBox_Component()
@@ -31,12 +33,27 @@ namespace HumanUI.Components.UI_Elements
         {
             showLabel = true;
         }
-
+                
         // Create right-click menu item for show-label
         protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
         {
             System.Windows.Forms.ToolStripMenuItem ShowLabelMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Show Label", new EventHandler(this.Menu_ShowLabelClicked), true, showLabel);
             ShowLabelMenuItem.ToolTipText = "When checked, the UI Element will include the supplied label.";
+
+            System.Windows.Forms.ToolStripMenuItem EnterListenerMenuItem = GH_DocumentObject.Menu_AppendItem(menu, "Use Enter to submit", new EventHandler(this.Menu_EnterEventClicked), true, enterEvent);
+            ShowLabelMenuItem.ToolTipText = "If checked, the text will be submitted when Enter key is pressed.";
+            if (!enterMenuEnabled)
+            {
+                EnterListenerMenuItem.Enabled = false;
+                EnterListenerMenuItem.Checked = true;
+            }
+        }
+
+        private void Menu_EnterEventClicked(object sender, EventArgs e)
+        {
+            RecordUndoEvent("Enter Event Toggle");
+            enterEvent = !enterEvent;
+            ExpireSolution(true);
         }
 
         // Method called on click event of Menu Item
@@ -53,6 +70,7 @@ namespace HumanUI.Components.UI_Elements
         public override bool Write(GH_IO.Serialization.GH_IWriter writer)
         {
             writer.SetBoolean("showLabel", showLabel);
+            writer.SetBoolean("enterEvent", enterEvent);
 
             return base.Write(writer);
         }
@@ -61,6 +79,7 @@ namespace HumanUI.Components.UI_Elements
         public override bool Read(GH_IO.Serialization.GH_IReader reader)
         {
             reader.TryGetBoolean("showLabel", ref showLabel);
+            reader.TryGetBoolean("enterEvent", ref enterEvent);
             //updateMessage();
             return base.Read(reader);
         }
@@ -114,7 +133,7 @@ namespace HumanUI.Components.UI_Elements
             //add the label to the stackpanel if showLabel is true
             if (!string.IsNullOrWhiteSpace(label) & showLabel) sp.Children.Add(l);
 
-
+            
 
             if (includeButton) // if the component is set to use a button for updating, add the button to the stack panel
             {
@@ -122,15 +141,25 @@ namespace HumanUI.Components.UI_Elements
                 DockPanel.SetDock(b, Dock.Right);
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox";
+
+                // disable menu item (enter will still work)
+                enterMenuEnabled = false;
             }
 
             else
             {
                 //this key is used by other methods (like AddEvents) to figure out whether or not to listen to all changes or just button presses.
                 sp.Name = "GH_TextBox_NoButton";
+
+                enterMenuEnabled = true;
             }
+
             tb.HorizontalAlignment = HorizontalAlignment.Stretch;
             sp.Children.Add(tb);
+
+            // save enter event in a textbox tag
+            if (enterEvent || !enterMenuEnabled)
+                tb.Tag = "enterEvent";
 
             //pass out the stackpanel
             DA.SetData("Text Box", new UIElement_Goo(sp, String.Format("TextBox: {0}", label), InstanceGuid, DA.Iteration));

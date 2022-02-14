@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -17,6 +17,7 @@ using De.TorstenMandelkow.MetroChart;
 using Grasshopper.Kernel.Parameters;
 using MahApps.Metro.Controls;
 using RangeSlider = MahApps.Metro.Controls.RangeSlider;
+using System.Windows.Input;
 
 namespace HumanUI
 {
@@ -311,6 +312,13 @@ namespace HumanUI
                     TextBox tb = u as TextBox;
                     Panel p = tb.Parent as Panel;
                     List<Button> btns = p.Children.OfType<Button>().ToList<Button>();
+
+                    if (tb.Tag == "enterEvent")
+                    {
+                        tb.KeyDown -= OnTextboxKeyPressed;
+                        tb.KeyDown += OnTextboxKeyPressed;
+                    }
+
                     if (btns.Count > 0)
                     {
                         foreach (Button btn0 in btns)
@@ -319,7 +327,7 @@ namespace HumanUI
                             btn0.Click += ExpireThis;
                         }
                     }
-                    else
+                    else if (tb.Tag != "enterEvent")
                     {
                         tb.TextChanged -= ExpireThis;
                         tb.TextChanged += ExpireThis;
@@ -390,6 +398,11 @@ namespace HumanUI
             }
         }
 
+        private void OnTextboxKeyPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ExpireSolution(true);
+        }
 
         void RemoveEvents(UIElement u)
         {
