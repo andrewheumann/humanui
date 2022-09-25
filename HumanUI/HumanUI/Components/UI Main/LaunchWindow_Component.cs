@@ -186,6 +186,16 @@ namespace HumanUI.Components.UI_Main
             // Check for the possibility of a null canvas. If the window is only
             // shown using the Grasshopper Player and Grasshopper itself has never
             // been run, then there is no canvas.
+            //September 24, 2022 update. We can force the window to be created for
+            //a moment, so that everything works as expected.
+            dynamic gh = Rhino.RhinoApp.GetPlugInObject("Grasshopper");
+            if (!gh.IsEditorLoaded())
+            {
+                gh.LoadEditor();
+                gh.ShowEditor();
+                gh.HideEditor();
+            }
+
             var canvas = Grasshopper.Instances.ActiveCanvas;
             if (canvas!=null)
             {
