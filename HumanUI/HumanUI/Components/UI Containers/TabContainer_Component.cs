@@ -141,7 +141,7 @@ namespace HumanUI.Components.UI_Containers
 
                 if (iconPaths.Count == 0)
                 {
-                    if (setSize) ControlsHelper.SetHeaderFontSize(tabItem, fontSize);
+                    if (setSize) HeaderedControlHelper.SetHeaderFontSize(tabItem, fontSize);
                     tabItem.Header = tabName;
                 }
                 else
@@ -183,12 +183,15 @@ namespace HumanUI.Components.UI_Containers
             ResourceDictionary ControlsResDict = new ResourceDictionary();
             ControlsResDict.Source =
            new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
+            // MahApps 2.x removed Styles/Colors.xaml; AccentColorBrush moved into the per-theme
+            // dictionaries (Styles/Themes/Light.Blue.xaml etc) and is keyed as "MahApps.Brushes.Accent".
             ResourceDictionary ColorsResDict = new ResourceDictionary();
             ColorsResDict.Source =
-           new Uri("/MahApps.Metro;component/Styles/Colors.xaml", UriKind.RelativeOrAbsolute);
+           new Uri("/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml", UriKind.RelativeOrAbsolute);
 
 
-            Style customTabStyle = new Style(typeof(TabItem), (Style)ControlsResDict["MetroTabItem"]);
+            // MahApps 2.x renamed the MetroTabItem key to MahApps.Styles.TabItem.
+            Style customTabStyle = new Style(typeof(TabItem), (Style)ControlsResDict["MahApps.Styles.TabItem"]);
             customTabStyle.TargetType = typeof(TabItem);
 
             //is selected trigger
@@ -198,7 +201,7 @@ namespace HumanUI.Components.UI_Containers
 
             Setter setter = new Setter();
             setter.Property = TextBlock.ForegroundProperty;
-            setter.Value = ColorsResDict["AccentColorBrush"];
+            setter.Value = ColorsResDict["MahApps.Brushes.Accent"];
 
             selectionTrigger.Setters.Add(setter);
 

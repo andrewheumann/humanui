@@ -64,11 +64,11 @@ namespace HumanUI.Components.UI_Elements
             ToggleSwitch ts = new ToggleSwitch();
             ts.HorizontalAlignment = HorizontalAlignment.Left;
 
-            ts.IsChecked = defaultVal;
+            ts.IsOn = defaultVal;
 
             if (hasLabel) ts.Header = label;
-            if (hasOnVal) ts.OnLabel = onVal;
-            if (hasOffVal) ts.OffLabel = offVal;
+            if (hasOnVal) ts.OnContent = onVal;
+            if (hasOffVal) ts.OffContent = offVal;
 
 
             DA.SetData("Toggle", new UIElement_Goo(ts, "Toggle Switch", InstanceGuid, DA.Iteration));

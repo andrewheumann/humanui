@@ -1,0 +1,4766 @@
+[
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateWrapPanel_Component",
+    "Guid": "00f0e6df-7227-42a7-b148-a9a4e245c928",
+    "Name": "Create WrapPanel",
+    "NickName": "WrapPanel",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to group together",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Horizontal",
+        "NickName": "H",
+        "Description": "Set to true for horizontal arrangement; false for vertical.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "WrapPanel",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateScrollViewer_Component",
+    "Guid": "038a7b79-5443-4ca1-bf88-c0cd3894c357",
+    "Name": "Create Scroll Viewer",
+    "NickName": "ScrollViewer",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to put in the scroll group",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Horizontal Scroll Bar Visibility",
+        "NickName": "HV",
+        "Description": "Whether or not to show the horizontal scroll bar",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Vertical Scroll Bar Visibility",
+        "NickName": "VV",
+        "Description": "Whether or not to show the vertical scroll bar",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the scrolling revion",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the scrolling revion",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "ScrollViewer",
+        "NickName": "S",
+        "Description": "The scrolling group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.SetMdSlider_Component",
+    "Guid": "04c34e5b-2a9f-4062-8330-efab05a86818",
+    "Name": "Set Multidimensional Slider",
+    "NickName": "SetMDSlider",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI MD Slider",
+        "NickName": "S",
+        "Description": "The UI Multidimensional Slider to update",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Point",
+        "NickName": "P",
+        "Description": "The Point to set the multidimensional slider to",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetLabel_Component",
+    "Guid": "07b9d48c-bfc5-4f49-a449-50ffe4e6d4c7",
+    "Name": "Set Label Contents",
+    "NickName": "SetLabel",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Label to modify",
+        "NickName": "L",
+        "Description": "The label object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Label contents",
+        "NickName": "C",
+        "Description": "The new text to display in the label",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateTextBlock_Component",
+    "Guid": "088f694c-6b70-4baf-afe4-5bfd46526d6f",
+    "Name": "Create Text Block",
+    "NickName": "TB",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Text",
+        "NickName": "T",
+        "Description": "The text to display in the text block",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Text Size",
+        "NickName": "S",
+        "Description": "The size of the label to display",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Justification",
+        "NickName": "J",
+        "Description": "Text justification",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Text Block",
+        "NickName": "TB",
+        "Description": "The created text block.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.GetElementProperties_Component",
+    "Guid": "097d774d-a647-4dea-8333-63e8f662a7ea",
+    "Name": "Get Element Properties",
+    "NickName": "GetProps",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "quarternary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Element",
+        "NickName": "E",
+        "Description": "The element to get properties for",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Property Names",
+        "NickName": "N",
+        "Description": "The names of the properties",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Property Types",
+        "NickName": "T",
+        "Description": "The types of the properties",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetTabs_Component_DEPRECATED",
+    "Guid": "0a32b740-1539-4417-ba73-c4885329bd77",
+    "Name": "Set Tabbed View",
+    "NickName": "SetTab",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tabbed View",
+        "NickName": "T",
+        "Description": "The tabbed view to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Tab Names",
+        "NickName": "N",
+        "Description": "The list of names corresponding to each tab",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Tabs",
+        "NickName": "S",
+        "Description": "Provide a list of boolean values to selectively hide/show tabs.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.LaunchWindow_Component",
+    "Guid": "0a6b8a40-57a4-4d8d-9f09-f34869655d1e",
+    "Name": "Launch Window",
+    "NickName": "LaunchWin",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show",
+        "NickName": "S",
+        "Description": "Set this boolean to true to display the control window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name",
+        "NickName": "N",
+        "Description": "The name of the window to display.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Starting Width of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Starting Height of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Font Family",
+        "NickName": "F",
+        "Description": "Optional Font family for UI elements in this window.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window Object",
+        "NickName": "W",
+        "Description": "The window object. Other components can access this to add controls or gather data from the window.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateShape_Component",
+    "Guid": "0ab1c8a7-4182-4a7b-bda3-67c24677182c",
+    "Name": "Create Shape",
+    "NickName": "Shape",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Curve",
+        "Name": "Shape",
+        "NickName": "S",
+        "Description": "The shape to add as Polyline(s)",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Fill Color",
+        "NickName": "FC",
+        "Description": "The fill color. Leave empty for no fill",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Stroke Weight",
+        "NickName": "SW",
+        "Description": "The stroke weight. Leave empty or set to 0 for no stroke.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Stroke Color",
+        "NickName": "SC",
+        "Description": "The stroke color",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale",
+        "NickName": "Scl",
+        "Description": "Use this value to resize the shape.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Shape",
+        "NickName": "S",
+        "Description": "The created shape.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateColorPicker_Component",
+    "Guid": "0c914dd3-ed91-4255-9c47-0148c126ea25",
+    "Name": "Create Color Picker",
+    "NickName": "ColorPicker",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Default Color",
+        "NickName": "D",
+        "Description": "The color displayed on the picker at load. Optional.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Available Colors",
+        "NickName": "C",
+        "Description": "An optional list of possible colors to limit the user\u0027s selection. \nIf left blank, the standard set of colors will display.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Color Picker",
+        "NickName": "P",
+        "Description": "The Color Picker UI element. Use in conjunction with an \u0022Add Elements\u0022 component.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.AdjustElementPositioning_Component",
+    "Guid": "0e1bdb06-2fe7-4fbc-b194-15227efdc8a7",
+    "Name": "Adjust Element Positioning",
+    "NickName": "AdjustPos",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements to adjust",
+        "NickName": "E",
+        "Description": "The UIElement you want to reposition.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Margin",
+        "NickName": "M",
+        "Description": "The margin value. Input a single number to \naffect margins on all sides, or four values separated by commas\nto set Left, Top, Right, and Bottom individually.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Absolute Positioning",
+        "NickName": "Abs",
+        "Description": "Set to true to position relative to the upper left corner of the document",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Override the element width",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Override the element height",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Horizontal Alignment",
+        "NickName": "HA",
+        "Description": "Horizontal alignment",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Vertical Alignment",
+        "NickName": "VA",
+        "Description": "Vertical alignment",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.CreateTransparentWindow_Component",
+    "Guid": "106d7436-7223-454a-a2da-57ee118e6815",
+    "Name": "Launch Transparent Window",
+    "NickName": "LaunchXPWin",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show",
+        "NickName": "S",
+        "Description": "Set this boolean to true to display the control window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name",
+        "NickName": "N",
+        "Description": "The name of the window to display.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Starting Width of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Starting Height of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Font Family",
+        "NickName": "F",
+        "Description": "Optional Font family for UI elements in this window.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window Object",
+        "NickName": "W",
+        "Description": "The window object. Other components can access this to add controls or gather data from the window.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetChecklist_Component",
+    "Guid": "11a5a354-fc1b-4cea-894a-bbeb71a23db5",
+    "Name": "Set Checklist Contents",
+    "NickName": "SetChecklist",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Checklist to modify",
+        "NickName": "L",
+        "Description": "The list object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New checklist contents",
+        "NickName": "C",
+        "Description": "The new items to display in the checklist",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Selected",
+        "NickName": "S",
+        "Description": "The optional boolean values to control if items are selected",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateMarkdownViewer_Component",
+    "Guid": "127e3f49-5f69-46a1-96fe-2e531eead975",
+    "Name": "Create Markdown Viewer",
+    "NickName": "MDV",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Text",
+        "NickName": "T",
+        "Description": "The markdown-syntax-formatted text you\u0027d like to render",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Styles File",
+        "NickName": "SF",
+        "Description": "The optional path to a styles.xaml file. Defaults will be used if not supplied",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Asset Directory",
+        "NickName": "AD",
+        "Description": "The optional root directory for any assets like in-line images included in your markdown",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Markdown Viewer",
+        "NickName": "MDV",
+        "Description": "The Markdown Viewer Element.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.SetMultiChart_Component",
+    "Guid": "12a5a354-fc1b-4cea-394a-bbeb71a23db5",
+    "Name": "Set Multi Chart Contents",
+    "NickName": "SetMultiChart",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Chart to modify",
+        "NickName": "G",
+        "Description": "The Multi Chart object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "New Chart Values",
+        "NickName": "D",
+        "Description": "The new values to include in the Multi Chart",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Chart Names",
+        "NickName": "N",
+        "Description": "The names of the data items to be Charted",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "The title of the Chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "SubTitle",
+        "NickName": "sT",
+        "Description": "The subtitle of the Chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "ClusterTitle",
+        "NickName": "cT",
+        "Description": "The title of each bar cluster",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.SetGraph_Component",
+    "Guid": "12a5a354-fc1b-4cea-894a-bbeb71a23db5",
+    "Name": "Set Graph Contents",
+    "NickName": "SetGraph",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Graph to modify",
+        "NickName": "G",
+        "Description": "The Pie Graph object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "New Pie Graph Values",
+        "NickName": "V",
+        "Description": "The new values to graph in the pie graph",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Pie Graph Names",
+        "NickName": "N",
+        "Description": "The names of the data items to be graphed",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "The title of the graph",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "SubTitle",
+        "NickName": "sT",
+        "Description": "The subtitle of the graph",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.SetChartAppearance_Component",
+    "Guid": "12a5a354-fc1b-4cea-894a-bbeb99a23db5",
+    "Name": "Chart Appearance",
+    "NickName": "ChartAppearance",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Chart to modify",
+        "NickName": "C",
+        "Description": "The Chart object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Colors",
+        "NickName": "Co",
+        "Description": "The Chart colors",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Legend",
+        "NickName": "L",
+        "Description": "Legend on?",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "Title on?",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.SetWindowProperties_Component",
+    "Guid": "14a1ee78-6536-43b2-b6d8-4b26a736f0a9",
+    "Name": "Set Window Properties",
+    "NickName": "WinProps",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window",
+        "NickName": "W",
+        "Description": "The window to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Starting Location",
+        "NickName": "L",
+        "Description": "The point (screen coordinates, so 0,0 is upper left) \nat which to locate the window\u0027s upper left corner.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Theme",
+        "NickName": "T",
+        "Description": "The base theme for the window.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Accent Color",
+        "NickName": "A",
+        "Description": "The color accent for the window.  Use the component \nmenu item \u0022Create Accent List\u0022 so you don\u0027t have to guess",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Title Bar",
+        "NickName": "TB",
+        "Description": "Set to false to hide the window\u0027s title bar.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Background Color",
+        "NickName": "BG",
+        "Description": "Set the background color of the window.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale Factor",
+        "NickName": "SF",
+        "Description": "An absolute scaling factor used to modify the size of the window.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.CreateSlider_Component_DEPRECATED",
+    "Guid": "16231ddc-6473-42d4-b81f-e0c5e90e8fbd",
+    "Name": "Create Slider",
+    "NickName": "Slider",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Slider",
+        "NickName": "S",
+        "Description": "The slider(s) to add to the window.",
+        "Access": "tree",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Sliders",
+        "NickName": "S",
+        "Description": "The Slider UI elements. Use in conjunction with an \u0022Add Elements\u0022 component.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateChart_Component",
+    "Guid": "1a96f054-26dd-45c6-b09d-2760b496bb0a",
+    "Name": "Create Chart",
+    "NickName": " Chart",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Data",
+        "NickName": "D",
+        "Description": "The list of values to be charted.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Names",
+        "NickName": "N",
+        "Description": "The names of the data items to be charted",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "The title of the Chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "SubTitle",
+        "NickName": "sT",
+        "Description": "The subtitle of the Chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Chart Type",
+        "NickName": "CT",
+        "Description": "The type of Chart to create",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Chart",
+        "NickName": "C",
+        "Description": "The Chart object",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.SetChart_LiveUpdate",
+    "Guid": "1c4ac2ec-3090-4d03-8d17-923417129692",
+    "Name": "Set Chart Contents",
+    "NickName": "SetChart",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Chart to modify",
+        "NickName": "C",
+        "Description": "The Chart object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "New Chart Values",
+        "NickName": "V",
+        "Description": "The new values to include in the Chart",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Chart Names",
+        "NickName": "N",
+        "Description": "The names of the data items to be charted",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "The title of the Chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "SubTitle",
+        "NickName": "sT",
+        "Description": "The subtitle of the Chart",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreatePullDown_Component_DEPRECATED",
+    "Guid": "1ca8d537-ef52-487c-828d-034b1bca7361",
+    "Name": "Create Pulldown Menu",
+    "NickName": "Pulldown",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "List Items",
+        "NickName": "L",
+        "Description": "The initial list of options to display in the list.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Selected Index",
+        "NickName": "I",
+        "Description": "The initially selected index. Defaults to the first item.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Pulldown",
+        "NickName": "PD",
+        "Description": "The pulldown object",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetTabs_Component",
+    "Guid": "1e63a1ca-e3e8-44ad-8ee6-0a660e01c84b",
+    "Name": "Set Tabbed View",
+    "NickName": "SetTab",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tabbed View",
+        "NickName": "T",
+        "Description": "The tabbed view to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Tab Names",
+        "NickName": "N",
+        "Description": "The list of names corresponding to each tab (optional)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Tabs",
+        "NickName": "S",
+        "Description": "Provide a list of boolean values to selectively hide/show tabs (optional)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Set Tab Index",
+        "NickName": "I",
+        "Description": "The index value of the tab to select (optional)",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateGrid_Component_DEPRECATED",
+    "Guid": "1e68a9a8-c28d-4799-854c-337dc4018917",
+    "Name": "Create Grid",
+    "NickName": "Grid",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to place in the grid",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the grid",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the grid",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Grid",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateListBox_Component",
+    "Guid": "2dddb05e-5503-4506-8f9e-5c0f4c35f8b0",
+    "Name": "Create List Box",
+    "NickName": "ListBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "List Items",
+        "NickName": "L",
+        "Description": "The initial list of options to display in the list.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Selected Index",
+        "NickName": "I",
+        "Description": "The initially selected index. Defaults to the first item.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "List box height in pixels.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "List Box",
+        "NickName": "LB",
+        "Description": "The list box object",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateMDSlider_Component",
+    "Guid": "2e335fb4-447c-42d4-a10b-a7c9ab882757",
+    "Name": "Create Multidimensional Slider",
+    "NickName": "MD Slider",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Starting Value",
+        "NickName": "S",
+        "Description": "The initial point (between 0,0 and 1,1) you want this slider to start with.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "MD Slider",
+        "NickName": "S",
+        "Description": "The MD Slider.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateStack_Component",
+    "Guid": "30edb451-7870-4204-a6a3-e38745f42590",
+    "Name": "Create Stack",
+    "NickName": "Stack",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to group together",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Horizontal",
+        "NickName": "H",
+        "Description": "Set to true for horizontal arrangement; false for vertical.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Stack",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.Set3DView_Component",
+    "Guid": "3472130d-fc0e-409d-9295-f93ecaf1afb5",
+    "Name": "Set 3D View",
+    "NickName": "Set3DView",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "3D View",
+        "NickName": "V",
+        "Description": "The 3D view to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Mesh",
+        "Name": "Mesh to display",
+        "NickName": "M",
+        "Description": "The mesh(es) to display in the viewport",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Mesh Colors",
+        "NickName": "C",
+        "Description": "The color with which to display the mesh.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateImage_Component",
+    "Guid": "3c76e033-c9a8-4b6d-94c4-8ccdfac09834",
+    "Name": "Create Image",
+    "NickName": "Image",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Source",
+        "NickName": "src",
+        "Description": "The file location of the image to add.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Image Width",
+        "NickName": "W",
+        "Description": "The width of the image",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Image Height",
+        "NickName": "H",
+        "Description": "The height of the image. Set to 0 or leave blank to scale image proportionally to its width.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Image",
+        "NickName": "I",
+        "Description": "The image object. Use in conjunction with an \u0022Add Elements\u0022 component.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateExpander_Component",
+    "Guid": "3cec9da4-eb68-4063-9325-57850921a8b2",
+    "Name": "Create Expander",
+    "NickName": "Expander",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to put in the expander",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Header",
+        "NickName": "H",
+        "Description": "The text to display in the expander header",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Open",
+        "NickName": "O",
+        "Description": "The starting state of the expander - true for open, false for collapsed",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Expander",
+        "NickName": "E",
+        "Description": "The expander element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.GetScreenDimensions_Component",
+    "Guid": "415bcdd1-11f0-4eae-ba0b-c48b50037de3",
+    "Name": "Get Screen Dimensions",
+    "NickName": "GetScreen",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Width",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Height",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateTextBox_Component",
+    "Guid": "41a3a0d8-e0f4-4b48-88b3-bf87d79a3cfd",
+    "Name": "Create Text Box",
+    "NickName": "TextBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "Optional label for the Text Box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Default Text",
+        "NickName": "D",
+        "Description": "The starting text in the text box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Update Button",
+        "NickName": "U",
+        "Description": "Set to true to associate text box \nwith a button for updates. Otherwise event listening will \nassociate with every change in text box content.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Text Box",
+        "NickName": "TB",
+        "Description": "The created text box.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.Set3DViewTex_Component",
+    "Guid": "47d12d28-2711-435a-a445-dd4016ebb363",
+    "Name": "Set 3D View Textured",
+    "NickName": "Set3DViewTex",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "3D View",
+        "NickName": "V",
+        "Description": "The 3D view to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Mesh",
+        "Name": "Mesh to display",
+        "NickName": "M",
+        "Description": "The mesh(es) to display in the viewport",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Mesh Colors",
+        "NickName": "C",
+        "Description": "The color with which to display the mesh.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Mesh Texture",
+        "NickName": "T",
+        "Description": "The textures to display each mesh",
+        "Access": "list",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateSimpleGrid_Component",
+    "Guid": "4df77b45-0d74-44ea-9445-6d5d8b1d17ad",
+    "Name": "Create Simple Grid",
+    "NickName": "SimpleGrid",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to place in the grid. Each path branch will form a column of the provided UI Elements from top to bottom.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Grid Membership",
+        "NickName": "M",
+        "Description": "List of index numbers to place elements in different Grids. List length must match the number of Element paths.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Row Definitions",
+        "NickName": "RD",
+        "Description": "An optional repeating pattern of Row Heights - use \u0027Auto\u0027 to inherit, numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Column Definitions",
+        "NickName": "CD",
+        "Description": "An optional flat list of Column Widths - use \u0027Auto\u0027 to inherit, use numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Simple Grid",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateViewBox_Component",
+    "Guid": "51123304-f2c4-41ec-b31f-fd8c50e1a113",
+    "Name": "Create View Box",
+    "NickName": "ViewBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to scale",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the viewbox",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the viewbox",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "ViewBox",
+        "NickName": "VB",
+        "Description": "The viewbox",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.AdjustElementAppearance_Component_DEPRECATED",
+    "Guid": "51fdc506-7224-49a2-b827-ef6d302fa70b",
+    "Name": "Adjust Element Appearance",
+    "NickName": "AdjustElem",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements to Adjust",
+        "NickName": "E",
+        "Description": "The elements to adjust",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Foreground",
+        "NickName": "FC",
+        "Description": "The foreground color of the element",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Background",
+        "NickName": "BC",
+        "Description": "The background color of the element",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Font Size",
+        "NickName": "S",
+        "Description": "The font size of the element",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.ContainerContents_Component",
+    "Guid": "5215a6c0-8e04-4987-a87d-fef05f1a4a6b",
+    "Name": "Container Contents",
+    "NickName": "Contents",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "All Controls and other elements belonging to the window",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name Filter(s)",
+        "NickName": "F",
+        "Description": "The filter(s) for the containers you want to listen for.",
+        "Access": "list",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Child Elements",
+        "NickName": "C",
+        "Description": "The child elements inside this container",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Element Names",
+        "NickName": "N",
+        "Description": "The names of the child elements.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateRhinoCmdButton_Component",
+    "Guid": "58aee14d-8214-4e76-8d51-3432cd30b3ac",
+    "Name": "Create Rhino Command Button",
+    "NickName": "CmdButton",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The text to display on the button",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Path",
+        "NickName": "I",
+        "Description": "The image to display on the button.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Rhino Script",
+        "NickName": "S",
+        "Description": "The command line script to execute on button press",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button",
+        "NickName": "B",
+        "Description": "The created Button",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetTextBox_Component",
+    "Guid": "59b523a4-d32c-4a20-883c-a9cb828bf880",
+    "Name": "Set TextBox Contents",
+    "NickName": "SetTextBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Text Box to modify",
+        "NickName": "TB",
+        "Description": "The text box object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Text Box contents",
+        "NickName": "C",
+        "Description": "The new text to display in the text box",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetCheckBox_Component",
+    "Guid": "59b523a4-d32c-4a21-883c-a9cb828bf880",
+    "Name": "Set CheckBox",
+    "NickName": "SetCheckBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Check Box to modify",
+        "NickName": "CB",
+        "Description": "The check box object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Check Box Label",
+        "NickName": "L",
+        "Description": "The new label to display next to the check box",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "New Value",
+        "NickName": "V",
+        "Description": "The new value (checked/unchecked) for the box.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateTrueOnlyButton_Component",
+    "Guid": "5ab78609-c132-45c7-ba44-200a4f2e4188",
+    "Name": "Create True-Only Button",
+    "NickName": "True Button",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The text to display on the button",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Path",
+        "NickName": "I",
+        "Description": "The image to display on the button.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button",
+        "NickName": "B",
+        "Description": "The created Button",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateRadioButton_Component",
+    "Guid": "5b7e6af2-eb03-477a-abeb-3c0065593296",
+    "Name": "Create Radio Button",
+    "NickName": "RadioBtn",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Radio Button Name",
+        "NickName": "N",
+        "Description": "The name of the radio button.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Radio Button Group",
+        "NickName": "G",
+        "Description": "The group the radio button belongs to. \n Only one button in a group can be selected at a time.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Initially Selected",
+        "NickName": "S",
+        "Description": "Whether or not this button should be selected initially.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Radio Button",
+        "NickName": "RB",
+        "Description": "The created radio button.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.Create3DView_Component",
+    "Guid": "5d84c99e-fe9c-4546-8cb0-9f6fe58e011d",
+    "Name": "Create 3D View",
+    "NickName": "3DView",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Mesh",
+        "Name": "Mesh to display",
+        "NickName": "M",
+        "Description": "The mesh(es) to display in the viewport",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Mesh Colors",
+        "NickName": "C",
+        "Description": "The color with which to display the mesh.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "View Width",
+        "NickName": "W",
+        "Description": "The width of the 3d viewport",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "View Height",
+        "NickName": "H",
+        "Description": "The height of the 3d viewport",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "3DView",
+        "NickName": "V",
+        "Description": "The 3D view containing your mesh.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateMultiChart_Component",
+    "Guid": "66fa84e1-d224-4b4b-8da4-e3e40ca815d5",
+    "Name": "Create Multi Chart",
+    "NickName": "MultiChart",
+    "Category": "Human UI",
+    "SubCategory": "UI Graphs \u002B Charts",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Data",
+        "NickName": "D",
+        "Description": "The list of values to be charted.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Names",
+        "NickName": "N",
+        "Description": "The names of the data items to be charted",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Title",
+        "NickName": "T",
+        "Description": "The title of the chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "SubTitle",
+        "NickName": "sT",
+        "Description": "The subtitle of the chart",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "ClusterTitle",
+        "NickName": "cT",
+        "Description": "The title of each chart cluster",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Chart Type",
+        "NickName": "CT",
+        "Description": "The type of chart to create",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "MultiChart",
+        "NickName": "MC",
+        "Description": "The MultiChart object",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateCheckList_Component",
+    "Guid": "6e21dbe5-ecb8-4530-8a22-7cd713cf40d5",
+    "Name": "Create Checklist",
+    "NickName": "Checklist",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Checklist Items",
+        "NickName": "L",
+        "Description": "The initial list of options to display in the checklist.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Selected",
+        "NickName": "S",
+        "Description": "The initially selected state of all boxes. Defaults to unchecked for all.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Optional checklist box height in pixels.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Checklist",
+        "NickName": "CL",
+        "Description": "The checklist object",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.AddElements_Component",
+    "Guid": "73b5e187-b35d-45bd-8495-9e06b429bc07",
+    "Name": "Add Elements",
+    "NickName": "AddElems",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window",
+        "NickName": "W",
+        "Description": "The window to which to add the elements",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "The Controls and other elements you want to add to the window",
+        "Access": "list",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Added Elements",
+        "NickName": "E",
+        "Description": "The elements added.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Element Names",
+        "NickName": "N",
+        "Description": "The names of the added elements.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateFilePicker_Component",
+    "Guid": "76332fc9-f97c-4428-befe-723fa7c0ad37",
+    "Name": "Create File Picker",
+    "NickName": "FilePicker",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Label Text",
+        "NickName": "BT",
+        "Description": "The text to display on the button to the right of the text box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Dialog Type",
+        "NickName": "DT",
+        "Description": "The type of dialog to display - Open, Save, or Folder",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Must Exist",
+        "NickName": "ME",
+        "Description": "Set to true if the file (in an open file dialog) must exist",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Filter",
+        "NickName": "F",
+        "Description": "The file filter(s) to use. Specify type names, separated from path filters with a | character, like \u0022Grasshopper Files|*.gh\u0022 and join multiples with | characters as well.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Starting Path",
+        "NickName": "SP",
+        "Description": "The optional starting directory the dialog should open with",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "File Picker",
+        "NickName": "P",
+        "Description": "The File Picker element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.AdjustElementAppearance_Component",
+    "Guid": "76eb5930-7b2b-4a11-839e-d3c00990af8b",
+    "Name": "Adjust Element Appearance",
+    "NickName": "AdjustElem",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements to Adjust",
+        "NickName": "E",
+        "Description": "The elements to adjust",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Foreground",
+        "NickName": "FC",
+        "Description": "The foreground color of the element",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Background",
+        "NickName": "BC",
+        "Description": "The background color of the element",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Font Size",
+        "NickName": "S",
+        "Description": "The font size of the element",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetColorPicker_Component",
+    "Guid": "77ec992b-a0d8-440c-b9ad-91098a40cd78",
+    "Name": "Set Color Picker",
+    "NickName": "SetColorPicker",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Color picker to modify",
+        "NickName": "CP",
+        "Description": "The color picker object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Default Color",
+        "NickName": "D",
+        "Description": "The color displayed on the picker. Optional.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Available Colors",
+        "NickName": "C",
+        "Description": "An optional list of possible colors to limit the user\u0027s selection. \nIf left blank, the existing set of available colors will not be changed.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.ValueListener_Component_DEPRECATED",
+    "Guid": "78fb7e0c-ae2a-45ad-b09c-83df32d0b3bc",
+    "Name": "Value Listener",
+    "NickName": "Values",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "UI Element(s) to listen to. This can be retrieved either directly from the component \n that generated the element, or from the output of the \u0022Add Elements\u0022 component.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name Filter(s)",
+        "NickName": "F",
+        "Description": "The optional filter(s) for the elements you want to listen for.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Values",
+        "NickName": "V",
+        "Description": "The values of the listened elements",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Indices",
+        "NickName": "I",
+        "Description": "For list-based objects (checklist, pulldown menu, etc) returns the selected index - otherwise returns -1.",
+        "Access": "tree",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateGradientEditor_Component_DEPRECATED",
+    "Guid": "818ce7bb-0e46-4203-bc92-419bb786ba49",
+    "Name": "Create Gradient Editor",
+    "NickName": "Gradient",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Gradient(s)",
+        "NickName": "G",
+        "Description": "The Gradient or collection of gradient presets to include. The first one will be the default. Multiples will be ignored if the preset menu is not showing.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Editor",
+        "NickName": "E",
+        "Description": "Set to true to show an interactive gradient editor",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Presets",
+        "NickName": "P",
+        "Description": "Set to true to show a pulldown menu of gradient presets",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Gradient Editor",
+        "NickName": "GE",
+        "Description": "The Gradient Editor Element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateRhinoPickButton_Component",
+    "Guid": "81a69431-0aee-4b30-bb1b-131a8eeb2b7f",
+    "Name": "Create Rhino Pick Button",
+    "NickName": "PickBtn",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The text to display on the button",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Path",
+        "NickName": "I",
+        "Description": "The image to display on the button.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Prompt",
+        "NickName": "P",
+        "Description": "The prompt to display to the user",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Multiple",
+        "NickName": "AM",
+        "Description": "Set to true to allow selecting multiple items",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow None",
+        "NickName": "AN",
+        "Description": "Set to true to allow the selection of nothing",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Type",
+        "NickName": "T",
+        "Description": "The allowed geometry types",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button",
+        "NickName": "B",
+        "Description": "The created Button",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetExpander_Component",
+    "Guid": "8a270d94-fbd4-49f0-8cfe-5fb43ce85bee",
+    "Name": "Set Expander",
+    "NickName": "SetExp",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Expander",
+        "NickName": "E",
+        "Description": "The expander to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name",
+        "NickName": "N",
+        "Description": "The new name of the expander",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Expanded Open",
+        "NickName": "O",
+        "Description": "Set to true to expand or false to collapse",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.SaveElementState_Component",
+    "Guid": "8b6f72d3-6eff-4d25-8faa-62065ab7663e",
+    "Name": "Save Element States",
+    "NickName": "SaveStates",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "All Controls and other elements belonging to the window",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name Filter(s)",
+        "NickName": "F",
+        "Description": "The optional filter(s) for the elements you want to save.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Save State",
+        "NickName": "S",
+        "Description": "Set to true to save the current state of all selected elements",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "State Name",
+        "NickName": "N",
+        "Description": "The name under which to save the state. If the name already exists, saved state will be overwritten",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Clear Saved States",
+        "NickName": "C",
+        "Description": "Set to true to clear all saved states.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Saved States",
+        "NickName": "SS",
+        "Description": "The saved element states. Connect to a \u0022Restore State\u0022 component to reinstate.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Saved State Names",
+        "NickName": "N",
+        "Description": "The names of all currently saved states",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreatePullDown_Component_ALSO_DEPRECATED",
+    "Guid": "8f5b1d66-de73-47a2-9678-9e59cea106c0",
+    "Name": "Create Pulldown Menu",
+    "NickName": "Pulldown",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "List Items",
+        "NickName": "L",
+        "Description": "The initial list of options to display in the list.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Selected Index",
+        "NickName": "I",
+        "Description": "The initially selected index. Defaults to the first item.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Pulldown",
+        "NickName": "PD",
+        "Description": "The pulldown object",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.CaptureWindow_Component",
+    "Guid": "900fcba9-1b83-403e-b909-9293146469d8",
+    "Name": "Capture Window or Element to File",
+    "NickName": "Capture",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window or Element",
+        "NickName": "W",
+        "Description": "The Window to Capture",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "File Path",
+        "NickName": "F",
+        "Description": "The file path where the image should be saved",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale Factor",
+        "NickName": "S",
+        "Description": "A scale factor applied to the size of the window or element for hi-resolution capture",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Run",
+        "NickName": "R",
+        "Description": "Set to true to activate the capture.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Capture Entire Window",
+        "NickName": "EW",
+        "Description": "If a window is supplied, capture the entire window contents inside the scrollable area. Title bar will not show. This parameter is ignored if supplying a specific element.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateMultiShape_Component",
+    "Guid": "94288ced-76f6-438a-9216-e60c8290f640",
+    "Name": "Create Shapes",
+    "NickName": "Shapes",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Curve",
+        "Name": "Shapes",
+        "NickName": "S",
+        "Description": "The shapes to add as Polyline(s)",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Fill Color",
+        "NickName": "FC",
+        "Description": "The fill colors. Leave empty for no fill",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Stroke Weight",
+        "NickName": "SW",
+        "Description": "The stroke weights. Leave empty or set to 0 for no stroke.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Stroke Color",
+        "NickName": "SC",
+        "Description": "The stroke colors",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale",
+        "NickName": "Scl",
+        "Description": "Use this value to resize the shape.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Shape",
+        "NickName": "S",
+        "Description": "The created shape.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateButton_Component",
+    "Guid": "9a5b87d6-046e-4c33-9aca-5af2f7503047",
+    "Name": "Create Button",
+    "NickName": "Button",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The text to display on the button",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Path",
+        "NickName": "I",
+        "Description": "The image to display on the button.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button",
+        "NickName": "B",
+        "Description": "The created Button",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.MakeChildWindow_Component",
+    "Guid": "a067cebe-045c-4f4a-8d77-cd4fb0075a5a",
+    "Name": "Make Child Window",
+    "NickName": "ChildWin",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Parent Window",
+        "NickName": "P",
+        "Description": "The parent window",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Child Window",
+        "NickName": "C",
+        "Description": "The child window",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Default Option",
+        "NickName": "D",
+        "Description": "Use this if you want to reset the child window to one of the default modes and break its relationship with the parent.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetTextBlock_Component",
+    "Guid": "a1e21ba0-2f60-41df-bb5a-619802c5af9a",
+    "Name": "Set TextBlock Contents",
+    "NickName": "SetTextBlock",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Text Block to modify",
+        "NickName": "TB",
+        "Description": "The text block object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Text Block contents",
+        "NickName": "C",
+        "Description": "The new text to display in the text block",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateSimpleGrid_Component_ALSO_DEPRECATED",
+    "Guid": "a39c7889-7ce1-489a-8165-84cbe841dd67",
+    "Name": "Create Simple Grid",
+    "NickName": "SimpleGrid",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to place in the grid. Each path branch will form a column of the provided UI Elements from top to bottom.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Grid Membership",
+        "NickName": "M",
+        "Description": "List of index numbers to place elements in different Grids. List length must match the number of Element paths.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Row Definitions",
+        "NickName": "RD",
+        "Description": "An optional repeating pattern of Row Heights - use \u0027Auto\u0027 to inherit, numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Column Definitions",
+        "NickName": "CD",
+        "Description": "An optional flat list of Column Widths - use \u0027Auto\u0027 to inherit, use numbers for absolute sizes, and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Simple Grid",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.HideShowElement_Component",
+    "Guid": "a3c49442-c136-4553-9a0d-637d5fbf27d4",
+    "Name": "Hide/Show Element",
+    "NickName": "HideShow",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Element to Hide/Show",
+        "NickName": "E",
+        "Description": "The elements to hide/show",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show",
+        "NickName": "S",
+        "Description": "Set to true to show the element, false to hide",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Collapse",
+        "NickName": "C",
+        "Description": "If true, no space is reserved for the element - if false, the space remains but the element hides",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Disable",
+        "NickName": "D",
+        "Description": "If true, item will appear \u0022greyed out\u0022 and a user will be unable to interact with it.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.RestoreElementState_Component",
+    "Guid": "a6567bb1-37d1-46cb-ad10-594ff726299b",
+    "Name": "Restore Element States",
+    "NickName": "Restore",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Restore",
+        "NickName": "R",
+        "Description": "Set to true to restore the state. \nProbably not a good idea to leave this set to true while you\u0027re adding new states.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Saved States",
+        "NickName": "SS",
+        "Description": "The collection of saved states",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "State Name to restore",
+        "NickName": "N",
+        "Description": "The name of the state to restore",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.CreateTooltip_Component",
+    "Guid": "a6e4cefc-ca10-4dc4-9120-696e02e5cfeb",
+    "Name": "Attach Tooltip to Element",
+    "NickName": "Tooltip",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements to Attach to",
+        "NickName": "E",
+        "Description": "The elements to attach the tooltip to",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tooltip Content",
+        "NickName": "C",
+        "Description": "The content (text or elements) to put in the tooltip",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Show Delay",
+        "NickName": "SD",
+        "Description": "How long in ms before the tooltip displays",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Duration",
+        "NickName": "D",
+        "Description": "How long in ms that the tooltip should show",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateSeparator_Component",
+    "Guid": "a7a0c814-ab68-45e0-9a9e-5515b0c4adc6",
+    "Name": "Create Separator",
+    "NickName": "Separator",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Thickness",
+        "NickName": "T",
+        "Description": "The thickness of the separator.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Horizontal",
+        "NickName": "H",
+        "Description": "Separator is horizontal.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Color",
+        "NickName": "C",
+        "Description": "The color of the separator (optional).",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the separator (optional). Default is Stretch.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the separator (optional). Default is Stretch.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Separator",
+        "NickName": "S",
+        "Description": "The created Separator",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetBrowser_Component",
+    "Guid": "a880cc82-b5df-45bc-a730-afa8352c4679",
+    "Name": "Set Browser",
+    "NickName": "SetBrowser",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Browser",
+        "NickName": "B",
+        "Description": "The Browser UI Element to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Back",
+        "NickName": "Bk",
+        "Description": "Set to true in order to send the browser back a page",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Forward",
+        "NickName": "Fwd",
+        "Description": "Set to true to send the browser forward a page",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Refresh",
+        "NickName": "Rf",
+        "Description": "Set to true to refresh the current window",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "URL",
+        "NickName": "U",
+        "Description": "The URL to set the current browser to access.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.WindowStatus_Component",
+    "Guid": "a9ec5ddf-0ed9-4c67-90ac-ae5586390f12",
+    "Name": "Window Status",
+    "NickName": "WinStat",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window",
+        "NickName": "W",
+        "Description": "The window to check",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Status",
+        "NickName": "S",
+        "Description": "The status of the window",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateDataTable_Component",
+    "Guid": "b29e654e-b952-4d58-acf2-a60c4358d6e3",
+    "Name": "Create Data Table",
+    "NickName": "DataTable",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Data",
+        "NickName": "D",
+        "Description": "The data to display in the table, organized in branches by column.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Column Headings",
+        "NickName": "C",
+        "Description": "The heading for each column, one for each column in Data",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Sorting",
+        "NickName": "S",
+        "Description": "Set to true to allow sorting by column values",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Column Sizing Mode",
+        "NickName": "CS",
+        "Description": "Sizing Mode for columns. Pick from predefined \u0022special\u0022 values or supply a fixed numerical width.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "DataTable",
+        "NickName": "DT",
+        "Description": "The Data Table element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.CreateButton_Component_DEPRECATED",
+    "Guid": "b29e7c03-27ee-446c-894c-476261a807d1",
+    "Name": "Create Button",
+    "NickName": "Button",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The text to display on the button",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button",
+        "NickName": "B",
+        "Description": "The created Button",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.Set3DViewPropertiesComponent",
+    "Guid": "b3b5dd54-90c3-4fb1-b026-866e960ab942",
+    "Name": "Set 3D View Properties",
+    "NickName": "Set3DViewProps",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "3D View",
+        "NickName": "V",
+        "Description": "The 3D view to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show View Cube",
+        "NickName": "VC",
+        "Description": "Show the view cube",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Pan",
+        "NickName": "AP",
+        "Description": "Allow user to pan 3d view",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Zoom",
+        "NickName": "AZ",
+        "Description": "Allow user to zoom 3d view",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Move",
+        "NickName": "AM",
+        "Description": "Allow user to move 3d view",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Allow Rotation",
+        "NickName": "AR",
+        "Description": "Allow user to rotate 3d view",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Perspective/Parallel",
+        "NickName": "Par",
+        "Description": "Set to true for Parallel, false for Perspective",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Camera Location",
+        "NickName": "CL",
+        "Description": "The camera location",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Camera Target",
+        "NickName": "CT",
+        "Description": "The target for the camera",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Camera Transition Time",
+        "NickName": "CTT",
+        "Description": "The amount of time it takes the camera position to update",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.SetSlider_Component",
+    "Guid": "b412d7d3-02e2-4a8e-bdcc-2e1f8b2a8834",
+    "Name": "Set Slider",
+    "NickName": "SetSlider",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Slider",
+        "NickName": "S",
+        "Description": "The UI Slider to update",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Value",
+        "NickName": "V",
+        "Description": "The value to set the slider to",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Interval",
+        "Name": "Range",
+        "NickName": "R",
+        "Description": "the new slider range",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateGrid_Component",
+    "Guid": "b618569a-868d-4a88-a035-faa1416a841f",
+    "Name": "Create Grid",
+    "NickName": "Grid",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Elements",
+        "NickName": "E",
+        "Description": "The UI elements to place in the grid",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the grid",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Row Definitions",
+        "NickName": "RD",
+        "Description": "An optional list of Row Heights. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Column Definitions",
+        "NickName": "CD",
+        "Description": "An optional list of Column Widths. Use numbers for absolute sizes and numbers with * for ratios (like 1* and 2* for a 1/3 2/3 split)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Element Row",
+        "NickName": "ER",
+        "Description": "The rows to place the elements in, counting from 0 at the top.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Element Column",
+        "NickName": "EC",
+        "Description": "The columns to place the elements in, counting from 0 at the left.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Element Row Span",
+        "NickName": "ERS",
+        "Description": "How many rows each element should span. This will be 1 by default.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Element Column Span",
+        "NickName": "ECS",
+        "Description": "How many columns each element should span. This will be 1 by default.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Grid",
+        "NickName": "S",
+        "Description": "The combined group of elements",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateLabel_Component",
+    "Guid": "b844ab20-b7ae-4a21-99d5-83c5666a7432",
+    "Name": "Create Label",
+    "NickName": "Label",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label Text",
+        "NickName": "T",
+        "Description": "The text to display in the label",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Label Size",
+        "NickName": "S",
+        "Description": "The size of the label to display",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Justification",
+        "NickName": "J",
+        "Description": "Text justification",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "The created labels.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateToggle_Component",
+    "Guid": "baf92e4a-c2ca-47d1-99c1-5e78631994d5",
+    "Name": "Create Toggle",
+    "NickName": "Toggle",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Default",
+        "NickName": "D",
+        "Description": "Whether toggle is on by default",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "The optional label for the toggle",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "On Label",
+        "NickName": "On",
+        "Description": "The text to display when on",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Off Label",
+        "NickName": "Off",
+        "Description": "The text to display when off",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Toggle",
+        "NickName": "T",
+        "Description": "The Toggle Element.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetImage_Component",
+    "Guid": "bc15817d-291f-461b-a1a8-f3c66fd053be",
+    "Name": "Set Image",
+    "NickName": "SetImg",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Image to modify",
+        "NickName": "I",
+        "Description": "The image object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New Image Path",
+        "NickName": "I2",
+        "Description": "The path to a new image to replace in the window",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.CreateGraphMapper_Component",
+    "Guid": "bc47947b-f83f-4cdd-b7d8-abc546a26c5e",
+    "Name": "Create Graph Mapper",
+    "NickName": "GraphMapper",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Graph Mapper",
+        "NickName": "G",
+        "Description": "An optional Graph Mapper to represent the starting configuration. Connect directly or use Metahopper to obtain a reference.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Graph Mapper",
+        "NickName": "G",
+        "Description": "The Graph Mapper UI element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.SetDataTable_Component",
+    "Guid": "c2462873-d58e-4bb4-a1cd-31e351c133b3",
+    "Name": "Set Data Table",
+    "NickName": "SetDataTable",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Data Table to Set",
+        "NickName": "DT",
+        "Description": "The data table to set",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Data",
+        "NickName": "D",
+        "Description": "The data to display in the table, organized in branches by column.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Column Headings",
+        "NickName": "C",
+        "Description": "The heading for each column, one for each column in Data",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateCheckBox_Component",
+    "Guid": "c2c5cc88-9812-4769-b482-bd6f32697836",
+    "Name": "Create Checkbox",
+    "NickName": "Checkbox",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "The label for the checkbox.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Starting Value",
+        "NickName": "V",
+        "Description": "The starting value (checked/unchecked) for the box.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Checkbox",
+        "NickName": "CB",
+        "Description": "The created checkbox.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.CreateRadioButton_Component_DEPRECATED",
+    "Guid": "c6c908a8-48aa-4cde-b959-dfb389b299a2",
+    "Name": "Create Radio Button",
+    "NickName": "RadioBtn",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Radio Button Name",
+        "NickName": "N",
+        "Description": "The name of the radio button.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Radio Button Group",
+        "NickName": "G",
+        "Description": "The group the radio button belongs to. \n Only one button in a group can be selected at a time.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Radio Button",
+        "NickName": "RB",
+        "Description": "The created radio button.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateSlider_Component",
+    "Guid": "c77acc8a-fe64-43f0-9485-d23744f6152e",
+    "Name": "Create Slider",
+    "NickName": "Slider",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Slider",
+        "NickName": "Sl",
+        "Description": "The slider(s) to add to the window.",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Snap Value",
+        "NickName": "Sn",
+        "Description": "An optional value to round/snap slider to. This overrides the native settings on the GH slider.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Sliders",
+        "NickName": "S",
+        "Description": "The Slider UI elements. Use in conjunction with an \u0022Add Elements\u0022 component.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateTextBox_Component_Deprecated",
+    "Guid": "c8d203fe-7e84-416a-b93e-d1bd746f3f66",
+    "Name": "Create Text Box",
+    "NickName": "TextBox",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "Optional label for the Text Box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Default Text",
+        "NickName": "D",
+        "Description": "The starting text in the text box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Update Button",
+        "NickName": "U",
+        "Description": "Set to true to associate text box \nwith a button for updates. Otherwise event listening will \nassociate with every change in text box content.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Text Box",
+        "NickName": "TB",
+        "Description": "The created text box.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Main.CaptureWindow_Component_DEPRECATED",
+    "Guid": "cbf6b72e-bfda-4d36-b114-80a1e8d942c6",
+    "Name": "Capture Window to File",
+    "NickName": "Capture",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window",
+        "NickName": "W",
+        "Description": "The Window to Capture",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "File Path",
+        "NickName": "F",
+        "Description": "The file path where the image should be saved",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale Factor",
+        "NickName": "S",
+        "Description": "A scale factor applied to the size of the window for hi-resolution capture",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Run",
+        "NickName": "R",
+        "Description": "Set to true to activate the capture.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.SetElementProperty_Component",
+    "Guid": "cf439fd5-6cc5-4db6-a265-9b0e5aed2989",
+    "Name": "Set Element Property",
+    "NickName": "SetProp",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "quarternary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Element",
+        "NickName": "E",
+        "Description": "The element to set",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Property Name",
+        "NickName": "P",
+        "Description": "The name of the property to set",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Value to set",
+        "NickName": "V",
+        "Description": "The value or object to set the property to",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateBrowser_Component",
+    "Guid": "cf49dbbd-93b5-4f9f-81ea-f585f20a5843",
+    "Name": "Create Browser",
+    "NickName": "Browser",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "secondary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "URL",
+        "NickName": "U",
+        "Description": "The URI/URL of the page to display",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Width of the window",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Height of the window",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Browser",
+        "NickName": "WB",
+        "Description": "The created Web Browser",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.RestoreElementState_Component_DEPRECATED",
+    "Guid": "d106b262-7a20-4151-b59a-872300f7ee9c",
+    "Name": "Restore Element States",
+    "NickName": "Restore",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Restore",
+        "NickName": "R",
+        "Description": "Set to true to restore the state. \nProbably not a good idea to leave this set to true while you\u0027re adding new states.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Saved States",
+        "NickName": "SS",
+        "Description": "The collection of saved states",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "State Name to restore",
+        "NickName": "N",
+        "Description": "The name of the state to restore",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.Testing.ElemFromGuid_Component",
+    "Guid": "d6b1d3c9-f9a9-4523-8ecd-1def6fdc753f",
+    "Name": "ElemFromGuid",
+    "NickName": "Nickname",
+    "Category": "Human UI",
+    "SubCategory": "UI Testing",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Element",
+        "NickName": "E",
+        "Description": "Element",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "GUID",
+        "NickName": "G",
+        "Description": "GUID",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Index",
+        "NickName": "i",
+        "Description": "Index",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.ValueListener_Component",
+    "Guid": "d6ba0398-70a7-46e7-a068-274486eb0acb",
+    "Name": "Value Listener",
+    "NickName": "Values",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "UI Element(s) to listen to. This can be retrieved either directly from the component \n that generated the element, or from the output of the \u0022Add Elements\u0022 component.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name Filter(s)",
+        "NickName": "F",
+        "Description": "The optional filter(s) for the elements you want to listen for.",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Values",
+        "NickName": "V",
+        "Description": "The values of the listened elements",
+        "Access": "tree",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Indices",
+        "NickName": "I",
+        "Description": "For list-based objects (checklist, pulldown menu, etc) returns the selected index - otherwise returns -1.",
+        "Access": "tree",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetList_Component",
+    "Guid": "d98497d6-c164-4499-aedb-78d04c09eba4",
+    "Name": "Set List Contents",
+    "NickName": "SetList",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "List to modify",
+        "NickName": "L",
+        "Description": "The list object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "New list contents",
+        "NickName": "C",
+        "Description": "The new items to display in the label",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Selected Index",
+        "NickName": "I",
+        "Description": "The optional index to select in the updated list",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.CreateGradientEditor_Component",
+    "Guid": "da8dd6a3-ad57-471e-b891-94902c8647ed",
+    "Name": "Create Gradient Editor",
+    "NickName": "Gradient",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Gradient(s)",
+        "NickName": "G",
+        "Description": "The Gradient or collection of gradient presets to include. Multiples will be ignored if the preset menu is not showing.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Default Gradient",
+        "NickName": "D",
+        "Description": "The default gradient to show - only used if the preset menu is enabled.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Editor",
+        "NickName": "E",
+        "Description": "Set to true to show an interactive gradient editor",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show Presets",
+        "NickName": "P",
+        "Description": "Set to true to show a pulldown menu of gradient presets",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Gradient Editor",
+        "NickName": "GE",
+        "Description": "The Gradient Editor Element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.AddElementsToShape",
+    "Guid": "db39d16e-1be9-41c5-b69f-7b52f38e1ef0",
+    "Name": "Add Elements to Shape(s)",
+    "NickName": "AddElem2Shape",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Shape to add to",
+        "NickName": "S",
+        "Description": "The Shape object to add element(s) to",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Element to add",
+        "NickName": "E",
+        "Description": "The element(s) to add to the shapes. For text use a TextBlock or Label, for instance.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Point",
+        "Name": "Element Location",
+        "NickName": "L",
+        "Description": "The point at which to position the element",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale",
+        "NickName": "Sc",
+        "Description": "The scale (this should match whatever you\u0027re using for your shape)",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.TabContainer_Component_DEPRECATED",
+    "Guid": "df93e843-3893-4ffc-b2e3-666190768b8e",
+    "Name": "Tabbed View",
+    "NickName": "Tabs",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Tab Names",
+        "NickName": "N",
+        "Description": "The labels for the tabs you\u0027re creating.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tab 0",
+        "NickName": "T0",
+        "Description": "The ui elements to include in tab 0",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tabs",
+        "NickName": "T",
+        "Description": "The Tab control",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.CreateBorder_Component",
+    "Guid": "dfb1703a-45fd-44e6-be50-e2a4a3c415b4",
+    "Name": "Create Border",
+    "NickName": "Border",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "UI Element",
+        "NickName": "E",
+        "Description": "The UI element to include",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Border Thickness",
+        "NickName": "T",
+        "Description": "Border thickness",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Border Color",
+        "NickName": "C",
+        "Description": "Border color",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Corner Radius",
+        "NickName": "R",
+        "Description": "Border corner radius",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Border",
+        "NickName": "B",
+        "Description": "The Border",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateSlider_Component_ALSO_DEPRECATED",
+    "Guid": "e4f276af-46fb-478e-b10a-b95e7b04dff0",
+    "Name": "Create Slider",
+    "NickName": "Slider",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Slider",
+        "NickName": "S",
+        "Description": "The slider(s) to add to the window.",
+        "Access": "tree",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Sliders",
+        "NickName": "S",
+        "Description": "The Slider UI elements. Use in conjunction with an \u0022Add Elements\u0022 component.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.CreateFilePicker_Component_Deprecated",
+    "Guid": "ea5d59c3-bb17-49e5-9967-1f46b21e3e51",
+    "Name": "Create File Picker",
+    "NickName": "FilePicker",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Label Text",
+        "NickName": "BT",
+        "Description": "The text to display on the button to the right of the text box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Dialog Type",
+        "NickName": "DT",
+        "Description": "The type of dialog to display - Open, Save, or Folder",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Must Exist",
+        "NickName": "ME",
+        "Description": "Set to true if the file (in an open file dialog) must exist",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Filter",
+        "NickName": "F",
+        "Description": "The file filter(s) to use. Specify type names, separated from path filters with a | character, like \u0022Grasshopper Files|*.gh\u0022 and join multiples with | characters as well.",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "File Picker",
+        "NickName": "P",
+        "Description": "The File Picker element",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Containers.TabContainer_Component",
+    "Guid": "eaf93260-86b3-4ae7-82d2-58e683deae7b",
+    "Name": "Tabbed View",
+    "NickName": "Tabs",
+    "Category": "Human UI",
+    "SubCategory": "UI Containers",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Tab Names",
+        "NickName": "N",
+        "Description": "The labels for the tabs you\u0027re creating.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Tab Text Size",
+        "NickName": "S",
+        "Description": "The font size for tab elements",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Tab Icon Source",
+        "NickName": "I",
+        "Description": "The path to an icon image - one per tab",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tab 0",
+        "NickName": "T0",
+        "Description": "The ui elements to include in tab 0",
+        "Access": "list",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Tabs",
+        "NickName": "T",
+        "Description": "The Tab control",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetShapes_Component",
+    "Guid": "edc4a536-7412-46f2-b56f-6d8668d6b983",
+    "Name": "Set Shapes",
+    "NickName": "SetShapes",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Shape to Modify",
+        "NickName": "S",
+        "Description": "The shape object to modify.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Curve",
+        "Name": "Shape Curves",
+        "NickName": "SC",
+        "Description": "The shapes to add as Polyline(s)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Fill Colors",
+        "NickName": "FC",
+        "Description": "The fill colors. Leave empty for no fill",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Stroke Weights",
+        "NickName": "SW",
+        "Description": "The stroke weight. Leave empty or set to 0 for no stroke.",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Stroke Colors",
+        "NickName": "SC",
+        "Description": "The stroke color",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale",
+        "NickName": "Scl",
+        "Description": "Use this value to resize the shape.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetShape_Component",
+    "Guid": "f6881435-7de3-4098-ada8-f3068ed7331c",
+    "Name": "Set Shape",
+    "NickName": "SetShape",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Shape to Modify",
+        "NickName": "S",
+        "Description": "The shape object to modify.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Curve",
+        "Name": "Shape Curve",
+        "NickName": "SC",
+        "Description": "The shape to add as Polyline(s)",
+        "Access": "list",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Fill Color",
+        "NickName": "FC",
+        "Description": "The fill color. Leave empty for no fill",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Stroke Weight",
+        "NickName": "SW",
+        "Description": "The stroke weight. Leave empty or set to 0 for no stroke.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Colour",
+        "Name": "Stroke Color",
+        "NickName": "SC",
+        "Description": "The stroke color",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Number",
+        "Name": "Scale",
+        "NickName": "Scl",
+        "Description": "Use this value to resize the shape.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "The width of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "The height of the container for the shape. \nLeave blank to autosize.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.Components.UI_Output.SetButton_Component",
+    "Guid": "f7b661aa-71b0-483e-acd6-95663c78d7df",
+    "Name": "Set Button",
+    "NickName": "SetBtn",
+    "Category": "Human UI",
+    "SubCategory": "UI Output",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Button to modify",
+        "NickName": "B",
+        "Description": "The button object to modify",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Button Name",
+        "NickName": "N",
+        "Description": "The new text to display on the button",
+        "Access": "item",
+        "Optional": true
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Image Path",
+        "NickName": "I",
+        "Description": "The new image to display on the button.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": []
+  },
+  {
+    "Type": "HumanUI.LaunchWindow_Component_DEPRECATED",
+    "Guid": "f9d46462-5227-4c4e-9268-0b678960d7a9",
+    "Name": "Launch Window",
+    "NickName": "LaunchWin",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Boolean",
+        "Name": "Show",
+        "NickName": "S",
+        "Description": "Set this boolean to true to display the control window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name",
+        "NickName": "N",
+        "Description": "The name of the window to display.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Width",
+        "NickName": "W",
+        "Description": "Starting Width of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Height",
+        "NickName": "H",
+        "Description": "Starting Height of the window.",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Font Family",
+        "NickName": "F",
+        "Description": "Optional Font family for UI elements in this window.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Window Object",
+        "NickName": "W",
+        "Description": "The window object. Other components can access this to add controls or gather data from the window.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreatePullDown_Component",
+    "Guid": "fc6ae741-ecd1-432f-abb4-36b3f439c6f5",
+    "Name": "Create Pulldown Menu",
+    "NickName": "Pulldown",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Label",
+        "NickName": "L",
+        "Description": "Optional label for the Text Box",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "List Items",
+        "NickName": "L",
+        "Description": "The initial list of options to display in the list.",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Integer",
+        "Name": "Selected Index",
+        "NickName": "I",
+        "Description": "The initially selected index. Defaults to the first item.",
+        "Access": "item",
+        "Optional": true
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Pulldown",
+        "NickName": "PD",
+        "Description": "The pulldown object",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateObjectsFromXaml_Component",
+    "Guid": "fd2eb7a5-9db0-4688-ad19-3736eb4fb182",
+    "Name": "Create Objects from XAML",
+    "NickName": "XAML",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "tertiary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "XAML",
+        "NickName": "X",
+        "Description": "The XAML text",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Object",
+        "NickName": "O",
+        "Description": "The XAML object tree",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.FilterUIElements_Component",
+    "Guid": "fe29a68f-5c93-48b0-9558-c0c75c53172f",
+    "Name": "Filter UI Elements",
+    "NickName": "Filter",
+    "Category": "Human UI",
+    "SubCategory": "UI Main",
+    "Exposure": "hidden",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Elements",
+        "NickName": "E",
+        "Description": "All Controls and other elements belonging to the window",
+        "Access": "list",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_String",
+        "Name": "Name Filter(s)",
+        "NickName": "F",
+        "Description": "The filter(s) for the elements you want to listen for.",
+        "Access": "list",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Filtered Elements",
+        "NickName": "FE",
+        "Description": "The selected UI elements.",
+        "Access": "list",
+        "Optional": false
+      }
+    ]
+  },
+  {
+    "Type": "HumanUI.Components.UI_Elements.CreateRangeSlider",
+    "Guid": "ff8ebc79-b1ce-430b-8734-e1993f7e477f",
+    "Name": "Create Range Slider",
+    "NickName": "RangeSlider",
+    "Category": "Human UI",
+    "SubCategory": "UI Elements",
+    "Exposure": "primary",
+    "Inputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Interval",
+        "Name": "Slider Range",
+        "NickName": "R",
+        "Description": "The range that defines the min and max of the slider extents",
+        "Access": "item",
+        "Optional": false
+      },
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_Interval",
+        "Name": "Starting Range",
+        "NickName": "SR",
+        "Description": "The initial value selected on the slider",
+        "Access": "item",
+        "Optional": false
+      }
+    ],
+    "Outputs": [
+      {
+        "Type": "Grasshopper.Kernel.Parameters.Param_GenericObject",
+        "Name": "Range Slider",
+        "NickName": "RS",
+        "Description": "The Range Slider Element.",
+        "Access": "item",
+        "Optional": false
+      }
+    ]
+  }
+]

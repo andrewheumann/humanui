@@ -35,6 +35,10 @@ namespace HumanUI.Components.UI_Main
         protected MainWindow mw;
         bool shouldBeVisible = true;
         bool enableHorizScroll = false;
+        // True when *we* are closing the window (RemovedFromDocument / SetupWin tear-down).
+        // The Closing handler uses this to distinguish a user X-click from a programmatic
+        // close and only the latter is allowed to actually destroy mw.
+        bool _allowProgrammaticClose = false;
 
         /// <summary>
         /// Each implementation of GH_Component must provide a public 
@@ -97,11 +101,22 @@ namespace HumanUI.Components.UI_Main
             DA.GetData<string>("Name", ref windowName);
             DA.GetData<int>("Width", ref width);
             DA.GetData<int>("Height", ref height);
+
+            // If SetupWin failed in BeforeSolveInstance (e.g. an upstream XAML/resource
+            // problem), mw is null and any property access below NREs. Surface a clear
+            // runtime message instead of a silent "nothing happens".
+            if (mw == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error,
+                    "Window failed to initialize. See Rhino command line for details.");
+                return;
+            }
+
             mw.Title = windowName;
             mw.Height = height;
             mw.Width = width;
             mw.HorizontalScrollingEnabled = enableHorizScroll;
-            
+
 
 
             //this nebulous "ShouldBeVisible" helps account for the fact that there are other conditions controling window visibility (see SetupWin and HideWindow methods in this class) - lets us separate what the user wants from what should actually happen at any moment.
@@ -109,6 +124,11 @@ namespace HumanUI.Components.UI_Main
             {
                 shouldBeVisible = true;
                 mw.Show();
+                // WPF's Show() does not bring the window to front when another HWND
+                // already has focus (the canvas the user just clicked on). Without
+                // Activate(), the window opens behind Rhino on first toggle -- a
+                // long-standing forum complaint.
+                mw.Activate();
             }
             else
             {
@@ -166,15 +186,47 @@ namespace HumanUI.Components.UI_Main
         /// </summary>
         private void SetupWin()
         {
-            //try closing a window if it's already up
+            // Capture the position/size of any existing window before we replace it, so
+            // a SetupWin triggered by something other than first-launch (e.g. menu change,
+            // a doc-changed reset) doesn't yank the window back to the default location.
+            // The user's hand-placed position via SetWindowProperties would otherwise be
+            // lost on every internal recreate.
+            double? carryLeft = null, carryTop = null, carryWidth = null, carryHeight = null;
+            if (mw != null && mw.IsLoaded && !double.IsNaN(mw.Left) && !double.IsNaN(mw.Top))
+            {
+                carryLeft = mw.Left;
+                carryTop = mw.Top;
+                carryWidth = mw.Width;
+                carryHeight = mw.Height;
+            }
+
+            //try closing a window if it's already up. SetupWin is a programmatic teardown
+            //(menu change, doc reset) so we allow the Closing handler to let the Close go
+            //through rather than intercepting it as a user X-click.
             try
             {
+                _allowProgrammaticClose = true;
                 mw?.Close();
             }
             catch { }
+            finally
+            {
+                _allowProgrammaticClose = false;
+            }
 
             mw = new MainWindow();
-            //Add a listener for window close 
+            if (carryLeft.HasValue)
+            {
+                mw.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+                mw.Left = carryLeft.Value;
+                mw.Top = carryTop.Value;
+                mw.Width = carryWidth.Value;
+                mw.Height = carryHeight.Value;
+            }
+            //Closing intercepts a user X-click so we hide instead of destroying the window.
+            //Destroying loses all wired-up element state and forces a full rebuild downstream.
+            mw.Closing += mw_Closing;
+            //Closed is still wired as a safety net for genuinely closed windows.
             mw.Closed += mw_Closed;
 
             //set ownership based on child status 
@@ -228,11 +280,34 @@ namespace HumanUI.Components.UI_Main
 
 
 
+        // Intercept a user X-click on the window. Without this the Closed event fires,
+        // mw_Closed rebuilds the window in the background, and the user's "close" gets
+        // resurrected on the next solve -- the long-running "I closed it but it came
+        // back" / "duplicate windows after toggle spam" forum complaint. Programmatic
+        // closes (SetupWin tear-down, RemovedFromDocument) set _allowProgrammaticClose
+        // first so the actual close goes through.
+        void mw_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_allowProgrammaticClose) return;
+            e.Cancel = true;
+            shouldBeVisible = false;
+            mw.Hide();
+        }
+
         void mw_Closed(object sender, EventArgs e)
         {
-            //remove the listener
+            //remove the listeners
+            mw.Closing -= mw_Closing;
             mw.Closed -= mw_Closed;
-            //initialize a brand new window. Once it's closed, you can't get it back. 
+            // Programmatic teardown (SetupWin / RemovedFromDocument) already
+            // constructs the replacement window on its own path — if we re-enter
+            // SetupWin here we'd build two MainWindow instances (the second one
+            // immediately tearing down the first via _allowProgrammaticClose
+            // again, and so on). Only resurrect when the window died from a
+            // non-programmatic close that bypassed mw_Closing (e.g. an Alt+F4
+            // that fired straight to Closed in some host versions).
+            if (_allowProgrammaticClose) return;
+            //initialize a brand new window. Once it's closed, you can't get it back.
             SetupWin();
         }
 
@@ -371,9 +446,14 @@ namespace HumanUI.Components.UI_Main
         {
             try
             {
-                mw.Close();
+                _allowProgrammaticClose = true;
+                mw?.Close();
             }
             catch { }
+            finally
+            {
+                _allowProgrammaticClose = false;
+            }
             base.RemovedFromDocument(document);
         }
 

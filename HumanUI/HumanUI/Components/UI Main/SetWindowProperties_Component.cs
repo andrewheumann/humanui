@@ -7,7 +7,7 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Special;
 using Rhino.Geometry;
-using MahApps.Metro;
+using ControlzEx.Theming;
 using HumanUIBaseApp;
 using System.Windows.Controls;
 
@@ -87,19 +87,26 @@ namespace HumanUI.Components
                 mw.Top = startLoc.Y;
             }
             //set the theme
+            string baseColor = null;
             if (DA.GetData<int>("Theme", ref theme))
             {
                 switch (theme)
                 {
                     case 0:
-                        ThemeManager.ChangeAppTheme(mw, "BaseLight");
+                        baseColor = ThemeManager.BaseColorLight;
                         break;
                     case 1:
-                        ThemeManager.ChangeAppTheme(mw, "BaseDark");
+                        baseColor = ThemeManager.BaseColorDark;
                         break;
                     default:
                         AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "That's not a valid theme - only 0 or 1 (light or dark) can be used.");
                         break;
+                }
+                if (baseColor != null)
+                {
+                    var current = ThemeManager.Current.DetectTheme(mw);
+                    string colorScheme = current != null ? current.ColorScheme : "Blue";
+                    ThemeManager.Current.ChangeTheme(mw, $"{baseColor}.{colorScheme}");
                 }
             }
             //get scale factor
@@ -124,10 +131,10 @@ namespace HumanUI.Components
             //set accent color
             if (DA.GetData<string>("Accent Color", ref colorName))
             {
-                //get the current accent and theme so that theme can be preserved while accent changes
-                Tuple<AppTheme, Accent> currStyle = ThemeManager.DetectAppStyle(mw);
-
-                ThemeManager.ChangeAppStyle(mw, ThemeManager.GetAccent(colorName), currStyle.Item1);
+                //get the current theme so its base color can be preserved while accent changes
+                var currStyle = ThemeManager.Current.DetectTheme(mw);
+                string currentBase = currStyle != null ? currStyle.BaseColorScheme : ThemeManager.BaseColorLight;
+                ThemeManager.Current.ChangeTheme(mw, $"{currentBase}.{colorName}");
             }
 
 

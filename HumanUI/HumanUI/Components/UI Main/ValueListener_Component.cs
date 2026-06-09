@@ -17,6 +17,7 @@ using De.TorstenMandelkow.MetroChart;
 using Grasshopper.Kernel.Parameters;
 using MahApps.Metro.Controls;
 using RangeSlider = MahApps.Metro.Controls.RangeSlider;
+using ColorPicker = Xceed.Wpf.Toolkit.ColorPicker;
 using System.Windows.Input;
 
 namespace HumanUI
@@ -37,7 +38,17 @@ namespace HumanUI
         }
 
 
-        private static List<UIElement> eventedElements;
+        // Instance-level; making this static caused cross-talk between ValueListeners
+        // (the most-recently-constructed instance's list was used by all of them, so two
+        // listeners on the same canvas would clear each other's wired elements mid-solve).
+        private List<UIElement> eventedElements;
+
+        // Debounce window for ExpireThis. WPF events arrive far faster than Grasshopper
+        // can solve under slider drags and rapid clicks; firing ExpireSolution
+        // synchronously on every event causes nested-solve / recompute-storm symptoms
+        // (Tests E/F/G/T in the regression checklist). 50ms is below human-perceivable
+        // latency for a single solve but coalesces a typical 60fps event burst to one.
+        private const int DebounceMs = 50;
 
 
 
@@ -210,7 +221,9 @@ namespace HumanUI
 
         void AddEvents(UIElement u)
         {
-            eventedElements.Add(u);
+            // Note: the SolveInstance caller adds `u` to eventedElements before invoking
+            // AddEvents, so we don't double-add here. The previous code had both adds,
+            // doubling list size every solve before the Clear() at the next solve.
             switch (u.GetType().ToString())
             {
                 case "System.Windows.Controls.Slider":
@@ -368,8 +381,8 @@ namespace HumanUI
                     return;
                 case "MahApps.Metro.Controls.ToggleSwitch":
                     ToggleSwitch ts = u as ToggleSwitch;
-                    ts.IsCheckedChanged -= ExpireThis;
-                    ts.IsCheckedChanged += ExpireThis;
+                    ts.Toggled -= ExpireThis;
+                    ts.Toggled += ExpireThis;
                     return;
                 case "MahApps.Metro.Controls.RangeSlider":
                     RangeSlider rs = u as RangeSlider;
@@ -523,7 +536,7 @@ namespace HumanUI
                     return;
                 case "MahApps.Metro.Controls.ToggleSwitch":
                     ToggleSwitch ts = u as ToggleSwitch;
-                    ts.IsCheckedChanged -= ExpireThis;
+                    ts.Toggled -= ExpireThis;
                     return;
                 case "MahApps.Metro.Controls.RangeSlider":
                     RangeSlider rs = u as RangeSlider;
@@ -550,10 +563,13 @@ namespace HumanUI
 
         void ExpireThis(object sender, EventArgs e)
         {
-
-            // System.Windows.Forms.MessageBox.Show("Event Trigger");
-            ExpireSolution(true);
-
+            // Mark this component expired but defer the actual solve. GH_Document's
+            // ScheduleSolution coalesces repeated calls within the delay window so a
+            // slider drag firing 60 ValueChanged events / sec becomes ~20 solves / sec
+            // worst case (and in practice one solve once the drag stops), instead of
+            // 60 nested re-entrant ExpireSolution(true) calls on the WPF thread.
+            ExpireSolution(false);
+            OnPingDocument()?.ScheduleSolution(DebounceMs);
         }
 
 

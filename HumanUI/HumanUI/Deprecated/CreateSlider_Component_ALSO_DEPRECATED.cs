@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Elements
         public CreateSlider_Component_ALSO_DEPRECATED()
             : base("Create Slider", "Slider",
                 "Create a slider with a label and a value readout.",
-                "Human", "UI Elements")
+                "Human UI", "UI Elements")
         {
         }
 

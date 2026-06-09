@@ -1,9 +1,0 @@
----
-name: human-ui
-version: $version
-authors:
-- Andrew Heumann
-description: WPF-based User Interface library for Grasshopper
-url: https://discourse.mcneel.com/c/grasshopper/human-ui
-secret:
-  id: 1b2ec1b3-ab86-44c1-81d4-176f567b3592

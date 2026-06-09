@@ -20,6 +20,7 @@ using System.Data;
 using MahApps.Metro.Controls;
 using Rhino.Geometry;
 using RangeSlider = MahApps.Metro.Controls.RangeSlider;
+using ColorPicker = Xceed.Wpf.Toolkit.ColorPicker;
 
 namespace HumanUI
 {
@@ -268,7 +269,7 @@ namespace HumanUI
                         return;
                     case "MahApps.Metro.Controls.ToggleSwitch":
                         ToggleSwitch ts = u as ToggleSwitch;
-                        ts.IsChecked = (bool)o;
+                        ts.IsOn = (bool)o;
                         return;
                     case "MahApps.Metro.Controls.RangeSlider":
                         RangeSlider rs = u as RangeSlider;
@@ -548,7 +549,7 @@ namespace HumanUI
                 case "MahApps.Metro.Controls.ToggleSwitch":
                     ToggleSwitch ts = u as ToggleSwitch;
 
-                    return ts.IsChecked;
+                    return ts.IsOn;
                 case "MahApps.Metro.Controls.RangeSlider":
                     RangeSlider rs = u as RangeSlider;
 

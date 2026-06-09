@@ -22,7 +22,7 @@ namespace HumanUI.Components.UI_Containers
         public CreateGrid_Component_DEPRECATED()
             : base("Create Grid", "Grid",
                 "Create a container with absolutely positioned elements. \n Their input order determines their Z order - set the margins \nwith the \"Adjust Element Positioning\" component to locate \nelements inside the grid.",
-                "Human", "UI Containers")
+                "Human UI", "UI Containers")
         {
         }
 

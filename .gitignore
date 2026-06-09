@@ -50,6 +50,10 @@ HumanUI/HumanUI/bin/
 HUI_Install/bin/
 HUI_Install/obj/
 HumanUIBaseApp/HumanUIBaseApp/bin/*
+HumanUI.Tests/bin/
+HumanUI.Tests/obj/
+HumanUI.Tests/diag*.log
+HumanUI.Tests/diag.host*
 
 # NuGet Dependencies
 packages/

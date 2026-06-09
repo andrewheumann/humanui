@@ -260,16 +260,18 @@ namespace HumanUI.Components.UI_Elements
            new Uri("/MahApps.Metro;component/Styles/Controls.xaml", UriKind.RelativeOrAbsolute);
 
             //based on the user selected button style, assign the appropriate style to the button
+            //MahApps 2.x renamed: MetroButton -> MahApps.Styles.Button, SquareButtonStyle ->
+            //MahApps.Styles.Button.Square, MetroCircleButtonStyle -> MahApps.Styles.Button.Circle.
             switch (bs)
             {
                 case buttonStyle.Default:
-                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroButton"]);
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MahApps.Styles.Button"]);
                     break;
                 case buttonStyle.Square:
-                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["SquareButtonStyle"]);
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MahApps.Styles.Button.Square"]);
                     break;
                 case buttonStyle.Circle:
-                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MetroCircleButtonStyle"]);
+                    btn.Style = new Style(typeof(Button), (Style)ControlsResDict["MahApps.Styles.Button.Circle"]);
                     break;
                 case buttonStyle.Borderless:
                     // this one could probably be made to look a little better. I'm using a cheap trick that basically
