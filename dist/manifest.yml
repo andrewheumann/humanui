@@ -1,9 +1,9 @@
 ---
 name: human-ui
-version: 0.8.10
+version: 0.8.11
 authors:
 - Andrew Heumann
-description: WPF-based User Interface library for Grasshopper. Modernized .NET 7 build for Rhino 8.
+description: WPF-based User Interface library for Grasshopper. Modernized .NET 7 build for Rhino 8 (runs on Rhino 8 .NET 7/8/10 runtimes).
 url: https://discourse.mcneel.com/c/grasshopper/human-ui
 keywords:
 - guid:1b2ec1b3-ab86-44c1-81d4-176f567b3592

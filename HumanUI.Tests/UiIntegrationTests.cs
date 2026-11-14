@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Interop;
 using System.Windows.Media;
 using Xunit;
 
@@ -40,6 +42,54 @@ namespace HumanUI.Tests
             EnsureApplication();
             var win = new HumanUIBaseApp.MainWindow();
             Assert.Equal(WindowStartupLocation.CenterScreen, win.WindowStartupLocation);
+        }
+
+        [StaFact]
+        public void MainWindow_TitleBarDragTargetsOwnHwnd()
+        {
+            // Rhino 8 SR36 hosts .NET 10, whose WPF dropped the internal Window.CriticalHandle
+            // that MahApps.Metro <= 2.4.10 reflected on to start a title-bar drag. The lookup
+            // silently fell back to IntPtr.Zero, WM_NCLBUTTONDOWN went nowhere, and windows
+            // could no longer be moved (MahApps#4554). Run under .NET 10 to cover that case:
+            //   set DOTNET_ROLL_FORWARD=LatestMajor && dotnet test
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 2;
+
+            EnsureApplication();
+            var win = new HumanUIBaseApp.MainWindow
+            {
+                WindowStartupLocation = WindowStartupLocation.Manual,
+                Left = -10000,
+                Top = -10000,
+                ShowActivated = false,
+                ShowInTaskbar = false,
+            };
+            win.Show();
+            try
+            {
+                bool captionDragRequested = false;
+                HwndSource.FromHwnd(new WindowInteropHelper(win).Handle).AddHook(
+                    (IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) =>
+                    {
+                        if (msg == WM_NCLBUTTONDOWN && wParam.ToInt32() == HTCAPTION)
+                        {
+                            captionDragRequested = true;
+                            handled = true; // don't enter the modal move loop
+                        }
+                        return IntPtr.Zero;
+                    });
+
+                var thumb = win.Template.FindName("PART_WindowTitleThumb", win) as Thumb;
+                Assert.NotNull(thumb);
+                thumb.RaiseEvent(new DragDeltaEventArgs(10, 10) { RoutedEvent = Thumb.DragDeltaEvent });
+
+                Assert.True(captionDragRequested,
+                    $"Title-bar drag never reached the window's HWND (runtime {Environment.Version}).");
+            }
+            finally
+            {
+                win.Close();
+            }
         }
 
         [Fact]

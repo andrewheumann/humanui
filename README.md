@@ -47,6 +47,7 @@ Major contributions to this project so far:
 * #### 0.8.5 - better setup for build with yak, fix for transparent tabs
 * #### 0.8.6 - Allow "Auto" sizing on data table columns
 * #### 0.8.8 - fix for grasshopper player crash, update xceed toolkit
+* #### 0.8.11 - fix windows not draggable on Rhino 8 SR36+ (.NET 10 runtime): update MahApps.Metro to 2.4.11 ([MahApps#4554](https://github.com/MahApps/MahApps.Metro/issues/4554))
 
 
 
